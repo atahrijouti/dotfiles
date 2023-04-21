@@ -1,3 +1,5 @@
+vim.api.nvim_exec ('language en_US', true)
+
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 
