@@ -1,0 +1,16 @@
+autosuggest.enable = True
+
+clink.default_bindings = bash
+
+cmd.ctrld_exits = False
+
+history.max_lines = 25000
+
+history.time_stamp = show
+
+match.expand_envvars = True
+
+match.substring = True
+
+prompt.transient = same_dir
+
