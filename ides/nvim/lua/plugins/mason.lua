@@ -1,4 +1,16 @@
 return {
+  {
+    "neovim/nvim-lspconfig",
+    lazy = true,
+  },
+  {
+    "folke/neoconf.nvim"
+  },
+  {
+    "folke/neodev.nvim",
+    lazy = true,
+  },
+  {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
     cmd = { "Mason", "MasonInstall", "MasonUninstall", "MasonUninstallAll", "MasonLog" },
@@ -28,4 +40,5 @@ return {
             automatic_installation = true,
         }
     end
+  }
 }

@@ -1,10 +1,13 @@
 {
   "lazy.nvim": { "branch": "main", "commit": "5c89dc52f42e5058a46b0912d7d9042f564e44e0" },
-  "mason-lspconfig.nvim": { "branch": "main", "commit": "7034065099c1665143091c7282b3b1b8f0b23783" },
-  "mason.nvim": { "branch": "main", "commit": "4b357eded58ef0993fb49a591ed70306c6b44e08" },
-  "neoconf.nvim": { "branch": "main", "commit": "327d46c5625c3b1bb2163ecdd734acdc1cbef566" },
+  "mason-lspconfig.nvim": { "branch": "main", "commit": "fe0d5e6a10d1912974988afc196b79da30f87dba" },
+  "mason.nvim": { "branch": "main", "commit": "ac767592473104dd0cf11725c73470cd47b81b7e" },
+  "neoconf.nvim": { "branch": "main", "commit": "62c8d706fafed90c95aa6b5846f296d3b28db75a" },
   "neodev.nvim": { "branch": "main", "commit": "e812f3d0e62e21a164b70f90f642cf30129503e4" },
   "nvim-lspconfig": { "branch": "master", "commit": "eddaef928c1e1dd79a96f5db45f2fd7f2efe7ea0" },
+  "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
+  "telescope-fzf-native.nvim": { "branch": "main", "commit": "580b6c48651cabb63455e97d7e131ed557b8c7e2" },
+  "telescope.nvim": { "branch": "master", "commit": "c1a2af0af69e80e14e6b226d3957a064cd080805" },
   "tokyonight.nvim": { "branch": "main", "commit": "ff81eac0ecf85db235dfc4c9d54f2d07d662a423" },
   "which-key.nvim": { "branch": "main", "commit": "94cb020ff33a1e0e22fac1c41663d2c439741f17" }
 }
