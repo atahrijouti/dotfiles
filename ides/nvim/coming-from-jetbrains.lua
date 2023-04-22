@@ -1,0 +1,41 @@
+-- C-Tab     : Swtich between between opened files and tool windows
+-- C-E       : Swtich between recent files in a project
+-- C-A-Up    : Syntaxt Aware Selection / Tree Sitter expand Seleon
+-- C-Space   : Basic Code Completion
+-- C-B       : Go to declaration / Go to definition
+-- C-F       : Find in current file
+-- C-R       : Replace in current file
+-- C-S-F(C-P): Find in files
+-- C-S-R     : Replace in files
+-- C-/       : Comment / Uncomment
+-- A-Enter   : Context Actions - Show Meny that can apply some actions or even diognostics on a line
+-- S-F6      : Refactor
+-- S-C-N     : Find a file in project
+-- C-P       : Parameter Info (Show information about the parameters inside a method or function)
+-- C-A-P     : Command Palette : Search through commands and actions in an editor
+-- C-S-A     : Command Palette : Search through commands and actions in an editor
+-- A-1       : Open Project tool window / NeoTree
+-- A-9       : Open Git tool window / lazyGit
+-- A-4       : Open currently running script or task
+-- A-3       : Open pinned search
+-- A-F12     : Open Terminal
+-- C-A-(L/P) : Reformat Code
+-- C-A-S-Ins : New Scratch File (new buffer?)
+-- C-Q       : Show Documentation (Based on source code)
+-- S-A-F10   : Show tasks to run
+-- S-F10     : Run previous task
+-- C-A-Arrow : Go Back/Forward to where you were before
+-- A-B       : Show Relative path and navigate through it
+
+-- Name of project in title bar
+-- Name of file somewhere on the UI (preferably with relative path to root)
+-- Recent Search History
+-- Search inside UI menues
+-- Git Integration
+-- Local History
+-- Multiple Cursors
+--   - Edit on all cursors
+--   - Auto-complete on all cursors
+--   - Paste similar items on all cursors
+-- TODOs tracked along the entire project
+-- Turn Searches into selections
