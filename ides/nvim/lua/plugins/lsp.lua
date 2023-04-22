@@ -1,15 +1,10 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    lazy = true,
+    event = { "BufReadPre", "BufNewFile" },
   },
-  {
-    "folke/neoconf.nvim"
-  },
-  {
-    "folke/neodev.nvim",
-    lazy = true,
-  },
+  { "folke/neoconf.nvim", cmd = "Neoconf", config = true },
+  { "folke/neodev.nvim", opts = { experimental = { pathStrict = true } } },
   {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
