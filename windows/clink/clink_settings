@@ -1,7 +1,31 @@
 autosuggest.enable = True
+clink.colorize_input = True
 clink.default_bindings = bash
 cmd.ctrld_exits = False
+
 history.max_lines = 99999999
 match.expand_envvars = True
 match.substring = True
 prompt.transient = same_dir
+
+color.arg                        = bold 
+color.arginfo                    = yellow
+color.argmatcher                 = green
+color.cmd                        = bold bright white
+color.cmdredir                   = bold yellow
+color.cmdsep                     = bold yellow
+color.comment_row                = bright cyan on blue
+color.description                = bright cyan
+color.doskey                     = bold cyan
+color.executable                 = bold cyan
+color.filtered                   = bright white
+color.flag                       = cyan
+color.hidden                     = red        
+color.histexpand                 = default on Magenta             
+color.horizscroll                = black on green
+color.input                      = yellow
+color.readonly                   = green      
+color.selected_completion        = black on white
+color.selection                  = black on yellow
+color.suggestion                 = bright black
+color.unrecognized               = bright red
