@@ -11,7 +11,7 @@ end
 
 function module.scheme_for_appearance(appearance)
     if appearance:find 'Dark' then
-        return "Tokyo Night (Gogh)"
+        return "tokyonight_storm"
     else
         return "tokyonight_day"
     end
