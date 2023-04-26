@@ -1,24 +1,14 @@
 # Shell
 set -o emacs
 
-# Antigen
-source "$HOME/antigen.zsh"
-
-# antigen bundle zsh-users/zsh-syntax-highlighting
-# antigen bundle zsh-users/zsh-completions
-# antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle qoomon/zsh-lazyload
-
-antigen apply
+# Oh-My-Zsh
+export ZSH="/Users/atahrijouti/.oh-my-zsh"
+ZSH_THEME=""
+plugins=(git zsh-lazyload)
+source $ZSH/oh-my-zsh.sh
 
 # Starship Prompt
-# eval "$(starship init zsh)"
-
-# Vanilla Prompt
-# black, white, yellow, green, red, blue, cyan, magenta
-autoload -U colors && colors
-PS1="%{${fg_bold[cyan]}%}%(6~|.../%5~|%~)%{$reset_color%}
-%{%(!.${fg_bold[red]}.${fg_bold[green]})%}λ%{$reset_color%} "
+eval "$(starship init zsh)"
 
 # Homebrew
 lazy_load_brew() {
@@ -53,7 +43,6 @@ lazy_load_jabba() {
     [ -s "$JABBA_HOME/jabba.sh" ] && source "$JABBA_HOME/jabba.sh"
 }
 lazyload jabba -- lazy_load_jabba
-
 
 # Custom shell
 # functions
