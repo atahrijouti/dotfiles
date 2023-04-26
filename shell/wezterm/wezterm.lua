@@ -9,6 +9,8 @@ config.font = wezterm.font('FiraCode NF', { weight = 'Regular'})
 config.font_size = 14.0
 config.line_height = 1.15
 
+config.audible_bell = "Disabled"
+
 config.window_decorations = "RESIZE"
 config.window_padding = {
   left = 15,
