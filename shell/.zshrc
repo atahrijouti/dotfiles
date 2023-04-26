@@ -10,6 +10,8 @@ source $ZSH/oh-my-zsh.sh
 # Starship Prompt
 eval "$(starship init zsh)"
 
+# Lazy Load
+
 # Homebrew
 lazy_load_brew() {
     if type brew &>/dev/null
@@ -43,24 +45,6 @@ lazy_load_jabba() {
     [ -s "$JABBA_HOME/jabba.sh" ] && source "$JABBA_HOME/jabba.sh"
 }
 lazyload jabba -- lazy_load_jabba
-
-# Custom shell
-# functions
-source_infra() {
-    [ -s "${INFRA_AUTO_HOME}/setup-environment.zsh" ] && \. "${INFRA_AUTO_HOME}/setup-environment.zsh"
-}
-
-connect_to_mas_prod() {
-    "$HOME/playground/web/merchant-apps-service/tools/connect_to_rds_in_isolated_subnet.sh" $1 prod 6667
-}
-
-run_iz_docker_service() {
-    cd $IZETTLE_DOCKER_SERVICES && docker-compose up -d "$1" && cd -
-}
-
-run_portal_service() {
-    cd $PORTAL_FOLDER && docker-compose up -d "$1" && cd -
-}
 
 #aliases
 alias ls="ls -F --color"
