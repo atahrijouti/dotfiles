@@ -25,11 +25,17 @@ lazy_load_brew() {
 lazyload brew -- lazy_load_brew
 
 # NVM
-lazy_load_nvm() {
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-}
-lazyload nvm -- lazy_load_nvm
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  nvm_cmds=(nvm node npm yarn pnpm)
+  for cmd in $nvm_cmds ; do
+    alias $cmd="unalias $nvm_cmds \
+    && unset nvm_cmds \
+    && . $NVM_DIR/nvm.sh \
+    && . "$NVM_DIR/bash_completion" \
+    && $cmd"
+  done
+fi
 
 # Rbenv
 lazy_load_rbenv() {

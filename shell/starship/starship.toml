@@ -2,10 +2,12 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
+continuation_prompt = "[\\\\](bright-black) "
 
 [character]
 success_symbol = '[λ](bold green)'
 error_symbol = '[λ](bold red)'
 
-[package]
+# [package]
+
 # disabled = true
