@@ -15,16 +15,17 @@ config.line_height = 1.15
 
 config.audible_bell = "Disabled"
 
-if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-  config.default_cwd = "D:\\Users\\atj"
-end
-
-
 config.window_padding = {
   left = 10,
   right = 10,
   top = 10,
   bottom = 10,
 }
+
+
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  config.default_cwd = "D:\\Users\\atj"
+  config.default_prog = { 'cmd.exe', '/k' }
+end
 
 return config
