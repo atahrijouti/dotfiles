@@ -1,5 +1,7 @@
 @echo off
 
+cls 
+
 :: basic bash aliases
 doskey ls=ls --show-control-chars -F --color $*
 doskey vim=nvim $*
