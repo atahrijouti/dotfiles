@@ -1,6 +1,6 @@
 @echo off
 
-cls 
+@REM cls 
 
 :: basic bash aliases
 doskey ls=ls --show-control-chars -F --color $*
