@@ -5,9 +5,9 @@ local config = wezterm.config_builder()
 
 config.color_scheme = helpers.scheme_for_appearance(helpers.get_appearance())
 
-config.font = wezterm.font('Source Code Pro', { weight = "Regular" })
+config.font = wezterm.font('JetBrainsMono Nerd Font')
 config.font_size = 14
-config.line_height = 1.15
+config.line_height = 1.10
 
 config.audible_bell = "Disabled"
 
@@ -18,8 +18,11 @@ config.window_padding = {
   bottom = 10,
 }
 
+config.enable_scroll_bar = true
+config.hide_tab_bar_if_only_one_tab = true
+
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
-  config.font_size = 13
+  config.font_size = 10
   config.default_cwd = "D:\\Users\\atj"
   config.default_prog = { 'cmd.exe', '/k' }
 end
