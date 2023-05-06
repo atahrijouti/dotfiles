@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.api.nvim_exec('language en_US', true)
+vim.api.nvim_exec("language en_US", true)
 
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
@@ -61,7 +61,7 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldcolumn = "1"
 
 -- complex modifications
-vim.opt.iskeyword:append "-"
+vim.opt.iskeyword:append("-")
 
 vim.opt.formatoptions = "jcroqlnt"
 
