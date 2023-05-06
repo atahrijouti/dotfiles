@@ -1,5 +1,3 @@
-os.setenv("STARSHIP_CONFIG", "C:\\Users\\atj\\.config\\starship\\starship.toml")
-
 function starship_transient_prompt_func(prompt)
     return io.popen("starship module character"
         .. " --keymap=" .. rl.getvariable('keymap')

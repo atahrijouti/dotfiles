@@ -23,7 +23,9 @@ config.hide_tab_bar_if_only_one_tab = true
 
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
   config.font_size = 10
-  config.default_cwd = "D:\\Users\\atj"
+  if wezterm.hostname() == "Sapphire-Tower" then
+    config.default_cwd = "D:\\Users\\atj"
+  end
   config.default_prog = { 'cmd.exe', '/k' }
 end
 
