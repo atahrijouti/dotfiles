@@ -38,6 +38,8 @@ vim.keymap.set("n", "<leader>n", "<cmd>enew q<cr>", { desc = "New File" })
 vim.keymap.set("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
 vim.keymap.set("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
 
+vim.keymap.set("n", "<leader>1", "<cmd>Neotree toggle<cr>", { desc = "Project Files" })
+
 -- Plugin Manager
 vim.keymap.set("n", "<leader>pi", lazy.install, { desc = "Plugins Install" })
 vim.keymap.set("n", "<leader>ps", lazy.home, { desc = "Plugins Status" })

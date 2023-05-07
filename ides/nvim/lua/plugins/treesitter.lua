@@ -43,7 +43,15 @@ return {
 				return vim.api.nvim_buf_line_count(bufnr) > 10000
 			end,
 		},
-		incremental_selection = { enable = true },
+		incremental_selection = {
+			enable = true,
+			keymaps = {
+				init_selection = "<C-A-Up>",
+				node_incremental = "<C-A-Up>",
+				scope_incremental = "<nop>",
+				node_decremental = "<C-A-Down>",
+			},
+		},
 		indent = { enable = true },
 		autotag = { enable = true },
 		context_commentstring = { enable = true, enable_autocmd = false },
