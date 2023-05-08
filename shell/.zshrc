@@ -54,5 +54,6 @@ lazyload jabba -- lazy_load_jabba
 
 #aliases
 alias ls="ls -F --color"
+alias love="/Applications/love.app/Contents/MacOS/love"
 
 source "$HOME/.work_zshrc"
