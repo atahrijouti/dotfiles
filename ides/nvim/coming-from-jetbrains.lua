@@ -2,6 +2,9 @@
 -- C-E       : Swtich between recent files in a project
 -- C-A-Up    : Syntaxt Aware Selection / Tree Sitter expand Seleon
 -- C-Space   : Basic Code Completion
+-- A-Shift-Up: Move Line Up
+-- A-Shift-Do: Move Line Down
+-- C-D       : Duplicate Line
 -- C-B       : Go to declaration / Go to definition
 -- C-F       : Find in current file
 -- C-R       : Replace in current file
