@@ -18,9 +18,9 @@
 -- C-A-P     : Command Palette : Search through commands and actions in an editor
 -- C-S-A     : Command Palette : Search through commands and actions in an editor
 -- A-1       : Open Project tool window / NeoTree
--- A-9       : Open Git tool window / lazyGit
--- A-4       : Open currently running script or task
 -- A-3       : Open pinned search
+-- A-4       : Open currently running script or task
+-- A-9       : Open Git tool window / lazyGit
 -- A-F12     : Open Terminal
 -- C-A-(L/P) : Reformat Code
 -- C-A-S-Ins : New Scratch File (new buffer?)
