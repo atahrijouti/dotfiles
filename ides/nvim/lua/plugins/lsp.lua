@@ -1,5 +1,5 @@
 local on_attach = function(_, bufnr)
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function(...)
+  vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
     vim.lsp.buf.format()
   end, { desc = "Format current buffer with LSP" })
 end
@@ -46,6 +46,9 @@ return {
         tsserver = {},
         lua_ls = {
           Lua = {
+            format = {
+              enable = false,
+            },
             diagnostics = {
               globals = { "vim" },
             },
