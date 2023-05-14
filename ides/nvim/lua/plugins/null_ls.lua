@@ -5,15 +5,24 @@ return {
     dependencies = {
       "mason.nvim",
     },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        sources = {
-          nls.builtins.formatting.prettier,
-          nls.builtins.formatting.stylua,
-          nls.builtins.code_actions.eslint,
+  },
+  {
+
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+    },
+    config = function()
+      require("mason-null-ls").setup({
+        ensure_installed = {
+          "prettier",
+          "stylua",
+          "eslint",
         },
-      }
+        handlers = {},
+      })
     end,
   },
 }

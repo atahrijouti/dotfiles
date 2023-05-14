@@ -40,9 +40,6 @@ return {
         cssls = {},
         eslint = {},
         jsonls = {},
-        kotlin_language_server = {},
-        marksman = {},
-        sqlls = {},
         tsserver = {},
         lua_ls = {
           Lua = {
