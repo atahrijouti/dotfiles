@@ -64,3 +64,8 @@ REM winget install -e --id Love2d.Love2d
 REM pacman -S mingw-w64-ucrt-x86_64-ripgrep
 
 winget install -e --id CoreyButler.NVMforWindows
+
+winget install -e --id Telegram.TelegramDesktop
+winget install -e --id KeePassXCTeam.KeePassXC
+winget install -e --id Dropbox.Dropbox
+winget install -e --id Parsec.Parsec
