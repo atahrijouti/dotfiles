@@ -34,6 +34,12 @@ M.on_attach = function(client, bufnr)
     -- stylua: ignore end
   end
 
+  if capabilities.hoverProvider then
+    -- stylua: ignore start
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { desc = "Hover symbol details" })
+    -- stylua: ignore end
+  end
+
   if capabilities.documentHighlightProvider then
     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
       buffer = bufnr,
