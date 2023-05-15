@@ -2,7 +2,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.1",
-    lazy = true,
     cmd = "Telescope",
     dependencies = {
       -- "nvim-lua/plenary.nvim",
@@ -13,7 +12,6 @@ return {
   {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
-    lazy = true,
   },
   {
     "nvim-lua/plenary.nvim",
@@ -21,6 +19,5 @@ return {
       "PlenaryBustedFile",
       "PlenaryBustedDirectory",
     },
-    lazy = true,
   },
 }
