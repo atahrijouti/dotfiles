@@ -41,8 +41,15 @@ return {
             diagnostics = {
               globals = { "vim" },
             },
-            workspace = { checkThirdParty = false },
             telemetry = { enable = false },
+            workspace = {
+              library = vim.api.nvim_get_runtime_file("", true),
+              checkThirdParty = false,
+            },
+            runtime = {
+              version = "LuaJIT",
+              -- path = runtime_path,
+            },
           },
         },
       }
@@ -54,7 +61,7 @@ return {
           function(server_name)
             lspconfig[server_name].setup({
               -- capabilities = capabilities,
-              on_attach = on_attach,
+              on_attach = require("config.utils.lsp").on_attach,
               settings = servers[server_name],
             })
           end,
