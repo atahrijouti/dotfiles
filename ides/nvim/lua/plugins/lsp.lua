@@ -24,11 +24,22 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
-    config = function()
-      local lspconfig = require("lspconfig")
-      local masonLspconfig = require("mason-lspconfig")
-
-      local servers = {
+    opts = {
+      diagnostics = {
+        virtual_text = true,
+        update_in_insert = true,
+        underline = true,
+        severity_sort = true,
+        float = {
+          focused = false,
+          style = "minimal",
+          border = "rounded",
+          source = "always",
+          header = "",
+          prefix = "",
+        },
+      },
+      servers = {
         cssls = {},
         eslint = {},
         jsonls = {},
@@ -52,17 +63,24 @@ return {
             },
           },
         },
-      }
+      },
+    },
+    config = function(_, opts)
+      local lspconfig = require("lspconfig")
+      local masonLspconfig = require("mason-lspconfig")
+
+      vim.diagnostic.config(opts.diagnostics)
 
       masonLspconfig.setup({
-        ensure_installed = vim.tbl_keys(servers),
+        ensure_installed = vim.tbl_keys(opts.servers),
         automatic_installation = true,
         handlers = {
           function(server_name)
             lspconfig[server_name].setup({
               -- capabilities = capabilities,
+              diagnostics = opts.diagnostics,
               on_attach = require("config.utils.lsp").on_attach,
-              settings = servers[server_name],
+              settings = opts.servers[server_name],
             })
           end,
         },
