@@ -7,7 +7,7 @@ local sections = {
   f = { desc = "󰍉 Find" },
   g = { desc = " Git" },
   p = { desc = "󰏖 Packages" },
-  -- l = { desc = " LSP" },
+  l = { desc = " LSP" },
   -- u = { desc = " UI" },
   -- b = { desc = "󰓩 Buffers" },
   -- d = { desc = " Debugger" },
@@ -24,8 +24,11 @@ vim.keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>n", "<cmd>enew q<cr>", { desc = "New File" })
 vim.keymap.set("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
 vim.keymap.set("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
 
 vim.keymap.set("n", "<leader>1", "<cmd>Neotree toggle<cr>", { desc = "Project Files" })
+
 
 -- Plugin Manager
 vim.keymap.set("n", "<leader>pi", lazy.install, { desc = "Plugins Install" })
@@ -58,4 +61,14 @@ vim.keymap.set("n", "<leader>fm", telescope.man_pages, { desc = "Find man pages"
 vim.keymap.set("n", "<leader>gb", telescope.git_branches, { desc = "Git branches" })
 vim.keymap.set("n", "<leader>gc", telescope.git_commits, { desc = "Git commits" })
 vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Git status" })
+
+-- LSP
+vim.keymap.set("n", "<leader>lD", function() telescope.diagnostics() end, { desc = "Search diagnostics" })
+vim.keymap.set("n", "<leader>ls", function () telescope.lsp_document_symbols() end, { desc = "Search symbols" })
+
+-- Improved Terminal Navigation
+vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
+vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Terminal down window navigation" })
+vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Terminal up window navigation" })
+vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Terminal right window navigation" })
 -- stylua: ignore end
