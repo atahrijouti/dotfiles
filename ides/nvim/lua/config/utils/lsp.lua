@@ -34,7 +34,6 @@ M.on_attach = function(client, bufnr)
 
   if capabilities.definitionProvider then
     -- stylua: ignore start
-    -- vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "[G]o to the [D]efinition of current symbol" })
     vim.keymap.set("n", "gd", function() telescopeBuiltin.lsp_definitions() end, { desc = "[G]o to the [D]efinition of current symbol" })
     -- stylua: ignore end
   end
@@ -76,6 +75,11 @@ M.on_attach = function(client, bufnr)
     -- stylua: ignore end
   end
 
+  if capabilities.documentSymbolProvider then
+    -- stylua: ignore start
+    vim.keymap.set("n", "<leader>ls", function() telescopeBuiltin.lsp_document_symbols() end, { desc = "Definition of current type" })
+    -- stylua: ignore end
+  end
   if capabilities.workspaceSymbolProvider then
     local workspaceSymbols = function()
       vim.ui.input({ prompt = "Symbol Query: " }, function(query)
