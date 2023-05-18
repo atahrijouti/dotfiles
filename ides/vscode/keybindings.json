@@ -2,31 +2,26 @@
 [
     {
         "key": "alt+1",
-        "mac": "cmd+1",
         "command": "workbench.view.explorer",
         "when": "viewContainer.workbench.view.explorer.enabled"
     },
     {
         "key": "alt+1",
-        "mac": "cmd+1",
         "command": "workbench.action.toggleSidebarVisibility",
         "when": "activeViewlet == 'workbench.view.explorer'"
     },
     {
         "key": "alt+9",
-        "mac": "cmd+9",
         "command": "workbench.view.scm",
         "when": "workbench.scm.active"
     },
     {
         "key": "alt+9",
-        "mac": "cmd+9",
         "command": "workbench.action.toggleSidebarVisibility",
         "when": "workbench.scm.active && activeViewlet == 'workbench.view.scm'"
     },
     {
         "key": "ctrl+b",
-        "mac": "cmd+b",
         "command": "editor.action.goToDeclaration",
         "when": "editorHasDefinitionProvider && editorTextFocus",
     },
@@ -175,11 +170,6 @@
         "when": "breadcrumbsPossible && breadcrumbsVisible"
     },
     {
-        "key": "alt+up",
-        "command": "editor.action.insertCursorAbove",
-        "when": "editorTextFocus"
-    },
-    {
         "key": "ctrl+alt+up",
         "command": "editor.action.smartSelect.expand",
         "when": "editorTextFocus"
@@ -188,6 +178,37 @@
         "key": "ctrl+alt+down",
         "command": "editor.action.smartSelect.shrink",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+up",
+        "command": "editor.action.insertCursorAbove",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+down",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+z",
+        "command": "git.revertSelectedRanges",
+        "when": "editorTextFocus && !operationInProgress"
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "workbench.action.navigateBack"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "workbench.action.navigateForward"
+    },
+    {
+        "key": "shift+alt+f10",
+        "command": "workbench.action.tasks.runTask"
+    },
+    {
+        "key": "shift+f10",
+        "command": "workbench.action.tasks.reRunTask"
     },
     //////////
     //////////
@@ -523,5 +544,32 @@
         "key": "shift+alt+left",
         "command": "-editor.action.smartSelect.shrink",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+r",
+        "command": "-workbench.action.keybindingsReference"
+    },
+    {
+        "key": "alt+left",
+        "command": "-workbench.action.navigateBack",
+        "when": "canNavigateBack"
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "-workbench.action.moveEditorToPreviousGroup"
+    },
+    {
+        "key": "alt+right",
+        "command": "-workbench.action.navigateForward",
+        "when": "canNavigateForward"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "-workbench.action.moveEditorToNextGroup"
+    },
+    {
+        "key": "shift+f10",
+        "command": "-editor.action.showContextMenu",
+        "when": "textInputFocus"
     }
 ]
