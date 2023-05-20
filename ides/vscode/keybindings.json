@@ -571,5 +571,45 @@
         "key": "shift+f10",
         "command": "-editor.action.showContextMenu",
         "when": "textInputFocus"
+    },
+    {
+        "key": "alt+enter",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+enter",
+        "command": "acceptSelectedCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "alt+enter",
+        "command": "problems.action.showQuickFixes",
+        "when": "problemFocus"
+    },
+    {
+        "key": "ctrl+.",
+        "command": "-editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+.",
+        "command": "-acceptSelectedCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "ctrl+.",
+        "command": "-workbench.action.terminal.showQuickFixes",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+.",
+        "command": "-problems.action.showQuickFixes",
+        "when": "problemFocus"
+    },
+    {
+        "key": "ctrl+.",
+        "command": "-editor.changeDropType",
+        "when": "dropWidgetVisible"
     }
 ]
