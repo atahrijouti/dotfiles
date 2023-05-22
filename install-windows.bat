@@ -71,3 +71,5 @@ winget install -e --id Dropbox.Dropbox
 winget install -e --id Parsec.Parsec
 winget install -e --id Valve.Steam
 winget install -e --id Spotify.Spotify
+winget install -e --id WhatsApp.WhatsApp
+winget install -e --id Discord.Discord
