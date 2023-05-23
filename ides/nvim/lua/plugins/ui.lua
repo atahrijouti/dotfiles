@@ -16,9 +16,12 @@ return {
       require("gitsigns").setup(opts)
     end,
   },
-  {
-    "rcarriga/nvim-notify",
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   config = function()
+  --     require("notify").setup({})
+  --   end,
+  -- },
   {
     "NvChad/nvim-colorizer.lua",
     event = "User",
@@ -46,24 +49,53 @@ return {
           hide_hidden = false,
         },
         follow_current_file = true,
+        bind_to_cwd = true,
+        use_libuv_file_watcher = true,
       },
     },
   },
   {
     "MunifTanjim/nui.nvim",
   },
-  -- {
-  --   "folke/noice.nvim",
-  --   requires = {
-  --     "MunifTanjim/nui.nvim",
-  --     "rcarriga/nvim-notify",
-  --   },
-  --   config = function()
-  --     require("noice").setup({})
-  --   end,
-  -- },
+  {
+    "folke/noice.nvim",
+    requires = {
+      "MunifTanjim/nui.nvim",
+      -- "rcarriga/nvim-notify",
+    },
+    config = function()
+      require("noice").setup({})
+    end,
+  },
   {
     "stevearc/dressing.nvim",
     opts = {},
+  },
+  {
+    "onsails/lspkind.nvim",
+    opts = {
+      mode = "symbol",
+      symbol_map = {
+        Array = "󰅪",
+        Boolean = "⊨",
+        Class = "󰌗",
+        Constructor = "",
+        Key = "󰌆",
+        Namespace = "󰅪",
+        Null = "NULL",
+        Number = "#",
+        Object = "󰀚",
+        Package = "󰏗",
+        Property = "",
+        Reference = "",
+        Snippet = "",
+        String = "󰀬",
+        TypeParameter = "󰊄",
+        Unit = "",
+      },
+    },
+    config = function(_, opts)
+      require("lspkind").init(opts)
+    end,
   },
 }

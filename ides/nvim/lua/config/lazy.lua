@@ -18,17 +18,12 @@ require("lazy").setup("plugins", {
   },
   change_detection = {
     enabled = false,
-    notify = true,
+    notify = false,
   },
   install = {
     colorscheme = { "tokyonight" },
   },
   performance = {
-    disable_plugins = {
-      "gzip",
-      "tarPlugin",
-      "tohtml",
-      "zipPlugin",
-    },
+    disabled_plugins = { "tohtml", "gzip", "zipPlugin", "netrwPlugin", "tarPlugin" },
   },
 })
