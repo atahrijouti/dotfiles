@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.g.neovide_cursor_animation_length = 0
+vim.o.guifont = "JetBrainsMono Nerd Font:h10"
+
 vim.api.nvim_exec("language en_US", true)
 
 vim.opt.termguicolors = true
