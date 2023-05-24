@@ -2,6 +2,14 @@ return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
   opts = function()
+    local function attached_clients()
+      return "(" .. vim.tbl_count(vim.lsp.buf_get_clients(0)) .. ")"
+    end
+
+    local function cwd()
+      return vim.fn.fnamemodify(vim.loop.cwd(), ":~")
+    end
+
     return {
       options = {
         theme = "auto",
@@ -12,35 +20,13 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch" },
-        lualine_c = {
-          {
-            "diagnostics",
-          },
-        },
+        lualine_b = { "branch", "diff", cwd, "diagnostics" },
+        lualine_c = {},
         lualine_x = {
-          {
-            "encoding",
-          },
-          {
-            "diff",
-          },
-          {
-            function()
-              return require("noice").api.status.command.get()
-            end,
-            cond = function()
-              return package.loaded["noice"] and require("noice").api.status.command.has()
-            end,
-          },
-          {
-            function()
-              return require("noice").api.status.mode.get()
-            end,
-            cond = function()
-              return package.loaded["noice"] and require("noice").api.status.mode.has()
-            end,
-          },
+          "filesize",
+          "encoding",
+          "filetype",
+          { attached_clients },
         },
         lualine_y = {},
         lualine_z = {
@@ -48,17 +34,7 @@ return {
         },
       },
       winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          {
-            "filename",
-            path = 1,
-          },
-        },
-        lualine_x = {},
-        lualine_y = {},
-        lualine_z = {},
+        lualine_c = { { "filename", path = 1 } },
       },
       extensions = { "neo-tree", "lazy" },
     }
