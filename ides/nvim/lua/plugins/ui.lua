@@ -37,6 +37,7 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
     opts = {
+      close_if_last_window = true,
       window = {
         position = "left",
         width = 30,
@@ -49,7 +50,6 @@ return {
           hide_hidden = false,
         },
         follow_current_file = true,
-        bind_to_cwd = true,
         use_libuv_file_watcher = true,
       },
     },
@@ -57,16 +57,16 @@ return {
   {
     "MunifTanjim/nui.nvim",
   },
-  {
-    "folke/noice.nvim",
-    requires = {
-      "MunifTanjim/nui.nvim",
-      -- "rcarriga/nvim-notify",
-    },
-    config = function()
-      require("noice").setup({})
-    end,
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   requires = {
+  --     "MunifTanjim/nui.nvim",
+  --     -- "rcarriga/nvim-notify",
+  --   },
+  --   config = function()
+  --     require("noice").setup({})
+  --   end,
+  -- },
   {
     "stevearc/dressing.nvim",
     opts = {},
