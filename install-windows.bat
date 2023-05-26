@@ -73,3 +73,6 @@ winget install -e --id Valve.Steam
 winget install -e --id Spotify.Spotify
 winget install -e --id WhatsApp.WhatsApp
 winget install -e --id Discord.Discord
+winget install -e --id VideoLAN.VLC
+winget install -e --id ShareX.ShareX
+winget install -e --id Mp3tag.Mp3tag
