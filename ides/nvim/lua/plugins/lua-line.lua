@@ -16,7 +16,6 @@ return {
         section_separators = "",
         component_separators = "",
         globalstatus = true,
-        disabled_filetypes = { statusline = { "dashboard", "alpha" } },
       },
       sections = {
         lualine_a = { "mode" },
@@ -33,8 +32,11 @@ return {
           { "location", padding = { left = 0, right = 1 } },
         },
       },
+      inactive_winbar = {
+        lualine_b = { { "filename", path = 1 } },
+      },
       winbar = {
-        lualine_c = { { "filename", path = 1 } },
+        lualine_b = { { "filename", path = 1 } },
       },
       extensions = { "neo-tree", "lazy" },
     }
