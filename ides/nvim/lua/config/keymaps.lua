@@ -11,7 +11,7 @@ local sections = {
   -- u = { desc = " UI" },
   -- b = { desc = "󰓩 Buffers" },
   -- d = { desc = " Debugger" },
-  -- S = { desc = "󱂬 Session" },
+  w = { desc = "󱂬 Workspace" },
   -- t = { desc = " Terminal" },
 }
 
@@ -65,6 +65,12 @@ vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Git status" })
 -- LSP
 vim.keymap.set("n", "<leader>lD", function() telescope.diagnostics() end, { desc = "Search diagnostics" })
 vim.keymap.set("n", "<leader>ls", function () telescope.lsp_document_symbols() end, { desc = "Search symbols" })
+
+
+-- Workspaces
+vim.keymap.set("n", "<leader>wo", "<cmd>Telescope workspaces<cr>", { desc = "Workspaces Open" })
+vim.keymap.set("n", "<leader>wa", "<cmd>WorkspacesAdd<cr>", { desc = "Workspaces Add" })
+vim.keymap.set("n", "<leader>wr", "<cmd>WorkspacesRemove<cr>", { desc = "Workspaces Remove" })
 
 -- Improved Terminal Navigation
 vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
