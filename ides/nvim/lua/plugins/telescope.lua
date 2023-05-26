@@ -6,7 +6,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "telescope-fzf-native.nvim",
-      -- "project.nvim",
     },
     opts = function()
       local actions = require("telescope.actions")
@@ -42,7 +41,6 @@ return {
     config = function(_, opts)
       local telescope = require("telescope")
       telescope.setup(opts)
-      require("telescope").load_extension("projects")
       require("telescope").load_extension("fzf")
     end,
   },
