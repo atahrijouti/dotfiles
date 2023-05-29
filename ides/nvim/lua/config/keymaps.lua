@@ -68,9 +68,9 @@ vim.keymap.set("n", "<leader>ls", function () telescope.lsp_document_symbols() e
 
 
 -- Workspaces
-vim.keymap.set("n", "<leader>wo", "<cmd>Telescope workspaces<cr>", { desc = "Workspaces Open" })
-vim.keymap.set("n", "<leader>wa", "<cmd>WorkspacesAdd<cr>", { desc = "Workspaces Add" })
-vim.keymap.set("n", "<leader>wr", "<cmd>WorkspacesRemove<cr>", { desc = "Workspaces Remove" })
+vim.keymap.set("n", "<leader>oo", "<cmd>Telescope workspaces<cr>", { desc = "Workspaces Open" })
+vim.keymap.set("n", "<leader>oa", "<cmd>WorkspacesAdd<cr>", { desc = "Workspaces Add" })
+vim.keymap.set("n", "<leader>or", "<cmd>WorkspacesRemove<cr>", { desc = "Workspaces Remove" })
 
 -- Improved Terminal Navigation
 vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
