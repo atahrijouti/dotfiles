@@ -6,7 +6,9 @@ return {
       hooks = {
         open = { "Telescope find_files" },
       },
-    })
+    }),
+  },
+  config = function()
     require("telescope").load_extension("workspaces")
   end,
 }
