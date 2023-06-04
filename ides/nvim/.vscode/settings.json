@@ -2,6 +2,7 @@
     "Lua.runtime.version": "Lua 5.1",
     "Lua.workspace.checkThirdParty": false,
     "Lua.workspace.library": [
-        "~/.local/share/nvim/lazy/neodev.nvim/types"
+        "~/.local/share/nvim/lazy/neodev.nvim/types",
+        "C:\\Users\\atj\\AppData\\Local\\nvim-data\\lazy\\neodev.nvim\\types"
     ]
 }

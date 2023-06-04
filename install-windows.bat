@@ -76,3 +76,5 @@ winget install -e --id Discord.Discord
 winget install -e --id VideoLAN.VLC
 winget install -e --id ShareX.ShareX
 winget install -e --id Mp3tag.Mp3tag
+winget install -e --id EpicGames.EpicGamesLauncher
+winget install -e --id XBMCFoundation.Kodi
