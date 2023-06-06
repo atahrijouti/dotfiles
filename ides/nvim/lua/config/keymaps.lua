@@ -21,7 +21,7 @@ whichKey.register(sections, { prefix = "<leader>" })
 -- Top Level
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 vim.keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit" })
-vim.keymap.set("n", "<leader>n", "<cmd>enew q<cr>", { desc = "New File" })
+vim.keymap.set("n", "<leader>n", "<cmd>enew<cr>", { desc = "New File" })
 vim.keymap.set("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
 vim.keymap.set("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
