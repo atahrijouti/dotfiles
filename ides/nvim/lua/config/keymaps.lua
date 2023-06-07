@@ -11,7 +11,7 @@ local sections = {
   -- u = { desc = " UI" },
   -- b = { desc = "󰓩 Buffers" },
   -- d = { desc = " Debugger" },
-  w = { desc = "󱂬 Workspace" },
+  o = { desc = "󱂬 Workspace" },
   -- t = { desc = " Terminal" },
 }
 
@@ -28,6 +28,12 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Mov
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
 
 vim.keymap.set("n", "<leader>1", "<cmd>Neotree toggle<cr>", { desc = "Project Files" })
+
+-- Improved Terminal Navigation
+vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
+vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Terminal down window navigation" })
+vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Terminal up window navigation" })
+vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Terminal right window navigation" })
 
 
 -- Plugin Manager
@@ -72,9 +78,4 @@ vim.keymap.set("n", "<leader>oo", "<cmd>Telescope workspaces<cr>", { desc = "Wor
 vim.keymap.set("n", "<leader>oa", "<cmd>WorkspacesAdd<cr>", { desc = "Workspaces Add" })
 vim.keymap.set("n", "<leader>or", "<cmd>WorkspacesRemove<cr>", { desc = "Workspaces Remove" })
 
--- Improved Terminal Navigation
-vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
-vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Terminal down window navigation" })
-vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Terminal up window navigation" })
-vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Terminal right window navigation" })
 -- stylua: ignore end
