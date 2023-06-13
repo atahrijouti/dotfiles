@@ -78,3 +78,5 @@ winget install -e --id ShareX.ShareX
 winget install -e --id Mp3tag.Mp3tag
 winget install -e --id EpicGames.EpicGamesLauncher
 winget install -e --id XBMCFoundation.Kodi
+winget install -e --id RandomEngy.VidCoder
+winget install -e --id TGRMNSoftware.BulkRenameUtility
