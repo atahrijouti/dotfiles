@@ -29,4 +29,19 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	config.default_prog = { "cmd.exe", "/k" }
 end
 
+config.disable_default_key_bindings = true
+
+config.keys = {
+	{
+		key = ",",
+		mods = "CMD",
+		action = wezterm.action.ActivateCommandPalette,
+	},
+	{
+		key = ";",
+		mods = "CMD",
+		action = wezterm.action.ShowDebugOverlay,
+	},
+}
+
 return config
