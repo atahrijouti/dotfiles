@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 local helpers = require("helpers")
 
 local config = wezterm.config_builder()
@@ -32,16 +33,11 @@ end
 config.disable_default_key_bindings = true
 
 config.keys = {
-	{
-		key = ",",
-		mods = "CMD",
-		action = wezterm.action.ActivateCommandPalette,
-	},
-	{
-		key = ";",
-		mods = "CMD",
-		action = wezterm.action.ShowDebugOverlay,
-	},
+	{ key = ",", mods = "SUPER", action = act.ActivateCommandPalette },
+	{ key = ";", mods = "SUPER", action = act.ShowDebugOverlay },
+	{ key = "c", mods = "SUPER", action = act.CopyTo("Clipboard") },
+	{ key = "v", mods = "SUPER", action = act.PasteFrom("Clipboard") },
+	{ key = "q", mods = "SUPER", action = act.QuitApplication },
 }
 
 return config
