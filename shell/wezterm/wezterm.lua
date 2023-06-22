@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local act = wezterm.action
 local helpers = require("helpers")
 
 local config = wezterm.config_builder()
@@ -28,5 +29,20 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	end
 	config.default_prog = { "cmd.exe", "/k" }
 end
+
+local cmdKey = "SUPER"
+
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	cmdKey = "CTRL"
+end
+
+config.keys = {
+	{ key = ",", mods = cmdKey, action = act.ActivateCommandPalette },
+	{ key = ";", mods = cmdKey, action = act.ShowDebugOverlay },
+	{ key = "c", mods = cmdKey, action = act.CopyTo("Clipboard") },
+	{ key = "v", mods = cmdKey, action = act.PasteFrom("Clipboard") },
+	{ key = "q", mods = cmdKey, action = act.QuitApplication },
+	{ key = "h", mods = cmdKey, action = act.HideApplication },
+}
 
 return config
