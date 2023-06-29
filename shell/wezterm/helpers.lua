@@ -1,20 +1,29 @@
 local wezterm = require("wezterm")
 
-local module = {}
+local M = {}
 
-function module.get_appearance()
-	if wezterm.gui then
-		return wezterm.gui.get_appearance()
-	end
-	return "Dark"
+M.getAppearance = function()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+  return "Dark"
 end
 
-function module.scheme_for_appearance(appearance)
-	if appearance:find("Dark") then
-		return "tokyonight_storm"
-	else
-		return "tokyonight_day"
-	end
+M.schemeForAppearance = function(appearance)
+  if appearance:find("Dark") then
+    return "tokyonight_storm"
+  else
+    return "tokyonight_day"
+  end
 end
 
-return module
+M.togglePadding = function(config)
+  config.window_padding = {
+    left = 10,
+    right = 10,
+    top = 10,
+    bottom = 10,
+  }
+end
+
+return M

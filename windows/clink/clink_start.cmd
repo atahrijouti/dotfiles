@@ -2,10 +2,12 @@
 
 @REM cls 
 
-:: basic bash aliases
+set EDITOR=hx
+
+:: Basic bash aliases
 doskey ls=ls --show-control-chars -F --color $*
 doskey vim=nvim $*
-doskey curl=D:\Users\atj\programs\msys2\usr\bin\curl.exe $*
+@REM doskey curl=D:\Users\atj\programs\msys2\usr\bin\curl.exe $*
 
 :: yt-dlp
 doskey ytfhd=yt-dlp.exe -f "bestvideo[height<=1080]+bestaudio/best[height<=1080]" $*

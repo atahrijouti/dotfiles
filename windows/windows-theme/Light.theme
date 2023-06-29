@@ -1,0 +1,128 @@
+[Theme]
+; Landscape - IDS_THEME_DISPLAYNAME_THEME2
+DisplayName=Light
+ThemeId={4550338A-03A9-4AC0-B7A1-437C48CD8584}
+
+; Computer - SHIDI_SERVER
+[CLSID\{20D04FE0-3AEA-1069-A2D8-08002B30309D}\DefaultIcon]
+DefaultValue=%SystemRoot%\System32\imageres.dll,-109
+
+; UsersFiles - SHIDI_USERFILES
+[CLSID\{59031A47-3F72-44A7-89C5-5595FE6B30EE}\DefaultIcon]
+DefaultValue=%SystemRoot%\System32\imageres.dll,-123
+
+; Network - SHIDI_MYNETWORK
+[CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\DefaultIcon]
+DefaultValue=%SystemRoot%\System32\imageres.dll,-25
+
+; Recycle Bin - SHIDI_RECYCLERFULL SHIDI_RECYCLER
+[CLSID\{645FF040-5081-101B-9F08-00AA002F954E}\DefaultIcon]
+Full=%SystemRoot%\System32\imageres.dll,-54
+Empty=%SystemRoot%\System32\imageres.dll,-55
+
+[Control Panel\Cursors]
+Arrow=%SystemRoot%\cursors\aero_arrow.cur
+Help=%SystemRoot%\cursors\aero_helpsel.cur
+AppStarting=%SystemRoot%\cursors\aero_working.ani
+Wait=%SystemRoot%\cursors\aero_busy.ani
+NWPen=%SystemRoot%\cursors\aero_pen.cur
+No=%SystemRoot%\cursors\aero_unavail.cur
+SizeNS=%SystemRoot%\cursors\aero_ns.cur
+SizeWE=%SystemRoot%\cursors\aero_ew.cur
+Crosshair=
+IBeam=
+SizeNWSE=%SystemRoot%\cursors\aero_nwse.cur
+SizeNESW=%SystemRoot%\cursors\aero_nesw.cur
+SizeAll=%SystemRoot%\cursors\aero_move.cur
+UpArrow=%SystemRoot%\cursors\aero_up.cur
+DefaultValue=Windows Default
+Hand=%SystemRoot%\cursors\aero_link.cur
+Link=
+
+[Control Panel\Desktop]
+Wallpaper=d:\atj\Pictures\Wallpapers\01067_mountcooknewzealand_1920x1080.jpg
+Pattern=
+MultimonBackgrounds=0
+PicturePosition=4
+
+[Control Panel\Desktop\WindowMetrics]
+
+[VisualStyles]
+Path=%SystemRoot%\resources\themes\Aero\Aero.msstyles
+ColorStyle=NormalColor
+Size=NormalSize
+AutoColorization=0
+ColorizationColor=0XC48E8CD8
+AppMode=Light
+SystemMode=Light
+VisualStyleVersion=10
+
+[boot]
+SCRNSAVE.EXE=
+
+[MasterThemeSelector]
+MTSM=RJSPBS
+
+[Sounds]
+; IDS_SCHEME_DEFAULT
+SchemeName=ATJ
+
+[AppEvents\Schemes\Apps\.Default\.Default]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\CriticalBatteryAlarm]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\DeviceConnect]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\DeviceDisconnect]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\DeviceFail]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\FaxBeep]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\LowBatteryAlarm]
+DefaultValue=%SystemRoot%\media\Speech Off.wav
+[AppEvents\Schemes\Apps\.Default\MailBeep]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\MessageNudge]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\Notification.Default]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\Notification.IM]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\Notification.Mail]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\Notification.Proximity]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\Notification.Reminder]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\Notification.SMS]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\ProximityConnection]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\SystemAsterisk]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\SystemExclamation]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\SystemHand]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\SystemNotification]
+DefaultValue=
+[AppEvents\Schemes\Apps\.Default\WindowsUAC]
+DefaultValue=
+[AppEvents\Schemes\Apps\sapisvr\DisNumbersSound]
+DefaultValue=
+[AppEvents\Schemes\Apps\sapisvr\HubOffSound]
+DefaultValue=
+[AppEvents\Schemes\Apps\sapisvr\HubOnSound]
+DefaultValue=
+[AppEvents\Schemes\Apps\sapisvr\HubSleepSound]
+DefaultValue=
+[AppEvents\Schemes\Apps\sapisvr\MisrecoSound]
+DefaultValue=
+[AppEvents\Schemes\Apps\sapisvr\PanelSound]
+DefaultValue=%SystemRoot%\media\Speech Off.wav
+[Slideshow]
+ImagesRootPIDL=DFAFA8BUg/E0gouOpBhoYjAArADMdqDAuAI160KJpVKMFhZ4rKQ+BpHqmAQAAYCAv7bEAAAAFjEaTDPiZHw+ar3ba5Y2BEu1XxGOkmdAUAw8AEDAAAAAAErVpaJEAcVYsxGchBXZyNHAAYEAJAABA8uvxaFqWytVVJpLAAAAuAAAAAAABAAAAAAAAAAAAAAAAAAAA0np8DwVAEGAsBAbAAHAhBAcAUGAyBwcAAAAaAwkAAAAnAw7+WIAAAQMTB1U32pr/3IH/PUgMSIQ6M6ctkGAAAAZAAAAA8BAAAALAAAA3BQaA4GAkBwbAcHAzBgLAkGAtBQbAUGAyBwcAkGA2BQZAMGAvBgbAQHAyBwbAwGAwBQYA4GAlBAbA8FAjBwdAUDAuBQMAgGAyAAdAgHA5BQZAcHA5BAAAAAAAAAAAAAAaAAAAA
+
+Interval=600000
+Shuffle=1
