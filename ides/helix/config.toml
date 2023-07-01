@@ -1,5 +1,4 @@
-
-theme = "onedark"
+theme = "tokyonight_storm"
 
 [editor]
 line-number = "relative"
@@ -17,7 +16,7 @@ hidden = false
 
 
 [editor.soft-wrap]
-enable = true
+# enable = true
 
 [editor.statusline]
 mode.normal = "NORMAL"
