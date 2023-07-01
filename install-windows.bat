@@ -81,3 +81,7 @@ winget install -e --id XBMCFoundation.Kodi
 winget install -e --id RandomEngy.VidCoder
 winget install -e --id TGRMNSoftware.BulkRenameUtility
 winget install -e --id OBSProject.OBSStudio
+
+winget install -e --id Microsoft.VisualStudio.2022.BuildTools
+winget install -e --id Rustlang.Rustup
+

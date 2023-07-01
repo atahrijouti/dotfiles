@@ -23,6 +23,9 @@ M.run = function(config)
     { key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
     { key = "x", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
 
+    -- Search
+    { key = "f", mods = "LEADER", action = act.Search("CurrentSelectionOrEmptyString") },
+
     -- tabs
     { key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
     { key = "w", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
