@@ -12,6 +12,7 @@ mklink "%USERPROFILE%\.config\starship.toml" "%DOTFILES%\shell\starship\starship
 REM Helix
 mklink "%USERPROFILE%\AppData\Roaming\helix\config.toml" "%DOTFILES%\ides\helix\config.toml"
 mklink "%USERPROFILE%\AppData\Roaming\helix\languages.toml" "%DOTFILES%\ides\helix\languages.toml"
+mklink /d "%USERPROFILE%\AppData\Roaming\helix\themes" "%DOTFILES%\ides\helix\themes"
 
 REM MSYS Bash
 mklink "%USERPROFILE%\.bash_profile" "%DOTFILES%\windows\msys_shell\.bash_profile"
