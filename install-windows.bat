@@ -2,7 +2,6 @@ REM install Windows Updates
 REM install winaero + Disable all unwanted things
 REM install winget
 
-
 REM Uninstall unwanted apps
 REM Cortana
 winget uninstall Microsoft.549981C3F5F10_8wekyb3d8bbwe
@@ -31,6 +30,11 @@ winget uninstall Microsoft.WindowsMaps_8wekyb3d8bbwe
 winget uninstall Microsoft.ZuneMusic_8wekyb3d8bbwe
 winget uninstall Microsoft.ZuneVideo_8wekyb3d8bbwe
 winget uninstall Microsoft.OneDrive
+
+setx HELIX_RUNTIME %USERPROFILE%\programs\helix\runtime
+setx MSYS winsymlinks:nativestrict
+setx MSYS2_PATH_TYPE inherit
+
 
 REM install Git, Clink manually for their tricky settings during installation
 winget install -e --id Notepad2mod.Notepad2mod
