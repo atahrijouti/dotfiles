@@ -36,6 +36,8 @@ M.run = function(config)
     { key = "h", mods = "LEADER", action = act.Hide },
     { key = ",", mods = "LEADER", action = act.ActivateCommandPalette },
     { key = ";", mods = "LEADER", action = act.ShowDebugOverlay },
+    { key = "n", mods = "LEADER", action = act.SpawnWindow },
+
   }
 
   config.key_tables = {
