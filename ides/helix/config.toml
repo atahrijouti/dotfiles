@@ -4,6 +4,7 @@ theme = "zed_onelight"
 line-number = "relative"
 cursorline = true
 auto-save = true
+auto-format = true
 color-modes = true
 true-color = true
 
