@@ -58,6 +58,7 @@
 
 "ui.cursor" = { fg = "light-black", bg = "white" }
 "ui.cursor.primary" = { fg = "light-black", bg = "blue" }
+"ui.cursor.primary.select" = { fg = "light-black", bg = "purple" }
 "ui.cursor.match" = { fg = "light-black", bg = "white" }
 
 "ui.selection" = { bg = "faint-gray" }
