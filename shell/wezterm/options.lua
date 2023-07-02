@@ -23,7 +23,7 @@ M.run = function(config)
   config.hide_tab_bar_if_only_one_tab = true
 
   config.disable_default_key_bindings = true
-  config.debug_key_events = true
+  -- config.debug_key_events = true
 end
 
 return M
