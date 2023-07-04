@@ -1,0 +1,11 @@
+Enabled: true
+Component:
+  Scripts:
+  - Name: Toggle helix theme
+    Command: sh
+    WorkingDirectory: C:\Users\atj\AppData\Roaming\helix\themes
+    ArgsLight: [-c, cp zed_onelight.toml auto_dark_mode.toml]
+    ArgsDark: [-c, cp zed_onedark.toml auto_dark_mode.toml]
+    AllowedSources: [Any]
+    TimeoutMillis: 
+

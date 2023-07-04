@@ -1,4 +1,4 @@
-theme = "zed_onelight"
+theme = "auto_dark_mode"
 
 [editor]
 line-number = "relative"

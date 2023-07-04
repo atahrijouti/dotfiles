@@ -9,6 +9,8 @@ mklink /d "%USERPROFILE%\AppData\Local\nvim" "%DOTFILES%\ides\nvim"
 mklink /d "%USERPROFILE%\.config\wezterm" "%DOTFILES%\shell\wezterm"
 mklink "%USERPROFILE%\.config\starship.toml" "%DOTFILES%\shell\starship\starship.toml"
 
+mklink "%USERPROFILE%\AppData\Roaming\AutoDarkMode\scripts.yaml" "%DOTFILES%\windows\autodarkmode\scripts.yaml"
+
 mklink /d "%USERPROFILE%\AppData\Local\lf" "%DOTFILES%\ides\lf"
 
 
