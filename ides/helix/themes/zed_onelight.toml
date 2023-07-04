@@ -15,7 +15,7 @@ inherits = "zed_onedark"
 "markup.quote" = { fg = "green" }
 
 "ui.cursor" = { fg = "white", bg = "dark-blue" }
-"ui.cursor.match" = { fg = "light-black", bg = "light-gray" }
+"ui.cursor.match" = { fg = "white", bg = "light-gray" }
 "ui.cursor.primary" = { fg = "white", bg = "dark-blue" }
 "ui.cursor.primary.select" = { fg = "white", bg = "purple" }
 
