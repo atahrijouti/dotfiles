@@ -30,3 +30,5 @@ k = "normal_mode"
 
 [keys.normal]
 space = { w = ":w", q = ":q" }
+i = ["collapse_selection", "insert_mode"]
+a = ["collapse_selection", "append_mode"]
