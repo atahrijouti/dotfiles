@@ -1,0 +1,9 @@
+set hidden 			true
+set dirpreviews 	false
+set preview			false
+set icons			true
+set mouse			true
+set incsearch		true
+set incfilter		true
+#set autoquit		true
+set ratios '1'

@@ -9,6 +9,9 @@ mklink /d "%USERPROFILE%\AppData\Local\nvim" "%DOTFILES%\ides\nvim"
 mklink /d "%USERPROFILE%\.config\wezterm" "%DOTFILES%\shell\wezterm"
 mklink "%USERPROFILE%\.config\starship.toml" "%DOTFILES%\shell\starship\starship.toml"
 
+mklink /d "%USERPROFILE%\AppData\Local\lf" "%DOTFILES%\ides\lf"
+
+
 REM Helix
 mklink "%USERPROFILE%\AppData\Roaming\helix\config.toml" "%DOTFILES%\ides\helix\config.toml"
 mklink "%USERPROFILE%\AppData\Roaming\helix\languages.toml" "%DOTFILES%\ides\helix\languages.toml"
