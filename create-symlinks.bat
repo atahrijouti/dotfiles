@@ -15,9 +15,7 @@ mklink /d "%USERPROFILE%\AppData\Local\lf" "%DOTFILES%\ides\lf"
 
 
 REM Helix
-mklink "%USERPROFILE%\AppData\Roaming\helix\config.toml" "%DOTFILES%\ides\helix\config.toml"
-mklink "%USERPROFILE%\AppData\Roaming\helix\languages.toml" "%DOTFILES%\ides\helix\languages.toml"
-mklink /d "%USERPROFILE%\AppData\Roaming\helix\themes" "%DOTFILES%\ides\helix\themes"
+mklink /d "%USERPROFILE%\AppData\Roaming\helix" "%DOTFILES%\ides\helix"
 
 REM MSYS Bash
 mklink "%USERPROFILE%\.bash_profile" "%DOTFILES%\windows\msys_shell\.bash_profile"
