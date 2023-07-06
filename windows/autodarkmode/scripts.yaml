@@ -4,7 +4,7 @@ Component:
   - Name: Toggle helix theme
     Command: sh
     WorkingDirectory: C:\Users\atj\AppData\Roaming\helix
-    ArgsLight: [-c, sed -i -E 's/(theme\s=\s").*(")/\1zed_onelight\2/' config.toml]
+    ArgsLight: [-c, sed -i -E 's/(theme\s=\s").*(")/\1atj\2/' config.toml]
     ArgsDark: [-c, sed -i -E 's/(theme\s=\s").*(")/\1zed_onedark\2/' config.toml]
     AllowedSources: [Any]
     TimeoutMillis: 
