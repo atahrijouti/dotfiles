@@ -29,6 +29,7 @@ mode.select = "SELECT"
 k = "normal_mode"
 
 [keys.normal]
-space = { w = ":w", q = ":q" }
+space = { w = ":w", q = ":q", t = ":tree-sitter-scopes", c = ":config-reload" }
 i = ["collapse_selection", "insert_mode"]
 a = ["collapse_selection", "append_mode"]
+
