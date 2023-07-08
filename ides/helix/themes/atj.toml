@@ -1,92 +1,109 @@
+# atj theme
 
-# Author: ATJ 
+"attribute" = "blue"
+"type" = "shade06"
+"type.enum.variant" = "purple"
+"constructor" = "shade06"
 
-"ui.background" = { bg = "background" }
-"ui.menu" = { fg = "base05", bg = "base01" }
-"ui.menu.selected" = { fg = "base01", bg = "base04" }
-"ui.popup" = { bg = "base01" }
-"ui.window" = { bg = "base01" }
-"ui.linenr" = { fg = "base03", bg = "base01" }
-"ui.linenr.selected" = { fg = "base04", bg = "base01", modifiers = ["bold"] }
-"ui.statusline" = { fg = "base04", bg = "base01" }
-"ui.virtual.whitespace" = "base03"
-"ui.text" = "base05"
-"ui.text.focus" = "base05"
-"ui.help" = { fg = "base06", bg = "base01" }
-"ui.gutter" = { bg = "base01" }
-
-"ui.cursor" = { bg = "light_blue" }
-"ui.cursor.primary" = { bg = "light_blue" }
-"ui.cursor.match" = { bg = "base03" }
-"ui.cursorline.primary" = { bg = "faint_blue" }
-"ui.selection" = { bg = "lighter_blue" }
-
-
-"diff.plus" = "base0B"
-"diff.delta" = "base09"
-"diff.minus" = "red"
-
-"diagnostic" = { modifiers = ["underlined"] }
-"info" = "base0D"
-"hint" = "base03"
-"debug" = "base03"
-"warning" = "base09"
-"error" = "base08"
-
-"ui.bufferline" = { fg = "base04", bg = "base01" }
-"ui.bufferline.active" = { fg = "base07", bg = "base00" }
-
-"comment" = { fg = "gray", modifiers = ["italic"] }
-
-"operator" = "black"
-"variable" = "purple"
-"variable.other.member" = "purple"
-"constant.numeric" = "blue"
 "constant" = "darker_blue"
-"attribute" = "base09"
-"type" = "darker_blue"
-"string"  = "green"
-"constant.character.escape" = "base0C"
-"function" = "black"
-"constructor" = "black"
-"special" = "base0D"
+"constant.builtin.boolean" = "blue"
+"constant.character" = "blue"
+"constant.characted.escape" = "blue"
+"constant.numeric" = "blue"
+
+"string" = "green"
+"string.regexp" = "blue"
+"string.special" = { fg = "dark_red", modifiers = ["underlined"] }
+
+"comment" = "gray"
+
+"variable" = "purple"
+"variable.builtin" = { fg = "purple", modifiers = ["underlined"] }
+"variable.parameter" = "purple"
+"variable.other.member" = "purple"
+
+"label" = { fg = "darker_blue", modifiers = ["underlined"] }
+"punctuation" = "shade06"
+
 "keyword" = "darker_blue"
-"label" = "purple"
+"keyword.control.exception" = "darker_blue"
+
+"operator" = "light_purple"
+
+"function" = "shade06"
+"function.macro" = "yellow"
+"function.builtin" = { fg = "shade06", modifiers = ["italic"] }
+"function.special" = "dark_red"
+"function.method" = "dark_yellow"
+
+"tag" = "darker_blue"
+"special" = "shade06"
 "namespace" = "darker_blue"
 
-"markup.heading" = "purple"
+"markup.bold" = { fg = "shade06", modifiers = ["bold"] }
+"markup.italic" = { fg = "shade06", modifiers = ["italic"] }
+"markup.strikethrough" = { fg = "shade06", modifiers = ["crossed_out"] }
+"markup.heading" = { fg = "purple", modifiers = ["bold"] }
 "markup.list" = "darker_blue"
-"markup.bold" = { modifiers = ["bold"] }
-"markup.italic" = { modifiers = ["italic"] }
-"markup.strikethrough" = { modifiers = ["crossed_out"] }
-"markup.link.url" = { }
-"markup.link.text" = { fg = "dark_blue", modifiers = ["underlined"] }
-"markup.link.label" = { fg = "darker_blue" }
+"markup.list.numbered" = "darker_blue"
+"markup.list.unnumbered" = "darker_blue"
+"markup.link.url" = "shade06"
+"markup.link.text" = { fg = "dark_blue", modifiers = ['underlined'] }
+"markup.link.label" = "dark_blue"
 "markup.quote" = "green"
 "markup.raw" = "green"
+"markup.raw.inline" = "green"
+"markup.raw.block" = "green"
 
+"diff.plus" = "diff_green"
+"diff.minus" = "diff_red"
+"diff.delta" = "diff_blue"
+
+# ui specific
+"ui.background" = { bg = "shade00" }                                            # .separator
+"ui.cursor" = { bg = "light_blue" }
+# "ui.cursor.insert" = { bg = "light_yellow", fg = "background" }
+"ui.cursor.match" = { bg = "shade03" }
+"ui.highlight" = { bg = "faint_blue" }
+"ui.cursorline" = { bg = "faint_blue" }
+"ui.linenr" = { fg = "shade03" }
+"ui.linenr.selected" = { fg = "shade04", bg = "faint_blue", modifiers = ["bold"] }
+"ui.statusline" = { fg = "shade04", bg = "shade01" }
+"ui.statusline.inactive" = { fg = "shade04", bg = "shade02" }
+# "ui.statusline.normal" = { fg = "light_yellow", bg = "darker" }
+# "ui.statusline.insert" = { fg = "darker", bg = "purple" }
+# "ui.statusline.select" = { fg = "selectionFG", bg = "selection" }
+"ui.popup" = { bg = "shade01" }
+"ui.window" = { bg = "shade01" }
+"ui.help" = { fg = "shade06", bg = "shade01" }
+"ui.text" = "shade05"
+"ui.text.focus" = "shade04"
+"ui.virtual" = "shade03"
+"ui.virtual.ruler" = { bg = "shade04" }
+"ui.menu" = { fg = "shade05", bg = "shade01" }
+"ui.menu.selected" = { fg = "shade01", bg = "shade04" }
+"ui.selection" = { bg = "lighter_blue" }
+"ui.selection.primary" = { bg = "lighter_blue" }
+"hint" = "gray"
+"info" = "light_blue"
+"warning" = "orange"
+"error" = "red"
+"diagnostic" = { modifiers = [] }
+"diagnostic.hint" = { underline = { color = "gray", style = "line" } }
+"diagnostic.info" = { underline = { color = "light_blue", style = "line" } }
+"diagnostic.warning" = { underline = { color = "orange", style = "curl" } }
+"diagnostic.error" = { underline = { color = "red", style = "curl" } }
 
 [palette]
 # E4EAED
-base00 = "#f2f3f7" 
-
-base01 = "#dadde8" 
-base02 = "#c1c6d9" 
-base03 = "#a9b0ca" 
-base04 = "#525c85" 
-base05 = "#434b6c" 
-base06 = "#343a54" 
-
-base07 = "#25293c" 
-
-base08 = "#d90016" # +Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-base09 = "#dc9656" # Integers, Boolean, Constants, XML Attributes, Markup Link Url
-base0A = "#f7ca88" # Classes, Markup Bold, Search Text Background
-base0B = "#00733B" # Strings, Inherited Class, Markup Code, Diff Inserted
-base0C = "#86c1b9" # Support, Regular Expressions, Escape Characters, Markup Quotes
-base0D = "#7cafc2" # Functions, Methods, Attribute IDs, Headings
-base0E = "#660E7A" # +Keywords, Storage, Selector, Markup Italic, Diff Changed
-base0F = "#a16946" # Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+shade00 = "#f2f3f7" 
+shade01 = "#dadde8" 
+shade02 = "#c1c6d9" 
+shade03 = "#a9b0ca" 
+shade04 = "#525c85" 
+shade05 = "#434b6c" 
+shade06 = "#343a54" 
+shade07 = "#25293c" 
 
 background = "#f2f3f7"
 foreground = "#25293c"
@@ -95,6 +112,7 @@ light_gray = "#dadde8"
 gray = "#525c85"
 black = "#25293c"
 
+diff_blue = "#C3D6E8"
 faint_blue = "#E8Eef1"
 lighter_blue = "#d0eaff"
 light_blue = "#99ccff"
@@ -104,5 +122,16 @@ darker_blue = "#000080"
 
 purple = "#660E7A"
 
+diff_green = "#C9DEC1"
 green = "#00733B"
+green_blue = "#458383"
+
+
+yellow = "#808000"
+dark_yellow = "#7A7A43"
+
+orange = "#F49810"
+
+diff_red = "#EBBCBC"
 red = "#d90016"
+dark_red = "#7F0000"
