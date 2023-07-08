@@ -1,9 +1,9 @@
 # atj theme
 
 "attribute" = "blue"
-"type" = "shade06"
+"type" = "shade07"
 "type.enum.variant" = "purple"
-"constructor" = "shade06"
+"constructor" = "shade07"
 
 "constant" = "darker_blue"
 "constant.builtin.boolean" = "blue"
@@ -15,10 +15,10 @@
 "string.regexp" = "blue"
 "string.special" = { fg = "dark_red", modifiers = ["underlined"] }
 
-"comment" = "gray"
+"comment" = "comment_gray"
 
-"variable" = "purple"
-"variable.builtin" = { fg = "purple", modifiers = ["underlined"] }
+"variable" = "green_blue"
+"variable.builtin" = { fg = "darker_blue" }
 "variable.parameter" = "purple"
 "variable.other.member" = "purple"
 
@@ -28,11 +28,11 @@
 "keyword" = "darker_blue"
 "keyword.control.exception" = "darker_blue"
 
-"operator" = "light_purple"
+"operator" = "shade06"
 
-"function" = "shade06"
+"function" = "shade07"
 "function.macro" = "yellow"
-"function.builtin" = { fg = "shade06", modifiers = ["italic"] }
+"function.builtin" = { fg = "shade07", modifiers = ["italic"] }
 "function.special" = "dark_red"
 "function.method" = "dark_yellow"
 
@@ -43,7 +43,7 @@
 "markup.bold" = { fg = "shade06", modifiers = ["bold"] }
 "markup.italic" = { fg = "shade06", modifiers = ["italic"] }
 "markup.strikethrough" = { fg = "shade06", modifiers = ["crossed_out"] }
-"markup.heading" = { fg = "purple", modifiers = ["bold"] }
+"markup.heading" = { fg = "purple" }
 "markup.list" = "darker_blue"
 "markup.list.numbered" = "darker_blue"
 "markup.list.unnumbered" = "darker_blue"
@@ -62,17 +62,23 @@
 # ui specific
 "ui.background" = { bg = "shade00" }                                            # .separator
 "ui.cursor" = { bg = "light_blue" }
-# "ui.cursor.insert" = { bg = "light_yellow", fg = "background" }
+"ui.cursor.primary" = { bg = "light_blue" }
+"ui.cursor.primary.select" = { bg = "purple", fg = "shade00" }
+"ui.cursor.primary.insert" = { bg = "green", fg = "shade00" }
 "ui.cursor.match" = { bg = "shade03" }
+
+
 "ui.highlight" = { bg = "faint_blue" }
 "ui.cursorline" = { bg = "faint_blue" }
+
 "ui.linenr" = { fg = "shade03" }
 "ui.linenr.selected" = { fg = "shade04", bg = "faint_blue", modifiers = ["bold"] }
-"ui.statusline" = { fg = "shade04", bg = "shade01" }
-"ui.statusline.inactive" = { fg = "shade04", bg = "shade02" }
-# "ui.statusline.normal" = { fg = "light_yellow", bg = "darker" }
-# "ui.statusline.insert" = { fg = "darker", bg = "purple" }
-# "ui.statusline.select" = { fg = "selectionFG", bg = "selection" }
+
+"ui.statusline" = { fg = "shade06", bg = "shade02" }
+"ui.statusline.inactive" = { fg = "shade04", bg = "shade01" }
+"ui.statusline.normal" = { fg = "shade00", bg = "blue" }
+"ui.statusline.insert" = { fg = "shade00", bg = "green" }
+"ui.statusline.select" = { fg = "shade00", bg = "purple" }
 "ui.popup" = { bg = "shade01" }
 "ui.window" = { bg = "shade01" }
 "ui.help" = { fg = "shade06", bg = "shade01" }
@@ -84,12 +90,12 @@
 "ui.menu.selected" = { fg = "shade01", bg = "shade04" }
 "ui.selection" = { bg = "lighter_blue" }
 "ui.selection.primary" = { bg = "lighter_blue" }
-"hint" = "gray"
+"hint" = "shade04"
 "info" = "light_blue"
 "warning" = "orange"
 "error" = "red"
 "diagnostic" = { modifiers = [] }
-"diagnostic.hint" = { underline = { color = "gray", style = "line" } }
+"diagnostic.hint" = { underline = { color = "shade04", style = "line" } }
 "diagnostic.info" = { underline = { color = "light_blue", style = "line" } }
 "diagnostic.warning" = { underline = { color = "orange", style = "curl" } }
 "diagnostic.error" = { underline = { color = "red", style = "curl" } }
@@ -108,9 +114,7 @@ shade07 = "#25293c"
 background = "#f2f3f7"
 foreground = "#25293c"
 
-light_gray = "#dadde8"
-gray = "#525c85"
-black = "#25293c"
+comment_gray = "#808080"
 
 diff_blue = "#C3D6E8"
 faint_blue = "#E8Eef1"
@@ -119,6 +123,7 @@ light_blue = "#99ccff"
 blue = "#0073E6"
 dark_blue = "#185b93"
 darker_blue = "#000080"
+
 
 purple = "#660E7A"
 
