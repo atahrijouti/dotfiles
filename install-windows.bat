@@ -39,6 +39,8 @@ setx MSYS2_PATH_TYPE inherit
 REM install Git, Clink manually for their tricky settings during installation
 winget install -e --id Notepad2mod.Notepad2mod
 winget install -e --id 7zip.7zip
+winget install -e --id AutoHotkey.AutoHotkey
+
 
 REM install JetBrains Mono Nerd font from https://www.nerdfonts.com/font-downloads
 winget install -e --id wez.wezterm
