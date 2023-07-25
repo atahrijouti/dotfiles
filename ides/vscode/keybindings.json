@@ -210,6 +210,30 @@
         "key": "shift+f10",
         "command": "workbench.action.tasks.reRunTask"
     },
+    {
+        "key": "alt+down",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+enter",
+        "command": "editor.action.quickFix",
+        "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+enter",
+        "command": "acceptSelectedCodeAction",
+        "when": "codeActionMenuVisible"
+    },
+    {
+        "key": "alt+enter",
+        "command": "problems.action.showQuickFixes",
+        "when": "problemFocus"
+    },
+    {
+        "key": "ctrl+0",
+        "command": "workbench.action.zoomReset"
+    },
     //////////
     //////////
     //////////
@@ -521,11 +545,6 @@
         "when": "breadcrumbsPossible && breadcrumbsVisible"
     },
     {
-        "key": "alt+down",
-        "command": "editor.action.insertCursorBelow",
-        "when": "editorTextFocus"
-    },
-    {
         "key": "ctrl+alt+down",
         "command": "-editor.action.insertCursorBelow",
         "when": "editorTextFocus"
@@ -573,21 +592,6 @@
         "when": "textInputFocus"
     },
     {
-        "key": "alt+enter",
-        "command": "editor.action.quickFix",
-        "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "alt+enter",
-        "command": "acceptSelectedCodeAction",
-        "when": "codeActionMenuVisible"
-    },
-    {
-        "key": "alt+enter",
-        "command": "problems.action.showQuickFixes",
-        "when": "problemFocus"
-    },
-    {
         "key": "ctrl+.",
         "command": "-editor.action.quickFix",
         "when": "editorHasCodeActionsProvider && textInputFocus && !editorReadonly"
@@ -611,5 +615,45 @@
         "key": "ctrl+.",
         "command": "-editor.changeDropType",
         "when": "dropWidgetVisible"
-    }
+    },
+    {
+        "key": "ctrl+numpad0",
+        "command": "-workbench.action.zoomReset"
+    },
+    {
+        "key": "ctrl+0",
+        "command": "-workbench.action.focusSideBar"
+    },
+    {
+        "key": "ctrl+2",
+        "command": "-workbench.action.focusSecondEditorGroup"
+    },
+    {
+        "key": "ctrl+3",
+        "command": "-workbench.action.focusThirdEditorGroup"
+    },
+    {
+        "key": "ctrl+4",
+        "command": "-workbench.action.focusFourthEditorGroup"
+    },
+    {
+        "key": "ctrl+5",
+        "command": "-workbench.action.focusFifthEditorGroup"
+    },
+    {
+        "key": "ctrl+6",
+        "command": "-workbench.action.focusSixthEditorGroup"
+    },
+    {
+        "key": "ctrl+7",
+        "command": "-workbench.action.focusSeventhEditorGroup"
+    },
+    {
+        "key": "ctrl+8",
+        "command": "-workbench.action.focusEighthEditorGroup"
+    },
+    {
+        "key": "ctrl+9",
+        "command": "-workbench.action.lastEditorInGroup"
+    },
 ]
