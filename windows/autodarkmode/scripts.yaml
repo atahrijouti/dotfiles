@@ -5,7 +5,7 @@ Component:
     Command: sh
     WorkingDirectory: C:\Users\atj\AppData\Roaming\helix
     ArgsLight: [-c, sed -i -E 's/(theme\s=\s").*(")/\1cyan_light\2/' config.toml]
-    ArgsDark: [-c, sed -i -E 's/(theme\s=\s").*(")/\1zed_onedark\2/' config.toml]
+    ArgsDark: [-c, sed -i -E 's/(theme\s=\s").*(")/\1tokyonight_storm\2/' config.toml]
     AllowedSources: [Any]
     TimeoutMillis: 
 
