@@ -7,6 +7,7 @@ auto-save = true
 auto-format = true
 color-modes = true
 true-color = true
+undercurl = true
 
 [editor.cursor-shape]
 insert = "block"
