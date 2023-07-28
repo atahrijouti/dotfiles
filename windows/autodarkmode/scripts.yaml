@@ -3,9 +3,8 @@ Component:
   Scripts:
   - Name: Toggle helix theme
     Command: sh
-    WorkingDirectory: C:\Users\atj\AppData\Roaming\helix
-    ArgsLight: [-c, sed -i -E 's/(theme\s=\s").*(")/\1cyan_light\2/' config.toml]
-    ArgsDark: [-c, sed -i -E 's/(theme\s=\s").*(")/\1tokyonight_storm\2/' config.toml]
+    ArgsLight: [-c, sed -i -E 's/(theme\s=\s").*(")/\1cyan_light\2/' ~/AppData/Roaming/helix/config.toml]
+    ArgsDark: [-c, sed -i -E 's/(theme\s=\s").*(")/\1tokyonight_storm\2/' ~/AppData/Roaming/helix/config.toml]
     AllowedSources: [Any]
     TimeoutMillis: 
 

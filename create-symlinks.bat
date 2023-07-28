@@ -2,7 +2,7 @@
 
 if not exist "%USERPROFILE%\.config" mkdir "%USERPROFILE%\.config"
 
-set DOTFILES="%USERPROFILE%\playground\git\dotfiles"
+setx DOTFILES="%USERPROFILE%\playground\git\dotfiles"
 
 mklink /d "%USERPROFILE%\AppData\Local\clink" "%DOTFILES%\windows\clink"
 mklink /d "%USERPROFILE%\AppData\Local\nvim" "%DOTFILES%\ides\nvim"
