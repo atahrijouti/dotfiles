@@ -39,7 +39,7 @@ Hand=%SystemRoot%\cursors\aero_link.cur
 Link=
 
 [Control Panel\Desktop]
-Wallpaper=d:\atj\Pictures\Wallpapers\01067_mountcooknewzealand_1920x1080.jpg
+Wallpaper=%USERPROFILE%\Pictures\Wallpapers\01067_mountcooknewzealand_1920x1080.jpg
 Pattern=
 MultimonBackgrounds=0
 PicturePosition=4
