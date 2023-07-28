@@ -1,3 +1,10 @@
+setx MSYS winsymlinks:nativestrict
+setx MSYS2_PATH_TYPE inherit
+
+REM helps MSYS2 set $HOME to the windows user directory
+setx HOME %USERPROFILE%
+setx HELIX_RUNTIME %USERPROFILE%\programs\helix\runtime
+
 REM install Windows Updates
 REM install winaero + Disable all unwanted things
 REM install winget
@@ -30,11 +37,6 @@ winget uninstall Microsoft.WindowsMaps_8wekyb3d8bbwe
 winget uninstall Microsoft.ZuneMusic_8wekyb3d8bbwe
 winget uninstall Microsoft.ZuneVideo_8wekyb3d8bbwe
 winget uninstall Microsoft.OneDrive
-
-setx HELIX_RUNTIME %USERPROFILE%\programs\helix\runtime
-setx MSYS winsymlinks:nativestrict
-setx MSYS2_PATH_TYPE inherit
-
 
 REM install Git, Clink manually for their tricky settings during installation
 winget install -e --id Notepad2mod.Notepad2mod
