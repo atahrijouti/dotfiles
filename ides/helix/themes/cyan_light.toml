@@ -65,8 +65,8 @@
 "ui.background" = { bg = "shade00" }                                            # .separator
 "ui.cursor" = { bg = "light_blue" }
 "ui.cursor.primary" = { bg = "light_blue" }
-"ui.cursor.primary.select" = { bg = "purple", fg = "shade00" }
-"ui.cursor.primary.insert" = { bg = "green", fg = "shade00" }
+"ui.cursor.primary.select" = { bg = "light_purple", fg = "shade00" }
+"ui.cursor.primary.insert" = { bg = "light_green", fg = "shade00" }
 "ui.cursor.match" = { bg = "shade03" }
 
 
@@ -128,9 +128,11 @@ darker_blue = "#000080"
 
 
 purple = "#660E7A"
+light_purple = "#895A94"
 
 diff_green = "#C9DEC1"
 green = "#00733B"
+light_green = "#548C71"
 green_blue = "#458383"
 
 
