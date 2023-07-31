@@ -1,3 +1,8 @@
 [[language]]
 name = "lua"
 auto-format = true
+
+
+[[languvage]]
+name = "html"
+indent = { tab-width = 2, unit = " " }
