@@ -72,7 +72,7 @@ vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Git status" })
 
 -- LSP
 vim.keymap.set("n", "<leader>lD", function() telescope.diagnostics() end, { desc = "Search diagnostics" })
-vim.keymap.set("n", "<leader>ls", function () telescope.lsp_document_symbols() end, { desc = "Search symbols" })
+vim.keymap.set("n", "<leader>ls", function() telescope.lsp_document_symbols() end, { desc = "Search symbols" })
 
 
 -- Workspaces
