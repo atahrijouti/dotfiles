@@ -33,4 +33,5 @@ k = "normal_mode"
 space = { w = ":w", q = ":q", t = ":tree-sitter-scopes", c = ":config-reload" }
 i = ["collapse_selection", "insert_mode"]
 a = ["collapse_selection", "append_mode"]
-
+"}" = ["goto_next_paragraph"]
+"{" = ["goto_prev_paragraph"]
