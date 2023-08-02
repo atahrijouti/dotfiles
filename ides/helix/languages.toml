@@ -3,6 +3,6 @@ name = "lua"
 auto-format = true
 
 
-[[languvage]]
+[[language]]
 name = "html"
 indent = { tab-width = 2, unit = " " }
