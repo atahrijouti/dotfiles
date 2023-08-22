@@ -94,3 +94,4 @@ winget install -e --id SumatraPDF.SumatraPDF
 winget install -e --id Microsoft.VisualStudio.2022.BuildTools
 winget install -e --id Rustlang.Rustup
 
+winget install -e --id XnSoft.XnConvert

@@ -10,7 +10,7 @@ F9::{
 			Break
 		Click()
 		; Make this number higher for slower clicks, lower for faster.
-		Sleep(17)
+		Sleep(5)
 	}
 	Return
 }
