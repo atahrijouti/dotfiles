@@ -24,18 +24,6 @@ lazy_load_brew() {
 }
 lazyload brew -- lazy_load_brew
 
-# NVM
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-  export NVM_DIR="$HOME/.nvm"
-  nvm_cmds=(nvm node npm yarn pnpm)
-  for cmd in $nvm_cmds ; do
-    alias $cmd="unalias $nvm_cmds \
-    && unset nvm_cmds \
-    && . $NVM_DIR/nvm.sh \
-    && . "$NVM_DIR/bash_completion" \
-    && $cmd"
-  done
-fi
 
 # Rbenv
 lazy_load_rbenv() {
@@ -51,9 +39,37 @@ lazy_load_jabba() {
     [ -s "$JABBA_HOME/jabba.sh" ] && source "$JABBA_HOME/jabba.sh"
 }
 lazyload jabba -- lazy_load_jabba
+# Lazy Load end
+
+# NVM
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    . $NVM_DIR/nvm.sh
+    . "$NVM_DIR/bash_completion"
+fi
+
+# Lf
+
+lfcd () {
+    tmp="$(mktemp)"
+    # `command` is needed in case `lfcd` is aliased to `lf`
+    command lf -last-dir-path="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
+alias lf=lfcd
 
 #aliases
 alias ls="ls -F --color"
 alias love="/Applications/love.app/Contents/MacOS/love"
+
+
 
 source "$HOME/.work_zshrc"
