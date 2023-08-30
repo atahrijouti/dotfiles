@@ -1,3 +1,4 @@
+
 theme = "cyan_light"
 
 [editor]
@@ -19,7 +20,7 @@ hidden = false
 
 
 [editor.soft-wrap]
-# enable = true
+enable = true
 
 [editor.statusline]
 mode.normal = "NORMAL"
