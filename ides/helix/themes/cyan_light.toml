@@ -69,6 +69,8 @@
 "ui.cursor.primary.insert" = { bg = "light_green" }
 "ui.cursor.match" = { bg = "shade03" }
 
+"ui.selection" = { bg = "lighter_blue" }
+"ui.selection.primary" = { bg = "lighter_blue" }
 
 "ui.highlight" = { bg = "faint_blue" }
 "ui.cursorline" = { bg = "faint_blue" }
@@ -81,6 +83,7 @@
 "ui.statusline.normal" = { fg = "shade00", bg = "blue" }
 "ui.statusline.insert" = { fg = "shade00", bg = "green" }
 "ui.statusline.select" = { fg = "shade00", bg = "purple" }
+
 "ui.popup" = { bg = "shade01" }
 "ui.window" = { bg = "shade00" }
 "ui.help" = { fg = "shade06", bg = "shade01" }
@@ -90,8 +93,7 @@
 "ui.virtual.ruler" = { bg = "shade04" }
 "ui.menu" = { fg = "shade05", bg = "shade01" }
 "ui.menu.selected" = { fg = "shade00", bg = "light_blue" }
-"ui.selection" = { bg = "lighter_blue" }
-"ui.selection.primary" = { bg = "lighter_blue" }
+
 "hint" = "shade04"
 "info" = "light_blue"
 "warning" = "orange"
