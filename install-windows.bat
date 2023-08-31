@@ -95,3 +95,4 @@ winget install -e --id Microsoft.VisualStudio.2022.BuildTools
 winget install -e --id Rustlang.Rustup
 
 winget install -e --id XnSoft.XnConvert
+winget install -e --id SyncTrayzor.SyncTrayzor
