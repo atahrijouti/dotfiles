@@ -32,6 +32,7 @@ return {
               ["<C-k>"] = actions.cycle_history_prev,
               ["<C-n>"] = actions.move_selection_next,
               ["<C-p>"] = actions.move_selection_previous,
+              ["<esc>"] = actions.close
             },
             n = { ["q"] = actions.close },
           },

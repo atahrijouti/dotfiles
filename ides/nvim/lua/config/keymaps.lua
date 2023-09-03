@@ -4,14 +4,14 @@ local lazy = require("lazy")
 local ku = require("config.utils.keymaps")
 
 local sections = {
-  f = { desc = "󰍉 Find" },
-  g = { desc = " Git" },
-  p = { desc = "󰏖 Packages" },
-  l = { desc = " LSP" },
+  -- f = { desc = "󰍉 Find" },
+  -- g = { desc = " Git" },
+  -- p = { desc = "󰏖 Packages" },
+  -- l = { desc = " LSP" },
   -- u = { desc = " UI" },
   -- b = { desc = "󰓩 Buffers" },
   -- d = { desc = " Debugger" },
-  o = { desc = "󱂬 Workspace" },
+  -- o = { desc = "󱂬 Workspace" },
   -- t = { desc = " Terminal" },
 }
 
@@ -48,36 +48,34 @@ vim.keymap.set("n", "<leader>pm", "<cmd>Mason<cr>", { desc = "Mason Installer" }
 vim.keymap.set("n", "<leader>pM", "<cmd>MasonUpdateAll<cr>", { desc = "Mason Update" })
 
 -- Find
-vim.keymap.set("n", "<leader>f<CR>", telescope.resume, { desc = "Resume previous search" })
-vim.keymap.set("n", "<leader>ff", telescope.find_files, { desc = "Find Files" })
-vim.keymap.set("n", "<leader>fF", ku.telescope_find_all_files, { desc = "Find all files" })
-vim.keymap.set("n", "<leader>fw", telescope.live_grep, { desc = "Find words" })
-vim.keymap.set("n", "<leader>fw", ku.telescope_find_words_everywhere, { desc = "Find words in all files" })
-vim.keymap.set("n", "<leader>fc", telescope.grep_string, { desc = "Find for word under cursor" })
+vim.keymap.set("n", "<leader>'", telescope.resume, { desc = "Resume previous search" })
+vim.keymap.set("n", "<leader>f", telescope.find_files, { desc = "Find Files" })
+vim.keymap.set("n", "<leader>F", ku.telescope_find_all_files, { desc = "Find all files" })
+vim.keymap.set("n", "<leader>/", telescope.live_grep, { desc = "Find words" })
+vim.keymap.set("n", "<leader>x/", ku.telescope_find_words_everywhere, { desc = "Find words in all files" })
+vim.keymap.set("n", "<leader>xc", telescope.grep_string, { desc = "Find for word under cursor" })
 
-vim.keymap.set("n", "<leader>fb", telescope.buffers, { desc = "Find Buffers" })
-vim.keymap.set("n", "<leader>fC", telescope.commands, { desc = "Find commands" })
-vim.keymap.set("n", "<leader>fo", telescope.oldfiles, { desc = "Find history" })
-vim.keymap.set("n", "<leader>fr", telescope.registers, { desc = "Find registers" })
-vim.keymap.set("n", "<leader>ft", ku.telescope_find_themes, { desc = "Find themes" })
+vim.keymap.set("n", "<leader>b", telescope.buffers, { desc = "Find Buffers" })
+vim.keymap.set("n", "<leader>?", telescope.commands, { desc = "Find commands" })
+vim.keymap.set("n", "<leader>xo", telescope.oldfiles, { desc = "Find history" })
+vim.keymap.set("n", "<leader>xr", telescope.registers, { desc = "Find registers" })
+vim.keymap.set("n", "<leader>xt", ku.telescope_find_themes, { desc = "Find themes" })
 
-vim.keymap.set("n", "<leader>fh", telescope.help_tags, { desc = "Find help" })
-vim.keymap.set("n", "<leader>fk", telescope.keymaps, { desc = "Find keymaps" })
-vim.keymap.set("n", "<leader>fm", telescope.man_pages, { desc = "Find man pages" })
+vim.keymap.set("n", "<leader>xh", telescope.help_tags, { desc = "Find help" })
+vim.keymap.set("n", "<leader>xk", telescope.keymaps, { desc = "Find keymaps" })
+vim.keymap.set("n", "<leader>xm", telescope.man_pages, { desc = "Find man pages" })
 
 -- Git
-vim.keymap.set("n", "<leader>gb", telescope.git_branches, { desc = "Git branches" })
-vim.keymap.set("n", "<leader>gc", telescope.git_commits, { desc = "Git commits" })
-vim.keymap.set("n", "<leader>gs", telescope.git_status, { desc = "Git status" })
+vim.keymap.set("n", "<leader>xgb", telescope.git_branches, { desc = "Git branches" })
+vim.keymap.set("n", "<leader>xgc", telescope.git_commits, { desc = "Git commits" })
+vim.keymap.set("n", "<leader>xgs", telescope.git_status, { desc = "Git status" })
 
 -- LSP
-vim.keymap.set("n", "<leader>lD", function() telescope.diagnostics() end, { desc = "Search diagnostics" })
-vim.keymap.set("n", "<leader>ls", function() telescope.lsp_document_symbols() end, { desc = "Search symbols" })
-
+vim.keymap.set("n", "<leader>d", function() telescope.diagnostics() end, { desc = "Search diagnostics" })
 
 -- Workspaces
-vim.keymap.set("n", "<leader>oo", "<cmd>Telescope workspaces<cr>", { desc = "Workspaces Open" })
-vim.keymap.set("n", "<leader>oa", "<cmd>WorkspacesAdd<cr>", { desc = "Workspaces Add" })
-vim.keymap.set("n", "<leader>or", "<cmd>WorkspacesRemove<cr>", { desc = "Workspaces Remove" })
+vim.keymap.set("n", "<leader>xwo", "<cmd>Telescope workspaces<cr>", { desc = "Workspaces Open" })
+vim.keymap.set("n", "<leader>xwa", "<cmd>WorkspacesAdd<cr>", { desc = "Workspaces Add" })
+vim.keymap.set("n", "<leader>xwr", "<cmd>WorkspacesRemove<cr>", { desc = "Workspaces Remove" })
 
 -- stylua: ignore end
