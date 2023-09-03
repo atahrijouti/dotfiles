@@ -38,7 +38,9 @@ winget uninstall Microsoft.ZuneMusic_8wekyb3d8bbwe
 winget uninstall Microsoft.ZuneVideo_8wekyb3d8bbwe
 winget uninstall Microsoft.OneDrive
 
-REM install Git, Clink manually for their tricky settings during installation
+winget install -e --id chrisant996.Clink -i
+winget install -e --id Git.Git -i
+
 winget install -e --id Notepad2mod.Notepad2mod
 winget install -e --id 7zip.7zip
 winget install -e --id AutoHotkey.AutoHotkey
