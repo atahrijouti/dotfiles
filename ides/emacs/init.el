@@ -11,3 +11,6 @@
 (use-package all-the-icons-dired
   :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
 
+(use-package evil
+  :init
+  (evil-mode))
