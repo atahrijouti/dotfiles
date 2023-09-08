@@ -2,7 +2,12 @@
 
 (require 'elpaca-installer)
 
+(require 'atj-options)
 
-(setq ring-bell-function #'ignore)
-(setq inhibit-startup-screen t)
-(setq initial-scratch-message nil)
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . (lambda () (all-the-icons-dired-mode t))))
+

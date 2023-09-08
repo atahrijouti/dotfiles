@@ -37,7 +37,6 @@
 
 (elpaca-no-symlink-mode)
 
-
 ;; Install use-package support
 (elpaca elpaca-use-package
   ;; Enable :elpaca use-package keyword.
@@ -47,6 +46,5 @@
 
 ;; Block until current queue processed.
 (elpaca-wait)
-
 
 (provide 'elpaca-installer)
