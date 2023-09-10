@@ -11,3 +11,5 @@
 (global-display-line-numbers-mode 1) ;; Display line numbers
 
 (provide 'atj-options)
+
+;;;; heheheh
