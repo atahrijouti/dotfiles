@@ -88,7 +88,7 @@
 "ui.window" = { bg = "shade00" }
 "ui.help" = { fg = "shade06", bg = "shade01" }
 "ui.text" = "shade05"
-"ui.text.focus" = { fg = "shade0r", bg = "faint_blue" }
+"ui.text.focus" = { fg = "shade05", bg = "diff_green" }
 "ui.virtual" = "shade03"
 "ui.virtual.ruler" = { bg = "shade04" }
 "ui.menu" = { fg = "shade05", bg = "shade01" }
