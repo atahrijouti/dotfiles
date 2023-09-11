@@ -34,10 +34,7 @@ mklink "%USERPROFILE%\.bash_functions" "%DOTFILES%\windows\msys_shell\.bash_func
 mklink "%USERPROFILE%\.bash_aliases" "%DOTFILES%\windows\msys_shell\.bash_aliases"
 
 REM Emacs
-if not exist "%HOME%\.emacs.d" mkdir "%HOME%\.emacs.d"
-mklink "%HOME%\.emacs.d\init.el" "%DOTFILES%\ides\emacs\init.el"
-mklink "%HOME%\.emacs.d\early-init.el" "%DOTFILES%\ides\emacs\early-init.el"
-mklink /d "%HOME%\.emacs.d\lisp" "%DOTFILES%\ides\emacs\lisp"
+mklink /d "%HOME%\.emacs.d" "%DOTFILES%\ides\emacs"
 
 REM VSCode
 REM mklink "%USERPROFILE%\AppData\Roaming\Code\keybindings.json" "%DOTFILES%\ides\vscode\keybindings.json"
