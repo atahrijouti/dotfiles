@@ -1,5 +1,5 @@
-*
-!.gitignore
-!early-init.el
-!init.el
-!lisp/
+/*
+!/.gitignore
+!/early-init.el
+!/init.el
+!/lisp/
