@@ -19,4 +19,8 @@ if wezterm.hostname() == "x240" then
   require("overrides.machine.x240").run(config)
 end
 
+if wezterm.hostname() == "Silver-Pond" then
+  require("overrides.machine.silver-pond").run(config)
+end
+
 return config
