@@ -62,21 +62,23 @@
 "diff.delta" = "diff_blue"
 
 # ui specific
-"ui.background" = { bg = "shade00" }                                            # .separator
-"ui.cursor" = { bg = "light_blue" }
-"ui.cursor.primary" = { bg = "light_blue" }
+"ui.background" = { bg = "shade00" }
+"ui.cursor" = { bg = "shade03" }
+"ui.cursor.primary" = { bg = "cursor_blue" }
+"ui.cursor.match" = { fg = "shade00", bg = "shade04" }
 "ui.cursor.primary.select" = { bg = "light_purple" }
 "ui.cursor.primary.insert" = { bg = "light_green" }
-"ui.cursor.match" = { bg = "shade03" }
 
 "ui.selection" = { bg = "lighter_blue" }
 "ui.selection.primary" = { bg = "lighter_blue" }
 
 "ui.highlight" = { bg = "faint_blue" }
-"ui.cursorline" = { bg = "faint_blue" }
+"ui.cursorline.primary" = { bg = "faint_blue" }
 
 "ui.linenr" = { fg = "shade03" }
-"ui.linenr.selected" = { fg = "shade04", bg = "faint_blue", modifiers = ["bold"] }
+"ui.linenr.selected" = { fg = "shade04", bg = "faint_blue", modifiers = [
+    "bold",
+] }
 
 "ui.statusline" = { fg = "shade06", bg = "shade02" }
 "ui.statusline.inactive" = { fg = "shade04", bg = "shade01" }
@@ -105,15 +107,14 @@
 "diagnostic.error" = { underline = { color = "red", style = "curl" } }
 
 [palette]
-# E4EAED
-shade00 = "#f2f3f7" 
-shade01 = "#dadde8" 
-shade02 = "#c1c6d9" 
-shade03 = "#a9b0ca" 
-shade04 = "#525c85" 
-shade05 = "#434b6c" 
-shade06 = "#343a54" 
-shade07 = "#25293c" 
+shade00 = "#f2f3f7"
+shade01 = "#dadde8"
+shade02 = "#c1c6d9"
+shade03 = "#a9b0ca"
+shade04 = "#525c85"
+shade05 = "#434b6c"
+shade06 = "#343a54"
+shade07 = "#25293c"
 
 background = "#f2f3f7"
 foreground = "#25293c"
@@ -124,6 +125,7 @@ diff_blue = "#C3D6E8"
 faint_blue = "#E8Eef1"
 lighter_blue = "#d0eaff"
 light_blue = "#99ccff"
+cursor_blue = "#80bfff"
 blue = "#0073E6"
 dark_blue = "#185b93"
 darker_blue = "#000080"
@@ -141,6 +143,7 @@ green_blue = "#458383"
 yellow = "#808000"
 dark_yellow = "#7A7A43"
 
+light_orange = "#f9c881"
 orange = "#F49810"
 
 diff_red = "#EBBCBC"
