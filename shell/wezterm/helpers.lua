@@ -2,17 +2,19 @@ local wezterm = require("wezterm")
 
 local M = {}
 
-M.getAppearance = function()
-  if wezterm.gui then
-    return wezterm.gui.get_appearance()
-  end
-  return "Dark"
-end
+M.decideColorScheme = function(config)
+  local appearance = "Dark"
 
-M.schemeForAppearance = function(appearance)
+  if wezterm.gui then
+    appearance = wezterm.gui.get_appearance()
+  end
+
   if appearance:find("Dark") then
     return "tokyonight_storm"
   else
+    config.colors = {
+      background = "#F2F3F7"
+    }
     return "tokyonight_day"
   end
 end

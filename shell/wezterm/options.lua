@@ -4,7 +4,7 @@ local wezterm = require("wezterm")
 local helpers = require("helpers")
 
 M.run = function(config)
-  config.color_scheme = helpers.schemeForAppearance(helpers.getAppearance())
+  config.color_scheme = helpers.decideColorScheme(config)
 
   config.font = wezterm.font("JetBrainsMono Nerd Font")
   config.font_size = 14
