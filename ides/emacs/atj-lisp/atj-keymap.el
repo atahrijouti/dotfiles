@@ -7,10 +7,6 @@
 		  
 )
 
-(global-set-key "\C-cr" #'(lambda ()
-		    (interactive)
-		    (load-file user-init-file)
-		    ))
 
 ;; why do I need to click escape 3 times?
 (global-set-key (kbd "<escape>")      'keyboard-escape-quit)
