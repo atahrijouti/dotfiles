@@ -24,6 +24,7 @@ mklink "%APPDATA%\AutoDarkMode\scripts.yaml" "%DOTFILES%\windows\autodarkmode\sc
 
 REM lf
 mklink /d "%USERPROFILE%\AppData\Local\lf" "%DOTFILES%\ides\lf"
+mklink "%USERPROFILE%\programs\bin\lfcd.cmd" "%DOTFILES%\windows\lf\lfcd.cmd"
 
 REM Helix
 mklink /d "%APPDATA%\helix" "%DOTFILES%\ides\helix"
