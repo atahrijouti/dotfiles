@@ -2,8 +2,6 @@
 
 (require 'atj-ui)
 
-(require 'atj-evil)
-
 (require 'atj-completions)
 
 (require 'atj-project)

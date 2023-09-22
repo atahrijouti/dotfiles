@@ -5,3 +5,5 @@
 (require 'atj-options)
 
 (require 'atj-packages)
+
+(require 'atj-keymap)

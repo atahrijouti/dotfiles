@@ -1,5 +1,5 @@
 (set-face-attribute 'default nil
-  :font "JetBrainsMono NFM")
+  :font "JetBrainsMono NFM-11")
 
 (setq ring-bell-function #'ignore)
 (setq inhibit-startup-screen t)
@@ -9,7 +9,12 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-(global-auto-revert-mode t)  ;; Automatically show changes if the file has changed
-(global-display-line-numbers-mode 1) ;; Display line numbers
+;; Automatically show changes if the file has changed
+(global-auto-revert-mode t)
+
+
+(global-display-line-numbers-mode 1)
+
+(pixel-scroll-precision-mode t)
 
 (provide 'atj-options)

@@ -8,7 +8,9 @@ link() {
 }
 
 # link
-link "shell/.zshrc"                     "$HOME/.zshrc"
+link "shell/zsh/.zshrc"                 "$HOME/.zshrc"
+link "shell/zsh/.zshenv"                "$HOME/.zshenv"
+link "shell/zsh/.zsh_aliases"           "$HOME/.zsh_aliases"
 link "shell/starship/starship.toml"     "$HOME/.config/starship.toml"
 link "shell/wezterm"                    "$HOME/.config/wezterm"
 link "ides/nvim"                        "$HOME/.config/nvim"
