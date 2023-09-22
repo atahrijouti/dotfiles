@@ -2,4 +2,5 @@
 !/.gitignore
 !/early-init.el
 !/init.el
-!/lisp/
+!/atj-lisp/
+!/atj-machine-specific/

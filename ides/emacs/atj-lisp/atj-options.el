@@ -1,6 +1,3 @@
-(set-face-attribute 'default nil
-  :font "JetBrainsMono NFM-11")
-
 (setq ring-bell-function #'ignore)
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
