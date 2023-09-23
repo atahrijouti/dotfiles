@@ -9,8 +9,14 @@
 (setq backup-directory-alist '((".*" . "~/.emacs.d/emacs-backup")))
 (setq create-lockfiles nil)
 
-;; Editor Scolling
-(setq scroll-conservatively 101)
+;; Scrolling sanely
+(setq scroll-margin 6
+      scroll-conservatively 101
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01
+      scroll-preserve-screen-position t
+      auto-window-vscroll nil)
+
 
 ;; Automatically show changes if the file has changed
 (global-auto-revert-mode t)
