@@ -2,6 +2,8 @@
 
 (require 'atj-ui)
 
+(require 'atj-modal)
+
 (require 'atj-completions)
 
 (require 'atj-project)
