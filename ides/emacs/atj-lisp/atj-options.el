@@ -9,6 +9,8 @@
 (setq backup-directory-alist '((".*" . "~/.emacs.d/emacs-backup")))
 (setq create-lockfiles nil)
 
+;; Editor Scolling
+(setq scroll-conservatively 101)
 
 ;; Automatically show changes if the file has changed
 (global-auto-revert-mode t)
