@@ -1,3 +1,6 @@
+(setq viper-mode 0)
+(require 'viper)
+
 (use-package ryo-modal
   :commands ryo-modal-mode
   :bind ("C-c SPC" . ryo-modal-mode)
@@ -9,8 +12,11 @@
    ("h" backward-char)
    ("j" next-line)
    ("k" previous-line)
-   ("l" forward-char))
+   ("l" forward-char)
 
+   ("w" viper-forward-word)
+   ("b" viper-backward-word)
+  )
   (ryo-modal-keys
    ;; First argument to ryo-modal-keys may be a list of keywords.
    ;; These keywords will be applied to all keybindings.
