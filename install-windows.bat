@@ -1,19 +1,27 @@
+setx HOME "%USERPROFILE%"
+setx DOTFILES "%USERPROFILE%\playground\git\dotfiles"
+
+setx PATH "%PATH%;%DOTFILES%\shell\bin"
+
 setx MSYS winsymlinks:nativestrict
 setx MSYS2_PATH_TYPE inherit
 
-REM helps MSYS2 set $HOME to the windows user directory
+@REM helps MSYS2 set $HOME to the windows user directory
 setx HOME %USERPROFILE%
 setx HELIX_RUNTIME %USERPROFILE%\programs\helix\runtime
 
-REM install Windows Updates
-REM install winaero + Disable all unwanted things
-REM install winget
 
-REM Uninstall unwanted apps
-REM Cortana
+@REM auto install and uninstall packages
+
+@REM install Windows Updates
+@REM install winaero + Disable all unwanted things
+@REM install winget
+
+@REM Uninstall unwanted apps
+@REM Cortana
 winget uninstall Microsoft.549981C3F5F10_8wekyb3d8bbwe
 
-REM unlikely to work
+@REM unlikely to work
 winget uninstall Microsoft.Edge
 winget uninstall Microsoft.BingWeather_8wekyb3d8bbwe
 
@@ -46,18 +54,18 @@ winget install -e --id 7zip.7zip
 winget install -e --id AutoHotkey.AutoHotkey
 
 
-REM install JetBrains Mono Nerd font from https://www.nerdfonts.com/font-downloads
+@REM install JetBrains Mono Nerd font from https://www.nerdfonts.com/font-downloads
 winget install -e --id wez.wezterm
 winget install -e --id VideoLAN.VLC
 winget install -e --id Neovim.Neovim
 
-REM Install Visual C++ 2015 for neovim
+@REM Install Visual C++ 2015 for neovim
 winget install -e --id Microsoft.VCRedist.2015+.x64
 winget install -e --id GitHub.cli
 
-winget install -e --id MSYS2.MSYS2
+winget install -e --id MSYS2.MSYS2 -i
 winget install -e --id OlegDanilov.RapidEnvironmentEditor
-REM Add Msys bin folder(s) to the path for the entire system
+@REM Add Msys bin folder(s) to the path for the entire system
 
 winget install -e --id Starship.Starship
 
@@ -69,9 +77,9 @@ winget install -e --id Armin2208.WindowsAutoNightMode
 
 winget install -e --id JetBrains.Toolbox
 
-REM winget install -e --id Love2d.Love2d
+@REM winget install -e --id Love2d.Love2d
 
-REM pacman -S mingw-w64-ucrt-x86_64-ripgrep
+@REM pacman -S mingw-w64-ucrt-x86_64-ripgrep
 
 winget install -e --id CoreyButler.NVMforWindows
 

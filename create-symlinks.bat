@@ -1,9 +1,7 @@
 @echo off
 
-setx HOME "%USERPROFILE%"
 
 if not exist "%USERPROFILE%\.config" mkdir "%USERPROFILE%\.config"
-setx DOTFILES "%USERPROFILE%\playground\git\dotfiles"
 
 
 REM clink
