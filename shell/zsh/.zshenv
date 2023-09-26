@@ -1,3 +1,6 @@
+export EDITOR="hx"
+export DOTFILES="$HOME/source/dotfiles"
+
 export HELIX_RUNTIME="$HOME/source/helix/runtime"
 
 . "$HOME/.cargo/env"
@@ -11,3 +14,4 @@ case ":$PATH:" in
 esac
 
 export PATH="$HOME/go/bin:$PATH"
+export PATH="$DOTFILES/shell/bin:$PATH"

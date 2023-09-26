@@ -3,7 +3,8 @@ lfcd () {
     cd "$(command lf -print-last-dir "$@")"
 }
 
-
-
-
 alias lf=lfcd
+
+# --- Aliases
+
+alias ls="ls --color"

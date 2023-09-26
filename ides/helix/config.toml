@@ -1,5 +1,5 @@
 
-theme = "tokyonight_storm"
+theme = "cyan_light"
 
 [editor]
 line-number = "relative"
@@ -30,9 +30,18 @@ mode.select = "SELECT"
 [keys.insert.j]
 k = "normal_mode"
 
+[keys.normal.space]
+w = ":w"
+q = ":q"
+c = ":config-reload"
+
 [keys.normal]
-space = { w = ":w", q = ":q", t = ":tree-sitter-scopes", c = ":config-reload" }
 i = ["collapse_selection", "insert_mode"]
 a = ["collapse_selection", "append_mode"]
 "}" = ["goto_next_paragraph"]
 "{" = ["goto_prev_paragraph"]
+"C-c" = ["toggle_comments", "move_line_down"]
+
+# Helix as an IDE
+"A-9" = ":sh sh lazygit-down.sh"
+"A-1" = ":sh sh file-tree-left.sh"
