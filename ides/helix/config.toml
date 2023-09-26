@@ -1,5 +1,5 @@
 
-theme = "cyan_light"
+theme = "tokyonight_storm"
 
 [editor]
 line-number = "relative"

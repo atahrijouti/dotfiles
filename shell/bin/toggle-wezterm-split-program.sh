@@ -1,3 +1,4 @@
+#!/bin/sh
 set -e
 
 if [ -z $1 ]; then
@@ -14,7 +15,8 @@ targetPaneId=$(wezterm cli list --format json \
 
 if [ -z "${targetPaneId}" ]; then
     targetPaneId=$(wezterm cli split-pane $splitDirection --percent ${splitPercent:-50})
-    echo "${program}" | wezterm cli send-text --pane-id $targetPaneId --no-paste
+    # removed --no-paste from the command as it wasn't working from within MSYS2
+    echo "${program}" | wezterm cli send-text --pane-id $targetPaneId 
 else
     wezterm cli kill-pane --pane-id $targetPaneId
 fi
