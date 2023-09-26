@@ -1,6 +1,8 @@
 local M = {}
 
 local wezterm = require("wezterm")
+local helpers = require("helpers")
+
 local act = wezterm.action
 
 M.run = function(config)
@@ -8,10 +10,11 @@ M.run = function(config)
 	config.leader = { key = ",", mods = "CTRL", timeout_milliseconds = 10000 }
 
 	config.keys = {
+		{ key = "1", mods = "ALT",    action = wezterm.action_callback(helpers.openLazyGitdown) },
 		--
 		-- panes
 		--
-		{ key = "-", mods = "LEADER",    action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{
 			key = "\\",
 			mods = "LEADER",
