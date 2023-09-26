@@ -43,5 +43,5 @@ a = ["collapse_selection", "append_mode"]
 "C-c" = ["toggle_comments", "move_line_down"]
 
 # Helix as an IDE
-"A-9" = ":sh sh lazygit-down.sh"
-"A-1" = ":sh sh file-tree-left.sh"
+# "A-9" = ":sh sh lazygit-down.sh"
+# "A-1" = ":sh sh file-tree-left.sh"
