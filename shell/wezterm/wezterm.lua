@@ -1,3 +1,5 @@
+require("helpers")
+
 local wezterm = require("wezterm")
 local keymaps = require("keymaps")
 local options = require("options")

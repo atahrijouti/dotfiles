@@ -1,5 +1,13 @@
 local wezterm = require("wezterm")
 
+_G.nocase = function(s)
+  s = string.gsub(s, "%a", function(c)
+    return string.format("[%s%s]", string.lower(c),
+      string.upper(c))
+  end)
+  return s
+end
+
 local M = {}
 
 M.decideColorScheme = function(config)
@@ -26,14 +34,6 @@ M.togglePadding = function(config)
     top = 10,
     bottom = 10,
   }
-end
-
-function nocase(s)
-  s = string.gsub(s, "%a", function(c)
-    return string.format("[%s%s]", string.lower(c),
-      string.upper(c))
-  end)
-  return s
 end
 
 M.openLazyGitdown = function(window, _pane)
