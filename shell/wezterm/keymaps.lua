@@ -15,11 +15,11 @@ M.run = function(config)
 		--
 		-- panes
 		--
-		{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ key = "-", mods = "LEADER", action = act.SplitPane({ direction = "Down" }) },
 		{
 			key = "\\",
 			mods = "LEADER",
-			action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+			action = act.SplitPane({ direction = "Right" }),
 		},
 		{ key = "z", mods = "LEADER",    action = act.TogglePaneZoomState },
 		{ key = "c", mods = "LEADER",    action = act.CloseCurrentPane({ confirm = true }) },
