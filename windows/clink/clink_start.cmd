@@ -15,4 +15,5 @@ doskey yt2k=yt-dlp.exe -f "bestvideo[height<=1440]+bestaudio/best[height<=1440]"
 doskey yt4k=yt-dlp.exe $*
 doskey gibfhd=yt-dlp.exe -S "res:1080" -f "(bv*[vcodec~='^((he|a)vc|h26[45])']+ba) / (bv*+ba/b)" $*
 @REM doskey cd=cd %USERPROFILE%
-@REM doskey lf=lfcd
+doskey lf=lfcd
+doskey ~=cd %homepath%
