@@ -12,6 +12,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Starship
 eval "$(starship init zsh)"

@@ -8,3 +8,4 @@ alias lf=lfcd
 # --- Aliases
 
 alias ls="ls --color"
+alias history="history 1"
