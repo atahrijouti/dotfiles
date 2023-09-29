@@ -15,3 +15,4 @@ esac
 
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$DOTFILES/shell/bin:$PATH"
+export PATH="$HOME/programs/bin:$PATH"
