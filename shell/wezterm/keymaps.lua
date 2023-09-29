@@ -10,7 +10,8 @@ M.run = function(config)
 	config.leader = { key = ",", mods = "CTRL", timeout_milliseconds = 10000 }
 
 	config.keys = {
-		{ key = "1", mods = "ALT",    action = wezterm.action_callback(mux.openLazyGitdown) },
+		{ key = "9", mods = "ALT",    action = wezterm.action_callback(mux.openLazyGitdown()) },
+		{ key = "1", mods = "ALT",    action = wezterm.action_callback(mux.openLfLeft()) },
 
 		--
 		-- panes
