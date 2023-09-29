@@ -18,19 +18,15 @@ M.openLazyGitdown = function(window, _pane)
     table.insert(info, paneId .. " 👉 " .. title)
   end
 
-  wezterm.log_info(info)
-  wezterm.log_info(targetPane and targetPane:pane_id() .. " - ✅" or "🛑")
-
-
   if targetPane then
+    targetPane:activate()
+    targetPane:send_paste("q")
+    window:perform_action(wezterm.action.CloseCurrentPane { confirm = false }, targetPane)
     return
   else
     targetPane = _pane:split({ direction = "Bottom" })
+    targetPane:send_paste("lazygit" .. "\n")
   end
-
-  targetPane:send_paste("lazygit" .. "\n")
-
-  wezterm.log_info("----------------------------------")
 end
 
 return M
