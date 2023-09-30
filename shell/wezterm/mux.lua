@@ -34,9 +34,17 @@ M.toggleProgramInPaneSplit = function(o)
   return function(window, pane)
     local targetDict = getTargetProgramPaneDict(pane)
     local programPaneId = targetDict[o.program]
+    local programPane = nil
 
-    if programPaneId then
-      local programPane = wezterm.mux.get_pane(programPaneId)
+    -- Our previous lua state might be different from current wezterm state
+    if programPaneId and not pcall(function()
+          programPane = wezterm.mux.get_pane(programPaneId)
+        end) then
+      targetDict[o.program] = nil
+    end
+
+
+    if programPane then
       programPane:activate()
       window:perform_action(wezterm.action.CloseCurrentPane { confirm = false }, programPane)
       targetDict[o.program] = nil
