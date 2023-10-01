@@ -9,11 +9,12 @@ M.on_attach = function(client, bufnr)
   -- stylua: ignore start
   vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP information" })
   vim.keymap.set("n", "<leader>lI", "<cmd>NullLsInfo<cr>", { desc = "Null-ls information" })
-  
-  vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, { desc = "Hover [L]SP [diagonstic]" })
-  vim.keymap.set("n", "<leader>[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous [d]iagnostic" })
-  vim.keymap.set("n", "<leader>]d", function() vim.diagnostic.goto_next() end, { desc = "Next [d]iagostic" })
-  vim.keymap.set("n", "gl", function() vim.diagnostic.open_float() end, { desc = "[G]o to [L]SP diagonstics" })
+
+  vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, { desc = "Hover [L]SP [diagonstic]" }) -- f = { desc = "󰍉 Find" },
+
+  vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { desc = "Previous [d]iagnostic" })
+  vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { desc = "Next [d]iagostic" })
+
   -- stylua: ignore end
 
   if capabilities.hoverProvider then
