@@ -2,13 +2,6 @@ local wezterm = require("wezterm")
 
 local M = {}
 
-M.openLazyGitdown = function()
-  return M.toggleProgramInPaneSplit({ program = "lazygit" })
-end
-
-M.openLfLeft = function()
-  return M.toggleProgramInPaneSplit({ program = "lf", direction = "Left", size = 0.2 })
-end
 
 local getTargetProgramPaneDict = function(pane)
   local tab = pane:tab()
@@ -29,7 +22,7 @@ local getTargetProgramPaneDict = function(pane)
   return wezterm.GLOBAL.targetPane[windowId][tabId]
 end
 
----@param o {program: string, direction?: string, size?: number}
+---@param o {program: string, direction?: string, size?: number, root?: boolean}
 M.toggleProgramInPaneSplit = function(o)
   return function(window, pane)
     local targetDict = getTargetProgramPaneDict(pane)
@@ -50,12 +43,23 @@ M.toggleProgramInPaneSplit = function(o)
       targetDict[o.program] = nil
     else
       local newPane = pane:split({
-        direction = o.direction and o.direction or "Bottom", size = o.size and o.size or 0.5
+        direction = o.direction and o.direction or "Bottom",
+        size = o.size and o.size or 0.5,
+        top_level = o.root and o.root or
+            false
       })
       newPane:send_paste(o.program .. "\n")
       targetDict[o.program] = newPane:pane_id()
     end
   end
+end
+
+M.openLazyGitdown = function()
+  return M.toggleProgramInPaneSplit({ program = "lazygit" })
+end
+
+M.openLfLeft = function()
+  return M.toggleProgramInPaneSplit({ program = "lf", direction = "Left", size = 0.2 })
 end
 
 return M
