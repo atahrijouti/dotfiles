@@ -4,18 +4,21 @@ local lazy = require("lazy")
 local ku = require("config.utils.keymaps")
 
 local sections = {
-  -- f = { desc = "󰍉 Find" },
-  -- g = { desc = " Git" },
-  -- p = { desc = "󰏖 Packages" },
-  -- l = { desc = " LSP" },
-  -- u = { desc = " UI" },
-  -- b = { desc = "󰓩 Buffers" },
-  -- d = { desc = " Debugger" },
-  -- o = { desc = "󱂬 Workspace" },
-  -- t = { desc = " Terminal" },
+ x = {desc = " Execute"}
 }
 
 whichKey.register(sections, { prefix = "<leader>" })
+
+-- Improved Terminal Navigation
+vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
+vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Terminal down window navigation" })
+vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Terminal up window navigation" })
+vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Terminal right window navigation" })
+
+vim.keymap.set("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
+vim.keymap.set("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
 
 -- stylua: ignore start
 -- Top Level
@@ -24,28 +27,7 @@ vim.keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>n", "<cmd>enew<cr>", { desc = "New File" })
 vim.keymap.set("n", "<leader>t", "<cmd>terminal<cr>", { desc = "Terminal" })
 
-vim.keymap.set("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
-vim.keymap.set("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
-
 vim.keymap.set("n", "<leader>1", "<cmd>Neotree toggle<cr>", { desc = "Project Files" })
-
--- Improved Terminal Navigation
-vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
-vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Terminal down window navigation" })
-vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Terminal up window navigation" })
-vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Terminal right window navigation" })
-
-
--- Plugin Manager
-vim.keymap.set("n", "<leader>pi", lazy.install, { desc = "Plugins Install" })
-vim.keymap.set("n", "<leader>ps", lazy.home, { desc = "Plugins Status" })
-vim.keymap.set("n", "<leader>pS", lazy.sync, { desc = "Plugins Sync" })
-vim.keymap.set("n", "<leader>pu", lazy.check, { desc = "Plugins Check Updates" })
-vim.keymap.set("n", "<leader>pU", lazy.update, { desc = "Plugins Update" })
-vim.keymap.set("n", "<leader>pm", "<cmd>Mason<cr>", { desc = "Mason Installer" })
-vim.keymap.set("n", "<leader>pM", "<cmd>MasonUpdateAll<cr>", { desc = "Mason Update" })
 
 -- Find
 vim.keymap.set("n", "<leader>'", telescope.resume, { desc = "Resume previous search" })
@@ -77,5 +59,15 @@ vim.keymap.set("n", "<leader>d", function() telescope.diagnostics() end, { desc 
 vim.keymap.set("n", "<leader>xwo", "<cmd>Telescope workspaces<cr>", { desc = "Workspaces Open" })
 vim.keymap.set("n", "<leader>xwa", "<cmd>WorkspacesAdd<cr>", { desc = "Workspaces Add" })
 vim.keymap.set("n", "<leader>xwr", "<cmd>WorkspacesRemove<cr>", { desc = "Workspaces Remove" })
+
+-- Plugin Manager
+vim.keymap.set("n", "<leader>xpi", lazy.install, { desc = "Plugins Install" })
+vim.keymap.set("n", "<leader>xps", lazy.home, { desc = "Plugins Status" })
+vim.keymap.set("n", "<leader>xpS", lazy.sync, { desc = "Plugins Sync" })
+vim.keymap.set("n", "<leader>xpu", lazy.check, { desc = "Plugins Check Updates" })
+vim.keymap.set("n", "<leader>xpU", lazy.update, { desc = "Plugins Update" })
+vim.keymap.set("n", "<leader>xpm", "<cmd>Mason<cr>", { desc = "Mason Installer" })
+vim.keymap.set("n", "<leader>xpM", "<cmd>MasonUpdateAll<cr>", { desc = "Mason Update" })
+
 
 -- stylua: ignore end
