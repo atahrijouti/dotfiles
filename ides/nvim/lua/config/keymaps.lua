@@ -4,12 +4,13 @@ local lazy = require("lazy")
 local ku = require("config.utils.keymaps")
 
 local sections = {
- x = {desc = " Execute"}
+  x = { desc = " Execute" },
 }
 
 whichKey.register(sections, { prefix = "<leader>" })
 
--- Improved Terminal Navigation
+-- stylua: ignore start
+
 vim.keymap.set("n", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Terminal left window navigation" })
 vim.keymap.set("n", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Terminal down window navigation" })
 vim.keymap.set("n", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Terminal up window navigation" })
@@ -17,11 +18,18 @@ vim.keymap.set("n", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Terminal right windo
 
 vim.keymap.set("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical Split" })
 vim.keymap.set("n", "\\", "<cmd>split<cr>", { desc = "Horizontal Split" })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
 
--- stylua: ignore start
--- Top Level
+vim.keymap.set({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Move cursor down" })
+vim.keymap.set({ "n", "v" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Move cursor up" })
+
+vim.keymap.set({ "n", "v" }, "gh", "0", { desc = "Goto line start" })
+vim.keymap.set({ "n", "v" }, "gl", "$", { desc = "Goto line end" })
+vim.keymap.set({ "n", "v" }, "gs", "^", { desc = "Goto first non-blank in line" })
+vim.keymap.set({ "n", "v" }, "ge", "G", { desc = "Goto last line" })
+
+vim.keymap.set("n", "U", "<C-r>", { desc = "Redo change" })
+
+-- Leader mode
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 vim.keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>n", "<cmd>enew<cr>", { desc = "New File" })
@@ -68,6 +76,5 @@ vim.keymap.set("n", "<leader>xpu", lazy.check, { desc = "Plugins Check Updates" 
 vim.keymap.set("n", "<leader>xpU", lazy.update, { desc = "Plugins Update" })
 vim.keymap.set("n", "<leader>xpm", "<cmd>Mason<cr>", { desc = "Mason Installer" })
 vim.keymap.set("n", "<leader>xpM", "<cmd>MasonUpdateAll<cr>", { desc = "Mason Update" })
-
 
 -- stylua: ignore end
