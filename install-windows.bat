@@ -105,5 +105,7 @@ winget install -e --id Rustlang.Rustup
 winget install -e --id XnSoft.XnConvert
 winget install -e --id SyncTrayzor.SyncTrayzor
 winget install -e --id GitHub.cli
-winget install --id=jurplel.qView  -e
-winget install --id=Google.Chrome  -e
+winget install -e --id=jurplel.qView
+winget install -e --id=Google.Chrome
+winget install -e --id JesseDuffield.lazygit
+winget install -e --id gokcehan.lf
