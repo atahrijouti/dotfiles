@@ -100,9 +100,10 @@ winget install -e --id RandomEngy.VidCoder
 winget install -e --id TGRMNSoftware.BulkRenameUtility
 winget install -e --id OBSProject.OBSStudio
 winget install -e --id SumatraPDF.SumatraPDF
-
 winget install -e --id Microsoft.VisualStudio.2022.BuildTools
 winget install -e --id Rustlang.Rustup
-
 winget install -e --id XnSoft.XnConvert
 winget install -e --id SyncTrayzor.SyncTrayzor
+winget install -e --id GitHub.cli
+winget install --id=jurplel.qView  -e
+winget install --id=Google.Chrome  -e
