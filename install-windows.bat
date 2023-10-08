@@ -109,3 +109,5 @@ winget install -e --id=jurplel.qView
 winget install -e --id=Google.Chrome
 winget install -e --id JesseDuffield.lazygit
 winget install -e --id gokcehan.lf
+winget install -e --id LGUG2Z.whkd
+winget install -e --id LGUG2Z.komorebi
