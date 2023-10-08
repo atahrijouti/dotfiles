@@ -1,5 +1,5 @@
 setx HOME "%USERPROFILE%"
-setx DOTFILES "%USERPROFILE%\playground\git\dotfiles"
+setx DOTFILES "%USERPROFILE%\source\dotfiles"
 
 setx PATH "%PATH%;%DOTFILES%\shell\bin"
 
