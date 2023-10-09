@@ -40,7 +40,7 @@ M.run = function(config)
 
 		-- Clipboard
 		-- { key = "C", mods = "CTRL", action = act.CopyTo("Clipboard") },
-		{ key = "v", mods = "CTRL",      action = act.PasteFrom("Clipboard") },
+		{ key = "V", mods = "CTRL",      action = act.PasteFrom("Clipboard") },
 		{ key = "x", mods = "LEADER",    action = wezterm.action.ActivateCopyMode },
 
 		-- Search
