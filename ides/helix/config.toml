@@ -37,7 +37,7 @@ c = ":config-reload"
 
 [keys.normal]
 i = ["collapse_selection", "insert_mode"]
-a = ["collapse_selection", "append_mode"]
+a = ["move_char_right", "collapse_selection", "insert_mode"]
 "}" = ["goto_next_paragraph"]
 "{" = ["goto_prev_paragraph"]
 "C-c" = ["toggle_comments", "move_line_down"]
