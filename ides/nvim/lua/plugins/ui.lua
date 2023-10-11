@@ -16,12 +16,6 @@ return {
       require("gitsigns").setup(opts)
     end,
   },
-  -- {
-  --   "rcarriga/nvim-notify",
-  --   config = function()
-  --     require("notify").setup({})
-  --   end,
-  -- },
   {
     "NvChad/nvim-colorizer.lua",
     event = "User",
@@ -57,6 +51,12 @@ return {
   {
     "MunifTanjim/nui.nvim",
   },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   config = function()
+  --     require("notify").setup({})
+  --   end,
+  -- },
   -- {
   --   "folke/noice.nvim",
   --   requires = {
