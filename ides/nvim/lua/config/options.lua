@@ -33,7 +33,7 @@ vim.opt.title = true
 vim.opt.emoji = true
 vim.opt.splitkeep = "screen"
 vim.opt.virtualedit = "block"
-
+vim.opt.whichwrap = "b,s,h,l"
 -- local history
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
