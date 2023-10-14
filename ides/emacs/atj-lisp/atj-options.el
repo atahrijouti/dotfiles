@@ -17,6 +17,9 @@
       scroll-preserve-screen-position t
       auto-window-vscroll nil)
 
+(delete-selection-mode 1)
+(electric-indent-mode -1)
+(electric-pair-mode 1)
 
 ;; Automatically show changes if the file has changed
 (global-auto-revert-mode t)

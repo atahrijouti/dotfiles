@@ -19,4 +19,28 @@
   (interactive)
   (find-file user-init-file))
 
+
+
+
+
+
+(use-package general
+  :config
+  (general-evil-setup)
+
+  (general-create-definer atj/leader-keys
+    :states '(normal insert visual emacs)
+    :keymaps 'override
+    :prefic "SPC"
+  )
+
+  (atj/leader-keys
+   "w" '(write-file :wk "Write file")
+  )
+)
+
+
+
+
+
 (provide 'atj-keymap)
