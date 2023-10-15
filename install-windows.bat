@@ -111,3 +111,4 @@ winget install -e --id JesseDuffield.lazygit
 winget install -e --id gokcehan.lf
 winget install -e --id LGUG2Z.whkd
 winget install -e --id LGUG2Z.komorebi
+winget install -e --id GoLang.Go
