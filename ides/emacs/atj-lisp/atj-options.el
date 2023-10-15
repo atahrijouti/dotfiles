@@ -28,4 +28,8 @@
 
 (pixel-scroll-precision-mode t)
 
+
+(setq org-return-follows-link  t)
+
+
 (provide 'atj-options)

@@ -29,13 +29,13 @@
   (general-evil-setup)
 
   (general-create-definer atj/leader-keys
-    :states '(normal insert visual emacs)
+    :states '(normal visual emacs)
     :keymaps 'override
-    :prefic "SPC"
+    :prefix "SPC"
   )
 
   (atj/leader-keys
-   "w" '(write-file :wk "Write file")
+   "w" '(save-buffer :wk "Write file")
   )
 )
 

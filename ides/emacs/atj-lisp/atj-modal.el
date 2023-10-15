@@ -5,7 +5,8 @@
           evil-vsplit-window-right t
           evil-split-window-below t
           evil-undo-system 'undo-redo)
-    (evil-mode))
+    (evil-mode)
+)
 
 (use-package evil-tutor)
 
