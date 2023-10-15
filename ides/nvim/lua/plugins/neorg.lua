@@ -1,26 +1,19 @@
 return {
   {
-    "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    "nvim-orgmode/orgmode",
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter" },
+    },
+    event = "VeryLazy",
+    ft = { "org", "orgagenda" },
     config = function()
-      require("neorg").setup({
-        load = {
-          ["core.defaults"] = {}, -- Loads default behaviour
-          ["core.concealer"] = {}, -- Adds pretty icons to your documents
-          ["core.dirman"] = { -- Manages Neorg workspaces
-            config = {
-              workspaces = {
-                notes = "~/playground/notes",
-              },
-            },
-          },
-          ["core.completion"] = {
-            config = {
-              engine = "nvim-cmp",
-            },
-          },
-        },
+      -- Load treesitter grammar for org
+      require("orgmode").setup_ts_grammar()
+
+      -- Setup orgmode
+      require("orgmode").setup({
+        org_agenda_files = "~/playground/notes/**/*",
+        org_default_notes_file = "~/playground/notes/refile.org",
       })
     end,
   },
