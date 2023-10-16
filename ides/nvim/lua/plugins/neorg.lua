@@ -12,8 +12,9 @@ return {
             config = {
               workspaces = {
                 notes = "~/playground/notes",
-                workNotes = "OneDrive - PayPal/notes",
+                workNotes = "~/OneDrive - PayPal/notes",
               },
+              default_workspace = "workNotes",
             },
           },
           ["core.completion"] = {
@@ -23,6 +24,8 @@ return {
           },
         },
       })
+      vim.wo.foldlevel = 99
+      vim.wo.conceallevel = 2
     end,
   },
 }
