@@ -11,6 +11,7 @@ return {
       local actions = require("telescope.actions")
       return {
         defaults = {
+          hidden = true,
           path_display = { "truncate" },
           sorting_strategy = "ascending",
           layout_config = {
@@ -32,9 +33,15 @@ return {
               ["<C-k>"] = actions.cycle_history_prev,
               ["<C-n>"] = actions.move_selection_next,
               ["<C-p>"] = actions.move_selection_previous,
-              ["<esc>"] = actions.close
+              ["<esc>"] = actions.close,
             },
             n = { ["q"] = actions.close },
+          },
+        },
+        pickers = {
+          find_files = {
+            -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
           },
         },
       }
