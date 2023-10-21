@@ -1,0 +1,76 @@
+"blue" = "attribute, boolean, numeric value, character escape, single character, regexp, NORMAL mode"
+"dark_blue" = "markup.link.text, markup.link.label"
+"darker_blue" = "constant, variable.builtin, label, keyword, keyword.control.exception, tag, namespace, markup.list, markup.list.numbered, markup.list.unnumbered"
+"green_blue" = "variable"
+"purple" = "type.enum.variant, variable.parameter, variable.other.member, markup.heading"
+"green" = "string, markup.quote, markup.raw, markup.raw.inline, markup.raw.block"
+"dark_red" = "string.special, function.special"
+"yellow" = "function.macro"
+ "dark_yellow" = "function.method"
+"comment_gray" = "comment" 
+
+
+
+"diff.plus" = "diff_green"
+"diff.minus" = "diff_red"
+"diff.delta" = "diff_blue"
+
+
+"markup.link.url" = "shade06"
+"markup.bold" = { fg = "shade06", modifiers = ["bold"] }
+"markup.italic" = { fg = "shade06", modifiers = ["italic"] }
+"markup.strikethrough" = { fg = "shade06", modifiers = ["crossed_out"] }
+"special" = "shade06"
+"function.builtin" = { fg = "shade07", modifiers = ["italic"] }
+"punctuation" = "shade06"
+"constructor" = "shade07"
+"type" = "shade07"
+"operator" = "shade06"
+"function" = "shade07"
+
+
+
+# ui specific
+"ui.background" = { bg = "shade00" }
+"ui.cursor" = { bg = "shade02" }
+"ui.cursor.primary" = { bg = "cursor_blue" }
+"ui.cursor.match" = { fg = "shade00", bg = "shade04" }
+"ui.cursor.primary.select" = { bg = "light_purple" }
+"ui.cursor.primary.insert" = { bg = "light_green" }
+
+"ui.selection" = { bg = "lighter_blue" }
+"ui.selection.primary" = { bg = "lighter_blue" }
+
+"ui.highlight" = { bg = "faint_blue" }
+"ui.cursorline.primary" = { bg = "faint_blue" }
+
+"ui.linenr" = { fg = "shade03" }
+"ui.linenr.selected" = { fg = "shade04", bg = "faint_blue", modifiers = [
+    "bold",
+] }
+
+"ui.statusline" = { fg = "shade06", bg = "shade02" }
+"ui.statusline.inactive" = { fg = "shade04", bg = "shade01" }
+"ui.statusline.insert" = { fg = "shade00", bg = "green" }
+"ui.statusline.select" = { fg = "shade00", bg = "purple" }
+
+"ui.popup" = { bg = "shade01", fg = "shade04" }
+"ui.window" = { bg = "shade00", fg = "shade04" }
+"ui.help" = { fg = "shade06", bg = "shade01" }
+"ui.text" = "shade05"
+"ui.text.focus" = { fg = "shade07", bg = "light_blue" }
+"ui.virtual" = "shade03"
+"ui.virtual.ruler" = { bg = "shade04" }
+"ui.menu" = { fg = "shade05", bg = "shade01" }
+"ui.menu.selected" = { fg = "shade07", bg = "light_blue" }
+
+"hint" = "shade04"
+"info" = "light_blue"
+"warning" = "orange"
+"error" = "red"
+"diagnostic" = { modifiers = [] }
+"diagnostic.hint" = { underline = { color = "shade04", style = "line" } }
+"diagnostic.info" = { underline = { color = "light_blue", style = "line" } }
+"diagnostic.warning" = { underline = { color = "orange", style = "curl" } }
+"diagnostic.error" = { underline = { color = "red", style = "curl" } }
+

@@ -1,8 +1,8 @@
 #Requires AutoHotkey v2.0
-#SingleInstance Force
 
-#Include komorebic.lib.ahk
-#Include utils.ahk
+
+#+E::lockWorkStation()
+
 
 ; Focus windows
 #H::Focus("left")
@@ -36,7 +36,6 @@
 
 ; Manipulate windows
 #F::ToggleMonocle()
-
 #+Space::ToggleFloat()
 
 ; Window manager options
@@ -44,7 +43,7 @@
 #+Z::TogglePause()
 
 ; Layouts
-#+X::FlipLayout("horizontal")
+#+X::FlipLayout("horizontal") 
 #+Y::FlipLayout("vertical")
 
 ; Workspaces
@@ -58,6 +57,15 @@
 #+3::MoveToWorkspace(2)
 
 
-#+E::lockWorkStation()
 
-#+C::Reload()
+
+#+S::{
+    disableLockWorkstation()
+    ; Stop()
+    Start()
+}
+
+#+Q::{
+    enableLockWorkstation()
+    Stop()
+}
