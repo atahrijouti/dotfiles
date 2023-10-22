@@ -1,13 +1,58 @@
-"blue" = "attribute, boolean, numeric value, character escape, single character, regexp, NORMAL mode"
-"dark_blue" = "markup.link.text, markup.link.label"
-"darker_blue" = "constant, variable.builtin, label, keyword, keyword.control.exception, tag, namespace, markup.list, markup.list.numbered, markup.list.unnumbered"
-"green_blue" = "variable"
-"purple" = "type.enum.variant, variable.parameter, variable.other.member, markup.heading"
-"green" = "string, markup.quote, markup.raw, markup.raw.inline, markup.raw.block"
-"dark_red" = "string.special, function.special"
-"yellow" = "function.macro"
- "dark_yellow" = "function.method"
-"comment_gray" = "comment" 
+"blue" = [
+  "attribute",
+  "constant.builtin.boolean",
+  "constant.character",
+  "constant.numeric",
+  "string.regexp",
+  "diff.delta"
+]
+"dark_blue" = [
+  "markup.link.text",
+  "markup.link.label"
+]
+"darker_blue" = [
+  "constant",
+  "variable.builtin",
+  "label",
+  "keyword",
+  "keyword.control.exception",
+  "tag",
+  "namespace",
+  "markup.list",
+  "markup.list.numbered",
+  "markup.list.unnumbered"
+]
+"green_blue" = [
+  "variable"
+]
+"purple" = [
+  "type.enum.variant",
+  "variable.parameter",
+  "variable.other.member",
+  "markup.heading"
+]
+"green" = [
+  "string",
+  "markup.quote",
+  "markup.raw",
+  "markup.raw.inline",
+  "markup.raw.block",
+  "diff.plus"
+]
+"dark_red" = [
+  "constant.character.escape",
+  "string.special",
+  "function.special"
+]
+"yellow" = [
+  "function.macro"
+]
+ "dark_yellow" = [
+  "function.method"
+]
+"comment_gray" = [
+  "comment"
+]
 
 
 
