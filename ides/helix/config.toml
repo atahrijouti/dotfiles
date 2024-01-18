@@ -9,6 +9,7 @@ auto-format = true
 color-modes = true
 true-color = true
 undercurl = true
+indent-guides.render = true
 
 [editor.cursor-shape]
 insert = "block"
@@ -34,6 +35,7 @@ k = "normal_mode"
 w = ":w"
 q = ":q"
 c = ":config-reload"
+t = ":tree-sitter-highlight-name"
 
 [keys.normal]
 i = ["collapse_selection", "insert_mode"]
