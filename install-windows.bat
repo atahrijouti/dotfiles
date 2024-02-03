@@ -112,3 +112,4 @@ winget install -e --id gokcehan.lf
 winget install -e --id LGUG2Z.whkd
 winget install -e --id LGUG2Z.komorebi
 winget install -e --id GoLang.Go
+winget install --id=WinSCP.WinSCP  -e
