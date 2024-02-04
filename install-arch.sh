@@ -25,8 +25,10 @@ cd helix
 cargo install --path helix-term --locked
 cd
 
+
+sudo pacman -Suy github-cli iio-sensor-proxy ttf-jetbrains-mono-nerd noto-fonts-emoji wezterm intel-ucode bluez bluez-utils btop p7zip unrar tar rsync git neofetch exfat-utils fuse-exfat ntfs-3g flac curl wget ufw steam flatpak fwupd wl-clipboard github-cli lazygit lf fd fzf xclip pacman-contrib
+
 yay -Suy
-yay -S google-chrome protonup-qt koi
+yay -S google-chrome protonup-qt koi informant
 
-sudo pacman -S github-cli iio-sensor-proxy ttf-jetbrains-mono-nerd noto-fonts-emoji wezterm intel-ucode bluez bluez-utils btop p7zip unrar tar rsync git neofetch exfat-utils fuse-exfat ntfs-3g flac curl wget ufw steam flatpak fwupd wl-clipboard github-cli lazygit lf fd fzf
-
+sudo usermod -a -G informant,render,video,audio atj 
