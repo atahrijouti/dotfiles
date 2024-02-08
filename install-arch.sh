@@ -69,6 +69,11 @@ sudo pacman -S \
  keepassxc
 
 yay -Suy
-yay -S google-chrome protonup-qt koi informant
+yay -S \
+ google-chrome \
+ protonup-qt \
+ koi \
+ informant \
+ appimagelauncher
 
-sudo usermod -a -G informant,render,video,audio atj 
+sudo usermod -a -G informant,render,video,audio,input,informant,wheel atj 
