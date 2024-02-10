@@ -35,6 +35,7 @@ sudo pacman -S \
  intel-ucode \
  bluez \
  bluez-utils \
+ powerdevil power-profiles-daemon cpupower \
  btop \
  p7zip \
  unrar \
