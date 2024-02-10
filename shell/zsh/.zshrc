@@ -22,3 +22,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
 
 [ -s "$HOME/.zsh_aliases" ] && \. "$HOME/.zsh_aliases"
+
+# Better word navigation
+autoload -U select-word-style
+select-word-style bash
