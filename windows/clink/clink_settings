@@ -1,4 +1,5 @@
 autosuggest.enable = True
+autosuggest.hint = False
 clink.colorize_input = True
 clink.default_bindings = bash
 cmd.ctrld_exits = False
