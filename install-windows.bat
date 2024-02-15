@@ -113,5 +113,5 @@ winget install -e --id LGUG2Z.whkd
 winget install -e --id LGUG2Z.komorebi
 winget install -e --id GoLang.Go
 winget install -e --id WinSCP.WinSCP  -e
-winget install -e --id openra
+winget install -e --id OpenRA.OpenRA
 winget install -e --id WireGuard.WireGuard
