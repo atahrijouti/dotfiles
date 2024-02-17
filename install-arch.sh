@@ -27,6 +27,7 @@ cd
 
 
 sudo pacman -S \
+ linux-headers \
  github-cli \
  iio-sensor-proxy \
  ttf-jetbrains-mono-nerd \
@@ -67,6 +68,12 @@ sudo pacman -S \
  xdotool \
  ttf-scheherazade-new \
  syncthing \
+ spectacle \
+ discord \
+ dkms \
+ kodi \
+ samba \
+ retroarch retroarch-assets-xmb retroarch-assets-glui retroarch-assets-ozone libretro-core-info libretro-shaders-slang \
  keepassxc
 
 yay -Suy
@@ -75,6 +82,9 @@ yay -S \
  protonup-qt \
  koi \
  informant \
+ xone-dkms-git xone-dongle-firmware \
+ kodi-addon-pvr-iptvsimple \
+ moonlight-qt \
  appimagelauncher
 
 sudo usermod -a -G informant,render,video,audio,input,informant,wheel atj 
