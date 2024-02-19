@@ -7,5 +7,9 @@ alias lf=lfcd
 
 # --- Aliases
 
-alias ls="ls --color"
+alias ls="ls --color=auto"
 alias history="history 1"
+alias diff='diff --color=auto'
+alias grep='grep --color=auto'
+alias ip='ip -color=auto'
+export LESS='-R --use-color -Dd+r$Du+b$'
