@@ -17,7 +17,7 @@ M.run = function(config)
     left = 10,
     right = 10,
     top = 10,
-    bottom = 10,
+    bottom = 0,
   }
 
   config.enable_scroll_bar = true
