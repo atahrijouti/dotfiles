@@ -16,7 +16,8 @@ makepkg -si
 yay -Suy
 yay -S google-chrome protonup-qt koi appimagelauncher kodi-addon-pvr-iptvsimple 
 yay -S xone-dkms-git xone-dongle-firmware
-
+yay -S informant
+sudo usermod -a -G informant,render,video,audio,input,informant,wheel atj 
 
 # Config
 chsh -s $(which zsh)
@@ -35,6 +36,5 @@ git clone https://github.com/helix-editor/helix
 cd helix
 cargo install --path helix-term --locked
 
-yay -S informant
-sudo usermod -a -G informant,render,video,audio,input,informant,wheel atj 
+
 
