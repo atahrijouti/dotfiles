@@ -19,6 +19,9 @@ yay -S xone-dkms-git xone-dongle-firmware
 yay -S informant
 sudo usermod -a -G informant,render,video,audio,input,informant,wheel atj 
 
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 # Config
 chsh -s $(which zsh)
 
@@ -27,8 +30,7 @@ cd ~/source
 git clone https://github.com/atahrijouti/dotfiles.git
 sh source/dotfiles/create-symlinks.sh
 
-# Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 
 # Helix
 cd ~/source
