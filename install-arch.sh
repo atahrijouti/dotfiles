@@ -26,55 +26,12 @@ cargo install --path helix-term --locked
 cd
 
 
-sudo pacman -S \
- linux-headers \
- github-cli \
- iio-sensor-proxy \
- ttf-jetbrains-mono-nerd \
- noto-fonts-emoji \
- wezterm \
- intel-ucode \
- bluez \
- bluez-utils \
- powerdevil power-profiles-daemon cpupower \
- btop \
- p7zip \
- unrar \
- tar \
- rsync \
- git \
- neofetch \
- exfat-utils \
- fuse-exfat \
- ntfs-3g \
- flac \
- curl \
- wget \
- ufw \
- steam \
- flatpak \
- fwupd \
- wl-clipboard \
- github-cli \
- lazygit \
- lf \
- fd \
- fzf \
- xclip \
- pacman-contrib \
- noto-fonts \
- github-cli \
- wmctrl \
- xdotool \
- ttf-scheherazade-new \
- syncthing \
- spectacle \
- discord \
- dkms \
- kodi \
- samba \
- retroarch retroarch-assets-xmb retroarch-assets-glui retroarch-assets-ozone libretro-core-info libretro-shaders-slang \
- keepassxc
+sudo pacman -S linux-headers base-devel git github-cli intel-ucode pacman-contrib dkms zsh
+sudo pacman -S plasma-meta konsole kwrite dolphin ark plasma-wayland-session egl-wayland sddm pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber iio-sensor-proxy bluez bluez-utils powerdevil power-profiles-daemon cpupower 
+sudo pacman -S nano vim openssh htop wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils lazygit fwupd wl-clipboard btop p7zip unrar tar rsync neofetch flac curl wget ufw flatpak samba 
+sudo pacman -S exfat-utils fuse-exfat ntfs-3g
+sudo pacman -S ttf-jetbrains-mono-nerd noto-fonts-emoji noto-fonts ttf-scheherazade-new
+sudo pacman -S steam  wezterm lf fd fzf xclip wmctrl xdotool syncthing spectacle discord kodi retroarch retroarch-assets-xmb retroarch-assets-glui retroarch-assets-ozone libretro-core-info libretro-shaders-slang keepassxc
 
 yay -Suy
 yay -S \
