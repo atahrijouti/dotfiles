@@ -47,6 +47,7 @@ sudo systemctl enable bluetooth
 
 git config --global user.email "tj.abderrahmane@gmail.com"
 git config --global user.name "Abderrahmane Tahri Jouti"
+git config pull.rebase false
 
 gh auth login
 gh auth setup-git
