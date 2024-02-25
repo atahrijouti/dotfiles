@@ -28,8 +28,8 @@ chsh -s $(which zsh)
 ## Dotfiles
 cd ~/source
 git clone https://github.com/atahrijouti/dotfiles.git
-sh source/dotfiles/create-symlinks.sh
-
+cd dotfiles
+sh create-symlinks.sh
 
 ## Helix
 cd ~/source
