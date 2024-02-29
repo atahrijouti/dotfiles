@@ -1,7 +1,7 @@
 # Install Packages
 sudo pacman -Suy
-sudo pacman -S linux-headers base-devel git github-cli intel-ucode pacman-contrib dkms zsh
-sudo pacman -S plasma-meta konsole kwrite dolphin ark plasma-wayland-session egl-wayland sddm sof-firmware pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber iio-sensor-proxy bluez bluez-utils powerdevil power-profiles-daemon cpupower 
+sudo pacman -S linux-headers base-devel git github-cli intel-ucode pacman-contrib dkms zsh grub os-prober
+sudo pacman -S plasma-meta konsole kwrite dolphin ark plasma-wayland-session egl-wayland sddm sof-firmware pipewire pipewire-alsa pipewire-jack pipewire-pulse gst-plugin-pipewire libpulse wireplumber iio-sensor-proxy bluez bluez-utils powerdevil power-profiles-daemon cpupower grub-optimizer
 sudo pacman -S nano vim openssh htop wget iwd wireless_tools wpa_supplicant smartmontools xdg-utils lazygit fwupd wl-clipboard btop p7zip unrar tar rsync neofetch flac curl wget ufw flatpak samba duf zsh-autosuggestions zsh-syntax-highlighting zsh-completions zsh-history-substring-search
 sudo pacman -S exfat-utils fuse-exfat ntfs-3g
 sudo pacman -S ttf-jetbrains-mono-nerd noto-fonts-emoji noto-fonts ttf-scheherazade-new
