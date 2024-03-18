@@ -12,7 +12,10 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+zstyle ':completion:*' menu select
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Starship
 eval "$(starship init zsh)"
