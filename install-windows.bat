@@ -1,3 +1,4 @@
+setx LANG en_US.UTF-8
 setx HOME "%USERPROFILE%"
 setx DOTFILES "%USERPROFILE%\source\dotfiles"
 
