@@ -70,6 +70,3 @@ alias lf=lfcd
 alias ls="ls -F --color"
 alias love="/Applications/love.app/Contents/MacOS/love"
 
-
-
-source "$HOME/.work_zshrc"
