@@ -4,7 +4,12 @@ local lazy = require("lazy")
 local ku = require("config.utils.keymaps")
 
 local sections = {
-  x = { desc = " Execute" },
+  x = {
+    name = " Execute",
+    w = { name = " Workspace" },
+    g = { name = " Git" },
+    p = { name = " Packages" },
+  },
 }
 
 whichKey.register(sections, { prefix = "<leader>" })
