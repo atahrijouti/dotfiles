@@ -6,7 +6,7 @@ local helpers = require("helpers")
 M.run = function(config)
   config.color_scheme = helpers.decideColorScheme(config)
 
-  config.front_end = "WebGpu"
+  config.front_end = "OpenGL"
   config.font = wezterm.font("JetBrainsMono Nerd Font")
   config.font_size = 14
   config.line_height = 1.10
