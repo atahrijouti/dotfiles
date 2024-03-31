@@ -113,6 +113,7 @@ winget install -e --id gokcehan.lf
 winget install -e --id LGUG2Z.whkd
 winget install -e --id LGUG2Z.komorebi
 winget install -e --id GoLang.Go
-winget install -e --id WinSCP.WinSCP  -e
+winget install -e --id WinSCP.WinSCP
 winget install -e --id OpenRA.OpenRA
 winget install -e --id WireGuard.WireGuard
+winget install -e --id NickeManarin.ScreenToGif
