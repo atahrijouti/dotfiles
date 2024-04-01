@@ -107,16 +107,17 @@
 "ui.menu" = { fg = "shade05", bg = "shade01" }
 "ui.menu.selected" = { fg = "shade07", bg = "light_blue" }
 
+# Gutter and top right message
 "hint" = "shade04"
 "info" = "light_blue"
 "warning" = "orange"
 "error" = "red"
 
-"diagnostic" = { modifiers = [] }
-"diagnostic.hint" = { underline = { color = "shade04", style = "line" } }
+# Text at issue
+"diagnostic" = { underline = { color = "shade04", style = "line" } }
 "diagnostic.info" = { underline = { color = "light_blue", style = "line" } }
-"diagnostic.warning" = { underline = { color = "orange", style = "curl" } }
-"diagnostic.error" = { underline = { color = "red", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "orange", style = "line" } }
+"diagnostic.error" = { underline = { color = "red", style = "line" } }
 
 [palette]
 shade00 = "#f2f3f7"
