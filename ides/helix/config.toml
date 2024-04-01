@@ -2,7 +2,6 @@
 theme = "cyan_light"
 
 [editor]
-line-number = "relative"
 cursorline = true
 auto-save = true
 auto-format = true
