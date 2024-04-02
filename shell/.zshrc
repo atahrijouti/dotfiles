@@ -69,4 +69,6 @@ alias lf=lfcd
 #aliases
 alias ls="ls -F --color"
 alias love="/Applications/love.app/Contents/MacOS/love"
+alias prettier.cmd="prettier"
 
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
