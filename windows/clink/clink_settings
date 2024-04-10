@@ -1,32 +1,139 @@
+# name: Enable automatic suggestions
+# type: boolean
 autosuggest.enable = True
+
+# name: Show usage hint for automatic suggestions
+# type: boolean
 autosuggest.hint = False
+
+# name: Auto-update the Clink program files
+# type: enum
+# options: off,check,prompt,auto
+clink.autoupdate = off
+
+# name: Colorize the input text
+# type: boolean
 clink.colorize_input = True
+
+# name: Selects default key bindings
+# type: enum
+# options: bash,windows
 clink.default_bindings = bash
+
+# name: Pressing Ctrl-D exits session
+# type: boolean
 cmd.ctrld_exits = False
 
+# name: Argument color
+# type: color
+color.arg = bold
+
+# name: Argument info color
+# type: color
+color.arginfo = yellow
+
+# name: Argmatcher color
+# type: color
+color.argmatcher = green
+
+# name: Shell command completions
+# type: color
+color.cmd = bold cyan
+
+# name: Color for < and > redirection symbols
+# type: color
+color.cmdredir = bold yellow
+
+# name: Color for & and | command separators
+# type: color
+color.cmdsep = bold yellow
+
+# name: Color for comment row
+# type: color
+color.comment_row = bright cyan on blue
+
+# name: Description completion color
+# type: color
+color.description = bright cyan
+
+# name: Doskey completions
+# type: color
+color.doskey = bold cyan
+
+# name: Color for executable command word
+# type: color
+color.executable = bold cyan
+
+# name: Filtered completion color
+# type: color
+color.filtered = magenta
+
+# name: Flag color
+# type: color
+color.flag = cyan
+
+# name: Hidden file completions
+# type: color
+color.hidden = red
+
+# name: History expansion color
+# type: color
+color.histexpand = default on magenta
+
+# name: Horizontal scroll marker color
+# type: color
+color.horizscroll = black on green
+
+# name: Input text color
+# type: color
+color.input = yellow
+
+# name: For user-interaction prompts
+# type: color
+color.interact = bold
+
+# name: Message area color
+# type: color
+color.message = default
+
+# name: Readonly file completions
+# type: color
+color.readonly = green
+
+# name: Selected completion color
+# type: color
+color.selected_completion = black on white
+
+# name: Selection color
+# type: color
+color.selection = black on yellow
+
+# name: Color for suggestion text
+# type: color
+color.suggestion = bright black
+
+# name: Unexpected argument color
+# type: color
+color.unexpected = default
+
+# name: Color for unrecognized command word
+# type: color
+color.unrecognized = bright red
+
+# name: The number of history lines to save
+# type: integer
 history.max_lines = 99999999
+
+# name: Expand envvars when completing
+# type: boolean
 match.expand_envvars = True
+
+# name: Try substring if no prefix matches
+# type: boolean
 match.substring = True
+
+# name: Controls when past prompts are collapsed
+# type: enum
+# options: off,always,same_dir
 prompt.transient = same_dir
 
-color.arg                        = bold 
-color.arginfo                    = yellow
-color.argmatcher                 = green
-color.cmd                        = bold cyan
-color.cmdredir                   = bold yellow
-color.cmdsep                     = bold yellow
-color.comment_row                = bright cyan on blue
-color.description                = bright cyan
-color.doskey                     = bold cyan
-color.executable                 = bold cyan
-color.filtered                   = magenta
-color.flag                       = cyan
-color.hidden                     = red        
-color.histexpand                 = default on Magenta             
-color.horizscroll                = black on green
-color.input                      = yellow
-color.readonly                   = green      
-color.selected_completion        = black on white
-color.selection                  = black on yellow
-color.suggestion                 = bright black
-color.unrecognized               = bright red

@@ -59,9 +59,9 @@ return {
     },
     indent = { enable = true },
     autotag = { enable = true },
-    context_commentstring = { enable = true, enable_autocmd = false },
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
+    require("ts_context_commentstring").setup({ enable_autocmd = false })
   end,
 }
