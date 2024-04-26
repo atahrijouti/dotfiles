@@ -4,9 +4,14 @@
     (load-theme 'ef-maris-dark :no-confirm)
 )
 
+(use-package auto-dark
+  :config
+  (setq auto-dark-dark-theme 'ef-maris-dark)
+  (setq auto-dark-light-theme 'ef-maris-light)
+  (auto-dark-mode t))
+
 ;; Icons everywhere
 (use-package all-the-icons
-  :ensure t
   :if (display-graphic-p))
 
 (use-package all-the-icons-dired
