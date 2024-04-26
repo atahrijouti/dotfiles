@@ -1,3 +1,5 @@
+(use-package diminish)
+
 (use-package ef-themes
   :init
     (mapc #'disable-theme custom-enabled-themes)
@@ -5,6 +7,7 @@
 )
 
 (use-package auto-dark
+  :diminish
   :config
   (setq auto-dark-dark-theme 'ef-maris-dark)
   (setq auto-dark-light-theme 'ef-maris-light)

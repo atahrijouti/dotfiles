@@ -24,20 +24,20 @@
 
 
 
-(use-package general
-  :config
-  (general-evil-setup)
+;; (use-package general
+;;   :config
+;;   (general-evil-setup)
 
-  (general-create-definer atj/leader-keys
-    :states '(normal visual emacs)
-    :keymaps 'override
-    :prefix "SPC"
-  )
+;;   (general-create-definer atj/leader-keys
+;;     :states '(normal visual emacs)
+;;     :keymaps 'override
+;;     :prefix "SPC"
+;;   )
 
-  (atj/leader-keys
-   "w" '(save-buffer :wk "Write file")
-  )
-)
+;;   (atj/leader-keys
+;;    "w" '(save-buffer :wk "Write file")
+;;   )
+;; )
 
 
 
