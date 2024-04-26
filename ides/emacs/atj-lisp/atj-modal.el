@@ -11,5 +11,11 @@
 (use-package evil-tutor)
 
 
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
+
 
 (provide 'atj-modal)
