@@ -2,8 +2,8 @@
 (setq inhibit-startup-screen t)
 (setq initial-scratch-message nil)
 (setq default-directory "~/")
+(setq delete-by-moving-to-trash t)
 
-;; Backups
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq backup-directory-alist '((".*" . "~/.emacs.d/emacs-backup")))
