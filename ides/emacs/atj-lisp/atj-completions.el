@@ -19,12 +19,6 @@
   :config
   (vertico-posframe-mode 1))
 
-;; Persist history over Emacs restarts. Vertico sorts by history position.
-(use-package savehist
-  :ensure nil
-  :init
-  (savehist-mode))
-
 ;; A few more useful configurations...
 (use-package emacs 
   :ensure nil

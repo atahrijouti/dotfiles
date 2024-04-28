@@ -7,6 +7,10 @@
 
 (require 'project)
 
+(use-package savehist
+  :ensure nil
+  :init
+  (savehist-mode))
 
 (use-package dashboard
   :init
