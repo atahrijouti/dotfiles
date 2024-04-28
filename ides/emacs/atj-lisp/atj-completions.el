@@ -15,6 +15,9 @@
 
 (use-package consult)
 
+(use-package vertico-posframe
+  :config
+  (vertico-posframe-mode 1))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
