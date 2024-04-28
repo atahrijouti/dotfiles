@@ -2,6 +2,9 @@
 name = "lua"
 auto-format = true
 
+[[language]]
+name = "common-lisp"
+file-types = ["lisp", "asd", "cl", "l", "lsp", "ny", "podsl", "sexp", "el"]
 
 [[language]]
 name = "html"
