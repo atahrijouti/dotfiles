@@ -3,6 +3,7 @@
 (setq initial-scratch-message nil)
 (setq default-directory "~/")
 (setq delete-by-moving-to-trash t)
+(setq warning-minimum-level :emergency)
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
