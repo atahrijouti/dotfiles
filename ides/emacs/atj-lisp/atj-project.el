@@ -9,7 +9,6 @@
 
 
 (use-package dashboard
-  :ensure t 
   :init
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)

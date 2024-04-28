@@ -1,5 +1,4 @@
 (use-package vertico
-  :ensure t
   :init
   (vertico-mode)
   (setq vertico-cycle t)
@@ -8,7 +7,6 @@
 
 (use-package marginalia
   :after vertico
-  :ensure t
   :bind (:map minibuffer-local-map
          ("M-A" . marginalia-cycle))
   :init
@@ -55,7 +53,6 @@
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
-  :ensure t
   :init
   :custom
   (completion-styles '(orderless basic))
