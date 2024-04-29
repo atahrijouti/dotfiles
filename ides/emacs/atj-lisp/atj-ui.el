@@ -3,7 +3,7 @@
 (use-package ef-themes
   :init
     (mapc #'disable-theme custom-enabled-themes)
-    (load-theme 'ef-maris-dark :no-confirm)
+    (load-theme 'ef-maris-light :no-confirm)
 )
 
 (use-package auto-dark
@@ -11,6 +11,7 @@
   :config
   (setq auto-dark-dark-theme 'ef-maris-dark)
   (setq auto-dark-light-theme 'ef-maris-light)
+  (setq auto-dark-allow-osascript t)
   (auto-dark-mode t))
 
 ;; Icons everywhere
