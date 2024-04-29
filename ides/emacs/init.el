@@ -7,8 +7,6 @@
 
 (require 'atj-packages)
 
-(require 'atj-editor)
-
 (require 'atj-keymap)
 
 (pcase system-name

@@ -1,4 +1,3 @@
-
 (require 'atj-ui)
 
 (require 'atj-modal)
@@ -7,6 +6,7 @@
 
 (require 'atj-project)
 
+(require 'atj-editor)
 
 ;; Git
 ;; (use-package magit)
