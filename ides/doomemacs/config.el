@@ -7,7 +7,7 @@
 
 (after! doom-ui
   ;; set your favorite themes
-  (setq! auto-dark-dark-theme 'doom-vibrart
+  (setq! auto-dark-dark-theme 'doom-vibrant
         auto-dark-light-theme 'doom-nord-light)
   (auto-dark-mode t))
 
