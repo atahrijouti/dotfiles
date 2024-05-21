@@ -24,7 +24,7 @@
 ;; WhichKey
 (use-package which-key
   :diminish
-  :init
+  :config
     (which-key-mode 1)
 )
 

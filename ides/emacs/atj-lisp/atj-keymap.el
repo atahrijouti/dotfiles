@@ -11,7 +11,7 @@
 ;; why do I need to click escape 3 times?
 (global-set-key (kbd "<escape>")      'keyboard-escape-quit)
 
-(global-set-key (kbd "\C-c g d")      'find-file-at-point)
+(global-set-key (kbd "\C-c g f")      'find-file-at-point)
 
 
 (defun atj/open-init-file ()
