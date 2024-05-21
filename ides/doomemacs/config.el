@@ -9,7 +9,7 @@
   ;; set your favorite themes
   (setq! auto-dark-dark-theme 'doom-vibrart
         auto-dark-light-theme 'doom-nord-light)
-  (auto-dark-mode t))
+  (auto-dark-mode 1))
 
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
