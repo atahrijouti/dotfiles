@@ -1,16 +1,12 @@
 (use-package diminish)
 
-(use-package ef-themes
-  :init
-    (mapc #'disable-theme custom-enabled-themes)
-    (load-theme 'ef-maris-light :no-confirm)
-)
+(use-package doom-themes)
 
 (use-package auto-dark
   :diminish
   :config
-  (setq auto-dark-dark-theme 'ef-maris-dark)
-  (setq auto-dark-light-theme 'ef-maris-light)
+  (setq auto-dark-dark-theme 'doom-nord-aurora)
+  (setq auto-dark-light-theme 'doom-nord-light)
   (setq auto-dark-allow-osascript t)
   (auto-dark-mode t))
 
