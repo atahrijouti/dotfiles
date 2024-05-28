@@ -26,7 +26,7 @@
 (global-auto-revert-mode t)
 
 (global-display-line-numbers-mode 1)
-
+(global-visual-line-mode 1)
 (pixel-scroll-precision-mode t)
 
 
