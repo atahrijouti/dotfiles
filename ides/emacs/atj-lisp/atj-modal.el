@@ -5,17 +5,6 @@
   :config
   
   (ryo-modal-keys
-
-   
-
-   ("u" undo-tree-undo)
-   ("U" undo-tree-redo)   
-
-   ("." ryo-modal-repeat)
-
-   ("i" ryo-modal-mode 0)
-   ("a" forward-char :exit t)
-   
    ("h" backward-char)
    ("j" next-line)
    ("k" previous-line)
@@ -23,6 +12,19 @@
    ("w" forward-word)
    ("b" backward-word)
    
+   ("u" undo-tree-undo)
+   ("U" undo-tree-redo)   
+
+   ("." ryo-modal-repeat)
+
+   ("i" ryo-modal-mode 0)
+   ("a" forward-char :exit t)
+
+   ("O"  move-beginning-of-line :then '(open-line))
+   ("o"  move-end-of-line :then '(newline))
+   
+   ("v"  set-mark-command)
+
    ("g h" beginning-of-line)
    ("g s" beginning-of-line-text)
    ("g l" end-of-line)
@@ -34,6 +36,7 @@
     (("w" save-buffer)
      ("q" save-buffers-kill-emacs)
      ("f" project-find-file)
+     ("b" consult-buffer)
      )
     )
   )
