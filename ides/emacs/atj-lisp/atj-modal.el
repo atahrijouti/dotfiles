@@ -1,21 +1,41 @@
 (use-package ryo-modal
+  :after (project)
   :commands ryo-modal-mode
   :bind ("C-c SPC" . ryo-modal-mode)
   :config
   
   (ryo-modal-keys
 
-   ("i" ryo-modal-mode)
    
+
+   ("u" undo-tree-undo)
+   ("U" undo-tree-redo)   
 
    ("." ryo-modal-repeat)
 
+   ("i" ryo-modal-mode 0)
+   ("a" forward-char :exit t)
+   
    ("h" backward-char)
    ("j" next-line)
    ("k" previous-line)
    ("l" forward-char)
    ("w" forward-word)
    ("b" backward-word)
+   
+   ("g h" beginning-of-line)
+   ("g s" beginning-of-line-text)
+   ("g l" end-of-line)
+   ("g g" beginning-of-buffer)
+   ("g e" end-of-buffer)
+
+   ;; Space map
+   ("SPC"
+    (("w" save-buffer)
+     ("q" save-buffers-kill-emacs)
+     ("f" project-find-file)
+     )
+    )
   )
 
   (ryo-modal-keys
@@ -32,7 +52,7 @@
    ("7" "M-7")
    ("8" "M-8")
    ("9" "M-9"))
-  )
+)
 
 (add-hook 'text-mode-hook 'ryo-modal-mode)
 (add-hook 'prog-mode-hook 'ryo-modal-mode)
