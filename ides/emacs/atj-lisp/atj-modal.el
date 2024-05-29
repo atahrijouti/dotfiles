@@ -5,6 +5,19 @@
   (key-chord-define-global "jk" 'ryo-modal-mode)
 )
 
+(defun atj/select-line (arg)
+  "Select the current line and move the cursor by ARG lines IF
+no region is selected.
+
+If a region is already selected when calling this command, only move
+the cursor by ARG lines."
+  (interactive "p")
+  (when (not (use-region-p))
+    (forward-line 0)
+    (set-mark-command nil))
+  (forward-line arg))
+
+
 (use-package ryo-modal
   :after (project)
   :commands ryo-modal-mode
@@ -31,6 +44,8 @@
    ("o"  move-end-of-line :then '(newline))
    
    ("v"  set-mark-command)
+
+   ("x"  atj/select-line)
 
    ("y"  kill-ring-save)
    ("p"  yank)
