@@ -1,3 +1,10 @@
+(use-package key-chord
+  :after (ryo-modal)
+  :config
+  (key-chord-mode 1)
+  (key-chord-define-global "jk" 'ryo-modal-mode)
+)
+
 (use-package ryo-modal
   :after (project)
   :commands ryo-modal-mode
@@ -24,6 +31,9 @@
    ("o"  move-end-of-line :then '(newline))
    
    ("v"  set-mark-command)
+
+   ("y"  kill-ring-save)
+   ("p"  yank)
 
    ("g h" beginning-of-line)
    ("g s" beginning-of-line-text)
