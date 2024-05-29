@@ -50,6 +50,9 @@ the cursor by ARG lines."
    ("y"  kill-ring-save)
    ("p"  yank)
 
+   ("d" kill-region)
+   ("c" kill-region :exit t)
+
    ("g h" beginning-of-line)
    ("g s" beginning-of-line-text)
    ("g l" end-of-line)
