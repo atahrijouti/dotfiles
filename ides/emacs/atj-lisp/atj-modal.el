@@ -93,7 +93,13 @@ the cursor by ARG lines."
   )
 )
 
-(add-hook 'text-mode-hook 'ryo-modal-mode)
-(add-hook 'prog-mode-hook 'ryo-modal-mode)
+(defun atj/modal-text-prog-hook ()
+  (ryo-modal-mode)
+   
+)
+
+
+(add-hook 'text-mode-hook #'atj/modal-text-prog-hook)
+(add-hook 'prog-mode-hook #'atj/modal-text-prog-hook)
 
 (provide 'atj-modal)
