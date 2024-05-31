@@ -1,3 +1,8 @@
+(use-package kakoune
+  :autoloads nil
+)
+
+
 
 (use-package key-chord
   :after (ryo-modal)
@@ -34,6 +39,10 @@ the cursor by ARG lines."
    ("k" previous-line)
    ("l" forward-char)
    ("w" forward-word)
+
+
+
+
    ("b" backward-word)
    
    ("u" undo-tree-undo)
