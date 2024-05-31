@@ -70,6 +70,7 @@ the cursor by ARG lines."
      ("q" save-buffers-kill-emacs)
      ("f" project-find-file)
      ("b" consult-buffer)
+     ("1" neotree-toggle)
     )
    )
 
