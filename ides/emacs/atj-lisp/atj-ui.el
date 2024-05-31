@@ -24,5 +24,6 @@
     (which-key-mode 1)
 )
 
+(use-package neotree)
 
 (provide 'atj-ui)
