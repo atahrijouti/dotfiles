@@ -23,6 +23,9 @@ the cursor by ARG lines."
   :commands ryo-modal-mode
   :bind ("C-c SPC" . ryo-modal-mode)
   :config
+
+  (define-key ryo-modal-mode-map [remap self-insert-command] 'undefined)
+
   
   (ryo-modal-keys
    ("h" backward-char)
@@ -61,12 +64,13 @@ the cursor by ARG lines."
 
    ;; Space map
    ("SPC"
-    (("w" save-buffer)
+    (
+     ("w" save-buffer)
      ("q" save-buffers-kill-emacs)
      ("f" project-find-file)
      ("b" consult-buffer)
-     )
     )
+   )
   )
 
   (ryo-modal-keys
@@ -82,7 +86,8 @@ the cursor by ARG lines."
    ("6" "M-6")
    ("7" "M-7")
    ("8" "M-8")
-   ("9" "M-9"))
+   ("9" "M-9")
+  )
 )
 
 (add-hook 'text-mode-hook 'ryo-modal-mode)
