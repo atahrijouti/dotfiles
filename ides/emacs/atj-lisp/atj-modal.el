@@ -1,3 +1,4 @@
+
 (use-package key-chord
   :after (ryo-modal)
   :config
@@ -57,7 +58,7 @@ the cursor by ARG lines."
    ("c" kill-region :exit t)
 
    ("g h" beginning-of-line)
-   ("g s" beginning-of-line-text)
+   ("g s" back-to-indentation)
    ("g l" end-of-line)
    ("g g" beginning-of-buffer)
    ("g e" end-of-buffer)
@@ -71,6 +72,8 @@ the cursor by ARG lines."
      ("b" consult-buffer)
     )
    )
+
+   ("RET" undefined)
   )
 
   (ryo-modal-keys
@@ -92,7 +95,5 @@ the cursor by ARG lines."
 
 (add-hook 'text-mode-hook 'ryo-modal-mode)
 (add-hook 'prog-mode-hook 'ryo-modal-mode)
-(global-set-key (kbd "C-<return>") 'ryo-modal-mode)
-
 
 (provide 'atj-modal)
