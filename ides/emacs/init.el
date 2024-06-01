@@ -1,5 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d/atj-lisp/")
 (add-to-list 'load-path "~/.emacs.d/atj-machine-specific/")
+(add-to-list 'load-path "~/.emacs.d/vendor/kakoune.el")
 
 (require 'elpaca-installer)
 

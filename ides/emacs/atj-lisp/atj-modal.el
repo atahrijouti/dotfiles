@@ -23,7 +23,9 @@ the cursor by ARG lines."
   :commands ryo-modal-mode
   :bind ("C-c SPC" . ryo-modal-mode)
   :config
-
+  
+  (require 'kakoune-utils)
+  
   (define-key ryo-modal-mode-map [remap self-insert-command] 'undefined)
 
   
@@ -34,9 +36,6 @@ the cursor by ARG lines."
    ("l" forward-char)
    ("w" forward-word)
 
-
-
-
    ("b" backward-word)
    
    ("u" undo-tree-undo)
@@ -45,14 +44,16 @@ the cursor by ARG lines."
    ("." ryo-modal-repeat)
 
    ("i" ryo-modal-mode 0)
+   ("I" back-to-indentation :exit t)
    ("a" forward-char :exit t)
+   ("A" move-end-of-line :exit t)
 
    ("O"  move-beginning-of-line :then '(open-line))
    ("o"  move-end-of-line :then '(newline))
    
    ("v"  set-mark-command)
 
-   ("x"  atj/select-line)
+   ("x"  kakoune-x)
 
    ("y"  kill-ring-save)
    ("p"  yank)

@@ -6,21 +6,23 @@
 (use-package expand-region
   :bind ("C-=" . er/expand-region)
   :config
-  (when (centaur-treesit-available-p)
-    (defun treesit-mark-bigger-node ()
-      "Use tree-sitter to mark regions."
-      (let* ((root (treesit-buffer-root-node))
-             (node (treesit-node-descendant-for-range root (region-beginning) (region-end)))
-             (node-start (treesit-node-start node))
-             (node-end (treesit-node-end node)))
-        ;; Node fits the region exactly. Try its parent node instead.
-        (when (and (= (region-beginning) node-start) (= (region-end) node-end))
-          (when-let ((node (treesit-node-parent node)))
-            (setq node-start (treesit-node-start node)
-                  node-end (treesit-node-end node))))
-        (set-mark node-end)
-        (goto-char node-start)))
-    (add-to-list 'er/try-expand-list 'treesit-mark-bigger-node)))
+  (defun tree-sitter-mark-bigger-node ()
+    (interactive)
+    (let* ((root (tsc-root-node tree-sitter-tree))
+         (node (tsc-get-descendant-for-position-range root (region-beginning) (region-end)))
+         (node-start (tsc-node-start-position node))
+         (node-end (tsc-node-end-position node)))
+    ;; Node fits the region exactly. Try its parent node instead.
+    (when (and (= (region-beginning) node-start) (= (region-end) node-end))
+      (when-let ((node (tsc-get-parent node)))
+        (setq node-start (tsc-node-start-position node)
+              node-end (tsc-node-end-position node))))
+    (set-mark node-end)
+    (goto-char node-start)))
+
+    (setq er/try-expand-list (append er/try-expand-list
+                                 '(tree-sitter-mark-bigger-node)))
+)
 
 ;; Jump to things in Emacs tree-style
 (use-package avy
@@ -36,6 +38,7 @@
                 avy-style 'at-full)
 )
 
+(use-package multiple-cursors)
 
 (use-package undo-tree
 :config
