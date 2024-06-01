@@ -1,3 +1,0 @@
-[submodule "ides/emacs/vendor/kakoune.el"]
-	path = ides/emacs/vendor/kakoune.el
-	url = https://github.com/jmorag/kakoune.el.git
