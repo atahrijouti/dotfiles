@@ -1,9 +1,3 @@
-(use-package kakoune
-  :autoloads nil
-)
-
-
-
 (use-package key-chord
   :after (ryo-modal)
   :config
