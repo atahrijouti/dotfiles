@@ -5,19 +5,6 @@
   (key-chord-define-global "jk" 'ryo-modal-mode)
 )
 
-(defun atj/select-line (arg)
-  "Select the current line and move the cursor by ARG lines IF
-no region is selected.
-
-If a region is already selected when calling this command, only move
-the cursor by ARG lines."
-  (interactive "p")
-  (when (not (use-region-p))
-    (forward-line 0)
-    (set-mark-command nil))
-  (forward-line arg))
-
-
 (use-package ryo-modal
   :after (project)
   :commands ryo-modal-mode
@@ -30,13 +17,16 @@ the cursor by ARG lines."
 
   
   (ryo-modal-keys
-   ("h" backward-char)
-   ("j" next-line)
-   ("k" previous-line)
-   ("l" forward-char)
-   ("w" forward-word)
-
-   ("b" backward-word)
+   (:mc-all t)
+   ("h" backward-char :first '(kakoune-deactivate-mark))
+   ("j" next-line :first '(kakoune-deactivate-mark))
+   ("k" previous-line :first '(kakoune-deactivate-mark))
+   ("l" forward-char :first '(kakoune-deactivate-mark))
+   
+   ("b" kakoune-backward-same-syntax :first '(kakoune-set-mark-here) :mc-all t)
+   ;; ("B" kakoune-backward-same-syntax :first '(kakoune-set-mark-if-inactive) :mc-all t)
+   ("w" forward-same-syntax :first '(kakoune-set-mark-here) :mc-all t)
+   ;; ("W" forward-same-syntax :first '(kakoune-set-mark-if-inactive) :mc-all t))
    
    ("u" undo-tree-undo)
    ("U" undo-tree-redo)   
@@ -49,7 +39,7 @@ the cursor by ARG lines."
    ("A" move-end-of-line :exit t)
 
    ("O"  move-beginning-of-line :then '(open-line))
-   ("o"  move-end-of-line :then '(newline))
+   ("o" kakoune-o)
    
    ("v"  set-mark-command)
 
@@ -58,8 +48,11 @@ the cursor by ARG lines."
    ("y"  kill-ring-save)
    ("p"  yank)
 
-   ("d" kill-region)
-   ("c" kill-region :exit t)
+   ("d" kakoune-d)
+   ("c" kakoune-d :exit t)
+   ("r" kakoune-replace-char)
+   ("R" kakoune-replace-selection)
+   
 
    ("g h" beginning-of-line)
    ("g s" back-to-indentation)
