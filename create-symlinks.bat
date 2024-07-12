@@ -24,6 +24,10 @@ REM lf
 mklink /d "%USERPROFILE%\AppData\Local\lf" "%DOTFILES%\ides\lf"
 mklink "%USERPROFILE%\programs\bin\lfcd.cmd" "%DOTFILES%\windows\lf\lfcd.cmd"
 
+REM Zed
+mklink "%USERPROFILE%\AppData\Roaming\Zed\settings.json" "%DOTFILES%\ides\zed\settings.json"
+mklink "%USERPROFILE%\AppData\Roaming\Zed\keymap.json" "%DOTFILES%\ides\zed\keymap.json"
+
 REM Helix
 mklink /d "%APPDATA%\helix" "%DOTFILES%\ides\helix"
 
