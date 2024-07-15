@@ -23,5 +23,11 @@
   "inlay_hints": {
     "enabled": false
   },
-  "auto_update": false
+  "auto_update": false,
+  "file_types": {
+    // The Windows config folder start with Uppercase Z
+    "JSONC": [
+      "~/AppData/Roaming/Zed/**/*.json"
+    ]
+  }
 }
