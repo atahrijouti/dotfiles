@@ -3,14 +3,14 @@
     "context": "vim_mode == normal",
     "bindings": {
       "alt-o": "editor::SelectLargerSyntaxNode",
-      "alt-i": "editor::SelectSmallerSyntaxNode",
+      "alt-i": "editor::SelectSmallerSyntaxNode"
     }
   },
   {
     "context": "vim_mode == visual",
     "bindings": {
       "alt-o": "editor::SelectLargerSyntaxNode",
-      "alt-i": "editor::SelectSmallerSyntaxNode",
+      "alt-i": "editor::SelectSmallerSyntaxNode"
     }
   }
 ]
