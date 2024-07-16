@@ -2,15 +2,22 @@
   {
     "context": "vim_mode == normal",
     "bindings": {
-      "alt-o": "editor::SelectLargerSyntaxNode",
-      "alt-i": "editor::SelectSmallerSyntaxNode"
+      "d": "vim::DeleteRight",
+      "z c": "editor::Fold",
+      "z o": "editor::UnfoldLines",
+      "space w": "workspace::Save",
+      "space f": "file_finder::Toggle",
+      "space 1": "project_panel::ToggleFocus"
     }
   },
   {
     "context": "vim_mode == visual",
     "bindings": {
-      "alt-o": "editor::SelectLargerSyntaxNode",
-      "alt-i": "editor::SelectSmallerSyntaxNode"
+      "d": "vim::VisualDelete",
+      ",": [
+        "vim::SwitchMode",
+        "Normal"
+      ],
     }
   },
   {
@@ -19,5 +26,20 @@
       "j k": "vim::NormalBefore",
       "j j": "vim::NormalBefore"
     }
-  }
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "alt-o": "editor::SelectLargerSyntaxNode",
+      "alt-i": "editor::SelectSmallerSyntaxNode",
+      "c": "vim::Substitute",
+      "U": "editor::Redo",
+      "x": "editor::SelectLine",
+      "R": "editor::Paste",
+      "g e": "vim::EndOfDocument",
+      "g l": "vim::EndOfLine",
+      "g s": "vim::FirstNonWhitespace",
+      "g h": "vim::StartOfLine"
+    }
+  },
 ]
