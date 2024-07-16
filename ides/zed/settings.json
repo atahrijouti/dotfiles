@@ -4,6 +4,7 @@
     "light": "One Light",
     "dark": "One Dark"
   },
+  "vim_mode": true,
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "telemetry": {
     "diagnostics": false,
@@ -13,7 +14,7 @@
     "show": false
   },
   "toolbar": {},
-  "autosave": "on_focus_change",
+  "autosave": "on_window_change",
   "formatter": "language_server",
   "git": {
     "inline_blame": {
