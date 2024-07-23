@@ -1,6 +1,7 @@
 [[language]]
 name = "lua"
 auto-format = true
+formatter = { command = "stylua", args = ["-"] }
 
 [[language]]
 name = "common-lisp"
