@@ -15,7 +15,6 @@
   },
   "toolbar": {},
   "autosave": "on_window_change",
-  "formatter": "language_server",
   "git": {
     "inline_blame": {
       "enabled": false
@@ -27,8 +26,17 @@
   "auto_update": false,
   "file_types": {
     // The Windows config folder start with Uppercase Z
-    "JSONC": [
-      "~/AppData/Roaming/Zed/**/*.json"
-    ]
+    "JSONC": ["~/AppData/Roaming/Zed/**/*.json"]
+  },
+  "format_on_save": "on",
+  "languages": {
+    "Lua": {
+      "formatter": {
+        "external": {
+          "command": "stylua",
+          "arguments": ["-"]
+        }
+      }
+    }
   }
 }
