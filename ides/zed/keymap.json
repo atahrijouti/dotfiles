@@ -2,7 +2,9 @@
   {
     "bindings": {
       "alt-9": ["task::Spawn", { "task_name": "Open lazygit" }],
+      "super-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "alt-1": "project_panel::ToggleFocus",
+      "super-1": "project_panel::ToggleFocus",
       "alt-super-h": ["workspace::ActivatePaneInDirection", "Left"],
       "alt-super-j": ["workspace::ActivatePaneInDirection", "Down"],
       "alt-super-k": ["workspace::ActivatePaneInDirection", "Up"],
