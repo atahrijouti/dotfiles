@@ -1,23 +1,27 @@
 [
   {
+    "bindings": {
+      "alt-9": ["task::Spawn", { "task_name": "Open lazygit" }],
+      "alt-1": "project_panel::ToggleFocus",
+      "alt-cmd-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "alt-cmd-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "alt-cmd-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "alt-cmd-l": ["workspace::ActivatePaneInDirection", "Right"]
+    }
+  },
+  {
     "context": "vim_mode == normal",
     "bindings": {
       "d": "vim::DeleteRight",
       "z c": "editor::Fold",
-      "z o": "editor::UnfoldLines",
-      "space w": "workspace::Save",
-      "space f": "file_finder::Toggle",
-      "space 1": "project_panel::ToggleFocus"
+      "z o": "editor::UnfoldLines"
     }
   },
   {
     "context": "vim_mode == visual",
     "bindings": {
       "d": "vim::VisualDelete",
-      ",": [
-        "vim::SwitchMode",
-        "Normal"
-      ],
+      ",": ["vim::SwitchMode", "Normal"]
     }
   },
   {
@@ -35,11 +39,13 @@
       "c": "vim::Substitute",
       "U": "editor::Redo",
       "x": "editor::SelectLine",
-      "R": "editor::Paste",
       "g e": "vim::EndOfDocument",
       "g l": "vim::EndOfLine",
       "g s": "vim::FirstNonWhitespace",
-      "g h": "vim::StartOfLine"
+      "g h": "vim::StartOfLine",
+      "space R": "editor::Paste",
+      "space w": "workspace::Save",
+      "space f": "file_finder::Toggle"
     }
-  },
+  }
 ]
