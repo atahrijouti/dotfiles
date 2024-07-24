@@ -1,6 +1,7 @@
 [
   {
     "bindings": {
+      "f10": ["task::Spawn", { "task_name": "Run project" }],
       "alt-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "super-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "alt-1": "project_panel::ToggleFocus",
