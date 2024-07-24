@@ -3,10 +3,10 @@
     "bindings": {
       "alt-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "alt-1": "project_panel::ToggleFocus",
-      "alt-cmd-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "alt-cmd-j": ["workspace::ActivatePaneInDirection", "Down"],
-      "alt-cmd-k": ["workspace::ActivatePaneInDirection", "Up"],
-      "alt-cmd-l": ["workspace::ActivatePaneInDirection", "Right"]
+      "alt-super-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "alt-super-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "alt-super-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "alt-super-l": ["workspace::ActivatePaneInDirection", "Right"]
     }
   },
   {
