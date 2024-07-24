@@ -25,9 +25,9 @@
   },
   "auto_update": false,
   "file_types": {
-    // The Windows config folder start with Uppercase Z
     "JSONC": ["~/AppData/Roaming/Zed/**/*.json"]
   },
+  // "soft_wrap": "editor_width",
   "format_on_save": "on",
   "languages": {
     "Lua": {
