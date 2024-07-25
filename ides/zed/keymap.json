@@ -40,6 +40,8 @@
       "alt-o": "editor::SelectLargerSyntaxNode",
       "alt-i": "editor::SelectSmallerSyntaxNode",
       "c": "vim::Substitute",
+      "alt-d": ["workspace::SendKeystrokes", "\"_d"],
+      "alt-c": ["workspace::SendKeystrokes", "\"_c"],
       "U": "editor::Redo",
       "x": "editor::SelectLine",
       "g e": "vim::EndOfDocument",
