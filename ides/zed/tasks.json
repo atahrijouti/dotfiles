@@ -1,0 +1,8 @@
+// Static tasks configuration.
+
+[
+  {
+    "label": "Open lazygit",
+    "command": "lazygit"
+  }
+]
