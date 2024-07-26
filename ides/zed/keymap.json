@@ -1,6 +1,7 @@
 [
   {
     "bindings": {
+      "ctrl-f12": "terminal_panel::ToggleFocus",
       "f10": ["task::Spawn", { "task_name": "Run project" }],
       "alt-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "super-9": ["task::Spawn", { "task_name": "Open lazygit" }],
@@ -51,6 +52,13 @@
       "space R": "editor::Paste",
       "space w": "workspace::Save",
       "space f": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
+      "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"]
     }
   }
 ]
