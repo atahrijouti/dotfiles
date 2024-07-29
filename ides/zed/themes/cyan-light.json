@@ -17,10 +17,10 @@
         "surface.background": null,
         "background": "#f2f3f7",
         "element.background": "#e4e6ea",
-        "element.hover": "#d6d6ff",
-        "element.active": "#3eb2c120",
-        "element.selected": "#4A4A4A",
-        "element.disabled": "#3C3C3C",
+        "element.hover": "#dbdfe4",
+        "element.active": "#d0d5db",
+        "element.selected": "#d0d5db",
+        "element.disabled": "#d0d5db",
         "drop_target.background": null,
         "ghost_element.background": "null",
         "ghost_element.hover": "#dbdfe4",
@@ -210,7 +210,7 @@
             "font_weight": null
           },
           "function.definition": {
-            "color": "#DCDCAA",
+            "color": null,
             "font_style": "normal",
             "font_weight": null
           },
@@ -240,7 +240,7 @@
             "font_weight": null
           },
           "operator": {
-            "color": null,
+            "color": "#000080",
             "font_style": "normal",
             "font_weight": null
           },
@@ -300,22 +300,22 @@
             "font_weight": null
           },
           "string.escape": {
-            "color": "#00733B",
+            "color": "#7F0000",
             "font_style": "normal",
             "font_weight": null
           },
           "string.regex": {
-            "color": "#00733B",
+            "color": "#0073E6",
             "font_style": "normal",
             "font_weight": null
           },
           "string.special": {
-            "color": "#00733B",
+            "color": "#7F0000",
             "font_style": "normal",
             "font_weight": null
           },
           "string.special.symbol": {
-            "color": "#00733B",
+            "color": "#7F0000",
             "font_style": "normal",
             "font_weight": null
           },
@@ -336,22 +336,22 @@
           },
           "type": {
             "color": "#660e7a",
-            "font_style": "italic",
+            "font_style": "normal",
             "font_weight": null
           },
           "type.builtin": {
             "color": null,
-            "font_style": "italic",
+            "font_style": "normal",
             "font_weight": null
           },
           "type.interface": {
             "color": "#660e7a",
-            "font_style": "italic",
+            "font_style": "normal",
             "font_weight": null
           },
           "type.super": {
             "color": "#660e7a",
-            "font_style": "italic",
+            "font_style": "normal",
             "font_weight": null
           },
           "variable": {
