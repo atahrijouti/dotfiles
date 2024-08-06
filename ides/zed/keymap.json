@@ -2,6 +2,7 @@
   {
     "bindings": {
       "ctrl-f12": "terminal_panel::ToggleFocus",
+      "ctrl-f11": ["task::Spawn", { "task_name": "Windows Terminal" }],
       "f10": ["task::Spawn", { "task_name": "Run project" }],
       "alt-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "super-9": ["task::Spawn", { "task_name": "Open lazygit" }],
@@ -11,7 +12,7 @@
       "alt-super-j": ["workspace::ActivatePaneInDirection", "Down"],
       "alt-super-k": ["workspace::ActivatePaneInDirection", "Up"],
       "alt-super-l": ["workspace::ActivatePaneInDirection", "Right"],
-      "ctrl-shift-w": "pane::CloseActiveItem"
+      "alt-w": "pane::CloseActiveItem"
     }
   },
   {
