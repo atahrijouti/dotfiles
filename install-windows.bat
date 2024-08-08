@@ -85,8 +85,6 @@ winget install -e --id CoreyButler.NVMforWindows
 
 winget install -e --id Telegram.TelegramDesktop
 winget install -e --id KeePassXCTeam.KeePassXC
-winget install -e --id Dropbox.Dropbox
-winget install -e --id Parsec.Parsec
 winget install -e --id Valve.Steam
 winget install -e --id Spotify.Spotify
 winget install -e --id WhatsApp.WhatsApp
