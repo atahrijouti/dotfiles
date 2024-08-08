@@ -8,7 +8,6 @@ setx MSYS winsymlinks:nativestrict
 setx MSYS2_PATH_TYPE inherit
 
 @REM helps MSYS2 set $HOME to the windows user directory
-setx HOME %USERPROFILE%
 setx HELIX_RUNTIME %USERPROFILE%\programs\helix\runtime
 
 
