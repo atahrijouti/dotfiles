@@ -45,6 +45,7 @@
       "c": "vim::Substitute",
       "alt-d": ["workspace::SendKeystrokes", "\"_d"],
       "alt-c": ["workspace::SendKeystrokes", "\"_c"],
+      "%": "editor::SelectAll",
       "U": "editor::Redo",
       "x": "editor::SelectLine",
       "g e": "vim::EndOfDocument",

@@ -1,7 +1,7 @@
 {
   "theme": {
-    "mode": "dark",
-    "light": "My Cyan Light",
+    "mode": "system",
+    "light": "Cyan Light",
     "dark": "One Dark"
   },
   "vim_mode": true,

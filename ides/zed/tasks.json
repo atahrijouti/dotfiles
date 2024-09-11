@@ -4,14 +4,5 @@
   {
     "label": "Open lazygit",
     "command": "lazygit"
-  },
-  {
-    "label": "Windows Terminal",
-    "shell": {
-      "with_arguments": {
-        "program": "cmd",
-        "arguments": ["--login"]
-      }
-    }
   }
 ]
