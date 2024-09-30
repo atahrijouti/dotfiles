@@ -16,6 +16,12 @@
     }
   },
   {
+    "context": "ProjectPanel",
+    "bindings": {
+      "alt-1": "workspace::ToggleLeftDock"
+    }
+  },
+  {
     "context": "vim_mode == normal",
     "bindings": {
       "d": "vim::DeleteRight",
