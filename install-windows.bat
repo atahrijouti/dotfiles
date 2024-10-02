@@ -115,3 +115,5 @@ winget install -e --id WinSCP.WinSCP
 winget install -e --id OpenRA.OpenRA
 winget install -e --id WireGuard.WireGuard
 winget install -e --id NickeManarin.ScreenToGif
+winget install -e --id Microsoft.PowerToys
+winget install -e --id Logseq.Logseq
