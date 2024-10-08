@@ -36,6 +36,9 @@ mklink "%USERPROFILE%\.bash_profile" "%DOTFILES%\windows\msys_shell\.bash_profil
 mklink "%USERPROFILE%\.bash_functions" "%DOTFILES%\windows\msys_shell\.bash_functions"
 mklink "%USERPROFILE%\.bash_aliases" "%DOTFILES%\windows\msys_shell\.bash_aliases"
 
+mklink "%USERPROFILE%\.zshrc" "%DOTFILES%\shell\zsh\.zshrc.windows"
+mklink "%USERPROFILE%\.starship-msys2-init-zsh" "%DOTFILES%\shell\zsh\.starship-msys2-init-zsh"
+
 REM Emacs
 mklink /d "%HOME%\.emacs.d" "%DOTFILES%\ides\emacs"
 
