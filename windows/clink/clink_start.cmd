@@ -19,3 +19,5 @@ doskey ffprobe=ffprobe -hide_banner $*
 @REM doskey cd=cd %USERPROFILE%
 doskey lf=lfcd
 doskey ~=cd %homepath%
+doskey msyshere=C:/msys64/msys2_shell.cmd -defterm -here -no-start -msys
+doskey ucrthere=C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64
