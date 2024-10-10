@@ -7,6 +7,8 @@ ZSH_THEME=""
 plugins=(git zsh-lazyload)
 source $ZSH/oh-my-zsh.sh
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Starship Prompt
 eval "$(starship init zsh)"
 
@@ -26,10 +28,10 @@ lazyload brew -- lazy_load_brew
 
 
 # Rbenv
-lazy_load_rbenv() {
+# lazy_load_rbenv() {
     eval "$(rbenv init - zsh)"
-}
-lazyload rbenv -- lazy_load_rbenv
+# }
+# lazyload rbenv -- lazy_load_rbenv
 
 # SDKMan
 # [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
