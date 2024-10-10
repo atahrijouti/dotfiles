@@ -3,7 +3,7 @@
     "bindings": {
       "ctrl-f12": "terminal_panel::ToggleFocus",
       "ctrl-f11": ["task::Spawn", { "task_name": "Windows Terminal" }],
-      "f10": ["task::Spawn", { "task_name": "Run project" }],
+      "ctrl-shift-r": ["task::Spawn", { "task_name": "Run project" }],
       "alt-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "super-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "alt-1": "project_panel::ToggleFocus",
