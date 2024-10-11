@@ -37,6 +37,14 @@
   },
   // "soft_wrap": "editor_width",
   "format_on_save": "on",
+  "lsp": {
+    "solargraph": {
+      "initialization_options": {
+        "diagnostics": true,
+        "formatting": true
+      }
+    }
+  },
   "languages": {
     "Lua": {
       "formatter": {
