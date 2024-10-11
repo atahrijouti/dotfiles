@@ -26,7 +26,10 @@
     "bindings": {
       "d": "vim::DeleteRight",
       "z c": "editor::Fold",
-      "z o": "editor::UnfoldLines"
+      "z o": "editor::UnfoldLines",
+      "space r": "editor::Rename",
+      "space k": "editor::Hover",
+      "space a": "editor::ToggleCodeActions"
     }
   },
   {
