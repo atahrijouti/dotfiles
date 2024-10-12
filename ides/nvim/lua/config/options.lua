@@ -4,7 +4,9 @@ vim.g.maplocalleader = " "
 vim.g.neovide_cursor_animation_length = 0
 vim.o.guifont = "JetBrainsMono Nerd Font:h10"
 
-vim.api.nvim_exec("language en_US", true)
+if vim.fn.has('win32') then
+  vim.api.nvim_exec("language en_US", true)
+end
 
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
