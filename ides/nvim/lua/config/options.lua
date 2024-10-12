@@ -4,7 +4,7 @@ vim.g.maplocalleader = " "
 vim.g.neovide_cursor_animation_length = 0
 vim.o.guifont = "JetBrainsMono Nerd Font:h10"
 
-if vim.fn.has('win32') then
+if vim.fn.has('win32') == 1 then
   vim.api.nvim_exec("language en_US", true)
 end
 
