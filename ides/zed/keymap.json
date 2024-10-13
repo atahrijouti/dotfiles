@@ -29,7 +29,9 @@
       "z o": "editor::UnfoldLines",
       "space r": "editor::Rename",
       "space k": "editor::Hover",
-      "space a": "editor::ToggleCodeActions"
+      "space a": "editor::ToggleCodeActions",
+      "shift-c": "editor::AddSelectionBelow",
+      ",": "editor::Cancel"
     }
   },
   {

@@ -5,7 +5,9 @@
     "dark": "One Dark"
   },
   "vim_mode": true,
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_size": 17,
+  "buffer_font_weight": 500,
   "telemetry": {
     "diagnostics": false,
     "metrics": false
