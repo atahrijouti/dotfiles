@@ -18,7 +18,8 @@
   {
     "context": "ProjectPanel",
     "bindings": {
-      "alt-1": "workspace::ToggleLeftDock"
+      "alt-1": "workspace::ToggleLeftDock",
+      "super-1": "workspace::ToggleLeftDock",
     }
   },
   {
