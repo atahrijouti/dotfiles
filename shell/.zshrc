@@ -1,47 +1,31 @@
-# Shell
-set -o emacs
+HISTFILE=~/.zsh_history
+HISTSIZE=999999999
+SAVEHIST=999999999
+unsetopt beep
+bindkey -e
 
-# Oh-My-Zsh
-export ZSH="/Users/atahrijouti/.oh-my-zsh"
-ZSH_THEME=""
-plugins=(git zsh-lazyload)
-source $ZSH/oh-my-zsh.sh
+zstyle :compinstall filename "$HOME/.zshrc"
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+autoload -Uz compinit
+compinit
 
-# Starship Prompt
-eval "$(starship init zsh)"
+zstyle ':completion:*' menu select
 
-# Lazy Load
+autoload -Uz compinit
+compinit
 
-# Homebrew
-lazy_load_brew() {
-    if type brew &>/dev/null
-    then
-        FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+# Brew
+[ -s "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-        autoload -Uz compinit
-        compinit
-    fi
-}
-lazyload brew -- lazy_load_brew
-
+# Starship
+[ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
 
 # Rbenv
-# lazy_load_rbenv() {
-    eval "$(rbenv init - zsh)"
-# }
-# lazyload rbenv -- lazy_load_rbenv
-
-# SDKMan
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[ -x "$(command -v rbenv)" ] && eval "$(rbenv init - zsh)"
 
 # Jabba
-lazy_load_jabba() {
-    [ -s "$JABBA_HOME/jabba.sh" ] && source "$JABBA_HOME/jabba.sh"
-}
-lazyload jabba -- lazy_load_jabba
-# Lazy Load end
+[ -s "$JABBA_HOME/jabba.sh" ] && source "$JABBA_HOME/jabba.sh"
 
 # NVM
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
@@ -50,27 +34,8 @@ if [ -s "$HOME/.nvm/nvm.sh" ]; then
     . "$NVM_DIR/bash_completion"
 fi
 
-# Lf
+[ -s "$HOME/.zsh_aliases" ] && \. "$HOME/.zsh_aliases"
 
-lfcd () {
-    tmp="$(mktemp)"
-    # `command` is needed in case `lfcd` is aliased to `lf`
-    command lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
-            fi
-        fi
-    fi
-}
-alias lf=lfcd
-
-#aliases
-alias ls="ls -F --color"
-alias love="/Applications/love.app/Contents/MacOS/love"
-alias prettier.cmd="prettier"
-
-# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# Better word navigation
+autoload -U select-word-style
+select-word-style bash
