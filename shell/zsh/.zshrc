@@ -11,11 +11,15 @@ compinit
 
 zstyle ':completion:*' menu select
 
-autoload -Uz compinit
-compinit
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # Brew
-[ -s "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ -s "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    # source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Starship
