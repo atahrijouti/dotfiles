@@ -11,17 +11,28 @@ compinit
 
 zstyle ':completion:*' menu select
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+autoload -Uz compinit
+compinit
+
+# Brew
+[ -s "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Starship
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
 
+# Rbenv
 [ -x "$(command -v rbenv)" ] && eval "$(rbenv init - zsh)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" 
+# Jabba
+[ -s "$JABBA_HOME/jabba.sh" ] && source "$JABBA_HOME/jabba.sh"
+
+# NVM
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+    export NVM_DIR="$HOME/.nvm"
+    . $NVM_DIR/nvm.sh
+    . "$NVM_DIR/bash_completion"
+fi
 
 [ -s "$HOME/.zsh_aliases" ] && \. "$HOME/.zsh_aliases"
 
