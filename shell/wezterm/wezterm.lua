@@ -25,4 +25,8 @@ if wezterm.hostname() == "Silver-Pond" then
   require("overrides.machine.silver-pond").run(config)
 end
 
+if wezterm.hostname() == "Saphire-Tower" then
+  require("overrides.machine.saphire-tower").run(config)
+end
+
 return config
