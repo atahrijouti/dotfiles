@@ -18,9 +18,9 @@ if [ -s "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
     source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     # source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Starship
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
