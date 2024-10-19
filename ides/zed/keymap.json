@@ -19,7 +19,13 @@
     "context": "ProjectPanel",
     "bindings": {
       "alt-1": "workspace::ToggleLeftDock",
-      "super-1": "workspace::ToggleLeftDock",
+      "super-1": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "alt-s": "search::ToggleSelection"
     }
   },
   {
