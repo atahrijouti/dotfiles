@@ -25,7 +25,8 @@
   {
     "context": "BufferSearchBar",
     "bindings": {
-      "alt-s": "search::ToggleSelection"
+      "alt-s": "search::ToggleSelection",
+      "alt-r": "search::ToggleRegex"
     }
   },
   {
