@@ -29,7 +29,6 @@
   "file_types": {
     "JSONC": ["~/AppData/Roaming/Zed/**/*.json"]
   },
-  // "soft_wrap": "editor_width",
   "format_on_save": "on",
   "lsp": {
     "solargraph": {
