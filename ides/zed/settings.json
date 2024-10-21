@@ -6,7 +6,7 @@
   },
   "vim_mode": true,
   "buffer_font_family": "JetBrains Mono",
-  "buffer_font_size": 17,
+  "buffer_font_size": 14,
   "buffer_font_weight": 500,
   "telemetry": {
     "diagnostics": false,
@@ -29,14 +29,14 @@
   "file_types": {
     "JSONC": ["~/AppData/Roaming/Zed/**/*.json"]
   },
-  "terminal": {
-    "shell": {
-      "with_arguments": {
-        "program": "cmd.exe",
-        "args": ["/k"]
-      }
-    }
-  },
+  // "terminal": {
+  //   "shell": {
+  //     "with_arguments": {
+  //       "program": "cmd.exe",
+  //       "args": ["/k"]
+  //     }
+  //   }
+  // },
   // "soft_wrap": "editor_width",
   "format_on_save": "on",
   "lsp": {
