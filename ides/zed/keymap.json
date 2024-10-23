@@ -32,6 +32,8 @@
   {
     "context": "vim_mode == normal",
     "bindings": {
+      "g r": "editor::FindAllReferences",
+      "g _": "outline::Toggle",
       "d": "vim::DeleteRight",
       "z c": "editor::Fold",
       "z o": "editor::UnfoldLines",
