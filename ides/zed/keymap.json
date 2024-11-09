@@ -59,6 +59,12 @@
     }
   },
   {
+    "context": "vim_mode == insert || vim_mode == normal",
+    "bindings": {
+      "alt-p": "editor::ShowSignatureHelp"
+    }
+  },
+  {
     "context": "vim_mode == normal || vim_mode == visual",
     "bindings": {
       "alt-o": "editor::SelectLargerSyntaxNode",
