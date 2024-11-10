@@ -2,7 +2,7 @@
   "theme": {
     "mode": "system",
     "light": "My Cyan Light",
-    "dark": "One Dark"
+    "dark": "JetBrains New Dark"
   },
   "vim_mode": true,
   "buffer_font_family": "JetBrains Mono",
