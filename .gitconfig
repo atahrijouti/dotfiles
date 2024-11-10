@@ -1,0 +1,3 @@
+[filter "ignore-section"]
+	clean = "sed \"/\\/\\/ gitignore:start/,/\\/\\/ gitignore:end/ { /\\/\\/ gitignore:start/b; /\\/\\/ gitignore:end/b; d; }\""
+	smudge = cat
