@@ -38,6 +38,10 @@ if [ -s "$HOME/.nvm/nvm.sh" ]; then
     . "$NVM_DIR/bash_completion"
 fi
 
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# ATJ
 [ -s "$HOME/.zsh_aliases" ] && \. "$HOME/.zsh_aliases"
 
 # Better word navigation
@@ -47,3 +51,5 @@ select-word-style bash
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
+
+
