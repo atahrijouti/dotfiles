@@ -15,6 +15,7 @@
   "tab_bar": {
     "show": false
   },
+  "show_wrap_guides": true,
   "toolbar": {},
   "autosave": "on_window_change",
   "git": {

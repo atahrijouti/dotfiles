@@ -1,5 +1,5 @@
 
-theme = "cyan_light"
+theme = "my_cyan_light"
 
 [editor]
 cursorline = true
