@@ -5,7 +5,7 @@ export HELIX_RUNTIME="$HOME/source/helix/runtime"
 
 export BUN_INSTALL="$HOME/.bun"
 
-. "$HOME/.cargo/env"
+[ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 
 export NVM_DIR="$HOME/.nvm"
 
