@@ -1,8 +1,6 @@
 export EDITOR="hx"
 export DOTFILES="$HOME/source/dotfiles"
 
-export HELIX_RUNTIME="$HOME/source/helix/runtime"
-
 export BUN_INSTALL="$HOME/.bun"
 
 [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
