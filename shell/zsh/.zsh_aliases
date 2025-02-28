@@ -14,4 +14,3 @@ alias grep='grep --color=auto'
 alias ip='ip -color=auto'
 export LESS='-R --use-color -Dd+r$Du+b$'
 alias love="/Applications/love.app/Contents/MacOS/love"
-alias prettier.cmd="prettier"

@@ -8,10 +8,10 @@
       "super-9": ["task::Spawn", { "task_name": "Open lazygit" }],
       "alt-1": "project_panel::ToggleFocus",
       "super-1": "project_panel::ToggleFocus",
-      "alt-super-h": ["workspace::ActivatePaneInDirection", "Left"],
-      "alt-super-j": ["workspace::ActivatePaneInDirection", "Down"],
-      "alt-super-k": ["workspace::ActivatePaneInDirection", "Up"],
-      "alt-super-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "alt-super-h": "workspace::ActivatePaneLeft",
+      "alt-super-j": "workspace::ActivatePaneDown",
+      "alt-super-k": "workspace::ActivatePaneUp",
+      "alt-super-l": "workspace::ActivatePaneRight",
       "alt-w": "pane::CloseActiveItem"
     }
   },
@@ -48,7 +48,7 @@
     "context": "vim_mode == visual",
     "bindings": {
       "d": "vim::VisualDelete",
-      ",": ["vim::SwitchMode", "Normal"]
+      ",": "vim::SwitchToNormalMode"
     }
   },
   {
@@ -87,6 +87,7 @@
   {
     "context": "Terminal",
     "bindings": {
+      "ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
       "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
       "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"]
     }
