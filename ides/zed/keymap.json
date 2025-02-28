@@ -9,9 +9,13 @@
       "alt-1": "project_panel::ToggleFocus",
       "super-1": "project_panel::ToggleFocus",
       "alt-super-h": "workspace::ActivatePaneLeft",
+      "alt-super-shift-h": "vim::ResizePaneLeft",
       "alt-super-j": "workspace::ActivatePaneDown",
+      "alt-super-shift-j": "vim::ResizePaneDown",
       "alt-super-k": "workspace::ActivatePaneUp",
+      "alt-super-shift-k": "vim::ResizePaneUp",
       "alt-super-l": "workspace::ActivatePaneRight",
+      "alt-super-shift-l": "vim::ResizePaneRight",
       "alt-w": "pane::CloseActiveItem"
     }
   },
