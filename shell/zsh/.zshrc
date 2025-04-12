@@ -11,7 +11,13 @@ compinit
 
 setopt hist_ignore_all_dups
 
+# Better word navigation
+autoload -U select-word-style
+select-word-style bash
 
+bindkey  "^[[H"   beginning-of-line
+bindkey  "^[[F"   end-of-line
+bindkey  "^[[3~"  delete-char
 
 zstyle ':completion:*' menu select
 
@@ -47,13 +53,4 @@ fi
 
 # ATJ
 [ -s "$HOME/.zsh_aliases" ] && \. "$HOME/.zsh_aliases"
-
-# Better word navigation
-autoload -U select-word-style
-select-word-style bash
-
-bindkey  "^[[H"   beginning-of-line
-bindkey  "^[[F"   end-of-line
-bindkey  "^[[3~"  delete-char
-
 
