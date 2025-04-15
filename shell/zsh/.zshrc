@@ -1,14 +1,14 @@
+# History
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=999999999
+
+# Options
 unsetopt beep
-bindkey -e
-
-zstyle :compinstall filename "$HOME/.zshrc"
-
 setopt hist_ignore_all_dups
 
-# Better word navigation
+# Keybindings
+bindkey -e
 autoload -U select-word-style
 select-word-style bash
 
@@ -16,19 +16,26 @@ bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 bindkey  "^[[3~"  delete-char
 
+# Completion
+zstyle :compinstall filename "$HOME/.zshrc"
 zstyle ':completion:*' menu select
+
+# fpath
+fpath=($HOME/.local/share/zsh/site-functions $fpath)
+
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # Brew
-if [ -s "/opt/homebrew/bin/brew" ]; then
+if [ -x "$(command -v brew)" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    # source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+    fpath=($(brew --prefix)/share/zsh/site-functions $(brew --prefix)/share/zsh-completions $fpath)
 fi
 
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+.
 autoload -Uz compinit
 compinit
 
@@ -44,13 +51,11 @@ compinit
 # NVM
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
     export NVM_DIR="$HOME/.nvm"
-    . $NVM_DIR/nvm.sh
-    . "$NVM_DIR/bash_completion"
+    source $NVM_DIR/nvm.sh
+    source "$NVM_DIR/bash_completion"
 fi
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# ATJ
-[ -s "$HOME/.zsh_aliases" ] && \. "$HOME/.zsh_aliases"
+# Aliases
+[ -s "$HOME/.zsh_aliases" ] && source "$HOME/.zsh_aliases"
 
