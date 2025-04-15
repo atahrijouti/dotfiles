@@ -35,7 +35,7 @@ fi
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-.
+
 autoload -Uz compinit
 compinit
 
