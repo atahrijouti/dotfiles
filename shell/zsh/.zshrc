@@ -6,9 +6,6 @@ bindkey -e
 
 zstyle :compinstall filename "$HOME/.zshrc"
 
-autoload -Uz compinit
-compinit
-
 setopt hist_ignore_all_dups
 
 # Better word navigation
@@ -29,8 +26,11 @@ if [ -s "/opt/homebrew/bin/brew" ]; then
     source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     # source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 fi
 
+autoload -Uz compinit
+compinit
 
 # Starship
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
