@@ -30,7 +30,6 @@ zstyle ':completion:*' menu select
 
 fpath=(
     $HOME/.local/share/zsh/site-functions
-    $HOME/.bun/_bun
     $fpath
 )
 
@@ -41,6 +40,13 @@ compinit
 
 # Starship
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
+
+# Bun
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# fzf
+[ -x "$(command -v fzf)" ] && source <(fzf --zsh)
+
 
 # Rbenv
 [ -x "$(command -v rbenv)" ] && eval "$(rbenv init - zsh)"
