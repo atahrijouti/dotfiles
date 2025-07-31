@@ -1,6 +1,8 @@
 (require 'atj-ui)
 
-(require 'atj-modal)
+; (require 'atj-modal)
+
+(require 'atj-helix)
 
 (require 'atj-completions)
 
@@ -17,4 +19,3 @@
 
 
 (provide 'atj-packages)
-

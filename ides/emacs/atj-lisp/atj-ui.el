@@ -1,12 +1,20 @@
 (use-package diminish)
 
-(use-package doom-themes)
+(use-package doom-themes
+  :ensure t)
 
 (use-package auto-dark
+  :ensure t
   :diminish
   :config
-  (setq auto-dark-dark-theme 'doom-nord-aurora)
-  (setq auto-dark-light-theme 'doom-nord-light)
+  (setq custom-safe-themes
+    '(
+      "3b8713240ad8a387afc4ca9033d2df9abb2fd32b0ce09a4159169878067327e6"
+      "0b2c80b52629015e3b52d7406ffb0b82f9c10dce5113c9a46bb42653914f1d05"
+      default
+    )
+  )
+  (setq auto-dark-themes '((doom-nord-aurora) (doom-nord-light)))
   (setq auto-dark-allow-osascript t)
   (auto-dark-mode t))
 
