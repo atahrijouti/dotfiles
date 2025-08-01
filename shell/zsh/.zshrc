@@ -64,3 +64,6 @@ fi
 # Aliases
 [ -s "$HOME/.zsh_aliases" ] && source "$HOME/.zsh_aliases"
 
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
