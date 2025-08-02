@@ -59,11 +59,16 @@
    (">" kakoune-indent-right)
    ("<" kakoune-indent-left)
 
-   ("g h" beginning-of-line)
-   ("g s" back-to-indentation)
-   ("g l" end-of-line)
-   ("g g" beginning-of-buffer)
-   ("g e" end-of-buffer)
+   ;; g map
+   ("g"
+     (
+       ("h" beginning-of-line)
+       ("s" back-to-indentation)
+       ("l" end-of-line)
+       ("g" beginning-of-buffer)
+       ("e" end-of-buffer)
+     )
+   )
 
    ;; Space map
    ("SPC"
