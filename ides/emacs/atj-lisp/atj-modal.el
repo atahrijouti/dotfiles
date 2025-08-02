@@ -10,26 +10,27 @@
   :commands ryo-modal-mode
   :bind ("C-c SPC" . ryo-modal-mode)
   :config
-  
+
   (require 'kakoune-utils)
-  
+
   (define-key ryo-modal-mode-map [remap self-insert-command] 'undefined)
 
-  
+  (global-subword-mode 1)
+
   (ryo-modal-keys
    (:mc-all t)
    ("h" backward-char :first '(kakoune-deactivate-mark))
    ("j" next-line :first '(kakoune-deactivate-mark))
    ("k" previous-line :first '(kakoune-deactivate-mark))
    ("l" forward-char :first '(kakoune-deactivate-mark))
-   
+
    ("b" kakoune-backward-same-syntax :first '(kakoune-set-mark-here) :mc-all t)
    ;; ("B" kakoune-backward-same-syntax :first '(kakoune-set-mark-if-inactive) :mc-all t)
    ("w" forward-same-syntax :first '(kakoune-set-mark-here) :mc-all t)
    ;; ("W" forward-same-syntax :first '(kakoune-set-mark-if-inactive) :mc-all t))
-   
+
    ("u" undo-tree-undo)
-   ("U" undo-tree-redo)   
+   ("U" undo-tree-redo)
 
    ("." ryo-modal-repeat)
 
@@ -38,12 +39,14 @@
    ("a" forward-char :exit t)
    ("A" move-end-of-line :exit t)
 
-   ("O"  move-beginning-of-line :then '(open-line))
-   ("o" kakoune-o)
-   
+   ("o" kakoune-o :exit t)
+   ("O" kakoune-O :exit t)
+
    ("v"  set-mark-command)
 
-   ("x"  kakoune-x)
+   ("x" kakoune-x)
+   ("X" kakoune-X)
+   ("%" mark-whole-buffer)
 
    ("y"  kill-ring-save)
    ("p"  yank)
@@ -52,7 +55,9 @@
    ("c" kakoune-d :exit t)
    ("r" kakoune-replace-char)
    ("R" kakoune-replace-selection)
-   
+
+   (">" kakoune-indent-right)
+   ("<" kakoune-indent-left)
 
    ("g h" beginning-of-line)
    ("g s" back-to-indentation)
@@ -93,7 +98,7 @@
 
 (defun atj/modal-text-prog-hook ()
   (ryo-modal-mode)
-   
+
 )
 
 
