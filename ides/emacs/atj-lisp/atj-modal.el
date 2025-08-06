@@ -67,6 +67,7 @@
        ("l" end-of-line)
        ("g" beginning-of-buffer)
        ("e" end-of-buffer)
+       ("f" find-file-at-point)
      )
    )
 
