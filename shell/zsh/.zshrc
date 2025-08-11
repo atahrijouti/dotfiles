@@ -30,6 +30,7 @@ zstyle ':completion:*' menu select
 
 fpath=(
     $HOME/.local/share/zsh/site-functions
+    $HOME/.zfunc
     $fpath
 )
 
