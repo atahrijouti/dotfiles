@@ -52,8 +52,8 @@ compinit
 # Rbenv
 [ -x "$(command -v rbenv)" ] && eval "$(rbenv init - zsh)"
 
-# Jabba
-[ -s "$JABBA_HOME/jabba.sh" ] && source "$JABBA_HOME/jabba.sh"
+# SKMan
+[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # NVM
 if [ -s "$HOME/.nvm/nvm.sh" ]; then
