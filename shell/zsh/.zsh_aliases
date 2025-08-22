@@ -17,3 +17,6 @@ alias love="/Applications/love.app/Contents/MacOS/love"
 
 alias rm="rm -Iv"
 alias mv="mv -i"
+
+alias ffmpeg='ffmpeg -hide_banner'
+alias ffprobe='ffprobe -hide_banner'
