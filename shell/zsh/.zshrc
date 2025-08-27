@@ -62,6 +62,11 @@ if [ -s "$HOME/.nvm/nvm.sh" ]; then
     source "$NVM_DIR/bash_completion"
 fi
 
+if [ -d "$HOME/Applications/Emacs.app/Contents/MacOS/bin" ]; then
+    echo "I did find Emacs.app"
+  export PATH="$HOME/Applications/Emacs.app/Contents/MacOS/bin:$PATH"
+fi
+
 # Aliases
 [ -s "$HOME/.zsh_aliases" ] && source "$HOME/.zsh_aliases"
 
