@@ -14,6 +14,7 @@
 
 (use-package dashboard
   :init
+  (setq dashboard-display-icons-p t)
   (setq initial-buffer-choice 'dashboard-open)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-projects-backend 'project-el)
