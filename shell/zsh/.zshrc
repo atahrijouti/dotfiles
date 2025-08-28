@@ -63,7 +63,6 @@ if [ -s "$HOME/.nvm/nvm.sh" ]; then
 fi
 
 if [ -d "$HOME/Applications/Emacs.app/Contents/MacOS/bin" ]; then
-    echo "I did find Emacs.app"
   export PATH="$HOME/Applications/Emacs.app/Contents/MacOS/bin:$PATH"
 fi
 
