@@ -1,6 +1,6 @@
 (require 'atj-ui)
 
-;; (require 'atj-modal)
+;; (require 'atj-ryo)
 ;; (require 'atj-helix)
 
 (require 'atj-ui-completion)

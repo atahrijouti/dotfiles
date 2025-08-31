@@ -111,4 +111,4 @@
 (add-hook 'text-mode-hook #'atj/modal-text-prog-hook)
 (add-hook 'prog-mode-hook #'atj/modal-text-prog-hook)
 
-(provide 'atj-modal)
+(provide 'atj-ryo)
