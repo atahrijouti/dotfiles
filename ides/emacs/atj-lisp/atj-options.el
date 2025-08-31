@@ -49,12 +49,18 @@
       "Function for `switch-to-prev-buffer-skip'."
       (string-match "\\*[^*]+\\*" (buffer-name buffer)))
     (setq switch-to-prev-buffer-skip 'skip-these-buffers)
+	
 
+    (defun atj/set-font (&optional frame)
+        (with-selected-frame (or frame (selected-frame))
+          (set-face-attribute 'default nil
+                              :family "JetBrainsMono NF"
+                              :height 100)))
+      
+      (add-hook 'after-make-frame-functions #'my/set-font)
 
-    (set-face-attribute 'default nil :family "JetBrainsMono NF Font"  :height 100)
-    ; (when (eq system-type 'darwin)
-    ;   (setq mac-command-modifier 'meta)
-    ;   (set-face-attribute 'default nil :family "JetBrainsMono Nerd Font" :height 130))
+      (when (display-graphic-p)
+        (my/set-font))
 
     (setq custom-file (locate-user-emacs-file "custom-vars.el"))
     (load custom-file 'noerror 'nomessage)
@@ -83,5 +89,10 @@
     (modify-coding-system-alist 'file "" 'utf-8)
 
   )
+
+
+
+
+
 
 (provide 'atj-options)
