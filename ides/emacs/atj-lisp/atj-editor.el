@@ -34,8 +34,10 @@
   :hook (after-init . avy-setup-default)
   :config (setq avy-all-windows nil
                 avy-all-windows-alt t
-		avy-keys (number-sequence ?a ?z)
-                avy-style 'at-full)
+				avy-keys (number-sequence ?a ?z)
+                avy-style 'at-full
+				;; avy-style 'de-bruijn
+		  )
 )
 
 (use-package multiple-cursors)
