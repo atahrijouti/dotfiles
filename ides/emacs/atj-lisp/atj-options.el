@@ -49,21 +49,21 @@
       "Function for `switch-to-prev-buffer-skip'."
       (string-match "\\*[^*]+\\*" (buffer-name buffer)))
     (setq switch-to-prev-buffer-skip 'skip-these-buffers)
-	
 
     (defun atj/set-font (&optional frame)
         (with-selected-frame (or frame (selected-frame))
           (set-face-attribute 'default nil
                               :family "JetBrainsMono NF"
                               :height 100)))
-      
-      (add-hook 'after-make-frame-functions #'my/set-font)
 
-      (when (display-graphic-p)
-        (my/set-font))
+    (add-hook 'after-make-frame-functions #'atj/set-font)
 
-    (setq custom-file (locate-user-emacs-file "custom-vars.el"))
-    (load custom-file 'noerror 'nomessage)
+    (when (display-graphic-p)
+      (atj/set-font))
+
+    (setq custom-file (expand-file-name "custom-vars.el" user-emacs-directory))
+    (when (file-exists-p custom-file)
+      (load custom-file))
 
     (set-display-table-slot standard-display-table 'vertical-border (make-glyph-code ?│))
 
