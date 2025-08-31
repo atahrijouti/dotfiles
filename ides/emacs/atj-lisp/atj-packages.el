@@ -1,10 +1,9 @@
 (require 'atj-ui)
 
-(require 'atj-modal)
+;; (require 'atj-modal)
+;; (require 'atj-helix)
 
-; (require 'atj-helix)
-
-(require 'atj-completions)
+(require 'atj-ui-completion)
 
 (require 'atj-project)
 

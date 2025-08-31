@@ -59,5 +59,5 @@
 )
 
 
-(provide 'atj-completions)
+(provide 'atj-ui-completion)
 
