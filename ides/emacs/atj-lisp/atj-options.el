@@ -56,12 +56,11 @@
               "JetBrainsMono Nerd Font"
               "JetBrainsMono NF"))
 
+    (setq atj/font-height (if (eq system-type 'darwin) 130 100))
 
     (defun atj/set-font (&optional frame)
         (with-selected-frame (or frame (selected-frame))
-          (set-face-attribute 'default nil
-                              :family "JetBrainsMono NF"
-                              :height 100)))
+          (set-face-attribute 'default nil :family atj/font-family :height atj/font-height)))
 
     (add-hook 'after-make-frame-functions #'atj/set-font)
 
