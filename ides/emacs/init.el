@@ -1,5 +1,4 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/lisp/machine-overrides/")
 (add-to-list 'load-path "~/.emacs.d/lisp/vendor/")
 
 (require 'elpaca-installer)
