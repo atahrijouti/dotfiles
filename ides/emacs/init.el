@@ -1,6 +1,6 @@
-(add-to-list 'load-path "~/.emacs.d/atj-lisp/")
-(add-to-list 'load-path "~/.emacs.d/atj-machine-specific/")
-(add-to-list 'load-path "~/.emacs.d/vendor/kakoune.el")
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(add-to-list 'load-path "~/.emacs.d/lisp/machine-overrides/")
+(add-to-list 'load-path "~/.emacs.d/lisp/vendor/")
 
 (require 'elpaca-installer)
 
@@ -10,7 +10,4 @@
 
 (require 'atj-keymap)
 
-(pcase system-name
-  ("SAPHIRE-TOWER" (require 'atj-machine-saphire-tower))
-  ("Silver-Pond" (require 'atj-machine-silver-pond))
-)
+(require 'atj-overrides)
