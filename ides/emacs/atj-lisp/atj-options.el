@@ -50,6 +50,13 @@
       (string-match "\\*[^*]+\\*" (buffer-name buffer)))
     (setq switch-to-prev-buffer-skip 'skip-these-buffers)
 
+
+    (setq atj/font-family
+          (if (eq system-type 'darwin)
+              "JetBrainsMono Nerd Font"
+              "JetBrainsMono NF"))
+
+
     (defun atj/set-font (&optional frame)
         (with-selected-frame (or frame (selected-frame))
           (set-face-attribute 'default nil
