@@ -3,6 +3,4 @@
 !/early-init.el
 !/init.el
 !/custom-vars.el
-!/atj-lisp/
-!/atj-machine-specific/
-!/vendor/
+!/lisp/
