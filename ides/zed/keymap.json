@@ -87,6 +87,7 @@
       "g l": "vim::EndOfLine",
       "g s": "vim::FirstNonWhitespace",
       "g h": "vim::StartOfLine",
+      "shift-r": "editor::Paste",
       "space R": "editor::Paste",
       "space w": "workspace::Save",
       "space f": "file_finder::Toggle"
