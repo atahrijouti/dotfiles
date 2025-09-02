@@ -1,3 +1,3 @@
-(set-face-attribute 'default nil :font "JetBrainsMono NF")
+(setq atj/font-family "JetbrainsMono NF")
 
 (provide 'atj-machine-saphire-tower)

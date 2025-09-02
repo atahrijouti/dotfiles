@@ -49,6 +49,7 @@
     (setq switch-to-prev-buffer-skip 'skip-these-buffers)
 
     (defun atj/set-font (&optional frame)
+      (message "%s,%s" atj/font-family atj/font-height)
       (with-selected-frame
         (or frame (selected-frame))
         (set-face-attribute 'default nil :family atj/font-family :height atj/font-height)))

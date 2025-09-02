@@ -6,7 +6,10 @@
 )
 
 (if (eq system-type 'darwin)
-  (setq atj/font-height 130)
+   (progn
+     (setq atj/font-height 130)
+     (setq atj/font-family "JetBrainsMono Nerd Font")
+   )
 )
 
 (provide 'atj-overrides)
