@@ -6,8 +6,8 @@
 
 (require 'atj-options)
 
+(require 'atj-overrides)
+
 (require 'atj-packages)
 
 (require 'atj-keymap)
-
-(require 'atj-overrides)
