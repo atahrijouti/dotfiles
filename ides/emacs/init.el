@@ -1,7 +1,8 @@
 (add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/lisp/vendor/")
 
 (require 'elpaca-installer)
+
+(require 'atj-vendor)
 
 (require 'atj-options)
 
