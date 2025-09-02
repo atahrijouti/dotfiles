@@ -1,12 +1,11 @@
 (use-package emacs
   :ensure nil
+
   :custom
     (column-number-mode t)
     (auto-save-default nil)
     (create-lockfiles nil)
     (delete-by-moving-to-trash t)
-    (delete-selection-mode 1)
-    (display-line-numbers-type t)
     (global-auto-revert-non-file-buffers t)
     (history-length 25)
     (inhibit-startup-message t)
@@ -21,7 +20,6 @@
     (tab-always-indent 'complete)
     (tab-width 4)
     (treesit-font-lock-level 4)
-    (truncate-lines t)
     (use-dialog-box nil)
     (use-short-answers t)
     (warning-minimum-level :emergency)
@@ -53,10 +51,7 @@
     (defun atj/set-font (&optional frame)
       (with-selected-frame
         (or frame (selected-frame))
-        (set-face-attribute 'default nil :family atj/font-family :height atj/font-height)
-      )
-    )
-
+        (set-face-attribute 'default nil :family atj/font-family :height atj/font-height)))
     (add-hook 'after-make-frame-functions #'atj/set-font)
 
     (when (display-graphic-p)
@@ -72,23 +67,33 @@
     (tool-bar-mode t)
     (menu-bar-mode t)
 
-    (when scroll-bar-mode
+    (when (fboundp 'scroll-bar-mode)
       (scroll-bar-mode -1))
 
     (global-visual-line-mode 1)
     (global-hl-line-mode -1)
     (global-auto-revert-mode 1)
-    (indent-tabs-mode -1)
+
+    (setq-default indent-tabs-mode nil)
+
+    (delete-selection-mode 1)
+
+    (setq-default truncate-lines t)
+
     (recentf-mode 1)
+    (setq recentf-max-saved-items 200
+          recentf-auto-cleanup 'never)
+
     (savehist-mode 1)
+    (setq savehist-additional-variables
+          '(kill-ring search-ring regexp-search-ring))
+
     (save-place-mode 1)
     (winner-mode 1)
     (xterm-mouse-mode 1)
     (file-name-shadow-mode 1)
 
-
     (modify-coding-system-alist 'file "" 'utf-8)
-
-  )
+)
 
 (provide 'atj-emacs)
