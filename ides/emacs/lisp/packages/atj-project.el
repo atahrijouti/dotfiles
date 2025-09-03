@@ -39,4 +39,7 @@
 
 (use-package ripgrep)
 
+(use-package transient :ensure t)
+(use-package magit :after(transient) :ensure t)
+
 (provide 'atj-project)
