@@ -4,9 +4,7 @@
 
 (require 'atj-ui)
 
-;; (require 'atj-ryo)
-;; (require 'atj-helix)
-(require 'atj-evil)
+(require 'atj-modal)
 
 (require 'atj-ui-completion)
 
