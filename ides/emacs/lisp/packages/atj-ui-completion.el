@@ -3,14 +3,15 @@
   (vertico-mode)
   (setq vertico-cycle t)
   (setq vertico-resize 1)
-  )
+ )
 
 (use-package marginalia
   :after vertico
   :bind (:map minibuffer-local-map
          ("M-A" . marginalia-cycle))
   :init
-  (marginalia-mode))
+  (marginalia-mode)
+)
 
 
 (use-package consult)
