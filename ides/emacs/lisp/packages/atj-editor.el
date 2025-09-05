@@ -1,3 +1,6 @@
+(use-package format-all
+  :ensure t)
+
 (use-package autorevert
   :ensure nil
   :diminish
