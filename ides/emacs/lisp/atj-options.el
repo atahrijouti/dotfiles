@@ -1,5 +1,5 @@
 (setq atj/font-family "JetBrainsMono NF")
 
-(setq atj/font-height 100)
+(setq atj/font-height 113)
 
 (provide 'atj-options)
