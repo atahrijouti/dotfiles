@@ -22,11 +22,6 @@ hidden = false
 [editor.soft-wrap]
 enable = true
 
-[editor.statusline]
-mode.normal = "NORMAL"
-mode.insert = "INSERT"
-mode.select = "SELECT"
-
 [keys.insert.j]
 k = "normal_mode"
 j = "normal_mode"
