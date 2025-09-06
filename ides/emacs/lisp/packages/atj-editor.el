@@ -7,6 +7,7 @@
   :hook (after-init . global-auto-revert-mode))
 
 (use-package expand-region
+  :ensure t
   :bind ("C-=" . er/expand-region)
   :config
   (defun tree-sitter-mark-bigger-node ()
@@ -29,6 +30,7 @@
 
 ;; Jump to things in Emacs tree-style
 (use-package avy
+  :ensure t
   ;; :bind (("C-:"   . avy-goto-char)
          ;; ("C-'"   . avy-goto-char-2)
          ;; ("M-g l" . avy-goto-line)
@@ -43,12 +45,14 @@
 		  )
 )
 
-(use-package multiple-cursors)
+(use-package multiple-cursors :ensure t)
 
 (use-package undo-tree
-:config
-  (global-undo-tree-mode))
-;;
+  :ensure t
+  :config
+  (global-undo-tree-mode)
+)
+
 (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 
 

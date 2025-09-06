@@ -1,10 +1,3 @@
-;; Projects
-
-;(use-package projectile
-;  :diminish
-;  :config
-;  (projectile-mode 1))
-
 (require 'project)
 
 (use-package savehist
@@ -13,6 +6,7 @@
   (savehist-mode))
 
 (use-package dashboard
+  :ensure t
   :init
   (setq dashboard-display-icons-p t)
   (setq initial-buffer-choice 'dashboard-open)
@@ -37,7 +31,7 @@
     (dashboard-setup-startup-hook)
 )
 
-(use-package ripgrep)
+(use-package ripgrep :ensure t)
 
 (use-package transient :ensure t)
 (use-package magit :after(transient) :ensure t)

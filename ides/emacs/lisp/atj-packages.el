@@ -13,7 +13,7 @@
 (require 'atj-editor)
 
 ;;;;;;;;;;;;;;;;;;;;; Languages
-(use-package lua-mode)
+(use-package lua-mode :ensure t)
 
 
 (provide 'atj-packages)

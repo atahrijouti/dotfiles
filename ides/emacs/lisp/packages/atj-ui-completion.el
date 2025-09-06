@@ -1,11 +1,15 @@
 (use-package vertico
+  :ensure t
+  :custom
+  (vertico-cycle t)
+  (vertico-resize 1)
+  
   :init
   (vertico-mode)
-  (setq vertico-cycle t)
-  (setq vertico-resize 1)
  )
 
 (use-package marginalia
+  :ensure t
   :after vertico
   :bind (:map minibuffer-local-map
          ("M-A" . marginalia-cycle))
@@ -14,9 +18,12 @@
 )
 
 
-(use-package consult)
+(use-package consult
+  :ensure t
+)
 
 (use-package vertico-posframe
+  :ensure t
   :config
   (vertico-posframe-mode 1))
 
@@ -51,6 +58,7 @@
 
 ;; Optionally use the `orderless' completion style.
 (use-package orderless
+  :ensure t
   :init
   :custom
   (completion-styles '(orderless basic))
