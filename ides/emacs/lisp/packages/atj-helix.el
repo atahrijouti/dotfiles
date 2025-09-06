@@ -6,12 +6,14 @@
    "format"
    (lambda () (call-interactively #'format-all-buffer))
    )
+  (helix-define-key 'space "w" #'save-buffer)
+  (helix-define-key 'space "q" #'kill-buffer)
   )
 
 (use-package helix
+  :ensure t
   :after (multiple-cursors format-all)
   :hook ((prog-mode text-mode conf-mode) . helix-setup)
-  :ensure t
   )
 
 (provide 'atj-helix)
