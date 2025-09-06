@@ -32,14 +32,14 @@
 (use-package avy
   :ensure t
   ;; :bind (("C-:"   . avy-goto-char)
-         ;; ("C-'"   . avy-goto-char-2)
+         ;; ("C-'"   . avy-goto-char-3)
          ;; ("M-g l" . avy-goto-line)
-         ;; ("M-g w" . avy-goto-word-1)
-         ;; ("M-g e" . avy-goto-word-0))
+         ;; ("M-g w" . avy-goto-word-2)
+         ;; ("M-g e" . avy-goto-word-1))
   :hook (after-init . avy-setup-default)
   :config (setq avy-all-windows nil
                 avy-all-windows-alt t
-				avy-keys (number-sequence ?a ?z)
+				avy-keys (number-sequence ?a ?s ?d ?f ?g ?h ?j ?k ?l ?e ?r ?u ?i)
                 avy-style 'at-full
 				;; avy-style 'de-bruijn
 		  )

@@ -3,7 +3,7 @@
   :custom
   (vertico-cycle t)
   (vertico-resize 1)
-  
+
   :init
   (vertico-mode)
  )
@@ -28,7 +28,7 @@
   (vertico-posframe-mode 1))
 
 ;; A few more useful configurations...
-(use-package emacs 
+(use-package emacs
   :ensure nil
   :init
   ;; Add prompt indicator to `completing-read-multiple'.
@@ -69,4 +69,3 @@
 
 
 (provide 'atj-ui-completion)
-
