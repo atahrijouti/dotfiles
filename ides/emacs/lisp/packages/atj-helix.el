@@ -8,6 +8,7 @@
    )
   (helix-define-key 'space "w" #'save-buffer)
   (helix-define-key 'space "q" #'kill-buffer)
+  (helix-define-key 'goto "w" #'avy-goto-word-0)
   )
 
 (use-package helix
