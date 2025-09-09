@@ -42,7 +42,6 @@ zplug load
 
 if [ -s "/opt/homebrew/bin/brew" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
-    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     fpath=(
         $(brew --prefix)/share/zsh/site-functions
         $(brew --prefix)/share/zsh-completions
