@@ -1,12 +1,5 @@
-if [ -s "/opt/homebrew/bin/brew" ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    fpath=(
-        $(brew --prefix)/share/zsh/site-functions
-        $(brew --prefix)/share/zsh-completions
-        $fpath
-    )
-fi
+autoload -Uz compinit
+compinit
 
 # Options
 HISTFILE=~/.zsh_history
@@ -34,8 +27,28 @@ fpath=(
     $fpath
 )
 
-autoload -Uz compinit
-compinit
+source "$HOME/.zplug/init.zsh"
+
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
+
+if [ -s "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    fpath=(
+        $(brew --prefix)/share/zsh/site-functions
+        $(brew --prefix)/share/zsh-completions
+        $fpath
+    )
+fi
 
 # Starship
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
@@ -71,16 +84,3 @@ fi
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-
-source "$HOME/.zplug/init.zsh"
-
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-zplug load
