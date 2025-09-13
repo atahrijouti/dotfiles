@@ -27,7 +27,6 @@ k = "normal_mode"
 j = "normal_mode"
 
 [keys.normal.space]
-w = ":w"
 q = ":q"
 c = ":config-reload"
 t = ":tree-sitter-highlight-name"
@@ -36,6 +35,8 @@ t = ":tree-sitter-highlight-name"
 i = ["collapse_selection", "insert_mode"]
 a = ["move_char_right", "collapse_selection", "insert_mode"]
 "C-c" = ["toggle_comments", "move_line_down"]
+"C-s" = ":write"
+"Cmd-s" = ":write"
 
 # Helix as an IDE
 # "A-9" = ":sh sh lazygit-down.sh"
