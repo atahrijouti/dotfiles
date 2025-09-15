@@ -4,6 +4,11 @@ auto-format = true
 formatter = { command = "stylua", args = ["-"] }
 
 [[language]]
+name = "ruby"
+formatter = { command = "bundle", args = ["exec", "stree", "format"] }
+auto-format = true
+
+[[language]]
 name = "common-lisp"
 file-types = ["lisp", "asd", "cl", "l", "lsp", "ny", "podsl", "sexp", "el"]
 
