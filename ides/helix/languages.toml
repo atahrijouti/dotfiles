@@ -9,6 +9,11 @@ formatter = { command = "bundle", args = ["exec", "stree", "format"] }
 auto-format = true
 
 [[language]]
+name = "python"
+formatter = { command = "ruff", args = ["format", "--line-length", "88", "-"] }
+auto-format = true
+
+[[language]]
 name = "common-lisp"
 file-types = ["lisp", "asd", "cl", "l", "lsp", "ny", "podsl", "sexp", "el"]
 
