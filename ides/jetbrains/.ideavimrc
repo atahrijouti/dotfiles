@@ -1,0 +1,30 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+source ~/source/helix.vim/helix.idea.vim
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+set incsearch
+set showmode
+set clipboard+=unnamed
+set clipboard+=ideaput
+set ignorecase
+set smartcase
+
+
+
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
+
+inoremap jk <Esc>
+
+"which key
+set which-key
+set timeoutlen=1000
+"make the popup show up 'instantly'
+let g:WhichKey_DefaultDelay = 0
