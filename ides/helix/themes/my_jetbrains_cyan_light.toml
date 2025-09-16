@@ -1,4 +1,4 @@
-# Cyan Light
+# Jetbrains Cyan Light
 # Adapted from JetBrains' Cyan Light Theme https://plugins.jetbrains.com/plugin/12102-cyan-light-theme 
 # Author: Abderrahmane Tahri Jouti <tj.abderrahmane@gmail.com>
 
@@ -93,8 +93,8 @@
 "ui.statusline.insert" = { fg = "shade00", bg = "green" }
 "ui.statusline.select" = { fg = "shade00", bg = "purple" }
 
-"ui.popup" = { fg = "shade04", bg = "shade01_lighter"  }
-"ui.window" = { fg = "shade04", bg = "shade00"  }
+"ui.popup" = { fg = "shade04", bg = "shade01_lighter" }
+"ui.window" = { fg = "shade04", bg = "shade00" }
 "ui.help" = { fg = "shade06", bg = "shade00" }
 "ui.text" = "shade05"
 "ui.text.focus" = { fg = "shade07", bg = "light_blue" }

@@ -1,5 +1,4 @@
-
-theme = "dark_plus"
+theme = "my_jetbrains_dark"
 
 [editor]
 cursorline = true
@@ -17,7 +16,6 @@ select = "block"
 
 [editor.file-picker]
 hidden = false
-
 
 [editor.soft-wrap]
 enable = true
