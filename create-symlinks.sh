@@ -20,6 +20,6 @@ link "ides/zed"                         "$HOME/.config/zed"
 link "ides/emacs"                       "$HOME/.emacs.d"
 link "ides/yazi"                        "$HOME/.config/yazi" 
 link "ides/jetbrains/.ideavimrc"        "$HOME/.ideavimrc"
-link "linux/koi/koirc"                  "$HOME/.config/koi/koirc"
+link "linux/koi/koirc"                  "$HOME/.config/koirc"
 
 
