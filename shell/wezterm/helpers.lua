@@ -17,6 +17,9 @@ M.decideColorScheme = function(config)
 	end
 
 	if appearance:find("Dark") then
+		config.colors = {
+			background = "#24283b"
+		}
 		return "Ef-Maris-Dark"
 	else
 		config.colors = {
