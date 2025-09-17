@@ -28,10 +28,7 @@ M.decideColorScheme = function(config)
     }
     return "Tomorrow Night Eighties"
   else
-    config.colors = {
-      background = "#F2F3F7",
-    }
-    return "Tomorrow"
+    return "jetbrains_cyan_light"
   end
 end
 
