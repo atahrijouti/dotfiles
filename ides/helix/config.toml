@@ -1,4 +1,4 @@
-theme = "my_jetbrains_dark"
+theme = "site-theme"
 
 [editor]
 cursorline = true
