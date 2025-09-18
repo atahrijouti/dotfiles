@@ -2,7 +2,6 @@ local wezterm = require("wezterm")
 
 local M = {}
 
-
 local getTargetProgramPaneDict = function(pane)
   local tab = pane:tab()
   local tabId = tab:tab_id() .. ""
@@ -30,23 +29,24 @@ M.toggleProgramInPaneSplit = function(o)
     local programPane = nil
 
     -- Our previous lua state might be different from current wezterm state
-    if programPaneId and not pcall(function()
-          programPane = wezterm.mux.get_pane(programPaneId)
-        end) then
+    if
+      programPaneId
+      and not pcall(function()
+        programPane = wezterm.mux.get_pane(programPaneId)
+      end)
+    then
       targetDict[o.program] = nil
     end
 
-
     if programPane then
       programPane:activate()
-      window:perform_action(wezterm.action.CloseCurrentPane { confirm = false }, programPane)
+      window:perform_action(wezterm.action.CloseCurrentPane({ confirm = false }), programPane)
       targetDict[o.program] = nil
     else
       local newPane = pane:split({
         direction = o.direction and o.direction or "Bottom",
         size = o.size and o.size or 0.5,
-        top_level = o.root and o.root or
-            false
+        top_level = o.root and o.root or false,
       })
       newPane:send_paste(o.program .. "\n")
       targetDict[o.program] = newPane:pane_id()
@@ -60,6 +60,10 @@ end
 
 M.openLfLeft = function()
   return M.toggleProgramInPaneSplit({ program = "lf", direction = "Left", size = 0.2 })
+end
+
+M.openYaziLeft = function()
+  return M.toggleProgramInPaneSplit({ program = "y", direction = "Left", size = 0.2 })
 end
 
 return M
