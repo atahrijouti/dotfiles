@@ -16,7 +16,7 @@ ansi = [
   "#B28C00", # yellow
   "#0073E6", # blue
   "#660E7A", # magenta
-  "#028E8E", # cyan (#028E8E)
+  "#028E8E", # cyan
   "#a9b0ca"  # white
 ]
 
