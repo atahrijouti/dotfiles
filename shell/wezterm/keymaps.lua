@@ -42,6 +42,7 @@ M.run = function(config)
     -- { key = "C", mods = "CTRL", action = act.CopyTo("Clipboard") },
     { key = "V", mods = "CTRL", action = act.PasteFrom("Clipboard") },
     { key = "x", mods = "LEADER", action = wezterm.action.ActivateCopyMode },
+    { key = "w", mods = "LEADER", action = wezterm.action.QuickSelect },
 
     -- Search
     { key = "f", mods = "LEADER", action = act.Search("CurrentSelectionOrEmptyString") },
