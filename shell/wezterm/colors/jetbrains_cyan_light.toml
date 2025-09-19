@@ -17,7 +17,7 @@ ansi = [
   "#0073E6", # blue
   "#660E7A", # magenta
   "#028E8E", # cyan (#028E8E)
-  "#434b6c"  # white
+  "#a9b0ca"  # white
 ]
 
 brights = [
@@ -28,5 +28,5 @@ brights = [
   "#0073E6", # blue
   "#660E7A", # magenta
   "#028E8E", # cyan
-  "#c1c6d9"  # white
+  "#dadde8"  # white
 ]
