@@ -54,6 +54,9 @@ fi
 
 # Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+ 
+# Task
+[ -x "$(command -v rbenv)" ] && eval "$(task --completion zsh)"
 
 # fzf
 [ -x "$(command -v fzf)" ] && source <(fzf --zsh)
@@ -80,6 +83,4 @@ fi
 [ -s "$HOME/.zsh_aliases" ] && source "$HOME/.zsh_aliases"
 
 
-# bun completions
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
