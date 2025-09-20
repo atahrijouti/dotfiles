@@ -1,10 +1,10 @@
 Enabled: true
 Component:
   Scripts:
-  - Name: Toggle helix theme
+  - Name: Toggle app themes
     Command: sh
-    ArgsLight: [-c, sed -i -E 's/(inherits\s=\s").*(")/\1my_jetbrains_cyan_light\2/' ~/AppData/Roaming/helix/themes/site-theme.toml]
-    ArgsDark: [-c, sed -i -E 's/(inherits\s=\s").*(")/\1my_jetbrains_dark\2/' ~/AppData/Roaming/themes/site-theme.toml]
+    ArgsLight: [~/source/dotfiles/scripts/switch_light.sh]
+    ArgsDark: [~/source/dotfiles/scripts/switch_dark.sh]
     AllowedSources: [Any]
     TimeoutMillis: 
 

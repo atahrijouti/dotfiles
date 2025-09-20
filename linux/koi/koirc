@@ -33,9 +33,9 @@ enabled=false
 light=breeze-dark
 
 [Script]
-dark=~/source/dotfiles/linux/koi/switch_dark.sh
+dark=~/source/dotfiles/scripts/switch_dark.sh
 enabled=true
-light=~/source/dotfiles/linux/koi/switch_light.sh
+light=~/source/dotfiles/scripts/switch_light.sh
 
 [Wallpaper]
 dark=
