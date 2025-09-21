@@ -7,3 +7,5 @@ set incsearch		true
 set incfilter		true
 #set autoquit		true
 set ratios '1'
+map b mark-load
+map M mark-remove
