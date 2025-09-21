@@ -1,0 +1,8 @@
+
+[which]
+mask            = { bg = "white" }
+cand            = { fg = "cyan" }
+# rest            = { fg = "blue" }
+desc            = { fg = "black" }
+separator       = " "
+# separator_style = { fg = "black" }
