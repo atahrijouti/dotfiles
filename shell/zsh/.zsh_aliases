@@ -3,7 +3,7 @@ lfcd () {
   cd "$(command lf -print-last-dir "$@")"
 }
 
-alias lf=lfcd
+alias l=lfcd
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
