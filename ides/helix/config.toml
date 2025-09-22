@@ -4,6 +4,7 @@ theme = "site-theme"
 cursorline = true
 auto-save = true
 auto-format = true
+auto-info = false
 color-modes = true
 true-color = true
 undercurl = true
