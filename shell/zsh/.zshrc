@@ -56,7 +56,7 @@ fi
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
  
 # Task
-[ -x "$(command -v rbenv)" ] && eval "$(task --completion zsh)"
+[ -x "$(command -v task)" ] && eval "$(task --completion zsh)"
 
 # fzf
 [ -x "$(command -v fzf)" ] && source <(fzf --zsh)
