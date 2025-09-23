@@ -17,7 +17,8 @@ doskey gibfhd=yt-dlp.exe -S "res:1080" -f "(bv*[vcodec~='^((he|a)vc|h26[45])']+b
 doskey ffmpeg=ffmpeg -hide_banner $*
 doskey ffprobe=ffprobe -hide_banner $*
 @REM doskey cd=cd %USERPROFILE%
-doskey lf=lfcd
+doskey l=lfcd
+doskey lg=lazygit
 doskey ~=cd %homepath%
 doskey msyshere=C:/msys64/msys2_shell.cmd -defterm -here -no-start -msys
 doskey ucrthere=C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64
