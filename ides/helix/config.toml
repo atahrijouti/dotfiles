@@ -26,7 +26,7 @@ k = "normal_mode"
 j = "normal_mode"
 
 [keys.normal.space]
-x = ":sh task"
+x = ":sh mise build --quiet"
 q = ":q"
 c = ":config-reload"
 t = ":tree-sitter-highlight-name"
