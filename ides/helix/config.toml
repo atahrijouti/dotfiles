@@ -26,8 +26,11 @@ k = "normal_mode"
 j = "normal_mode"
 
 [keys.normal.space]
-x = ":sh mise build --quiet"
 q = ":q"
+
+[keys.normal.space.x]
+x = ":sh mise build --quiet"
+r = ":reload-all"
 c = ":config-reload"
 t = ":tree-sitter-highlight-name"
 
@@ -38,6 +41,3 @@ a = ["move_char_right", "collapse_selection", "insert_mode"]
 "C-s" = ":write"
 "Cmd-s" = ":write"
 
-# Helix as an IDE
-# "A-9" = ":sh sh lazygit-down.sh"
-# "A-1" = ":sh sh file-tree-left.sh"
