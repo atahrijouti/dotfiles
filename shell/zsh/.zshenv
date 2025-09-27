@@ -13,7 +13,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-# bun
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$DOTFILES/shell/bin:$PATH"

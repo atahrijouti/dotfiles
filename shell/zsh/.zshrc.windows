@@ -1,25 +1,41 @@
+autoload -Uz compinit
+compinit
+
+# Options
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=999999999
 unsetopt beep
+setopt hist_ignore_all_dups
+
+# Keybindings
 bindkey -e
+autoload -U select-word-style
+select-word-style bash
+
+bindkey  "^[[H"   beginning-of-line
+bindkey  "^[[F"   end-of-line
+bindkey  "^[[3~"  delete-char
 
 zstyle :compinstall filename "$HOME/.zshrc"
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
 zstyle ':completion:*' menu select
 
-# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$HOME/.zplug/init.zsh"
+
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+zplug load
 
 # Starship
 [ -s "$HOME/.starship-msys2-init-zsh" ] && \. "$HOME/.starship-msys2-init-zsh"
 
+# Aliases
 [ -s "$HOME/.zsh_aliases" ] && \. "$HOME/.zsh_aliases"
 
-# Better word navigation
-autoload -U select-word-style
-select-word-style bash
