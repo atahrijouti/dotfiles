@@ -32,12 +32,9 @@ mklink "%USERPROFILE%\AppData\Roaming\Zed\themes\cyan-light.json" "%DOTFILES%\id
 REM Helix
 mklink /d "%APPDATA%\helix" "%DOTFILES%\ides\helix"
 
-REM MSYS Bash
-mklink "%USERPROFILE%\.bash_profile" "%DOTFILES%\windows\msys_shell\.bash_profile"
-mklink "%USERPROFILE%\.bash_functions" "%DOTFILES%\windows\msys_shell\.bash_functions"
-mklink "%USERPROFILE%\.bash_aliases" "%DOTFILES%\windows\msys_shell\.bash_aliases"
-
+RED ZSH
 mklink "%USERPROFILE%\.zshrc" "%DOTFILES%\shell\zsh\.zshrc.windows"
+mklink "%USERPROFILE%\.zsh_aliases" "%DOTFILES%\shell\zsh\.zsh_aliases"
 mklink "%USERPROFILE%\.starship-msys2-init-zsh" "%DOTFILES%\shell\zsh\.starship-msys2-init-zsh"
 
 REM Emacs
