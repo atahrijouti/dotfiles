@@ -39,3 +39,5 @@ zplug load
 # Aliases
 [ -s "$HOME/.zsh_aliases" ] && \. "$HOME/.zsh_aliases"
 
+# fzf
+[ -x "$(command -v fzf)" ] && source <(fzf --zsh)
