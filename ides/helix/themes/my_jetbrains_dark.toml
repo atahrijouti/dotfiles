@@ -1,1 +1,13 @@
 inherits = "jetbrains_dark"
+
+"ui.cursor.primary" = { fg = "blue48", bg = "blue247" }
+"ui.cursor.primary.select" = { fg = "blue48", bg = "red194" }
+"ui.cursor.primary.insert" = { fg = "blue48", bg = "green156" }
+
+"ui.cursor" = { fg = "blue48", bg = "blue196" }
+"ui.cursor.match" = {  fg = "blue48", bg = "blue122" }
+
+"ui.statusline.normal" = { fg = "blue48", bg = "blue247", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "blue48", bg = "green156", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "blue48", bg = "red194", modifiers = ["bold"] }
+
