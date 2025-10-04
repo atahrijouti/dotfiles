@@ -5,8 +5,17 @@ if not exist "%USERPROFILE%\.config" mkdir "%USERPROFILE%\.config"
 
 
 REM clink
-mklink /d "%USERPROFILE%\AppData\Local\clink" "%DOTFILES%\windows\clink"
-"C:\Program Files (x86)\clink\\clink.bat" autorun install -- -q
+REM mklink /d "%USERPROFILE%\AppData\Local\clink" "%DOTFILES%\windows\clink"
+REM "C:\Program Files (x86)\clink\\clink.bat" autorun install -- -q
+
+REM nushell
+mklink /d "%USERPROFILE%\AppData\Roaming\nushell" "%DOTFILES%\shell\nushell"
+mklink /d "%USERPROFILE%\AppData\Roaming\vivid" "%DOTFILES%\shell\vivid"
+
+REM vivid
+mklink /d 
+
+
 
 REM NeoVIM
 mklink /d "%USERPROFILE%\AppData\Local\nvim" "%DOTFILES%\ides\nvim"
@@ -42,3 +51,4 @@ mklink /d "%HOME%\.emacs.d" "%DOTFILES%\ides\emacs"
 
 REM VSCode
 REM mklink "%USERPROFILE%\AppData\Roaming\Code\keybindings.json" "%DOTFILES%\ides\vscode\keybindings.json"
+

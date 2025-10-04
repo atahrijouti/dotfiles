@@ -7,6 +7,11 @@ M.run = function(config)
   local launch_menu = {}
 
   table.insert(launch_menu, {
+    label = "Nushell",
+    args = { "nu" },
+  })
+
+  table.insert(launch_menu, {
     label = "ZSH - MSYS UCRT64",
     args = { "cmd.exe ", "/k", "C:\\msys64\\msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh" },
   })
