@@ -10,12 +10,6 @@ REM "C:\Program Files (x86)\clink\\clink.bat" autorun install -- -q
 
 REM nushell
 mklink /d "%USERPROFILE%\AppData\Roaming\nushell" "%DOTFILES%\shell\nushell"
-mklink /d "%USERPROFILE%\AppData\Roaming\vivid" "%DOTFILES%\shell\vivid"
-
-REM vivid
-mklink /d 
-
-
 
 REM NeoVIM
 mklink /d "%USERPROFILE%\AppData\Local\nvim" "%DOTFILES%\ides\nvim"
