@@ -21,3 +21,6 @@ $env.config.show_banner = false
 # $env.LS_COLORS = (vivid generate modus-operandi)
 $env.LS_COLORS = ""
 $env.config.table.mode = 'none'
+
+alias l = lfcd
+alias lg = lazygit
