@@ -1,6 +1,7 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+
 add_newline = false
 continuation_prompt = "[\\\\](bright-black) "
 command_timeout = 500
@@ -15,5 +16,3 @@ disabled = true
 [git_status]
 windows_starship = "C:\\Program Files\\starship\\bin\\starship.exe"
 
-# [gcloud]
-# disabled = true
