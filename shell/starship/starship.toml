@@ -4,10 +4,16 @@
 add_newline = false
 continuation_prompt = "[\\\\](bright-black) "
 command_timeout = 500
+
 [character]
 success_symbol = '[λ](bold green)'
 error_symbol = '[λ](bold red)'
 
-# [package]
+[package]
+disabled = true
 
+[git_status]
+windows_starship = "C:\\Program Files\\starship\\bin\\starship.exe"
+
+# [gcloud]
 # disabled = true
