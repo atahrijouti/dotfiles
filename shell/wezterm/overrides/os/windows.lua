@@ -2,7 +2,7 @@ local M = {}
 
 M.run = function(config)
   config.font_size = 11
-  config.default_prog = { "cmd.exe ", "/k", "C:\\msys64\\msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh" }
+  config.default_prog = { "cmd.exe ", "/k" }
 
   local launch_menu = {}
 
