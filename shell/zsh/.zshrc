@@ -1,5 +1,3 @@
-autoload -Uz compinit
-compinit
 
 # Options
 HISTFILE=~/.zsh_history
@@ -48,6 +46,9 @@ if [ -s "/opt/homebrew/bin/brew" ]; then
         $fpath
     )
 fi
+
+autoload -Uz compinit
+compinit
 
 # Starship
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
