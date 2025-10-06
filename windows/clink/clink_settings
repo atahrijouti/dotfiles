@@ -135,5 +135,4 @@ match.substring = True
 # name: Controls when past prompts are collapsed
 # type: enum
 # options: off,always,same_dir
-prompt.transient = same_dir
-
+prompt.transient = off
