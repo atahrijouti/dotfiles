@@ -2,7 +2,7 @@ local M = {}
 
 M.run = function(config)
   config.font_size = 11
-  config.default_prog = { "cmd.exe ", "/k" }
+  config.default_prog = { "nu" }
 
   local launch_menu = {}
 
