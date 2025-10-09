@@ -13,6 +13,8 @@ $env.LS_COLORS = ""
 $env.config.table.mode = 'none'
 
 $env.config.highlight_resolved_externals = true
+$env.config.color_config.shape_external = "red"
+$env.config.color_config.shape_external_resolved = "cyan"
 
 # aliases
 def --env --wrapped lfcd [...args: string] { 
