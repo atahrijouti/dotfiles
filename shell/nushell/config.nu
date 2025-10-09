@@ -12,6 +12,7 @@ $env.config.show_banner = false
 $env.LS_COLORS = ""
 $env.config.table.mode = 'none'
 
+$env.config.highlight_resolved_externals = true
 
 # aliases
 def --env --wrapped lfcd [...args: string] { 
