@@ -4,6 +4,7 @@
       "ctrl-f12": "terminal_panel::ToggleFocus",
       "ctrl-f11": ["task::Spawn", { "task_name": "Windows Terminal" }],
       "ctrl-shift-r": ["task::Spawn", { "task_name": "Run project" }],
+      "ctrl-s": "workspace::Save",
       "alt-9": "git_panel::ToggleFocus",
       "super-9": "git_panel::ToggleFocus",
       "alt-1": "project_panel::ToggleFocus",
@@ -43,13 +44,13 @@
     "context": "vim_mode == normal",
     "bindings": {
       "g r": "editor::FindAllReferences",
-      "g _": "outline::Toggle",
       "d": "vim::DeleteRight",
       "z c": "editor::Fold",
       "z o": "editor::UnfoldLines",
       "space r": "editor::Rename",
       "space k": "editor::Hover",
       "space a": "editor::ToggleCodeActions",
+      "space s": "outline::Toggle",
       "shift-c": "editor::AddSelectionBelow",
       ",": "editor::Cancel"
     }
@@ -89,7 +90,6 @@
       "g h": "vim::StartOfLine",
       "shift-r": "editor::Paste",
       "space R": "editor::Paste",
-      "space w": "workspace::Save",
       "space f": "file_finder::Toggle"
     }
   },
