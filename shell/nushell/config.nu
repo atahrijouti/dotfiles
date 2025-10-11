@@ -23,4 +23,6 @@ def --env --wrapped lfcd [...args: string] {
 
 alias l = lfcd
 alias lg = lazygit
-
+alias 'g h' = cd ~
+alias 'g d' = cd ~/source/dotfiles/
+alias 'g p' = cd ~/playground/
