@@ -24,27 +24,20 @@ if $is_windows {
 
 # started with folders
 let items = {
+  'shell\wezterm': '.config\wezterm',
+  'ides\emacs': '.emacs.d',
+  'shell\starship\starship.toml': '.config\starship.toml'
   'windows\clink': 'appdata\local\clink',
   'shell\nushell': 'appdata\roaming\nushell',
   'ides\nvim': 'appdata\local\nvim',
-  'shell\wezterm': '.config\wezterm',
   'ides\lf': 'appdata\local\lf',
   'ides\helix': 'appdata\roaming\helix',
-  'ides\emacs': '.emacs.d',
+  'windows\autodarkmode\scripts.yaml': 'appdata\roaming\AutoDarkMode\scripts.yaml'
+  'ides\zed\settings.json': 'AppData\Roaming\Zed\settings.json'
+  'ides\zed\keymap.json': 'AppData\Roaming\Zed\keymap.json'
+  'ides\zed\themes\cyan-light.json': 'AppData\Roaming\Zed\themes\cyan-light.json'
+  'ides\vscode\keybindings.json': 'AppData\Roaming\Code\keybindings.json'
 }
 
 
-# REM Starship
-# mklink "%USERPROFILE%\.config\starship.toml" "%DOTFILES%\shell\starship\starship.toml"
-
-# REM AutoDarkMode
-# mklink "%APPDATA%\AutoDarkMode\scripts.yaml" "%DOTFILES%\windows\autodarkmode\scripts.yaml"
-
-# REM Zed
-# mklink "%USERPROFILE%\AppData\Roaming\Zed\settings.json" "%DOTFILES%\ides\zed\settings.json"
-# mklink "%USERPROFILE%\AppData\Roaming\Zed\keymap.json" "%DOTFILES%\ides\zed\keymap.json"
-# mklink "%USERPROFILE%\AppData\Roaming\Zed\themes\cyan-light.json" "%DOTFILES%\ides\zed\themes\cyan-light.json"
- 
-# REM VSCode
-# REM mklink "%USERPROFILE%\AppData\Roaming\Code\keybindings.json" "%DOTFILES%\ides\vscode\keybindings.json"
 
