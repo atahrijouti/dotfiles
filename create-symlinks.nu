@@ -1,3 +1,5 @@
+#!/usr/bin/env nu
+ 
 let os = sys host | get name
 let is_windows = $os == Windows
 
@@ -7,15 +9,35 @@ if $is_windows {
 
 let home_config = $env.HOME | path join .config
 
-echo $home_config
+# make sure folders we're symlinking into exist
+mkdir $home_config
 
 
-# if not exist "%USERPROFILE%\.config" mkdir "%USERPROFILE%\.config"
+# bootstrap software that needs it
+if $is_windows {
+  let clink_path = 'C:\Program Files (x86)\clink\clink.bat'
+  if (^$clink_path autorun show | grep autorun | str length) == 0 {
+    print "enable clink autorun"
+    ^$clink_path autorun install -- -q
+  }
+}
+
+# started with folders
+let items = {
+  'windows\clink': 'appdata\local\clink',
+  'shell\nushell': 'appdata\roaming\nushell',
+  'ides\nvim': 'appdata\local\nvim',
+  'shell\wezterm': '.config\wezterm',
+  'ides\lf': 'appdata\local\lf',
+  'ides\helix': 'appdata\roaming\helix',
+  'ides\emacs': '.emacs.d',
+}
+
+
 
 
 # REM clink
 # REM mklink /d "%USERPROFILE%\AppData\Local\clink" "%DOTFILES%\windows\clink"
-# REM "C:\Program Files (x86)\clink\\clink.bat" autorun install -- -q
 
 # REM nushell
 # mklink /d "%USERPROFILE%\AppData\Roaming\nushell" "%DOTFILES%\shell\nushell"
@@ -34,7 +56,6 @@ echo $home_config
 
 # REM lf
 # mklink /d "%USERPROFILE%\AppData\Local\lf" "%DOTFILES%\ides\lf"
-# mklink "%USERPROFILE%\programs\bin\lfcd.cmd" "%DOTFILES%\windows\lf\lfcd.cmd"
 
 # REM Zed
 # mklink "%USERPROFILE%\AppData\Roaming\Zed\settings.json" "%DOTFILES%\ides\zed\settings.json"
