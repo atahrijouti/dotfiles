@@ -1,3 +1,11 @@
+let os = sys host | get name
+let is_windows = $os == Windows
+
+if $is_windows {
+  $env.HOME = $env.USERPROFILE
+}
+
+
 # generate autoload files
 # const autoload_dir = $nu.data-dir | path join vendor autoload
 # starship init nu | save -f ($autoload_dir | path join "starship.nu")
