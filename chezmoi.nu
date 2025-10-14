@@ -23,7 +23,7 @@ if $is_windows {
 }
 
 # started with folders
-let items = {
+let windows_files = {
   'shell\wezterm': '.config\wezterm',
   'ides\emacs': '.emacs.d',
   'shell\starship\starship.toml': '.config\starship.toml'
@@ -40,4 +40,19 @@ let items = {
 }
 
 
-
+let linux_files = {
+  'shell/zsh/.zshrc'                : '.zshrc',
+  'shell/zsh/.zshenv'               : '.zshenv',
+  'shell/zsh/.zsh_aliases'          : '.zsh_aliases',
+  'shell/starship/starship.toml'    : '.config/starship.toml',
+  'shell/wezterm'                   : '.config/wezterm',
+  'shell/nushell'                   : '.config/nushell',
+  'ides/nvim'                       : '.config/nvim',
+  'ides/lf'                         : '.config/lf',
+  'ides/helix'                      : '.config/helix',
+  'ides/zed'                        : '.config/zed',
+  'ides/emacs'                      : '.emacs.d',
+  'ides/yazi'                       : '.config/yazi' ,
+  'ides/jetbrains/.ideavimrc'       : '.ideavimrc',
+  'linux/koi/koirc'                 : '.config/koirc',
+}
