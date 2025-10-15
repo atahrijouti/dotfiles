@@ -22,42 +22,33 @@
 #   }
 # }
 
-# # started with folders
-# let windows_files = {
-#   'ides\emacs': '.emacs.d',
-#   'ides\nvim': 'appdata\local\nvim',
-#   'ides\lf': 'appdata\local\lf',
-#   'ides\helix': 'appdata\roaming\helix',
-#   'ides\zed\settings.json': 'AppData\Roaming\Zed\settings.json'
-#   'ides\zed\keymap.json': 'AppData\Roaming\Zed\keymap.json'
-#   'ides\zed\themes\cyan-light.json': 'AppData\Roaming\Zed\themes\cyan-light.json'
-#   'ides\vscode\keybindings.json': 'AppData\Roaming\Code\keybindings.json'
-#   'shell\wezterm': '.config\wezterm',
-#   'shell\starship\starship.toml': '.config\starship.toml'
-#   # 'shell\nushell': 'appdata\roaming\nushell',
-#   'windows\clink': 'appdata\local\clink',
-#   'windows\autodarkmode\scripts.yaml': 'appdata\roaming\AutoDarkMode\scripts.yaml'
-# }
+let windows_files = {
+  'ides\emacs': '.emacs.d',
+  'ides\nvim': 'AppData\Local\nvim',
+  'ides\lf': 'AppData\Local\lf',
+  'ides\helix': 'appdata\Roaming\helix',
+  'ides\zed\settings.json': 'AppData\Roaming\Zed\settings.json'
+  'ides\zed\keymap.json': 'AppData\Roaming\Zed\keymap.json'
+  'ides\zed\themes\cyan-light.json': 'AppData\Roaming\Zed\themes\cyan-light.json'
+  'ides\vscode\keybindings.json': 'AppData\Roaming\Code\keybindings.json'
+}
 
-# # started with folders
-# let linux_files = {
-#   'ides/nvim'                       : '.config/nvim',
-#   'ides/lf'                         : '.config/lf',
-#   'ides/helix'                      : '.config/helix',
-#   'ides/zed'                        : '.config/zed',
-#   'ides/emacs'                      : '.emacs.d',
-#   'ides/yazi'                       : '.config/yazi' ,
-#   'ides/jetbrains/.ideavimrc'       : '.ideavimrc',
-#   'shell/zsh/.zshrc'                : '.zshrc',
-#   'shell/zsh/.zshenv'               : '.zshenv',
-#   'shell/zsh/.zsh_aliases'          : '.zsh_aliases',
-#   # 'shell/starship/starship.toml'    : '.config/starship.toml',
-#   # 'shell/wezterm'                   : '.config/wezterm',
-#   # 'shell/nushell'                   : '.config/nushell',
-#   # 'linux/koi/koirc'                 : '.config/koirc',
-# }
+let linux_files = {
+  'ides/emacs'                      : '.emacs.d',
+  'ides/helix'                      : '.config/helix',
+  'ides/lf'                         : '.config/lf',
+  'ides/nvim'                       : '.config/nvim',
+  'ides/zed'                        : '.config/zed',
+}
 
 let mappings = [
+  { source: 'ides/jetbrains/.ideavimrc', target: '~' },
+  {
+    source: 'linux/koi/koirc',
+    target: {
+      Linux: '~/.config',
+    }
+  },
   {
     source: 'shell/nushell',
     target: {
@@ -66,15 +57,11 @@ let mappings = [
       Darwin: '~/Library/Application\ Support'
     }
   },
-  {
-    source: 'linux/koi/koirc',
-    target: {
-      Linux: '~/.config',
-    }
-  },
   { source: 'shell/wezterm', target: '~/.config' },
   { source :'shell/starship/starship.toml', target: '~/.config' },
-  { source :'shell/zsh/*', target: '~', only: [Linux, Darwin]},
+  { source :'shell/zsh/*', target: '~', only: [Linux, Darwin] },
+  { source: 'windows/clink', target: '~/AppData/local', only: [Windows]}
+  { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/roaming/AutoDarkMode', only: [Windows] }
 ]
 
 let os = (sys host | get name | str capitalize)
