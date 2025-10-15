@@ -78,7 +78,7 @@ let mappings = [
   { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode', only: [Windows] }
 ]
 
-let os = (sys host | get name | str capitalize)
+let os = ($nu.os-info.name | str capitalize)
 let dotfiles_root = $nu.home-path | path join source dotfiles
 
 for m in $mappings {
