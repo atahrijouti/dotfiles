@@ -22,27 +22,41 @@
 #   }
 # }
 
-let windows_files = {
-  'ides\emacs': '.emacs.d',
-  'ides\nvim': 'AppData\Local\nvim',
-  'ides\lf': 'AppData\Local\lf',
-  'ides\helix': 'appdata\Roaming\helix',
-  'ides\zed\settings.json': 'AppData\Roaming\Zed\settings.json'
-  'ides\zed\keymap.json': 'AppData\Roaming\Zed\keymap.json'
-  'ides\zed\themes\cyan-light.json': 'AppData\Roaming\Zed\themes\cyan-light.json'
-  'ides\vscode\keybindings.json': 'AppData\Roaming\Code\keybindings.json'
-}
-
-let linux_files = {
-  'ides/emacs'                      : '.emacs.d',
-  'ides/helix'                      : '.config/helix',
-  'ides/lf'                         : '.config/lf',
-  'ides/nvim'                       : '.config/nvim',
-  'ides/zed'                        : '.config/zed',
-}
-
 let mappings = [
+  { source: 'ides/emacs', target: '.emacs.d' },
+  {
+    source: 'ides/nvim/*',
+    target: {
+      Linux: '~/.config/nvim',
+      Windows: '~/AppData/Local/nvim',
+      Darwin: '~/.config/nvim'
+    },
+  },
+  {
+    source: 'ides/lf/*',
+    target: {
+      Linux: '~/.config/lf',
+      Windows: '~/AppData/Local/lf',
+      Darwin: '~/.config/lf'
+    },
+  },
+  {
+    source: 'ides/helix/*',
+    target: {
+      Linux: '~/.config/helix',
+      Windows: '~/AppData/Roaming/helix',
+      Darwin: '~/.config/helix'
+    },
+  },
   { source: 'ides/jetbrains/.ideavimrc', target: '~' },
+  {
+    source: 'ides/zed/*',
+    target: {
+      Linux: '~/.config/zed',
+      Windows: '~/AppData/Roaming/Zed',
+      Darwin: '~/.config/zed'
+    },
+  },
   {
     source: 'linux/koi/koirc',
     target: {
@@ -52,16 +66,16 @@ let mappings = [
   {
     source: 'shell/nushell',
     target: {
-      Windows: '~/AppData/roaming',
+      Windows: '~/AppData/Roaming',
       Linux: '~/.config',
-      Darwin: '~/Library/Application\ Support'
+      Darwin: '~/Library/Application Support'
     }
   },
   { source: 'shell/wezterm', target: '~/.config' },
   { source :'shell/starship/starship.toml', target: '~/.config' },
   { source :'shell/zsh/*', target: '~', only: [Linux, Darwin] },
-  { source: 'windows/clink', target: '~/AppData/local', only: [Windows]}
-  { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/roaming/AutoDarkMode', only: [Windows] }
+  { source: 'windows/clink', target: '~/AppData/Local', only: [Windows] },
+  { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode', only: [Windows] }
 ]
 
 let os = (sys host | get name | str capitalize)
