@@ -23,7 +23,7 @@
 # }
 
 let mappings = [
-  { source: 'ides/emacs', target: '.emacs.d' },
+  { source: 'ides/emacs/*', target: '~/.emacs.d' },
   {
     source: 'ides/nvim/*',
     target: {
