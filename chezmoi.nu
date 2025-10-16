@@ -27,62 +27,61 @@ let mappings = [
   {
     source: 'ides/nvim/*',
     target: {
-      Linux: '~/.config/nvim',
-      Windows: '~/AppData/Local/nvim',
-      Darwin: '~/.config/nvim'
+      linux: '~/.config/nvim',
+      windows: '~/AppData/Local/nvim',
+      macos: '~/.config/nvim'
     },
   },
   {
     source: 'ides/lf/*',
     target: {
-      Linux: '~/.config/lf',
-      Windows: '~/AppData/Local/lf',
-      Darwin: '~/.config/lf'
+      linux: '~/.config/lf',
+      windows: '~/AppData/Local/lf',
+      macos: '~/.config/lf'
     },
   },
   {
     source: 'ides/helix/*',
     target: {
-      Linux: '~/.config/helix',
-      Windows: '~/AppData/Roaming/helix',
-      Darwin: '~/.config/helix'
+      linux: '~/.config/helix',
+      windows: '~/AppData/Roaming/helix',
+      macos: '~/.config/helix'
     },
   },
   { source: 'ides/jetbrains/.ideavimrc', target: '~' },
   {
     source: 'ides/zed/*',
     target: {
-      Linux: '~/.config/zed',
-      Windows: '~/AppData/Roaming/Zed',
-      Darwin: '~/.config/zed'
+      linux: '~/.config/zed',
+      windows: '~/AppData/Roaming/Zed',
+      macos: '~/.config/zed'
     },
   },
   {
     source: 'linux/koi/koirc',
     target: {
-      Linux: '~/.config',
+      linux: '~/.config',
     }
   },
   {
     source: 'shell/nushell',
     target: {
-      Windows: '~/AppData/Roaming',
-      Linux: '~/.config',
-      Darwin: '~/Library/Application Support'
+      windows: '~/AppData/Roaming',
+      linux: '~/.config',
+      macos: '~/Library/Application Support'
     }
   },
   { source: 'shell/wezterm', target: '~/.config' },
   { source :'shell/starship/starship.toml', target: '~/.config' },
-  { source :'shell/zsh/*', target: '~', only: [Linux, Darwin] },
-  { source: 'windows/clink', target: '~/AppData/Local', only: [Windows] },
-  { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode', only: [Windows] }
+  { source :'shell/zsh/*', target: '~', only: [linux, macos] },
+  { source: 'windows/clink', target: '~/AppData/Local', only: [windows] },
+  { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode', only: [windows] }
 ]
 
-let os = ($nu.os-info.name | str capitalize)
+let os = $nu.os-info.name
 let dotfiles_root = $nu.home-path | path join source dotfiles
 
 for m in $mappings {
-
  # --- Check if should skip based on 'only' field ---
   let only_list = $m | get -o only | default []
   let skip = ($only_list | is-not-empty) and not ($only_list | any {|x| $x == $os})
@@ -100,9 +99,12 @@ for m in $mappings {
   let target = ($target_raw | path expand -n)
   let source = ($dotfiles_root | path join $m.source | path expand)
 
-  mkdir $target
+  # Create target directory only once
+  if not ($target | path exists) {
+    mkdir $target
+    print $"✓ mkdir ($target)"
+  }
 
   # --- Simple copy ---
-  print $"mkdir ($target)"
-  print $"cp -r ($source) ($target)"
+  print $"cp -r '($source)' '($target)'"
 }
