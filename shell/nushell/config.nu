@@ -38,3 +38,5 @@ alias lg = lazygit
 alias 'g h' = cd ~
 alias 'g d' = cd ~/source/dotfiles/
 alias 'g p' = cd ~/playground/
+
+use ./nu/chezmoi
