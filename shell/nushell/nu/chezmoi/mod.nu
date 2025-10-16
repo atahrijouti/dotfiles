@@ -1,6 +1,5 @@
 #!/usr/bin/env nu
 
-
 export def main [] {
   print 'chezmoi - mi casa es tu casa'
   add
@@ -42,6 +41,6 @@ export def "add" [] {
 
 
 def get-mappings [] {
-  const mappings_file = path self ./chezmoi-mappings.nuon
+  const mappings_file = path self ./mappings.nuon
   $mappings_file | open 
 }
