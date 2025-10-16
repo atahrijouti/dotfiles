@@ -1,0 +1,55 @@
+[
+  { source: 'ides/emacs/*', target: '~/.emacs.d' },
+  {
+    source: 'ides/nvim/*',
+    target: {
+      linux: '~/.config/nvim',
+      windows: '~/AppData/Local/nvim',
+      macos: '~/.config/nvim'
+    },
+  },
+  {
+    source: 'ides/lf/*',
+    target: {
+      linux: '~/.config/lf',
+      windows: '~/AppData/Local/lf',
+      macos: '~/.config/lf'
+    },
+  },
+  {
+    source: 'ides/helix/*',
+    target: {
+      linux: '~/.config/helix',
+      windows: '~/AppData/Roaming/helix',
+      macos: '~/.config/helix'
+    },
+  },
+  { source: 'ides/jetbrains/.ideavimrc', target: '~' },
+  {
+    source: 'ides/zed/*',
+    target: {
+      linux: '~/.config/zed',
+      windows: '~/AppData/Roaming/Zed',
+      macos: '~/.config/zed'
+    },
+  },
+  {
+    source: 'linux/koi/koirc',
+    target: {
+      linux: '~/.config',
+    }
+  },
+  {
+    source: 'shell/nushell',
+    target: {
+      windows: '~/AppData/Roaming',
+      linux: '~/.config',
+      macos: '~/Library/Application Support'
+    }
+  },
+  { source: 'shell/wezterm', target: '~/.config' },
+  { source :'shell/starship/starship.toml', target: '~/.config' },
+  { source :'shell/zsh/*', target: '~', only: [linux, macos] },
+  { source: 'windows/clink', target: '~/AppData/Local', only: [windows] },
+  { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode', only: [windows] }
+]

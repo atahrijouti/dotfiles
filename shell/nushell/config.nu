@@ -1,15 +1,19 @@
-let os = sys host | get name
-let is_windows = $os == Windows
+let os = $nu.os-info.name
+let is_windows = $os == windows
 
 if $is_windows {
   $env.HOME = $env.USERPROFILE
 }
 
+$env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
+$env.NU_LIB_DIRS ++= [ ($env.DOTFILES | path join shell nushell nu) ]
 
 # generate autoload files
-# const autoload_dir = $nu.data-dir | path join vendor autoload
-# starship init nu | save -f ($autoload_dir | path join "starship.nu")
-# carapace _carapace nushell | save -f ($autoload_dir | path join "carapace.nu")
+if false {
+  const autoload_dir = $nu.data-dir | path join vendor autoload
+  starship init nu | save -f ($autoload_dir | path join "starship.nu")
+  carapace _carapace nushell | save -f ($autoload_dir | path join "carapace.nu")
+}
 
 $env.PROMPT_INDICATOR_VI_INSERT = "i "
 $env.PROMPT_INDICATOR_VI_NORMAL = "y "
