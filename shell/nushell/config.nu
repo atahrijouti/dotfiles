@@ -11,10 +11,12 @@ $env.NU_LIB_DIRS ++= [ ($env.DOTFILES | path join shell nushell nu) ]
 # generate autoload files
 if false {
   const autoload_dir = $nu.data-dir | path join vendor autoload
-  starship init nu | save -f ($autoload_dir | path join "starship.nu")
-  carapace _carapace nushell | save -f ($autoload_dir | path join "carapace.nu")
+  ^starship init nu | save -f ($autoload_dir | path join "starship.nu")
+  ^carapace _carapace nushell | save -f ($autoload_dir | path join "carapace.nu")
+  ^mise activate nu | save -f ($autoload_dir | path join mise.nu)
 }
 
+###### nu config
 $env.PROMPT_INDICATOR_VI_INSERT = "i "
 $env.PROMPT_INDICATOR_VI_NORMAL = "y "
 $env.TRANSIENT_PROMPT_COMMAND = "∂ "
@@ -28,8 +30,9 @@ $env.config.highlight_resolved_externals = true
 $env.config.color_config.shape_external = "red"
 $env.config.color_config.shape_external_resolved = "cyan"
 
-# aliases
-def --env --wrapped lfcd [...args: string] { 
+
+###### aliases
+def --env --wrapped lfcd [...args: string] {
   cd (lf -print-last-dir ...$args)
 }
 
