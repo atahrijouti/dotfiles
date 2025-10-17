@@ -21,6 +21,13 @@
     }
   },
   {
+    "context": "(vim_mode == helix_normal || vim_mode == helix_select) && !menu",
+    "bindings": {
+      "alt-o": "editor::SelectLargerSyntaxNode",
+      "alt-i": "editor::SelectSmallerSyntaxNode"
+    }
+  },
+  {
     "context": "ProjectPanel",
     "bindings": {
       "alt-1": "workspace::ToggleLeftDock",
@@ -99,109 +106,6 @@
       "ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
       "ctrl-n": ["terminal::SendKeystroke", "ctrl-n"],
       "ctrl-p": ["terminal::SendKeystroke", "ctrl-p"]
-    }
-  },
-  {
-    "context": "vim_mode == helix_normal && !menu",
-    "bindings": {
-      // Changes
-      "r": "vim::PushReplace",
-      "shift-r": "vim::Paste",
-      "~": "vim::ChangeCase",
-      "`": "vim::ConvertToLowerCase",
-      "alt-`": "vim::ConvertToUpperCase",
-      "i": "vim::InsertBefore",
-      "a": "vim::InsertAfter",
-      "shift-i": "vim::InsertFirstNonWhitespace",
-      "shift-a": "vim::InsertEndOfLine",
-      "o": "vim::InsertLineBelow",
-      "shift-o": "vim::InsertLineAbove",
-      "u": "vim::Undo",
-      "shift-u": "vim::Redo",
-      "p": "vim::Paste",
-      "shift-p": ["vim::Paste", { "before": true }],
-      "\"": "vim::PushRegister",
-      ">": "vim::Indent",
-      "<": "vim::Outdent",
-      "=": "vim::AutoIndent",
-      "d": "vim::HelixDelete",
-      "alt-d": ["workspace::SendKeystrokes", "\" _ d"],
-      "c": "vim::Substitute",
-      "alt-c": ["workspace::SendKeystrokes", "\" _ c"],
-
-      //
-      "escape": "editor::Cancel",
-      "ctrl-[": "editor::Cancel",
-      ":": "command_palette::Toggle",
-      "shift-d": "vim::DeleteToEndOfLine",
-      "shift-j": "vim::JoinLines",
-      "y": "editor::Copy",
-      "shift-y": "vim::YankLine",
-      "ctrl-a": "vim::Increment",
-      "ctrl-x": "vim::Decrement",
-      "s": "vim::Substitute",
-      "shift-s": "vim::SubstituteLine",
-      "g u": "vim::PushLowercase",
-      "g shift-u": "vim::PushUppercase",
-      "g ~": "vim::PushOppositeCase",
-      "g q": "vim::PushRewrap",
-      "g w": "vim::PushRewrap",
-      "ctrl-pagedown": "pane::ActivateNextItem",
-      "ctrl-pageup": "pane::ActivatePreviousItem",
-      "insert": "vim::InsertBefore",
-      // tree-sitter related commands
-      "[ x": "editor::SelectLargerSyntaxNode",
-      "] x": "editor::SelectSmallerSyntaxNode",
-      "] d": "editor::GoToDiagnostic",
-      "[ d": "editor::GoToPreviousDiagnostic",
-      "] c": "editor::GoToHunk",
-      "[ c": "editor::GoToPreviousHunk",
-      // Goto mode
-      "g n": "pane::ActivateNextItem",
-      "g p": "pane::ActivatePreviousItem",
-      // "tab": "pane::ActivateNextItem",
-      // "shift-tab": "pane::ActivatePrevItem",
-      "shift-h": "pane::ActivatePreviousItem",
-      "shift-l": "pane::ActivateNextItem",
-      "g l": "vim::EndOfLine",
-      "g h": "vim::StartOfLine",
-      "g s": "vim::FirstNonWhitespace", // "g s" default behavior is "space s"
-      "g e": "vim::EndOfDocument",
-      "g y": "editor::GoToTypeDefinition",
-      "g r": "editor::FindAllReferences", // zed specific
-      "g t": "vim::WindowTop",
-      "g c": "vim::WindowMiddle",
-      "g b": "vim::WindowBottom",
-
-      "x": "editor::SelectLine",
-      "shift-x": "editor::SelectLine",
-      // Window mode
-      "space w h": "workspace::ActivatePaneLeft",
-      "space w l": "workspace::ActivatePaneRight",
-      "space w k": "workspace::ActivatePaneUp",
-      "space w j": "workspace::ActivatePaneDown",
-      "space w q": "pane::CloseActiveItem",
-      "space w s": "pane::SplitRight",
-      "space w r": "pane::SplitRight",
-      "space w v": "pane::SplitDown",
-      "space w d": "pane::SplitDown",
-      // Space mode
-      "space f": "file_finder::Toggle",
-      "space k": "editor::Hover",
-      "space s": "outline::Toggle",
-      "space shift-s": "project_symbols::Toggle",
-      "space d": "editor::GoToDiagnostic",
-      "space r": "editor::Rename",
-      "space a": "editor::ToggleCodeActions",
-      "space h": "editor::SelectAllMatches",
-      "space c": "editor::ToggleComments",
-      "space y": "editor::Copy",
-      "space p": "editor::Paste",
-      // Match mode
-      "m m": "vim::Matching",
-      "m i w": ["workspace::SendKeystrokes", "v i w"],
-      "ctrl-c": "editor::ToggleComments",
-      "shift-c": "editor::AddSelectionBelow"
     }
   }
 ]
