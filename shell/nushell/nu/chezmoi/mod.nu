@@ -6,7 +6,7 @@ export def main [] {
 }
 
 export def "add" [] {
-  let mappings = get-mappings 
+  let mappings = get-mappings
   let os = $nu.os-info.name
   let dotfiles_root = $nu.home-path | path join source dotfiles
 
@@ -42,5 +42,5 @@ export def "add" [] {
 
 def get-mappings [] {
   const mappings_file = path self ./mappings.nuon
-  $mappings_file | open 
+  $mappings_file | open
 }
