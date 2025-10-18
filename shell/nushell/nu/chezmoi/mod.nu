@@ -27,16 +27,21 @@ export def "apply" [] {
     if $target_raw == null { continue }
 
     let target = ($target_raw | path expand -n)
-    let source = ($dotfiles_root | path join $m.source | path expand)
+    let source_raw = ($dotfiles_root | path join $m.source | path expand -n)
+    mut source = $source_raw
+    let is_dir = ($source_raw | path type) == 'dir' 
+    if $is_dir {
+       $source = $source | path join '*' 
+    }
 
     # Create target directory only once
-    if not ($target | path exists) {
+    if $is_dir and not ($target | path exists) {
       # mkdir $target
       print $"✓ mkdir ($target)"
     }
 
     # --- Simple copy ---
-    print $"cp -r '($source)' '($target)'"
+    print $"cp -r ($source) ($target)"
   }
 }
 
@@ -70,30 +75,32 @@ export def "pull" [] {
       continue
     }
 
-    # Get ignore patterns and glob files
-    let ignore_patterns = $m | get -o ignore | default []
-    let all_items = glob ($target | path join **/*) --exclude $ignore_patterns
+    print $"($source)($target)"
 
-    # Only keep files, not directories
-    let target_files = $all_items | where {|item| ($item | path type) == 'file'}
+    # # Get ignore patterns and glob files
+    # let ignore_patterns = $m | get -o ignore | default []
+    # let all_items = glob ($target | path join **/*) --exclude $ignore_patterns
 
-    if ($target_files | is-empty) {
-      print $"⚠ No files to pull from ($target)"
-      continue
-    }
+    # # Only keep files, not directories
+    # let target_files = $all_items | where {|item| ($item | path type) == 'file'}
 
-    # Copy each file back to source
-    for file in $target_files {
-        let relative_path = $file | path relative-to $target
-        let source_path = $source | path join $relative_path
+    # if ($target_files | is-empty) {
+    #   print $"⚠ No files to pull from ($target)"
+    #   continue
+    # }
 
-        if not ($target | path exists) {
-            # mkdir ($source_path | path dirname)
-            print $"✓ mkdir ($source_path | path dirname)"
-        }
-        cp $file $source_path
-        print $"✓ Pulled ($relative_path)"
-    }
+    # # Copy each file back to source
+    # for file in $target_files {
+    #     let relative_path = $file | path relative-to $target
+    #     let source_path = $source | path join $relative_path
+
+    #     if not ($target | path exists) {
+    #         # mkdir ($source_path | path dirname)
+    #         print $"✓ mkdir ($source_path | path dirname)"
+    #     }
+    #     cp $file $source_path
+    #     print $"✓ Pulled ($relative_path)"
+    # }
   }
 }
 
