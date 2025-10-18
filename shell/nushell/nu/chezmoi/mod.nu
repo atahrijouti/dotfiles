@@ -1,11 +1,12 @@
 #!/usr/bin/env nu
 
+# Manage dotfiles à la chezmoi, with extra features to handle multiple OS setups
+# 
+# chezmoi est chez toi
 export def main [] {
-  print 'chezmoi - mi casa es tu casa'
-  add
 }
 
-export def "add" [] {
+export def "apply" [] {
   let mappings = get-mappings
   let os = $nu.os-info.name
   let dotfiles_root = $nu.home-path | path join source dotfiles
