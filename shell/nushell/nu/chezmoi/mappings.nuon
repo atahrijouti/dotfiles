@@ -1,5 +1,8 @@
 [
-  { source: 'ides/emacs', target: '~/.emacs.d' },
+  {
+    source: 'ides/emacs', target: '~/.emacs.d',
+    ignore: [elpaca/** undo/** transient/** server/** recentf projects places auto-save-list/** elpa/** history]
+  },
   {
     source: 'ides/nvim',
     target: { linux: '~/.config/nvim', windows: '~/AppData/Local/nvim', macos: '~/.config/nvim' },
@@ -11,6 +14,8 @@
   {
     source: 'ides/helix',
     target: { linux: '~/.config/helix', windows: '~/AppData/Roaming/helix', macos: '~/.config/helix' },
+    ignore: [runtime/**]
+
   },
   { source: 'ides/jetbrains/.ideavimrc', target: '~/.ideavimrc' },
   {
