@@ -19,9 +19,9 @@ export def "apply" [] {
 
     # --- Resolve target ---
     let target_raw = if (($m.target | describe -d | get type) == 'record') {
-        $m.target | get -o $os
+      $m.target | get -o $os
     } else {
-        $m.target
+      $m.target
     }
 
     if $target_raw == null { continue }
@@ -51,68 +51,69 @@ export def "pull" [] {
   let dotfiles_root = $nu.home-path | path join source dotfiles
 
   for m in $mappings {
-      # --- Check if should skip based on 'only' field ---
-      let only_list = $m | get -o only | default []
-      let skip = ($only_list | is-not-empty) and not ($only_list | any {|x| $x == $os})
-      if $skip { continue }
+    # --- Check if should skip based on 'only' field ---
+    let only_list = $m | get -o only | default []
+    let skip = ($only_list | is-not-empty) and not ($only_list | any {|x| $x == $os})
+    if $skip { continue }
 
-      # --- Resolve target ---
-      let target_raw = if (($m.target | describe -d | get type) == 'record') {
-          $m.target | get -o $os
-      } else {
-          $m.target
-      }
+    # --- Resolve target ---
+    let target_raw = if (($m.target | describe -d | get type) == 'record') {
+      $m.target | get -o $os
+    } else {
+      $m.target
+    }
 
-      if $target_raw == null { continue }
+    if $target_raw == null { continue }
 
-      let target = $target_raw | path expand -n
-      let source = $dotfiles_root | path join $m.source
+    let target = $target_raw | path expand -n
+    let source = $dotfiles_root | path join $m.source
 
-      
-      # Check if target exists
-      if not ($target | path exists) {
-        print $"⚠ Skipped ($m.source) - target not found: ($target)"
-        continue
-      }
+    
+    # Check if target exists
+    if not ($target | path exists) {
+      print $"⚠ Skipped ($m.source) - target not found: ($target)"
+      continue
+    }
 
-      let all_targets = if ($target | path expand | path type) == file { # TODO Remove extra expand
-        [ $target ]
-      } else if ($target | path expand | path type) == dir { # TODO Remove extra expand
-        let ignore_patterns = $m | get -o ignore | default []
-        glob $"($target_raw)/**/*" --exclude $ignore_patterns 
-      } else {
-        []
-      }
+    let all_targets = if ($target | path expand | path type) == file { # TODO Remove extra expand
+      [ $target ]
+    } else if ($target | path expand | path type) == dir { # TODO Remove extra expand
+      # the extra __never_match__/** is because glob won't allow me to pass in just one pattern that doesn't use `foldername/**`
+      let ignore_patterns = $m | get -o ignore | default [] | append '__never_match__/**'
+      glob $"($target_raw)/**/*" --exclude $ignore_patterns 
+    } else {
+      []
+    }
 
-      print $all_targets
+    print $all_targets
 
-      # # Get ignore patterns and glob files
+    # # Get ignore patterns and glob files
 
 
-      # # Only keep files, not directories
-      # let target_files = $all_items | where {|item| ($item | path type) == 'file'}
+    # # Only keep files, not directories
+    # let target_files = $all_items | where {|item| ($item | path type) == 'file'}
 
-      # if ($target_files | is-empty) {
-      #   print $"⚠ No files to pull from ($target)"
-      #   continue
-      # }
+    # if ($target_files | is-empty) {
+    #   print $"⚠ No files to pull from ($target)"
+    #   continue
+    # }
 
-      # # Copy each file back to source
-      # for file in $target_files {
-      #     let relative_path = $file | path relative-to $target
-      #     let source_path = $source | path join $relative_path
+    # # Copy each file back to source
+    # for file in $target_files {
+    #     let relative_path = $file | path relative-to $target
+    #     let source_path = $source | path join $relative_path
 
-      #     if not ($target | path exists) {
-      #         # mkdir ($source_path | path dirname)
-      #         print $"✓ mkdir ($source_path | path dirname)"
-      #     }
-      #     cp $file $source_path
-      #     print $"✓ Pulled ($relative_path)"
-      # }
+    #     if not ($target | path exists) {
+    #         # mkdir ($source_path | path dirname)
+    #         print $"✓ mkdir ($source_path | path dirname)"
+    #     }
+    #     cp $file $source_path
+    #     print $"✓ Pulled ($relative_path)"
+    # }
     }
 }
 
 def get-mappings [] {
-    const mappings_file = path self ./mappings.nuon
-    $mappings_file | open
+  const mappings_file = path self ./mappings.nuon
+  $mappings_file | open
 }
