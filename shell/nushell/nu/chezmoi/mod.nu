@@ -26,7 +26,7 @@ export def "apply" [] {
 
     if $target_raw == null { continue }
 
-    let target = ($target_raw | path expand -n)
+    let target = $target_raw | path expand -n
     let source_raw = ($dotfiles_root | path join $m.source | path expand -n)
     let is_dir = ($source_raw | path type) == 'dir' 
 
@@ -67,7 +67,6 @@ export def "pull" [] {
 
     let target = $target_raw | path expand -n
     let source = $dotfiles_root | path join $m.source
-
     
     # Check if target exists
     if not ($target | path exists) {
@@ -75,42 +74,35 @@ export def "pull" [] {
       continue
     }
 
-    let all_targets = if ($target | path expand | path type) == file { # TODO Remove extra expand
+    let target_files = if ($target | path type) == file { # TODO Remove extra expand
       [ $target ]
-    } else if ($target | path expand | path type) == dir { # TODO Remove extra expand
+    } else if ($target | path type) == dir { # TODO Remove extra expand
       # the extra __never_match__/** is because glob won't allow me to pass in just one pattern that doesn't use `foldername/**`
       let ignore_patterns = $m | get -o ignore | default [] | append '__never_match__/**'
-      glob $"($target_raw)/**/*" --exclude $ignore_patterns 
+      glob $"($target_raw)/**/*" --no-dir --exclude $ignore_patterns 
     } else {
       []
     }
 
-    print $all_targets
-
-    # # Get ignore patterns and glob files
-
-
-    # # Only keep files, not directories
-    # let target_files = $all_items | where {|item| ($item | path type) == 'file'}
-
-    # if ($target_files | is-empty) {
-    #   print $"⚠ No files to pull from ($target)"
-    #   continue
-    # }
-
-    # # Copy each file back to source
-    # for file in $target_files {
-    #     let relative_path = $file | path relative-to $target
-    #     let source_path = $source | path join $relative_path
-
-    #     if not ($target | path exists) {
-    #         # mkdir ($source_path | path dirname)
-    #         print $"✓ mkdir ($source_path | path dirname)"
-    #     }
-    #     cp $file $source_path
-    #     print $"✓ Pulled ($relative_path)"
-    # }
+    if ($target_files | is-empty) {
+      print $"⚠ No files to pull from ($target)"
+      continue
     }
+
+    # Copy each file back to source
+    for file in $target_files {
+      print $"file: ($file), target: ($target)"
+      let relative_path = $file | path relative-to $target
+      let source_path = $source | path join $relative_path
+
+      if not ($target | path exists) {
+          # mkdir ($source_path | path dirname)
+          print $"✓ mkdir ($source_path | path dirname)"
+      }
+      # cp $file $source_path
+      print $"✓ Pulled ($relative_path)"
+    }
+  }
 }
 
 def get-mappings [] {
