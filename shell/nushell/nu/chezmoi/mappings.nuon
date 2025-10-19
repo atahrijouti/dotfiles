@@ -35,6 +35,6 @@
   { source :'shell/zsh/.zshrc', target: '~/.zshrc', only: [linux, macos] },
   { source :'shell/zsh/.zshenv', target: '~/.zshenv', only: [linux, macos] },
   { source :'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases', only: [linux, macos] },
-  { source: 'windows/clink', target: '~/AppData/Local/clink', only: [windows] },
+  { source: 'windows/clink', target: '~/AppData/Local/clink', only: [windows], ignore: [clink_history* clink.log clink_error*] },
   { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode/scripts.yaml', only: [windows] }
 ]
