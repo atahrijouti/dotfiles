@@ -1,5 +1,3 @@
-#!/usr/bin/env nu
-
 # Manage dotfiles à la chezmoi, with extra features to handle multiple OS setups
 # 
 # chezmoi est chez toi
@@ -8,25 +6,15 @@ export def main [] {
 
 export def "apply" [] {
   let mappings = get-mappings
-  let os = $nu.os-info.name
   let dotfiles_root = $nu.home-path | path join source dotfiles
 
   for m in $mappings {
-   # --- Check if should skip based on 'only' field ---
-    let only_list = $m | get -o only | default []
-    let skip = ($only_list | is-not-empty) and not ($only_list | any {|x| $x == $os})
-    if $skip { continue }
+    if (should-skip $m) { continue }
 
-    # --- Resolve target ---
-    let target_raw = if (($m.target | describe -d | get type) == 'record') {
-      $m.target | get -o $os
-    } else {
-      $m.target
-    }
+    let target_relative = resolve-target $m
+    if $target_relative == null { continue }
 
-    if $target_raw == null { continue }
-
-    let target = $target_raw | path expand -n
+    let target = $target_relative | path expand -n
     let source_raw = ($dotfiles_root | path join $m.source | path expand -n)
     let is_dir = ($source_raw | path type) == 'dir' 
 
@@ -44,25 +32,14 @@ export def "apply" [] {
   }
 }
 
-
 export def "pull" [] {
   let mappings = get-mappings
-  let os = $nu.os-info.name
   let dotfiles_root = $nu.home-path | path join source dotfiles
 
   for m in $mappings {
-    # --- Check if should skip based on 'only' field ---
-    let only_list = $m | get -o only | default []
-    let skip = ($only_list | is-not-empty) and not ($only_list | any {|x| $x == $os})
-    if $skip { continue }
+    if (should-skip $m) { continue }
 
-    # --- Resolve target ---
-    let target_relative = if (($m.target | describe -d | get type) == 'record') {
-      $m.target | get -o $os
-    } else {
-      $m.target
-    }
-
+    let target_relative = resolve-target $m
     if $target_relative == null { continue }
 
     let target = $target_relative | path expand -n
@@ -112,4 +89,18 @@ export def "pull" [] {
 def get-mappings [] {
   const mappings_file = path self ./mappings.nuon
   $mappings_file | open
+}
+
+def should-skip [mapping: record] {
+  let os = $nu.os-info.name
+  let only_list = $mapping | get -o only | default []
+  ($only_list | is-not-empty) and not ($only_list | any {|x| $x == $os})
+}
+ 
+def resolve-target [mapping: record] {
+  if ($mapping.target | describe -d | get type) == 'record' {
+    $mapping.target | get -o $nu.os-info.name
+  } else {
+    $mapping.target
+  } 
 }
