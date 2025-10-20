@@ -57,15 +57,15 @@ export def "pull" [] {
     if $skip { continue }
 
     # --- Resolve target ---
-    let target_raw = if (($m.target | describe -d | get type) == 'record') {
+    let target_relative = if (($m.target | describe -d | get type) == 'record') {
       $m.target | get -o $os
     } else {
       $m.target
     }
 
-    if $target_raw == null { continue }
+    if $target_relative == null { continue }
 
-    let target = $target_raw | path expand -n
+    let target = $target_relative | path expand -n
     let source = $dotfiles_root | path join $m.source 
     
     # Check if target exists
@@ -79,7 +79,7 @@ export def "pull" [] {
     } else if ($target | path type) == dir { 
       # the extra __never_match__/** is because glob won't allow me to pass in just one pattern that doesn't use `foldername/**`
       let ignore_patterns = $m | get -o ignore | default [] | append '__never_match__/**'
-      glob $"($target_raw)/**/*" --no-dir --exclude $ignore_patterns 
+      glob $"($target_relative)/**/*" --no-dir --exclude $ignore_patterns 
     } else {
       []
     }
@@ -91,20 +91,18 @@ export def "pull" [] {
 
     # Copy each file back to source
     for target_file in $target_files {
-      let relative_path = $target_file | path relative-to $target
-
-      let source_path = if ($target | path type ) == target_file {
+      let source_path = if ($target | path type ) == file {
         $source
       } else {
         let relative_path = $target_file | path relative-to $target
         $source | path join $relative_path | path expand -n
       }
 
-      if not ($target | path exists) {
-          # mkdir ($source_path | path dirname)
-          print $"✓ mkdir ($source_path | path dirname)"
+      let source_dir = $source_path | path dirname
+      if not ($source_dir | path exists) {
+          # mkdir $source_dir
+          print $"✓ mkdir ($source_dir)"
       }
-
       # cp $target_file $source_path
       print $"cp ($target_file) ($source_path)"
     }
