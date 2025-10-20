@@ -72,8 +72,8 @@ export def "pull" [] {
         $source
       } else {
         let relative_path = $target_file | path relative-to $target
-        $source | path join $relative_path | path expand -n
-      }
+        $source | path join $relative_path 
+      } | path expand -n
 
       let source_dir = $source_path | path dirname
       if not ($source_dir | path exists) {
