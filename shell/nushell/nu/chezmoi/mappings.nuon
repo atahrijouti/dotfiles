@@ -21,7 +21,6 @@
   {
     source: 'ides/zed',
     target: { linux: '~/test/.config/zed', windows: '~/test/AppData/Roaming/zed', macos: '~/test/.config/zed' },
-    ignore: [.* copilot/** db/**]
   },
   {
     source: 'linux/koi/koirc',
