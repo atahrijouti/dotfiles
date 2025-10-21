@@ -15,7 +15,6 @@
     source: 'ides/helix',
     target: { linux: '~/test/.config/helix', windows: '~/test/AppData/Roaming/helix', macos: '~/test/.config/helix' },
     ignore: [runtime/**]
-
   },
   { source: 'ides/jetbrains/.ideavimrc', target: '~/test/.ideavimrc' },
   {

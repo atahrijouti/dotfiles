@@ -54,9 +54,17 @@ export def "pull" [] {
     let target_files = if ($target | path type) == file {
       [ $target ]
     } else if ($target | path type) == dir { 
-      # the extra __never_match__/** is because glob won't allow me to pass in just one pattern that doesn't use `foldername/**`
-      let ignore_patterns = $m | get -o ignore | default [] | append '__never_match__/**'
-      glob $"($target_relative)/**/*" --no-dir --exclude $ignore_patterns 
+      let ignore_attribute = $m | get -o ignore | default []
+      let includes_attribute = $m | get -o includes | default []
+      if ($includes_attribute | is-not-empty) {
+        $includes_attribute | each {|pattern|
+          glob $"($target_relative)/($pattern)" --no-dir
+        } | flatten
+      } else {
+        # the extra __never_match__/** is because glob won't allow me to pass in just one pattern that doesn't use `foldername/**`
+        let ignore_patterns = $ignore_attribute | append '__never_match__/**'
+        glob $"($target_relative)/**/*" --no-dir --exclude $ignore_patterns 
+      }
     } else {
       []
     }
