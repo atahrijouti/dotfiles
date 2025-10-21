@@ -17,16 +17,16 @@
     target: { linux: '~/.config/helix', windows: '~/AppData/Roaming/helix', macos: '~/.config/helix' },
     excludes: [runtime/** themes/site-theme.toml]
   },
-  # { source: 'ides/jetbrains/.ideavimrc', target: '~/.ideavimrc' },
-  # {
-  #   source: 'ides/zed',
-  #   target: { linux: '~/.config/zed', windows: '~/AppData/Roaming/zed', macos: '~/.config/zed' },
-  #   includes: [keymap.json settings.json tasks.json themes/**]
-  # },
-  # {
-  #   source: 'linux/koi/koirc',
-  #   target: '~/.config/koirc', only: [linux]
-  # },
+  { source: 'ides/jetbrains/.ideavimrc', target: '~/.ideavimrc' },
+  {
+    source: 'ides/zed',
+    target: { linux: '~/.config/zed', windows: '~/AppData/Roaming/zed', macos: '~/.config/zed' },
+    includes: [keymap.json settings.json tasks.json themes/**]
+  },
+  {
+    source: 'linux/koi/koirc',
+    target: '~/.config/koirc', only: [linux]
+  },
   {
     source: 'shell/nushell',
     target: { windows: '~/AppData/Roaming/nushell', linux: '~/.config/nushell', macos: '~/Library/Application Support/nushell' }
@@ -34,9 +34,9 @@
   },
   { source: 'shell/wezterm', target: '~/.config/wezterm' },
   { source :'shell/starship/starship.toml', target: '~/.config/starship.toml' },
-  # { source :'shell/zsh/.zshrc', target: '~/.zshrc', only: [linux, macos] },
-  # { source :'shell/zsh/.zshenv', target: '~/.zshenv', only: [linux, macos] },
-  # { source :'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases', only: [linux, macos] },
-  # { source: 'windows/clink', target: '~/AppData/Local/clink', only: [windows], excludes: [clink_history* clink.log clink_error*] },
-  # { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode/scripts.yaml', only: [windows] }
+  { source :'shell/zsh/.zshrc', target: '~/.zshrc', only: [linux, macos] },
+  { source :'shell/zsh/.zshenv', target: '~/.zshenv', only: [linux, macos] },
+  { source :'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases', only: [linux, macos] },
+  { source: 'windows/clink', target: '~/AppData/Local/clink', only: [windows], excludes: [clink_history* clink.log clink_error*] },
+  { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode/scripts.yaml', only: [windows] }
 ]
