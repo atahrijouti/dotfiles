@@ -30,6 +30,7 @@
   {
     source: 'shell/nushell',
     target: { windows: '~/test/AppData/Roaming/nushell', linux: '~/test/.config/nushell', macos: '~/test/Library/Application Support/nushell' }
+    excludes: [vendor/autoload/** history.*]
   },
   { source: 'shell/wezterm', target: '~/test/.config/wezterm' },
   { source :'shell/starship/starship.toml', target: '~/test/.config/starship.toml' },
