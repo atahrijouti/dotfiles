@@ -23,12 +23,13 @@ export def "apply" [] {
     
     # Create target directory only once
     if not ($target_dir | path exists) {
-      # mkdir $target_dir
+      mkdir $target_dir
       print $"✓ mkdir ($target_dir)"
     }
 
     # --- Simple copy ---
     print $"cp -r ($source) ($target)"
+    cp -r ($source | into glob) $target
   }
 }
 
@@ -87,11 +88,11 @@ export def "pull" [] {
 
       let source_dir = $source_path | path dirname
       if not ($source_dir | path exists) {
-          # mkdir $source_dir
+          mkdir $source_dir
           print $"✓ mkdir ($source_dir)"
       }
-      # cp $target_file $source_path
       print $"cp ($target_file) ($source_path)"
+      cp $target_file $source_path
     }
   }
 }
