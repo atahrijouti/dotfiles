@@ -6,7 +6,7 @@ if $is_windows {
 }
 
 $env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
-$env.NU_LIB_DIRS ++= [ ($env.DOTFILES | path join shell nushell nu) ]
+$env.NU_LIB_DIRS ++= [ ($nu.data-dir | path join nu) ]
 
 # generate autoload files
 if false {
