@@ -1,3 +1,6 @@
+const DOTFILES_ROOT = '~/source/dotfiles'
+const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
+
 # Manage dotfiles à la chezmoi, with extra features to handle multiple OS setups
 # 
 # chezmoi est chez toi
@@ -6,7 +9,6 @@ export def main [] {
 
 export def "apply" [--dry-run] {
   let mappings = get-mappings
-  let dotfiles_root = $nu.home-path | path join source dotfiles
 
   for m in $mappings {
     if (should-skip $m) { continue }
@@ -15,7 +17,7 @@ export def "apply" [--dry-run] {
     if $target_relative == null { continue }
 
     let target = $target_relative | path expand -n
-    let source_raw = ($dotfiles_root | path join $m.source | path expand -n)
+    let source_raw = ($DOTFILES_ROOT | path join $m.source | path expand -n)
     let is_dir = ($source_raw | path type) == 'dir' 
 
     let source = if $is_dir { $source_raw | path join '*'  } else { $source_raw }
@@ -37,7 +39,6 @@ export def "apply" [--dry-run] {
 
 export def "pull" [--dry-run] {
   let mappings = get-mappings
-  let dotfiles_root = $nu.home-path | path join source dotfiles
 
   for m in $mappings {
     if (should-skip $m) { continue }
@@ -46,7 +47,7 @@ export def "pull" [--dry-run] {
     if $target_relative == null { continue }
 
     let target = $target_relative | path expand -n
-    let source = $dotfiles_root | path join $m.source 
+    let source = $DOTFILES_ROOT | path join $m.source 
     
     # Check if target exists
     if not ($target | path exists) {
@@ -124,3 +125,57 @@ def resolve-target [mapping: record] {
     $mapping.target
   } 
 }
+
+def load-state [] {
+  if not ($STATE_FILE | path exists) { return {} }
+  open $STATE_FILE
+}
+
+def save-state [state: record] {
+  let state_dir = $STATE_FILE | path dirname
+  if not ($state_dir | path exists) { mkdir $state_dir }
+  $state | save -f $STATE_FILE
+}
+
+def enumerate-files [mapping: record] {
+  let target_relative = resolve-target $mapping
+  if $target_relative == null { return [] }
+
+  let target = $target_relative | path expand -n
+  let source = $DOTFILES_ROOT | path join $mapping.source | path expand -n
+
+  if not ($source | path exists) { return [] }
+
+  let is_dir = ($source | path type) == 'dir'
+
+  if not $is_dir {
+    return [{
+      source: $source,
+      target: $target,
+      mapping: $mapping
+    }]
+  }
+
+  let source_relative = $mapping.source
+  let excludes = $mapping | get -o excludes | default []
+  let includes = $mapping | get -o includes | default []
+
+  let files = if ($includes | is-not-empty) {
+    $includes | each {|pattern|
+      glob $"($source)/($pattern)" --no-dir
+    } | flatten
+  } else {
+    let exclude_patterns = $excludes | append '__never_match__/**'
+    glob $"($source)/**/*" --no-dir --exclude $exclude_patterns
+  }
+
+  $files | each {|file|
+    let relative = $file | path relative-to $source
+    {
+      source: $file,
+      target: ($target | path join $relative | path expand -n),
+      mapping: $mapping
+    }
+  }
+}
+
