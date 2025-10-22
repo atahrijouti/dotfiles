@@ -8,34 +8,75 @@ export def main [] {
 }
 
 export def "apply" [--dry-run] {
-  let mappings = get-mappings
+    let mappings = get-mappings
+    let dotfiles_root = $nu.home-path | path join source dotfiles
+    mut state = load-state
 
-  for m in $mappings {
-    if (should-skip $m) { continue }
+    for m in $mappings {
+      if (should-skip $m) { continue }
 
-    let target_relative = resolve-target $m
-    if $target_relative == null { continue }
+      let files = enumerate-files $m
 
-    let target = $target_relative | path expand -n
-    let source_raw = ($DOTFILES_ROOT | path join $m.source | path expand -n)
-    let is_dir = ($source_raw | path type) == 'dir' 
+      for file in $files {
+        let source_hash = file-hash $file.source
+        let target_hash = file-hash $file.target
+        let last_applied = $state | get -o $file.target
 
-    let source = if $is_dir { $source_raw | path join '*'  } else { $source_raw }
-    let target_dir = if $is_dir { $target  } else { $target | path dirname | path expand -n }
-    
-    # Create target directory only once
-    if not ($target_dir | path exists) {
-      mkdir $target_dir
-      print $"✓ mkdir ($target_dir)"
+        if $target_hash == $last_applied {
+          let target_dir = $file.target | path dirname
+          if not ($target_dir | path exists) {
+            if not $dry_run {
+              mkdir $target_dir
+            }
+            print $"✓ mkdir ($target_dir)"
+          }
+
+          print $"→ cp ($file.source) ($file.target)"
+          if not $dry_run {
+            cp $file.source $file.target
+            $state = ($state | upsert $file.target $source_hash)
+          }
+        } else if $target_hash == null {
+          let target_dir = $file.target | path dirname
+          if not ($target_dir | path exists) {
+            mkdir $target_dir
+            print $"✓ mkdir ($target_dir)"
+          }
+
+          print $"→ cp ($file.source) ($file.target)"
+          if not $dry_run {
+            cp $file.source $file.target
+            $state = ($state | upsert $file.target $source_hash)
+          }
+
+        } else if $last_applied == null {
+          if $source_hash == $target_hash {
+            print $"✓ ($file.target) - already matches"
+            if not $dry_run {
+              $state = ($state | upsert $file.target $source_hash)
+            }
+          } else {
+            print $"⚠ SKIP ($file.target) - exists with different content (run 'pull' first or remove file)"
+          }
+
+        } else {
+          if $source_hash == $last_applied {
+            print $"⚠ SKIP ($file.target) - local changes detected (run 'pull' to save)"
+          } else if $source_hash == $target_hash {
+            print $"✓ ($file.target) - already matches"
+            if not $dry_run {
+              $state = ($state | upsert $file.target $source_hash)
+            }
+          } else {
+            print $"⚠ CONFLICT ($file.target) - both source and target changed (resolve manually)"
+          }
+        }
+      }
     }
 
-    # --- Simple copy ---
-    print $"cp -r ($source) ($target)"
-    if not $dry_run {
-      cp -r ($source | into glob) $target
-    }
+    save-state $state
+    print "\n✓ Apply complete"
   }
-}
 
 export def "pull" [--dry-run] {
   let mappings = get-mappings
