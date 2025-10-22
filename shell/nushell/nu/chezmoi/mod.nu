@@ -1,5 +1,6 @@
 const DOTFILES_ROOT = '~/source/dotfiles'
 const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
+const MAPPINGS_FILE = path self ./mappings.nuon
 
 # Manage dotfiles à la chezmoi, with extra features to handle multiple OS setups
 # 
@@ -7,9 +8,8 @@ const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
 export def main [] {
 }
 
-export def "apply" [--dry-run] {
+export def "apply" [--dry-run --verbose] {
     let mappings = get-mappings
-    let dotfiles_root = $nu.home-path | path join source dotfiles
     mut state = load-state
 
     for m in $mappings {
@@ -28,10 +28,14 @@ export def "apply" [--dry-run] {
             if not $dry_run {
               mkdir $target_dir
             }
-            print $"✓ mkdir ($target_dir)"
+            if $verbose {
+              print $"✓ mkdir ($target_dir)"
+            }
           }
 
-          print $"→ cp ($file.source) ($file.target)"
+          if $verbose {
+            print $"→ cp ($file.source) ($file.target)"
+          }
           if not $dry_run {
             cp $file.source $file.target
             $state = ($state | upsert $file.target $source_hash)
@@ -40,10 +44,14 @@ export def "apply" [--dry-run] {
           let target_dir = $file.target | path dirname
           if not ($target_dir | path exists) {
             mkdir $target_dir
-            print $"✓ mkdir ($target_dir)"
+            if $verbose {
+              print $"✓ mkdir ($target_dir)"
+            }
           }
 
-          print $"→ cp ($file.source) ($file.target)"
+          if $verbose {
+            print $"→ cp ($file.source) ($file.target)"
+          }
           if not $dry_run {
             cp $file.source $file.target
             $state = ($state | upsert $file.target $source_hash)
@@ -51,24 +59,28 @@ export def "apply" [--dry-run] {
 
         } else if $last_applied == null {
           if $source_hash == $target_hash {
-            print $"✓ ($file.target) - already matches"
+            if $verbose {
+              print $"✓ ($file.target) - already matches"
+            }
             if not $dry_run {
               $state = ($state | upsert $file.target $source_hash)
             }
           } else {
-            print $"⚠ SKIP ($file.target) - exists with different content (run 'pull' first or remove file)"
+            print $"⚠ SKIP ($file.target) - exists with different content \(run 'pull' first or remove file)"
           }
 
         } else {
           if $source_hash == $last_applied {
-            print $"⚠ SKIP ($file.target) - local changes detected (run 'pull' to save)"
+            print $"⚠ SKIP ($file.target) - local changes detected \(run 'pull' to save)"
           } else if $source_hash == $target_hash {
-            print $"✓ ($file.target) - already matches"
+            if $verbose {
+              print $"✓ ($file.target) - already matches"
+            }
             if not $dry_run {
               $state = ($state | upsert $file.target $source_hash)
             }
           } else {
-            print $"⚠ CONFLICT ($file.target) - both source and target changed (resolve manually)"
+            print $"⚠ CONFLICT ($file.target) - both source and target changed \(resolve manually)"
           }
         }
       }
@@ -149,8 +161,7 @@ def file-hash [path: string] {
 }
 
 def get-mappings [] {
-  const mappings_file = path self ./mappings.nuon
-  $mappings_file | open
+  $MAPPINGS_FILE | open
 }
 
 def should-skip [mapping: record] {
@@ -183,7 +194,7 @@ def enumerate-files [mapping: record] {
   if $target_relative == null { return [] }
 
   let target = $target_relative | path expand -n
-  let source = $DOTFILES_ROOT | path join $mapping.source | path expand -n
+  let source = $"($DOTFILES_ROOT)/($mapping.source)"
 
   if not ($source | path exists) { return [] }
 
@@ -191,13 +202,12 @@ def enumerate-files [mapping: record] {
 
   if not $is_dir {
     return [{
-      source: $source,
+      source: ($source | path expand -n),
       target: $target,
       mapping: $mapping
     }]
   }
 
-  let source_relative = $mapping.source
   let excludes = $mapping | get -o excludes | default []
   let includes = $mapping | get -o includes | default []
 
