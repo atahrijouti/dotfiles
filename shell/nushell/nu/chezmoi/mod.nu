@@ -4,7 +4,7 @@
 export def main [] {
 }
 
-export def "apply" [] {
+export def "apply" [--dry-run] {
   let mappings = get-mappings
   let dotfiles_root = $nu.home-path | path join source dotfiles
 
@@ -29,11 +29,13 @@ export def "apply" [] {
 
     # --- Simple copy ---
     print $"cp -r ($source) ($target)"
-    cp -r ($source | into glob) $target
+    if not $dry_run {
+      cp -r ($source | into glob) $target
+    }
   }
 }
 
-export def "pull" [] {
+export def "pull" [--dry-run] {
   let mappings = get-mappings
   let dotfiles_root = $nu.home-path | path join source dotfiles
 
@@ -92,9 +94,16 @@ export def "pull" [] {
           print $"✓ mkdir ($source_dir)"
       }
       print $"cp ($target_file) ($source_path)"
-      cp $target_file $source_path
+      if not $dry_run {
+        cp $target_file $source_path
+      }
     }
   }
+}
+
+def file-hash [path: string] {
+  if not ($path | path exists) { return null }
+  open --raw $path | hash sha256
 }
 
 def get-mappings [] {
