@@ -20,9 +20,15 @@ export def "apply" [--dry-run --verbose] {
       for file in $files {
         let source_hash = file-hash $file.source
         let target_hash = file-hash $file.target
-        let last_applied = $state | get -o $file.target
+        let last_applied_hash = $state | get -o $file.target
 
-        if $target_hash == $last_applied {
+        let target_exists = $target_hash != null
+        let target_changed_since_last_apply = $target_hash != $last_applied_hash
+        let source_changed_since_last_apply = $source_hash != $last_applied_hash
+        let is_first_time = $last_applied_hash == null
+        let source_matches_target = $source_hash == $target_hash
+
+        if not $target_exists {
           let target_dir = $file.target | path dirname
           if not ($target_dir | path exists) {
             if not $dry_run {
@@ -40,10 +46,30 @@ export def "apply" [--dry-run --verbose] {
             cp $file.source $file.target
             $state = ($state | upsert $file.target $source_hash)
           }
-        } else if $target_hash == null {
+
+        } else if $is_first_time {
+          if $source_matches_target {
+            if $verbose {
+              print $"✓ ($file.target) - already matches"
+            }
+            if not $dry_run {
+              $state = ($state | upsert $file.target $source_hash)
+            }
+          } else {
+            print $"⚠ SKIP ($file.target) - exists with different content \(run 'pull' first or remove file)"
+          }
+        } else if not $source_changed_since_last_apply and not $target_changed_since_last_apply {
+          if $verbose {
+            print $"✓ ($file.target) - up to date"
+          }
+        } else if not $source_changed_since_last_apply and $target_changed_since_last_apply {
+          print $"⚠ SKIP ($file.target) - local changes detected \(run 'pull' to save)"
+        } else if $source_changed_since_last_apply and not $target_changed_since_last_apply {
           let target_dir = $file.target | path dirname
           if not ($target_dir | path exists) {
-            mkdir $target_dir
+            if not $dry_run {
+              mkdir $target_dir
+            }
             if $verbose {
               print $"✓ mkdir ($target_dir)"
             }
@@ -57,31 +83,8 @@ export def "apply" [--dry-run --verbose] {
             $state = ($state | upsert $file.target $source_hash)
           }
 
-        } else if $last_applied == null {
-          if $source_hash == $target_hash {
-            if $verbose {
-              print $"✓ ($file.target) - already matches"
-            }
-            if not $dry_run {
-              $state = ($state | upsert $file.target $source_hash)
-            }
-          } else {
-            print $"⚠ SKIP ($file.target) - exists with different content \(run 'pull' first or remove file)"
-          }
-
         } else {
-          if $source_hash == $last_applied {
-            print $"⚠ SKIP ($file.target) - local changes detected \(run 'pull' to save)"
-          } else if $source_hash == $target_hash {
-            if $verbose {
-              print $"✓ ($file.target) - already matches"
-            }
-            if not $dry_run {
-              $state = ($state | upsert $file.target $source_hash)
-            }
-          } else {
-            print $"⚠ CONFLICT ($file.target) - both source and target changed \(resolve manually)"
-          }
+          print $"⚠ CONFLICT ($file.target) - both source and target changed \(resolve manually)"
         }
       }
     }
