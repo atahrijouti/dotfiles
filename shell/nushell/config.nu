@@ -41,6 +41,6 @@ alias lg = lazygit
 alias 'g h' = cd ~
 alias 'g d' = cd ~/source/dotfiles/
 alias 'g p' = cd ~/playground/
-alias 'g c' = cd $nu.data-dir
+alias 'g c' = cd $nu.default-config-dir
 
 use ./nu/chezmoi
