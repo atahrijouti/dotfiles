@@ -9,7 +9,8 @@ export def main [] {
 }
 
 export def "apply" [--dry-run --verbose] {
-  let v = $verbose or $dry_run
+  let $vd = $verbose or $dry_run
+
   let mappings = get-mappings
   mut state = load-state
   for m in $mappings {
@@ -34,32 +35,28 @@ export def "apply" [--dry-run --verbose] {
           if not $dry_run {
             mkdir $target_dir
           }
-          # if $v {
-            print $" mkdir ($target_dir)"
-          # }
+          print $" mkdir ($target_dir)"
         }
 
-        # if $v {
-          print $" cp ($file.source) ($file.target)"
-        # }
         if not $dry_run {
           cp $file.source $file.target
           $state = ($state | upsert $file.target $source_hash)
         }
+        print $" cp ($file.source) ($file.target)"
 
       } else if $is_first_time {
         if $source_matches_target {
-          if $v {
-            print $"✓ ($file.target) - already matches"
-          }
           if not $dry_run {
             $state = ($state | upsert $file.target $source_hash)
+          }
+          if $verbose {
+            print $"✓ ($file.target) - already matches"
           }
         } else {
           print $"⚠ SKIP ($file.target) - exists with different content \(run 'pull' first or remove file)"
         }
       } else if not $source_changed_since_last_apply and not $target_changed_since_last_apply {
-        if $v {
+        if $verbose {
           print $"✓ ($file.target) - up to date"
         }
       } else if not $source_changed_since_last_apply and $target_changed_since_last_apply {
@@ -70,19 +67,14 @@ export def "apply" [--dry-run --verbose] {
           if not $dry_run {
             mkdir $target_dir
           }
-          # if $v {
-            print $"✓ mkdir ($target_dir)"
-          # }
+          print $" mkdir ($target_dir)"
         }
 
-        # if $v {
-          print $"→ cp ($file.source) ($file.target)"
-        # }
         if not $dry_run {
           cp $file.source $file.target
           $state = ($state | upsert $file.target $source_hash)
         }
-
+        print $" cp ($file.source) ($file.target)"
       } else {
         print $"⚠ CONFLICT ($file.target) - both source and target changed \(resolve manually)"
       }
