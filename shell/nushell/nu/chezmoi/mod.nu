@@ -161,13 +161,11 @@ export def "pull" [--dry-run --verbose] {
         continue
       }
 
-      # 2. target missing → skip (user probably deleted)
       if $target_missing {
         print $"⚠ SKIP : target missing for source : ($file.source)"
         continue
       }
 
-      # 3. source and target identical
       if $source_matches_target {
         if $source_hash != $last_applied_hash {
           if not $dry_run {
@@ -180,13 +178,11 @@ export def "pull" [--dry-run --verbose] {
         continue
       }
 
-      # 4. source changed only → skip (need apply to push changes)
       if $source_changed_only {
         print $"⚠ SKIP ($file.source) - remote/source changed (run 'apply' to update)"
         continue
       }
 
-      # 5. target changed only → copy from target → source
       if $target_changed_only {
         let source_dir = $file.source | path dirname
         if not ($source_dir | path exists) {
@@ -204,7 +200,6 @@ export def "pull" [--dry-run --verbose] {
         continue
       }
 
-      # 6. both changed → check if identical now, else conflict
       if $both_changed {
         if $source_hash == $target_hash {
           if not $dry_run {
