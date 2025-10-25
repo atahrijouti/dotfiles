@@ -23,18 +23,18 @@ export def "apply" [--dry-run --verbose] {
       let target_hash = file-hash $file.target
       let last_applied_hash = $state | get -o $file.target
 
-      let target_missing = $target_hash == null
       let source_missing = $source_hash == null
+      let target_missing = $target_hash == null
       let source_matches_target = $source_hash == $target_hash
-      let last_source_new_target = (
+      let target_changed_only = (
         $source_hash == $last_applied_hash and $target_hash != $last_applied_hash
       )
-      let new_source_last_target = (
+      let $source_changed_only = (
         $source_hash != $last_applied_hash and $target_hash == $last_applied_hash
       )
-      let new_source_new_target = (
+      let $both_changed = (
         $source_hash != $last_applied_hash
-        and $target_hash == $last_applied_hash
+        and $target_hash != $last_applied_hash
       )
 
       if $target_missing {
@@ -65,19 +65,14 @@ export def "apply" [--dry-run --verbose] {
           if not $dry_run {
             $state = ($state | upsert $file.target $source_hash)
           }
-          if $verbose {
-            print $"✓ ($file.target) - up to date"
-          }
+        }
+        if $verbose {
+          print $"✓ ($file.target) - up to date"
         }
         continue
       }
 
-      if $last_source_new_target {
-        print $"⚠ SKIP ($file.target) - local changes detected \(run 'pull' to save)"
-        continue
-      }
-
-      if $new_source_last_target {
+      if $source_changed_only {
         let target_dir = $file.target | path dirname
         if not ($target_dir | path exists) {
           if not $dry_run {
@@ -94,8 +89,23 @@ export def "apply" [--dry-run --verbose] {
         continue
       }
 
-      if $new_source_new_target {
-        print $"⚠ CONFLICT ($file.target) - both source and target changed \(resolve manually)"
+      if $target_changed_only {
+        print $"⚠ SKIP ($file.target) - local changes detected \(run 'pull' to save)"
+        continue
+      }
+
+      if $both_changed {
+        if $source_hash == $target_hash {
+          if not $dry_run {
+            $state = ($state | upsert $file.target $source_hash)
+          }
+          if $verbose {
+            print $"✓ ($file.target) - identical after changes"
+          }
+        } else {
+          print $"⚠ CONFLICT ($file.target) - both source and target changed \(resolve manually)"
+        }
+        continue
       }
     }
   }
