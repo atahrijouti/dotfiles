@@ -118,12 +118,7 @@ export def "apply" [--dry-run --verbose] {
 }
 
 export def "pull" [--dry-run --verbose] {
-  # print "→ git pull"
-  # cd ($nu.home-path | path join source dotfiles)
-  # git pull
-
   let mappings = get-mappings
-  let dotfiles_root = $nu.home-path | path join source dotfiles
   mut state = load-state
 
   for m in $mappings {
@@ -132,30 +127,104 @@ export def "pull" [--dry-run --verbose] {
     let files = enumerate-files $m
 
     for file in $files {
-      if not ($file.target | path exists) {
-        print $"⚠ SKIP ($file.source) - target not found: ($file.target)"
+      let source_hash = file-hash $file.source
+      let target_hash = file-hash $file.target
+      let last_applied_hash = $state | get -o $file.target
+
+      let target_missing = $target_hash == null
+      let source_missing = $source_hash == null
+      let source_matches_target = $source_hash == $target_hash
+      let source_changed_only = (
+        $source_hash != $last_applied_hash and $target_hash == $last_applied_hash
+      )
+      let target_changed_only = (
+        $source_hash == $last_applied_hash and $target_hash != $last_applied_hash
+      )
+      let both_changed = (
+        $source_hash != $last_applied_hash and $target_hash != $last_applied_hash
+      )
+
+      if $source_missing {
+        let source_dir = $file.source | path dirname
+        if not ($source_dir | path exists) {
+          if not $dry_run {
+            mkdir $source_dir
+          }
+          print $" mkdir ($source_dir)"
+        }
+
+        if not $dry_run {
+          cp $file.target $file.source
+          $state = ($state | upsert $file.target $target_hash)
+        }
+        print $" cp ($file.target) ($file.source)"
         continue
       }
 
-      let source_dir = $file.source | path dirname
-      if not ($source_dir | path exists) {
-        if not $dry_run {
-          mkdir $source_dir
+      # 2. target missing → skip (user probably deleted)
+      if $target_missing {
+        print $"⚠ SKIP : target missing for source : ($file.source)"
+        continue
+      }
+
+      # 3. source and target identical
+      if $source_matches_target {
+        if $source_hash != $last_applied_hash {
+          if not $dry_run {
+            $state = ($state | upsert $file.target $source_hash)
+          }
+        }
+        if $verbose {
+          print $"✓ ($file.source) - up to date"
+        }
+        continue
+      }
+
+      # 4. source changed only → skip (need apply to push changes)
+      if $source_changed_only {
+        print $"⚠ SKIP ($file.source) - remote/source changed (run 'apply' to update)"
+        continue
+      }
+
+      # 5. target changed only → copy from target → source
+      if $target_changed_only {
+        let source_dir = $file.source | path dirname
+        if not ($source_dir | path exists) {
+          if not $dry_run {
+            mkdir $source_dir
+          }
           print $" mkdir ($source_dir)"
         }
-      }
 
-      if not $dry_run {
-        cp $file.target $file.source
+        if not $dry_run {
+          cp $file.target $file.source
+          $state = ($state | upsert $file.target $target_hash)
+        }
         print $" cp ($file.target) ($file.source)"
+        continue
       }
 
-      let new_hash = file-hash $file.source
-      $state = ($state | upsert $file.target $new_hash)
+      # 6. both changed → check if identical now, else conflict
+      if $both_changed {
+        if $source_hash == $target_hash {
+          if not $dry_run {
+            $state = ($state | upsert $file.target $source_hash)
+          }
+          if $verbose {
+            print $"✓ ($file.source) - identical after changes"
+          }
+        } else {
+          print $"⚠ CONFLICT ($file.source) - both source and target changed (resolve manually)"
+        }
+        continue
+      }
     }
   }
 
-  save-state $state
+  if not $dry_run {
+    save-state $state
+  }
+
   print "\n✓ Pull complete"
 }
 
