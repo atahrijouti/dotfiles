@@ -9,8 +9,6 @@ export def main [] {
 }
 
 export def "apply" [--dry-run --verbose] {
-  let $vd = $verbose or $dry_run
-
   let mappings = get-mappings
   mut state = load-state
   for m in $mappings {
@@ -29,10 +27,10 @@ export def "apply" [--dry-run --verbose] {
       let target_changed_only = (
         $source_hash == $last_applied_hash and $target_hash != $last_applied_hash
       )
-      let $source_changed_only = (
+      let source_changed_only = (
         $source_hash != $last_applied_hash and $target_hash == $last_applied_hash
       )
-      let $both_changed = (
+      let both_changed = (
         $source_hash != $last_applied_hash
         and $target_hash != $last_applied_hash
       )
