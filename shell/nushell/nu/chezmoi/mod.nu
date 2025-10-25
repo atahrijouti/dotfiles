@@ -8,6 +8,39 @@ const MAPPINGS_FILE = path self ./mappings.nuon
 export def main [] {
 }
 
+
+export def "sync" [direction: string --dry-run --verbose] {
+  if not ($direction in ['apply' 'pull']) {
+    
+  }
+
+  let mappings = get-mappings
+  mut state = load-state
+  for m in $mappings {
+    if (should-skip $m) { continue }
+    let files = enumerate-files $m
+    for file in $files {
+      mut source_hash = file-hash $file.source
+      mut target_hash = file-hash $file.target
+      mut last_applied_hash = $state | get -o $file.target
+
+      mut source_missing = $source_hash == null
+      mut target_missing = $target_hash == null
+      mut source_matches_target = $source_hash == $target_hash
+      mut target_changed_only = (
+        $source_hash == $last_applied_hash and $target_hash != $last_applied_hash
+      )
+      let source_changed_only = (
+        $source_hash != $last_applied_hash and $target_hash == $last_applied_hash
+      )
+      let both_changed = (
+        $source_hash != $last_applied_hash
+        and $target_hash != $last_applied_hash
+      )
+    }
+  }
+}
+
 export def "apply" [--dry-run --verbose] {
   let mappings = get-mappings
   mut state = load-state
