@@ -23,13 +23,21 @@ export def "apply" [--dry-run --verbose] {
       let target_hash = file-hash $file.target
       let last_applied_hash = $state | get -o $file.target
 
-      let target_exists = $target_hash != null
-      let target_changed_since_last_apply = $target_hash != $last_applied_hash
-      let source_changed_since_last_apply = $source_hash != $last_applied_hash
-      let is_first_time = $last_applied_hash == null
+      let target_missing = $target_hash == null
+      let source_missing = $source_hash == null
       let source_matches_target = $source_hash == $target_hash
+      let last_source_new_target = (
+        $source_hash == $last_applied_hash and $target_hash != $last_applied_hash
+      )
+      let new_source_last_target = (
+        $source_hash != $last_applied_hash and $target_hash == $last_applied_hash
+      )
+      let new_source_new_target = (
+        $source_hash != $last_applied_hash
+        and $target_hash == $last_applied_hash
+      )
 
-      if not $target_exists {
+      if $target_missing {
         let target_dir = $file.target | path dirname
         if not ($target_dir | path exists) {
           if not $dry_run {
@@ -43,25 +51,33 @@ export def "apply" [--dry-run --verbose] {
           $state = ($state | upsert $file.target $source_hash)
         }
         print $" cp ($file.source) ($file.target)"
+        continue
+      }
 
-      } else if $is_first_time {
-        if $source_matches_target {
+      if $source_missing {
+        # TODO treat deletion cases
+        print $"⚠ SKIP : source missing for target : ($file.target)"  
+        continue
+      }
+
+      if $source_matches_target {
+        if $source_hash != $last_applied_hash {
           if not $dry_run {
             $state = ($state | upsert $file.target $source_hash)
           }
           if $verbose {
-            print $"✓ ($file.target) - already matches"
+            print $"✓ ($file.target) - up to date"
           }
-        } else {
-          print $"⚠ SKIP ($file.target) - exists with different content \(run 'pull' first or remove file)"
         }
-      } else if not $source_changed_since_last_apply and not $target_changed_since_last_apply {
-        if $verbose {
-          print $"✓ ($file.target) - up to date"
-        }
-      } else if not $source_changed_since_last_apply and $target_changed_since_last_apply {
+        continue
+      }
+
+      if $last_source_new_target {
         print $"⚠ SKIP ($file.target) - local changes detected \(run 'pull' to save)"
-      } else if $source_changed_since_last_apply and not $target_changed_since_last_apply {
+        continue
+      }
+
+      if $new_source_last_target {
         let target_dir = $file.target | path dirname
         if not ($target_dir | path exists) {
           if not $dry_run {
@@ -75,79 +91,62 @@ export def "apply" [--dry-run --verbose] {
           $state = ($state | upsert $file.target $source_hash)
         }
         print $" cp ($file.source) ($file.target)"
-      } else {
+        continue
+      }
+
+      if $new_source_new_target {
         print $"⚠ CONFLICT ($file.target) - both source and target changed \(resolve manually)"
       }
     }
   }
 
-  save-state $state
+  if not $dry_run {
+    save-state $state
+  }
+  
   print "\n✓ Apply complete"
 }
 
-export def "pull" [--dry-run] {
+export def "pull" [--dry-run --verbose] {
+  # print "→ git pull"
+  # cd ($nu.home-path | path join source dotfiles)
+  # git pull
+
   let mappings = get-mappings
+  let dotfiles_root = $nu.home-path | path join source dotfiles
+  mut state = load-state
 
   for m in $mappings {
     if (should-skip $m) { continue }
 
-    let target_relative = resolve-target $m
-    if $target_relative == null { continue }
+    let files = enumerate-files $m
 
-    let target = $target_relative | path expand -n
-    let source = $DOTFILES_ROOT | path join $m.source 
-    
-    # Check if target exists
-    if not ($target | path exists) {
-      print $"⚠ Skipped ($m.source) - target not found: ($target)"
-      continue
-    }
-
-    let target_files = if ($target | path type) == file {
-      [ $target ]
-    } else if ($target | path type) == dir { 
-      let excludes_attribute = $m | get -o excludes | default []
-      let includes_attribute = $m | get -o includes | default []
-      if ($includes_attribute | is-not-empty) {
-        $includes_attribute | each {|pattern|
-          glob $"($target_relative)/($pattern)" --no-dir
-        } | flatten
-      } else {
-        # the extra __never_match__/** is because glob won't allow me to pass in just one pattern that doesn't use `foldername/**`
-        let exclude_patterns = $excludes_attribute | append '__never_match__/**'
-        glob $"($target_relative)/**/*" --no-dir --exclude $exclude_patterns 
-        # print $exclude_patterns
-        # []
+    for file in $files {
+      if not ($file.target | path exists) {
+        print $"⚠ SKIP ($file.source) - target not found: ($file.target)"
+        continue
       }
-    } else {
-      []
-    }
 
-    if ($target_files | is-empty) {
-      print $"⚠ No files to pull from ($target)"
-      continue
-    }
-
-    # Copy each file back to source
-    for target_file in $target_files {
-      let source_path = if ($target | path type ) == file {
-        $source
-      } else {
-        let relative_path = $target_file | path relative-to $target
-        $source | path join $relative_path 
-      } | path expand -n
-
-      let source_dir = $source_path | path dirname
+      let source_dir = $file.source | path dirname
       if not ($source_dir | path exists) {
+        if not $dry_run {
           mkdir $source_dir
-          print $"✓ mkdir ($source_dir)"
+          print $" mkdir ($source_dir)"
+        }
       }
-      print $"cp ($target_file) ($source_path)"
+
       if not $dry_run {
-        cp $target_file $source_path
+        cp $file.target $file.source
+        print $" cp ($file.target) ($file.source)"
       }
+
+      let new_hash = file-hash $file.source
+      $state = ($state | upsert $file.target $new_hash)
     }
   }
+
+  save-state $state
+  print "\n✓ Pull complete"
 }
 
 def file-hash [path: string] {
