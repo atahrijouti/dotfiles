@@ -9,15 +9,62 @@ const POSSIBLE_DIRECTIONS = ['apply', 'pull']
 export def main [] {
 }
 
-export def "apply" [--dry-run --verbose] {
+export def apply [--dry-run --verbose] {
   sync apply --dry-run=$dry_run --verbose=$verbose
 }
 
-export def "pull" [--dry-run --verbose] {
+export def pull [--dry-run --verbose] {
   sync pull --dry-run=$dry_run --verbose=$verbose
 }
 
-export def "sync" [direction: string --dry-run --verbose] {
+export def status [--verbose] {
+  mut changes = []
+  let mappings = get-mappings
+  mut state = load-state
+  for m in $mappings {
+    if (os-skippable $m) { continue }
+    let files = enumerate-files $m
+    for file in $files {
+      let source_hash = file-hash $file.source
+      let target_hash = file-hash $file.target
+      let last_applied_hash = $state | get -o $file.target
+      let source_matches_target = $source_hash == $target_hash
+
+      let source_status = match $source_hash {
+        null => 'missing',
+        $last_applied_hash => 'unchanged',
+        _ => 'changed'
+      }
+
+      let target_status = match $target_hash {
+        null => 'missing',
+        $last_applied_hash => 'unchanged',
+        _ => 'changed'
+      }
+
+      if $file.target == 'C:\Users\atj\AppData\Roaming\nushell\nu\chezmoi\mod.nu' {
+        print {
+          hash: $target_hash,
+          last_has: $last_applied_hash
+        }
+      }
+
+      
+      if $source_status != 'unchanged' or $target_status != 'unchanged' or $verbose {
+        $changes ++= [{
+          source_status: $source_status,
+          source: $file.source
+          target_status: $target_status,
+          target: $file.target
+        }]
+      }
+    }
+  }
+
+  $changes
+}
+
+export def sync [direction: string --dry-run --verbose] {
   if not ($direction in $POSSIBLE_DIRECTIONS) {
     print $"direction takes ($POSSIBLE_DIRECTIONS), received ($direction)"
     return 
@@ -28,7 +75,7 @@ export def "sync" [direction: string --dry-run --verbose] {
   let mappings = get-mappings
   mut state = load-state
   for m in $mappings {
-    if (should-skip $m) { continue }
+    if (os-skippable $m) { continue }
     let files = enumerate-files $m
     for file in $files {
       let from = if $is_apply { $file.source } else { $file.target }
@@ -150,7 +197,7 @@ def get-mappings [] {
   $MAPPINGS_FILE | open
 }
 
-def should-skip [mapping: record] {
+def os-skippable [mapping: record] {
   let os = $nu.os-info.name
   let only_list = $mapping | get -o only | default []
   ($only_list | is-not-empty) and not ($only_list | any {|x| $x == $os})
