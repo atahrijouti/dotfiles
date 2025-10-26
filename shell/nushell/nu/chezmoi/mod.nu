@@ -138,7 +138,7 @@ export def "sync" [direction: string --dry-run --verbose] {
     save-state $state
   }
 
-  print $"\n✓ ($direction) complete"
+  print $"\n✓ ($direction | str capitalize) complete"
 }
 
 def file-hash [path: string] {
