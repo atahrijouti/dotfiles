@@ -17,6 +17,41 @@ export def pull [--dry-run --verbose] {
   sync pull --dry-run=$dry_run --verbose=$verbose
 }
 
+# last_applied == null
+# - untracked-both-missing : source == null and target == null  
+# - untracked-source-missing : target != null and source == null  
+# - untracked-target-missing : source != null and target == null  
+# - untracked-different : source != target and target != null and source != null  
+# - untracked-identical : source == target and source != null
+# last_applied != null
+# - both-deleted : source == null and target == null
+# - source-deleted : source == null and target == last_applied  
+# - source-deleted-target-changed : source == null and target != last_applied  
+# - target-deleted : target == null and source == last_applied 
+# - target-deleted-source-changed : target == null and source != last_applied 
+# - source-changed : source != last_applied and target == last_applied 
+# - target-changed : target != last_applied and source == last_applied 
+# - both-changed : target != last_applied and source != last_applied and target != source
+# - both-changed-identical : source != last_applied  and target != last_applied and source == target 
+# - up-to-date : source == last_applied and target == last_applied 
+
+def file_status [source, target, last] {
+  if $last == null {
+    match [$source, $target] {
+      [null, null] => 'untracked-both-missing',
+      [null, _] => 'untracked-source-missing',
+      [_, null] => 'untracked-target-missing',
+      [$s, $t] if $s == $t => 'untracked-identical',
+      _ => 'untracked-different'
+    }
+  
+  } else {
+    'unmatched'
+  }
+}
+
+
+
 export def status [--verbose] {
   mut changes = []
   let mappings = get-mappings
@@ -33,23 +68,9 @@ export def status [--verbose] {
       let source_status = file-status-based-on-hash $source_hash $last_applied_hash
       let target_status = file-status-based-on-hash $target_hash $last_applied_hash
 
-      # last_applied == null
-      # - untracked-both-missing : source == null and target == null  
-      # - untracked-source-missing : target != null and source == null  
-      # - untracked-target-missing : source != null and target == null  
-      # - untracked-diverged : source != target and target != null and source != null  
-      # - untracked-identical : source == target and source != null
-      # last_applied != null
-      # - both-deleted : source == null and target == null
-      # - source-deleted : source == null and target == last_applied  
-      # - source-deleted-target-changed : source == null and target != last_applied  
-      # - target-deleted : target == null and source == last_applied 
-      # - target-deleted-source-changed : target == null and source != last_applied 
-      # - source-changed : source != last_applied and target == last_applied 
-      # - target-changed : target != last_applied and source == last_applied 
-      # - conflict : target != last_applied and source != last_applied and target != source
-      # - both-changed-identical : source != last_applied  and target != last_applied and source == target 
-      # - up-to-date : source == last_applied and target == last_applied 
+
+
+      
 
 
 
