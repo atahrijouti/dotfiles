@@ -48,7 +48,7 @@ if [ -s "/opt/homebrew/bin/brew" ]; then
 fi
 
 autoload -Uz compinit
-compinit
+compinit -C
 
 # Starship
 [ -x "$(command -v starship)" ] && eval "$(starship init zsh)"
@@ -56,25 +56,21 @@ compinit
 # Bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
  
-# Task
-[ -x "$(command -v task)" ] && eval "$(task --completion zsh)"
-
 # fzf
 [ -x "$(command -v fzf)" ] && source <(fzf --zsh)
 
-
 # Rbenv
-[ -x "$(command -v rbenv)" ] && eval "$(rbenv init - zsh)"
+# [ -x "$(command -v rbenv)" ] && eval "$(rbenv init - zsh)"
 
 # SKMan
-[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # NVM
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    source $NVM_DIR/nvm.sh
-    source "$NVM_DIR/bash_completion"
-fi
+# if [ -s "$HOME/.nvm/nvm.sh" ]; then
+#     export NVM_DIR="$HOME/.nvm"
+#     source $NVM_DIR/nvm.sh
+#     source "$NVM_DIR/bash_completion"
+# fi
 
 if [ -d "$HOME/Applications/Emacs.app/Contents/MacOS/bin" ]; then
   export PATH="$HOME/Applications/Emacs.app/Contents/MacOS/bin:$PATH"
