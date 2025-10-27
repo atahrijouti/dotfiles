@@ -30,32 +30,41 @@ export def status [--verbose] {
       let last_applied_hash = $state | get -o $file.target
       let source_matches_target = $source_hash == $target_hash
 
-      let source_status = match $source_hash {
-        null => 'missing',
-        $last_applied_hash => 'unchanged',
-        _ => 'changed'
+      let source_status = file-status-based-on-hash $source_hash $last_applied_hash
+      let target_status = file-status-based-on-hash $target_hash $last_applied_hash
+
+      # last_applied == null
+      # - untracked-both-missing : source == null and target == null  
+      # - untracked-source-missing : target != null and source == null  
+      # - untracked-target-missing : source != null and target == null  
+      # - untracked-diverged : source != target and target != null and source != null  
+      # - untracked-identical : source == target and source != null
+      # last_applied != null
+      # - both-deleted : source == null and target == null
+      # - source-deleted : source == null and target == last_applied  
+      # - source-deleted-target-changed : source == null and target != last_applied  
+      # - target-deleted : target == null and source == last_applied 
+      # - target-deleted-source-changed : target == null and source != last_applied 
+      # - source-changed : source != last_applied and target == last_applied 
+      # - target-changed : target != last_applied and source == last_applied 
+      # - conflict : target != last_applied and source != last_applied and target != source
+      # - both-changed-identical : source != last_applied  and target != last_applied and source == target 
+      # - up-to-date : source == last_applied and target == last_applied 
+
+
+
+
+
+      mut status = 'up-to-date'
+
+      if $source_status == 'unchanged' and $target_status == 'unchanged' {
+        $status = 'up-to-date'
       }
 
-      let target_status = match $target_hash {
-        null => 'missing',
-        $last_applied_hash => 'unchanged',
-        _ => 'changed'
-      }
-
-      if $file.target == 'C:\Users\atj\AppData\Roaming\nushell\nu\chezmoi\mod.nu' {
-        print {
-          hash: $target_hash,
-          last_has: $last_applied_hash
-        }
-      }
-
-      
       if $source_status != 'unchanged' or $target_status != 'unchanged' or $verbose {
         $changes ++= [{
-          source_status: $source_status,
-          source: $file.source
-          target_status: $target_status,
-          target: $file.target
+          target: $file.target,
+          status: $source_status,
         }]
       }
     }
@@ -186,6 +195,14 @@ export def sync [direction: string --dry-run --verbose] {
   }
 
   print $"\n✓ ($direction | str capitalize) complete"
+}
+
+def file-status-based-on-hash [hash: string, last_hash: string] {
+  match $hash {
+    null => 'missing',
+    $x if $x != $last_hash => 'changed',
+    _ => 'unchanged'
+  }
 }
 
 def file-hash [path: string] {
