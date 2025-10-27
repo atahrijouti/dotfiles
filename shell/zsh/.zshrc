@@ -72,6 +72,9 @@ compinit -C
 #     source "$NVM_DIR/bash_completion"
 # fi
 
+# Mise
+[ -s "$HOME/.local/bin/mise" ] && eval "$($HOME/.local/bin/mise activate zsh)"
+
 if [ -d "$HOME/Applications/Emacs.app/Contents/MacOS/bin" ]; then
   export PATH="$HOME/Applications/Emacs.app/Contents/MacOS/bin:$PATH"
 fi
