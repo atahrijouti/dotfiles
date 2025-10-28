@@ -2,6 +2,7 @@ const DOTFILES_ROOT = '~/source/dotfiles'
 const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
 const MAPPINGS_FILE = path self ./mappings.nuon
 const POSSIBLE_DIRECTIONS = ['apply', 'pull']
+const OS = $nu.os-info.name
 
 # Manage dotfiles à la chezmoi, with extra features to handle multiple OS setups
 # 
@@ -17,83 +18,6 @@ export def pull [--dry-run --verbose] {
   sync pull --dry-run=$dry_run --verbose=$verbose
 }
 
-# last_applied == null
-# - untracked-both-missing : source == null and target == null  
-# - untracked-source-missing : target != null and source == null  
-# - untracked-target-missing : source != null and target == null  
-# - untracked-different : source != target and target != null and source != null  
-# - untracked-identical : source == target and source != null
-# last_applied != null
-# - both-deleted : source == null and target == null
-# - source-deleted : source == null and target == last_applied  
-# - source-deleted-target-changed : source == null and target != last_applied  
-# - target-deleted : target == null and source == last_applied 
-# - target-deleted-source-changed : target == null and source != last_applied 
-# - source-changed : source != last_applied and target == last_applied 
-# - target-changed : target != last_applied and source == last_applied 
-# - both-changed : target != last_applied and source != last_applied and target != source
-# - both-changed-identical : source != last_applied  and target != last_applied and source == target 
-# - up-to-date : source == last_applied and target == last_applied 
-
-def file_status [source, target, last] {
-  if $last == null {
-    match [$source, $target] {
-      [null, null] => 'untracked-both-missing',
-      [null, _] => 'untracked-source-missing',
-      [_, null] => 'untracked-target-missing',
-      [$s, $t] if $s == $t => 'untracked-identical',
-      _ => 'untracked-different'
-    }
-  
-  } else {
-    'unmatched'
-  }
-}
-
-
-
-export def status [--verbose] {
-  mut changes = []
-  let mappings = get-mappings
-  mut state = load-state
-  for m in $mappings {
-    if (os-skippable $m) { continue }
-    let files = enumerate-files $m
-    for file in $files {
-      let source_hash = file-hash $file.source
-      let target_hash = file-hash $file.target
-      let last_applied_hash = $state | get -o $file.target
-      let source_matches_target = $source_hash == $target_hash
-
-      let source_status = file-status-based-on-hash $source_hash $last_applied_hash
-      let target_status = file-status-based-on-hash $target_hash $last_applied_hash
-
-
-
-      
-
-
-
-
-
-      mut status = 'up-to-date'
-
-      if $source_status == 'unchanged' and $target_status == 'unchanged' {
-        $status = 'up-to-date'
-      }
-
-      if $source_status != 'unchanged' or $target_status != 'unchanged' or $verbose {
-        $changes ++= [{
-          target: $file.target,
-          status: $source_status,
-        }]
-      }
-    }
-  }
-
-  $changes
-}
-
 export def sync [direction: string --dry-run --verbose] {
   if not ($direction in $POSSIBLE_DIRECTIONS) {
     print $"direction takes ($POSSIBLE_DIRECTIONS), received ($direction)"
@@ -106,7 +30,7 @@ export def sync [direction: string --dry-run --verbose] {
   mut state = load-state
   for m in $mappings {
     if (os-skippable $m) { continue }
-    let files = enumerate-files $m
+    let files = enumerate-mapping-files $m
     for file in $files {
       let from = if $is_apply { $file.source } else { $file.target }
       let to = if $is_apply { $file.target } else { $file.source }
@@ -218,12 +142,82 @@ export def sync [direction: string --dry-run --verbose] {
   print $"\n✓ ($direction | str capitalize) complete"
 }
 
-def file-status-based-on-hash [hash: string, last_hash: string] {
-  match $hash {
-    null => 'missing',
-    $x if $x != $last_hash => 'changed',
-    _ => 'unchanged'
+export def status [--verbose] {
+  mut status_data = workable-files | each {|f| mapping-state-and-metadata $f (load-state) }
+
+  if not $verbose {
+    $status_data = $status_data | where {|f| $f.status != 'up-to-date' }
   }
+
+  $status_data
+}
+
+# last_applied == null
+# - untracked-both-missing      : source == null and target == null  
+# - untracked-source-missing    : target != null and source == null  
+# - untracked-target-missing    : source != null and target == null  
+# - untracked-different         : source != target and target != null and source != null  
+# - untracked-identical         : source == target and source != null
+# last_applied != null
+# - both-deleted                  : source == null and target == null
+# - source-deleted                : source == null and target == last_applied  
+# - source-deleted-target-changed : source == null and target != last_applied  
+# - target-deleted                : source == last_applied and target == null  
+# - target-deleted-source-changed : target == null and source != last_applied 
+# - source-changed                : source != last_applied and target == last_applied 
+# - target-changed                : target != last_applied and source == last_applied 
+# - both-changed-different        : target != last_applied and source != last_applied and target != source
+# - both-changed-identical        : source != last_applied  and target != last_applied and source == target 
+# - up-to-date                    : source == last_applied and target == last_applied 
+
+def mapping-state [source: oneof<string, nothing>, target: oneof<string, nothing>, last: oneof<string, nothing>] {
+  if $last == null {
+    match [$source, $target] {
+      [null, null] => 'untracked-both-missing'
+      [null, _]    => 'untracked-source-missing'
+      [_, null]    => 'untracked-target-missing'
+      [$s, $t] if $s == $t => 'untracked-identical'
+      [$s, $t] if $s != $t => 'untracked-different'
+    }
+  } else {
+    match [$source, $target] {
+      [null, null] => 'both-deleted'
+      [null, $t] if $t == $last => 'source-deleted'
+      [null, $t] if $t != $last => 'source-deleted-target-changed'
+      [$s, null] if $s == $last => 'target-deleted'
+      [$s, null] if $s != $last => 'target-deleted-source-changed'
+      [$s, $t] if $s != $last and $t == $last => 'source-changed'
+      [$s, $t] if $s == $last and $t != $last => 'target-changed'
+      [$s, $t] if $s != $last and $t != $last and $s == $t => 'both-changed-identical'
+      [$s, $t] if $s != $last and $t != $last and $s != $t => 'both-changed-different'
+      [$s, $t] if $s == $last and $t == $last => 'up-to-date'
+    }
+  }
+}
+
+def mapping-state-and-metadata [file: record, state: record] {
+  let source_hash = file-hash $file.source
+  let target_hash = file-hash $file.target
+  let last_hash = $state | get -o $file.target
+
+  let file_state = mapping-state $source_hash $target_hash $last_hash
+
+  return {
+    target: $file.target,
+    status: $file_state,
+  }
+}
+
+def workable-os [mapping: record] {
+  let only_list = $mapping | get -o only | default []
+  ($only_list | is-empty) or $OS in $only_list 
+}
+
+export def workable-files [] {
+  get-mappings
+  | where {|m| workable-os $m }
+  | each {|m| enumerate-mapping-files $m }
+  | flatten
 }
 
 def file-hash [path: string] {
@@ -260,7 +254,7 @@ def save-state [state: record] {
   $state | save -f $STATE_FILE
 }
 
-def enumerate-files [mapping: record] {
+def enumerate-mapping-files [mapping: record] {
   let target_relative = resolve-target $mapping
   if $target_relative == null { return [] }
 
