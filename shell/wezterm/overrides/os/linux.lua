@@ -7,6 +7,8 @@ M.run = function(config)
     config.enable_wayland = true
   end
 
+  config.default_prog = { "nu" }
+
   return config
 end
 
