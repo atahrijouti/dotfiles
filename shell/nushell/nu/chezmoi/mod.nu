@@ -242,8 +242,8 @@ def valid-mapping [mapping: record] {
 
 export def workable-files [] {
   get-mappings
-  | where {|m| workable-os $m }
   | where {|m| valid-mapping $m }
+  | where {|m| workable-os $m }
   | each {|m| enumerate-mapping-files $m }
   | flatten
 }

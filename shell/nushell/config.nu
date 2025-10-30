@@ -31,16 +31,5 @@ $env.config.color_config.shape_external = "red"
 $env.config.color_config.shape_external_resolved = "cyan"
 
 
-###### aliases
-def --env --wrapped lfcd [...args: string] {
-  cd (lf -print-last-dir ...$args)
-}
-
-alias l = lfcd
-alias lg = lazygit
-alias 'g h' = cd ~
-alias 'g d' = cd ~/source/dotfiles/
-alias 'g p' = cd ~/playground/
-alias 'g c' = cd $nu.default-config-dir
-
 use ./nu/chezmoi
+use nu/aliases.nu *
