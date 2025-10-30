@@ -213,9 +213,37 @@ def workable-os [mapping: record] {
   ($only_list | is-empty) or $OS in $only_list 
 }
 
+def valid-mapping [mapping: record] {
+  mut errors = []
+
+  if ($mapping | get -o source) == null {
+    $errors = $errors | append "source missing"
+  } else if (($mapping | describe -d).type == 'string') == null {
+    $errors = $errors | append "source is not a string"
+  }
+
+  if ($mapping | get -o target) == null {
+    $errors = $errors | append "target missing"
+  } else {
+    let target_type = $mapping.target | describe -d | get type
+    if $target_type not-in ['string', 'record'] {
+      $errors = $errors | append "target should either be a record or a type"
+    }
+  }
+
+  if ($errors | is-not-empty) {
+    print $errors
+    return false
+  }
+
+  return true
+}
+
+
 export def workable-files [] {
   get-mappings
   | where {|m| workable-os $m }
+  | where {|m| valid-mapping $m }
   | each {|m| enumerate-mapping-files $m }
   | flatten
 }
