@@ -38,8 +38,8 @@ export def sync [direction: string --dry-run --verbose] {
       let from_locale = if $is_apply {'source'} else {'local'}
       let to_locale = if $is_apply {'local'} else {'source'}
 
-      let from_hash = file-hash $from
-      let to_hash = file-hash $to
+      let from_hash = if $is_apply { $file.source_hash } else { $file.target_hash }
+      let to_hash = if $is_apply { $file.target_hash } else { $file.source_hash }
 
       let last_applied_hash = $state | get -o $file.target
 
@@ -149,7 +149,11 @@ export def status [--verbose] {
     $status_data = $status_data | where {|f| $f.status != 'up-to-date' }
   }
 
-  $status_data
+  if ($status_data | is-empty) {
+    'Up to date'
+  } else {
+    $status_data
+  }
 }
 
 # last_applied == null
@@ -282,22 +286,43 @@ def save-state [state: record] {
   $state | save -f $STATE_FILE
 }
 
-def enumerate-mapping-files [mapping: record] {
-  let target_relative = resolve-target $mapping
-  if $target_relative == null { return [] }
+export def enumerate-folder-files [root: string, includes: list, excludes: list] {
+  if not ($root | path exists) {
+    return []
+  }
+  if not (($root | path type) == dir) {
+    return [$root]
+  }
+  
+  let files = if ($includes | is-not-empty) {
+    $includes | each {|pattern|
+      glob $"($root)/($pattern)" --no-dir
+    } | flatten
+  } else {
+    let exclude_patterns = $excludes | append '__never_match__/**'
+    glob $"($root)/**/*" --no-dir --exclude $exclude_patterns
+  }
 
-  let target = $target_relative | path expand -n
-  let source = $"($DOTFILES_ROOT)/($mapping.source)"
+  $files | path relative-to $root
+}
 
-  if not ($source | path exists) { return [] }
+export def enumerate-mapping-files [mapping: record] {
+  let mapping_source = $mapping.source
+  let mapping_target = resolve-target $mapping
+  
+  let target = $mapping_target | path expand -n
+  let source = $"($DOTFILES_ROOT)/($mapping_source)"
+
 
   let is_dir = ($source | path type) == 'dir'
 
   if not $is_dir {
+    let expanded_source = $source | path expand -n
     return [{
-      source: ($source | path expand -n),
+      source: $expanded_source,
+      source_hash: (file-hash $expanded_source),
       target: $target,
-      mapping: $mapping
+      target_hash: (file-hash $target)
     }]
   }
 
@@ -313,12 +338,19 @@ def enumerate-mapping-files [mapping: record] {
     glob $"($source)/**/*" --no-dir --exclude $exclude_patterns
   }
 
-  $files | each {|file|
-    let relative = $file | path relative-to $source
+  let source_files = enumerate-folder-files $source $includes $excludes
+  let target_files = enumerate-folder-files $mapping_target $includes $excludes
+
+  let all_relative_paths =  $source_files | append $target_files | uniq
+
+  $all_relative_paths | each {|$relative|
+    let source_path = $source | path join $relative | path expand -n
+    let target_path = $target | path join $relative | path expand -n
     {
-      source: $file,
-      target: ($target | path join $relative | path expand -n),
-      mapping: $mapping
+      source: $source_path,
+      source_hash: (file-hash $source_path),
+      target: $target_path,
+      target_hash: (file-hash $target_path),
     }
   }
 }
