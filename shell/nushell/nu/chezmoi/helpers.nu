@@ -107,11 +107,16 @@ export def load-state [] {
   if not ($STATE_FILE | path exists) { return {} }
   open $STATE_FILE
 }
+export def update-state [state: record, target: path, hash: string] {
+  $state | upsert $target $hash
+}
 
 export def save-state [state: record] {
-  let state_dir = $STATE_FILE | path dirname
-  if not ($state_dir | path exists) { mkdir $state_dir }
-  $state | save -f $STATE_FILE
+  if not $env.DRY_RUN? {
+    let state_dir = $STATE_FILE | path dirname
+    if not ($state_dir | path exists) { mkdir $state_dir }
+    $state | save -f $STATE_FILE
+  }
 }
 
 export def list-folder-files [root: string, includes: list, excludes: list] {

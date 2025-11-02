@@ -9,14 +9,24 @@ export def main [] {
 }
 
 export def apply [--dry-run --verbose] {
-  sync apply --dry-run=$dry_run --verbose=$verbose
+  with-env {
+    DRY_RUN: $dry_run,
+    VERBOSE: $verbose
+  } {
+    sync apply
+  }
 }
 
 export def pull [--dry-run --verbose] {
-  sync pull --dry-run=$dry_run --verbose=$verbose
+  with-env {
+    DRY_RUN: $dry_run,
+    VERBOSE: $verbose
+  } {
+    sync pull
+  }
 }
 
-export def sync [direction: string --dry-run --verbose] {
+export def sync [direction: string] {
   if not ($direction in $POSSIBLE_DIRECTIONS) {
     print $"direction takes ($POSSIBLE_DIRECTIONS), received ($direction)"
     return 
@@ -55,13 +65,13 @@ export def sync [direction: string --dry-run --verbose] {
     if $to_missing {
       let to_dir = $to | path dirname
       if not ($to_dir | path exists) {
-        if not $dry_run {
+        if not $env.DRY_RUN? {
           mkdir $to_dir
         }
         print $" mkdir ($to_dir)"
       }
 
-      if not $dry_run {
+      if not $env.DRY_RUN? {
         cp $from $to
         $state = ($state | upsert $f.target $from_hash)
       }
@@ -77,11 +87,11 @@ export def sync [direction: string --dry-run --verbose] {
 
     if $from_matches_to {
       if $from_hash != $last_applied_hash {
-        if not $dry_run {
+        if not $env.DRY_RUN? {
           $state = ($state | upsert $f.target $from_hash)
         }
       }
-      if $verbose {
+      if $env.VERBOSE? {
         print $"✓ ($to) - up to date"
       }
       continue
@@ -90,13 +100,13 @@ export def sync [direction: string --dry-run --verbose] {
     if $from_changed_only {
       let to_dir = $to | path dirname
       if not ($to_dir | path exists) {
-        if not $dry_run {
+        if not $env.DRY_RUN? {
           mkdir $to_dir
         }
         print $" mkdir ($to_dir)"
       }
 
-      if not $dry_run {
+      if not $env.DRY_RUN? {
         cp $from $to
         $state = ($state | upsert $f.target $from_hash)
       }
@@ -115,10 +125,10 @@ export def sync [direction: string --dry-run --verbose] {
 
     if $both_changed {
       if $from_hash == $to_hash {
-        if not $dry_run {
+        if not $env.DRY_RUN? {
           $state = ($state | upsert $f.target $from_hash)
         }
-        if $verbose {
+        if $env.VERBOSE? {
           print $"✓ ($to) - identical after changes"
         }
       } else {
@@ -128,9 +138,7 @@ export def sync [direction: string --dry-run --verbose] {
     }
   }
 
-  if not $dry_run {
-    save-state $state
-  }
+  save-state $state
 
   print $"\n✓ ($direction | str capitalize) complete"
 }
@@ -149,32 +157,41 @@ export def status [--table --verbose] {
   }
 }
 
-export def magic [] {
-  workable-file-mappings | each {|file|
-    match $file.status {
-      'untracked-both-missing' => {
-        ' mapping exists, missing source and target'
-      },
-      'untracked-source-missing' => {
-        ' mapping exists, missing source'
-      },
-      'untracked-target-missing' => {
-        ' copy source to target'
-      },
-      'untracked-identical' => ' Files in place, missing cache entry',
-      'untracked-different' => ' Untracked files are in conflict and require manual intervention',
-      'both-deleted' => ' Files deleted ',
-      'source-deleted' => '󰆴 delete target',
-      'source-deleted-target-changed' => ' Source deleted & target changed',
-      'target-deleted' => '󰆴 delete source',
-      'target-deleted-source-changed' => ' Target deleted & source changed',
-      'source-changed' => ' copy source to target',
-      'target-changed' => ' copy target to source',
-      'both-changed-identical' => ' Files changed & identical, update cache',
-      'both-changed-different' => ' Files are in conflict and require manual intervention',
-      'up-to-date' => {
-        ' Up to date'
+export def magic [--dry-run --verbose] {
+  with-env {
+    DRY_RUN: true #$dry_run,
+    VERBOSE: true #$verbose
+  } {
+    mut state = load-state
+    for $mapping in (workable-file-mappings) {
+      match $mapping.status {
+        'untracked-both-missing' => {
+          print ' mapping exists, missing source and target'
+        },
+        'untracked-source-missing' => {
+          print ' mapping exists, missing source'
+        },
+        'untracked-target-missing' => {
+          try {
+            copy-file $mapping.source $mapping.target
+            $state = update-state $state $mapping.target $mapping.source_hash
+          }
+        },
+        'untracked-identical' => ' Files in place, missing cache entry',
+        'untracked-different' => ' Untracked files are in conflict and require manual intervention',
+        'both-deleted' => ' Files deleted ',
+        'source-deleted' => '󰆴 delete target',
+        'source-deleted-target-changed' => ' Source deleted & target changed',
+        'target-deleted' => '󰆴 delete source',
+        'target-deleted-source-changed' => ' Target deleted & source changed',
+        'source-changed' => ' copy source to target',
+        'target-changed' => ' copy target to source',
+        'both-changed-identical' => ' Files changed & identical, update cache',
+        'both-changed-different' => ' Files are in conflict and require manual intervention',
+        'up-to-date' => {
+          ' Up to date'
+        }
       }
-    }
+    }    
   }
 }
