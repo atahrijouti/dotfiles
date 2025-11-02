@@ -85,7 +85,7 @@ export def sync [direction: string --dry-run --verbose] {
         print $"✓ ($to) - up to date"
       }
       continue
-    }
+   }
 
     if $from_changed_only {
       let to_dir = $to | path dirname
@@ -149,3 +149,32 @@ export def status [--table --verbose] {
   }
 }
 
+export def magic [] {
+  workable-file-mappings | each {|file|
+    match $file.status {
+      'untracked-both-missing' => {
+        ' mapping exists, missing source and target'
+      },
+      'untracked-source-missing' => {
+        ' mapping exists, missing source'
+      },
+      'untracked-target-missing' => {
+        ' copy source to target'
+      },
+      'untracked-identical' => ' Files in place, missing cache entry',
+      'untracked-different' => ' Untracked files are in conflict and require manual intervention',
+      'both-deleted' => ' Files deleted ',
+      'source-deleted' => '󰆴 delete target',
+      'source-deleted-target-changed' => ' Source deleted & target changed',
+      'target-deleted' => '󰆴 delete source',
+      'target-deleted-source-changed' => ' Target deleted & source changed',
+      'source-changed' => ' copy source to target',
+      'target-changed' => ' copy target to source',
+      'both-changed-identical' => ' Files changed & identical, update cache',
+      'both-changed-different' => ' Files are in conflict and require manual intervention',
+      'up-to-date' => {
+        ' Up to date'
+      }
+    }
+  }
+}

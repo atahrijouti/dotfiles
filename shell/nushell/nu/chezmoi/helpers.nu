@@ -195,4 +195,18 @@ def enumerate-mapping-files [mapping: record, last_state: record] {
   }
 }
 
+export def copy-file [from: string, to: string] {
+  let to_dir = $to | path dirname
+  if not ($to_dir | path exists) {
+    if not $env.DRY_RUN? {
+      mkdir $to_dir
+    }
+    print $" mkdir ($to_dir)"
+  }
 
+  if not $env.DRY_RUN? {
+    cp $from $to
+  }
+  print $" cp ($from) ($to)"
+  continue
+}
