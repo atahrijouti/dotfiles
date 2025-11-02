@@ -213,5 +213,4 @@ export def copy-file [from: string, to: string] {
     cp $from $to
   }
   print $" cp ($from) ($to)"
-  continue
 }

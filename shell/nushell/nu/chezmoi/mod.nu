@@ -160,20 +160,20 @@ export def status [--table --verbose] {
 export def magic [--dry-run --verbose] {
   with-env {
     DRY_RUN: true #$dry_run,
-    VERBOSE: true #$verbose
+    VERBOSE: $verbose
   } {
     mut state = load-state
     for $mapping in (workable-file-mappings) {
       match $mapping.status {
         'untracked-both-missing' => {
-          print ' mapping exists, missing source and target'
+          print ' Mapping exists, missing source and target'
         },
         'untracked-source-missing' => {
-          print ' mapping exists, missing source'
+          print ' Mapping exists, missing source'
         },
         'untracked-target-missing' => {
           try {
-            print $" Applying target ($mapping.target) for the first time"
+            print $" Applying target ($mapping.target) for the first time"
             copy-file $mapping.source $mapping.target
             $state = update-state $state $mapping.target $mapping.source_hash
           }
@@ -184,18 +184,45 @@ export def magic [--dry-run --verbose] {
             $state = update-state $state $mapping.target $mapping.source_hash
           }
         },
-        'untracked-different' => ' Untracked files are in conflict and require manual intervention',
-        'both-deleted' => ' Files deleted ',
-        'source-deleted' => '󰆴 delete target',
-        'source-deleted-target-changed' => ' Source deleted & target changed',
-        'target-deleted' => '󰆴 delete source',
-        'target-deleted-source-changed' => ' Target deleted & source changed',
-        'source-changed' => ' copy source to target',
-        'target-changed' => ' copy target to source',
-        'both-changed-identical' => ' Files changed & identical, update cache',
-        'both-changed-different' => ' Files are in conflict and require manual intervention',
+        'untracked-different' => {
+          print ' Untracked files are in conflict and require manual intervention'
+        },
+        'both-deleted' => {
+          print ' Files deleted'
+        },
+        'source-deleted' => {
+          print '󰆴 Delete target using --delete'
+        },
+        'source-deleted-target-changed' => {
+          print ' Source deleted & target changed'
+        },
+        'target-deleted' => {
+          print '󰆴 Delete source using --delete'
+        },
+        'target-deleted-source-changed' => {
+          print ' Target deleted & source changed'
+        },
+        'source-changed' => {
+          print $" Applying ($mapping.target)"
+          copy-file $mapping.source $mapping.target
+          $state = update-state $state $mapping.target $mapping.source_hash
+        },
+        'target-changed' => {
+          print $" Pulling ($mapping.target)"
+          copy-file $mapping.target $mapping.source
+          $state = update-state $state $mapping.target $mapping.target_hash
+        },
+        'both-changed-identical' => {
+          print ' Files changed & identical, update cache'
+          $state = update-state $state $mapping.target $mapping.source_hash
+        },
+        'both-changed-different' => {
+          print ' Files are in conflict and require manual intervention'
+        },
         'up-to-date' => {
-          ' Up to date'
+          if $env.VERBOSE? {
+            print ' Up to date'
+          }
         }
       }
     }    
