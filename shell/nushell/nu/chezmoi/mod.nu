@@ -173,11 +173,17 @@ export def magic [--dry-run --verbose] {
         },
         'untracked-target-missing' => {
           try {
+            print $" Applying target ($mapping.target) for the first time"
             copy-file $mapping.source $mapping.target
             $state = update-state $state $mapping.target $mapping.source_hash
           }
         },
-        'untracked-identical' => ' Files in place, missing cache entry',
+        'untracked-identical' => {
+          try {
+            print ' Files in place, missing cache entry'
+            $state = update-state $state $mapping.target $mapping.source_hash
+          }
+        },
         'untracked-different' => ' Untracked files are in conflict and require manual intervention',
         'both-deleted' => ' Files deleted ',
         'source-deleted' => '󰆴 delete target',
