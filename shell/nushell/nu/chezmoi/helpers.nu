@@ -120,10 +120,11 @@ export def save-state [state: record] {
 }
 
 export def list-folder-files [root: string, includes: list, excludes: list] {
-  if not ($root | path exists) {
+  if not ($root | path exists)  or ($root | path type) == symlink {
     return []
   }
-  if not (($root | path type) == dir) {
+  
+  if ($root | path type) == file {
     return [$root]
   }
   
@@ -146,56 +147,59 @@ def enumerate-mapping-files [mapping: record, last_state: record] {
   let target = $mapping_target | path expand -n
   let source = $"($DOTFILES_ROOT)/($mapping_source)"
 
-  let is_dir = ($source | path type) == 'dir'
+  let source_type = $source | path type
+  let target_type = $target | path type
 
-  if not $is_dir {
-    let expanded_source = $source | path expand -n
-    let source_hash = file-hash $expanded_source
-    let target_hash = file-hash $target
-    let last_hash = $last_state | get -o $target
-    let status = mapping-status $source_hash $target_hash $last_hash
-    return [{
-      source: $expanded_source,
-      source_hash: $source_hash,
-      target: $target,
-      target_hash: $target_hash,
-      last_hash: $last_hash,
-      status: $status
-    }]
+  if $target_type == 'symlink' {
+    print $" Unexpected symlink at target ($target)"
+    return []
   }
 
-  let excludes = $mapping | get -o excludes | default []
-  let includes = $mapping | get -o includes | default []
+  match $source_type {
+    'file' => {
+      let expanded_source = $source | path expand -n
+      let source_hash = file-hash $expanded_source
+      let target_hash = file-hash $target
+      let last_hash = $last_state | get -o $target
+      let status = mapping-status $source_hash $target_hash $last_hash
+      [{
+        source: $expanded_source,
+        source_hash: $source_hash,
+        target: $target,
+        target_hash: $target_hash,
+        last_hash: $last_hash,
+        status: $status
+      }]
+    },
+    'dir' => {
+      let excludes = $mapping | get -o excludes | default []
+      let includes = $mapping | get -o includes | default []
 
-  let files = if ($includes | is-not-empty) {
-    $includes | each {|pattern|
-      glob $"($source)/($pattern)" --no-dir
-    } | flatten
-  } else {
-    let exclude_patterns = $excludes | append '__never_match__/**'
-    glob $"($source)/**/*" --no-dir --exclude $exclude_patterns
-  }
+      let source_files = list-folder-files $source $includes $excludes
+      let target_files = list-folder-files $mapping_target $includes $excludes
 
-  let source_files = list-folder-files $source $includes $excludes
-  let target_files = list-folder-files $mapping_target $includes $excludes
+      let all_relative_paths =  $source_files | append $target_files | uniq
 
-  let all_relative_paths =  $source_files | append $target_files | uniq
+      (
+        $all_relative_paths | each {|$relative|
+          let source_path = $source | path join $relative | path expand -n
+          let target_path = $target | path join $relative | path expand -n
 
-  $all_relative_paths | each {|$relative|
-    let source_path = $source | path join $relative | path expand -n
-    let target_path = $target | path join $relative | path expand -n
+          let source_hash = file-hash $source_path
+          let target_hash = file-hash $target_path
+          let last_hash = $last_state | get -o $target_path 
+          let status = mapping-status $source_hash $target_hash $last_hash
 
-    let source_hash = file-hash $source_path
-    let target_hash = file-hash $target_path
-    let last_hash = $last_state | get -o $target_path 
-    let status = mapping-status $source_hash $target_hash $last_hash
-    {
-      source: $source_path,
-      source_hash: $source_hash,
-      target: $target_path,
-      target_hash: $target_hash,
-      last_hash: $last_hash,
-      status: $status
+          {
+            source: $source_path,
+            source_hash: $source_hash,
+            target: $target_path,
+            target_hash: $target_hash,
+            last_hash: $last_hash,
+            status: $status
+          }
+        }
+      )
     }
   }
 }
