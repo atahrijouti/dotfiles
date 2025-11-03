@@ -159,7 +159,7 @@ export def status [--table --verbose] {
 
 export def magic [--dry-run --verbose] {
   with-env {
-    DRY_RUN: true #$dry_run,
+    DRY_RUN: $dry_run,
     VERBOSE: $verbose
   } {
     mut state = load-state
@@ -226,5 +226,10 @@ export def magic [--dry-run --verbose] {
         }
       }
     }    
+
+    save-state $state
+
+    print $"\n✓ Made myself chezmoi"
+
   }
 }
