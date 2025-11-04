@@ -175,13 +175,13 @@ export def magic [--dry-run --verbose] {
           try {
             print $" Applying target ($mapping.target) for the first time"
             copy-file $mapping.source $mapping.target
-            $state = update-state $state $mapping.target $mapping.source_hash
+            $state = update-state-for-target $state $mapping.target $mapping.source_hash
           }
         },
         'untracked-identical' => {
           try {
             print $" Files in place, missing cache entry. ($mapping.target)"
-            $state = update-state $state $mapping.target $mapping.source_hash
+            $state = update-state-for-target $state $mapping.target $mapping.source_hash
           }
         },
         'untracked-different' => {
@@ -191,7 +191,9 @@ export def magic [--dry-run --verbose] {
           print $" Files deleted. ($mapping.target)"
         },
         'source-deleted' => {
-          print $"󰆴 Delete target using --delete. ($mapping.target)"
+          try {
+            print $"󰆴 Delete target using --delete. ($mapping.target)"
+          }
         },
         'source-deleted-target-changed' => {
           print $" Source deleted & target changed. ($mapping.target)"
@@ -206,19 +208,21 @@ export def magic [--dry-run --verbose] {
           try {
             print $" Applying ($mapping.target)"
             copy-file $mapping.source $mapping.target
-            $state = update-state $state $mapping.target $mapping.source_hash
+            $state = update-state-for-target $state $mapping.target $mapping.source_hash
           }
         },
         'target-changed' => {
           try {
             print $" Pulling ($mapping.target)"
             copy-file $mapping.target $mapping.source
-            $state = update-state $state $mapping.target $mapping.target_hash
+            $state = update-state-for-target $state $mapping.target $mapping.target_hash
           }
         },
         'both-changed-identical' => {
-          print $" Files changed & identical, update cache. ($mapping.target)"
-          $state = update-state $state $mapping.target $mapping.source_hash
+          try {
+            print $" Files changed & identical, update cache. ($mapping.target)"
+            $state = update-state-for-target $state $mapping.target $mapping.source_hash
+          }
         },
         'both-changed-different' => {
           print $" Files are in conflict and require manual intervention. ($mapping.target)"

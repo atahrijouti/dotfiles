@@ -107,8 +107,12 @@ export def load-state [] {
   if not ($STATE_FILE | path exists) { return {} }
   open $STATE_FILE
 }
-export def update-state [state: record, target: path, hash: string] {
+export def update-state-for-target [state: record, target: path, hash: string] {
   $state | upsert $target $hash
+}
+
+export def remove-state-for-target [state: record, target: path] {
+  $state | reject $target
 }
 
 export def save-state [state: record] {
