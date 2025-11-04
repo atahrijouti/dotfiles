@@ -203,14 +203,18 @@ export def magic [--dry-run --verbose] {
           print $" Target deleted & source changed. ($mapping.target)"
         },
         'source-changed' => {
-          print $" Applying ($mapping.target)"
-          copy-file $mapping.source $mapping.target
-          $state = update-state $state $mapping.target $mapping.source_hash
+          try {
+            print $" Applying ($mapping.target)"
+            copy-file $mapping.source $mapping.target
+            $state = update-state $state $mapping.target $mapping.source_hash
+          }
         },
         'target-changed' => {
-          print $" Pulling ($mapping.target)"
-          copy-file $mapping.target $mapping.source
-          $state = update-state $state $mapping.target $mapping.target_hash
+          try {
+            print $" Pulling ($mapping.target)"
+            copy-file $mapping.target $mapping.source
+            $state = update-state $state $mapping.target $mapping.target_hash
+          }
         },
         'both-changed-identical' => {
           print $" Files changed & identical, update cache. ($mapping.target)"
@@ -221,7 +225,7 @@ export def magic [--dry-run --verbose] {
         },
         'up-to-date' => {
           if $env.VERBOSE? {
-            print " Up to date. ($mapping.target)"
+            print $" Up to date. ($mapping.target)"
           }
         }
       }
