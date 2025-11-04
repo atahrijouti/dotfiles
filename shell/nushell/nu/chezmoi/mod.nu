@@ -166,10 +166,10 @@ export def magic [--dry-run --verbose] {
     for $mapping in (workable-file-mappings) {
       match $mapping.status {
         'untracked-both-missing' => {
-          print ' Mapping exists, missing source and target'
+          print $" Mapping exists, missing source and target. ($mapping.target)"
         },
         'untracked-source-missing' => {
-          print ' Mapping exists, missing source'
+          print $" Mapping exists, missing source. ($mapping.target)"
         },
         'untracked-target-missing' => {
           try {
@@ -180,27 +180,27 @@ export def magic [--dry-run --verbose] {
         },
         'untracked-identical' => {
           try {
-            print ' Files in place, missing cache entry'
+            print $" Files in place, missing cache entry. ($mapping.target)"
             $state = update-state $state $mapping.target $mapping.source_hash
           }
         },
         'untracked-different' => {
-          print ' Untracked files are in conflict and require manual intervention'
+          print $" Untracked files are in conflict and require manual intervention. ($mapping.target)"
         },
         'both-deleted' => {
-          print ' Files deleted'
+          print $" Files deleted. ($mapping.target)"
         },
         'source-deleted' => {
-          print '󰆴 Delete target using --delete'
+          print $"󰆴 Delete target using --delete. ($mapping.target)"
         },
         'source-deleted-target-changed' => {
-          print ' Source deleted & target changed'
+          print $" Source deleted & target changed. ($mapping.target)"
         },
         'target-deleted' => {
-          print '󰆴 Delete source using --delete'
+          print $"󰆴 Delete source using --delete. ($mapping.target)"
         },
         'target-deleted-source-changed' => {
-          print ' Target deleted & source changed'
+          print $" Target deleted & source changed. ($mapping.target)"
         },
         'source-changed' => {
           print $" Applying ($mapping.target)"
@@ -213,15 +213,15 @@ export def magic [--dry-run --verbose] {
           $state = update-state $state $mapping.target $mapping.target_hash
         },
         'both-changed-identical' => {
-          print ' Files changed & identical, update cache'
+          print $" Files changed & identical, update cache. ($mapping.target)"
           $state = update-state $state $mapping.target $mapping.source_hash
         },
         'both-changed-different' => {
-          print ' Files are in conflict and require manual intervention'
+          print $" Files are in conflict and require manual intervention. ($mapping.target)"
         },
         'up-to-date' => {
           if $env.VERBOSE? {
-            print ' Up to date'
+            print " Up to date. ($mapping.target)"
           }
         }
       }
