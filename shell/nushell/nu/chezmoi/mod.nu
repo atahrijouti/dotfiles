@@ -189,6 +189,7 @@ export def magic [--dry-run --verbose] {
         },
         'both-deleted' => {
           print $" Files deleted. ($mapping.target)"
+          $state = $state | reject $mapping.target
         },
         'source-deleted' => {
           try {
