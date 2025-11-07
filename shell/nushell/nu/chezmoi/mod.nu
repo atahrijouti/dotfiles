@@ -37,7 +37,7 @@ export def sync [--dry-run --verbose --delete] {
           try {
             print $" Pulling target ($mapping.target) for the first time"
             copy-file $mapping.target $mapping.source
-            $state = update-state-for-target $state $mapping.target $mapping.target
+            $state = update-state-for-target $state $mapping.target $mapping.target_hash
           }
         },
         'untracked-target-missing' => {
@@ -71,6 +71,7 @@ export def sync [--dry-run --verbose --delete] {
               try {
                 print $"󰆴 Deleting target for ($mapping.target)."
                 rm $mapping.target
+                $state = $state | reject $mapping.target
               }
             }
           }
@@ -83,6 +84,7 @@ export def sync [--dry-run --verbose --delete] {
               try {
                 print $"󰆴 Deleting source for ($mapping.target)."
                 rm $mapping.source
+                $state = $state | reject $mapping.target
               }
             }
           }
