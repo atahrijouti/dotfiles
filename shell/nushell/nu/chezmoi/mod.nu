@@ -157,7 +157,7 @@ export def status [--table --verbose] {
   }
 }
 
-export def magic [--dry-run --verbose] {
+export def magic [--dry-run --verbose --delete] {
   with-env {
     DRY_RUN: $dry_run,
     VERBOSE: $verbose
@@ -190,6 +190,9 @@ export def magic [--dry-run --verbose] {
         },
         'untracked-different' => {
           print $" Untracked files are in conflict and require manual intervention. ($mapping.target)"
+          # --prefer-target: should this flag just make target the file the source?
+          # --prefer-source: should this flag just apply the source onto the target?
+          # --interactive-merge should this flag open some kind of mechanism that offers interactive merge?
         },
         'both-deleted' => {
           print $" Files deleted. ($mapping.target)"
@@ -197,14 +200,30 @@ export def magic [--dry-run --verbose] {
         },
         'source-deleted' => {
           try {
-            print $"󰆴 Delete target using --delete. ($mapping.target)"
+            let delete_string = if not $delete { " use --delete to handle it automatically." } else { ""  }
+            print $"󰆴 Source deleted for ($mapping.target).($delete_string)"
+            if $delete {
+              try {
+                print $"󰆴 Deleting target for ($mapping.target)."
+                rm $mapping.target
+              }
+            }
+          }
+        },
+        'target-deleted' => {
+          try {
+            let delete_string = if not $delete { " use --delete to handle it automatically." } else { ""  }
+            print $"󰆴 Target deleted for ($mapping.target).($delete_string)"
+            if $delete {
+              try {
+                print $"󰆴 Deleting source for ($mapping.target)."
+                rm $mapping.source
+              }
+            }
           }
         },
         'source-deleted-target-changed' => {
           print $" Source deleted & target changed. ($mapping.target)"
-        },
-        'target-deleted' => {
-          print $"󰆴 Delete source using --delete. ($mapping.target)"
         },
         'target-deleted-source-changed' => {
           print $" Target deleted & source changed. ($mapping.target)"
