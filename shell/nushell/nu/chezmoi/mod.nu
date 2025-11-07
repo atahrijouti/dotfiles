@@ -166,14 +166,18 @@ export def magic [--dry-run --verbose] {
     for $mapping in (workable-file-mappings) {
       match $mapping.status {
         'untracked-both-missing' => {
-          print $" Mapping exists, missing source and target. ($mapping.target)"
+          print $" Missing source and target for mapping ($mapping.target)"
         },
         'untracked-source-missing' => {
-          print $" Mapping exists, missing source. ($mapping.target)"
+          try {
+            print $" Pulling target ($mapping.target) for the first time"
+            copy-file $mapping.target $mapping.source
+            $state = update-state-for-target $state $mapping.target $mapping.target
+          }
         },
         'untracked-target-missing' => {
           try {
-            print $" Applying target ($mapping.target) for the first time"
+            print $" Applying target ($mapping.target) for the first time"
             copy-file $mapping.source $mapping.target
             $state = update-state-for-target $state $mapping.target $mapping.source_hash
           }
