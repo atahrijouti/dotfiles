@@ -190,9 +190,9 @@ export def magic [--dry-run --verbose --delete] {
         },
         'untracked-different' => {
           print $" Untracked files are in conflict and require manual intervention. ($mapping.target)"
-          # --prefer-target: should this flag just make target the file the source?
+          # --prefer-target: should this flag just pull target on source?
           # --prefer-source: should this flag just apply the source onto the target?
-          # --interactive-merge should this flag open some kind of mechanism that offers interactive merge?
+          # --merge should this flag open some kind of mechanism that offers interactive merge?
         },
         'both-deleted' => {
           print $" Files deleted. ($mapping.target)"
@@ -224,9 +224,15 @@ export def magic [--dry-run --verbose --delete] {
         },
         'source-deleted-target-changed' => {
           print $" Source deleted & target changed. ($mapping.target)"
+          # --prefer-target: should this flag pull target on source?
+          # --prefer-source: should this flag delete changed target?
+          # --merge should this flag open some kind of mechanism that offers interactive merge?
         },
         'target-deleted-source-changed' => {
           print $" Target deleted & source changed. ($mapping.target)"
+          # --prefer-target: should this flag apply source on target?
+          # --prefer-source: should this flag delete changed source?
+          # --merge should this flag open some kind of mechanism that offers interactive merge?
         },
         'source-changed' => {
           try {
@@ -250,6 +256,9 @@ export def magic [--dry-run --verbose --delete] {
         },
         'both-changed-different' => {
           print $" Files are in conflict and require manual intervention. ($mapping.target)"
+          # --prefer-target: should this flag apply source on target?
+          # --prefer-source: should this flag delete changed source?
+          # --merge should this flag open some kind of mechanism that offers interactive merge?
         },
         'up-to-date' => {
           if $env.VERBOSE? {
