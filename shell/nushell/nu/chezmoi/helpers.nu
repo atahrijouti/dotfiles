@@ -220,5 +220,5 @@ export def copy-file [from: string, to: string] {
   if not $env.DRY_RUN? {
     cp $from $to
   }
-  print $" cp ($from) ($to)"
+  print $" cp ($from) ($to)"
 }
