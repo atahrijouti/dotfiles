@@ -68,11 +68,9 @@ export def sync [--dry-run --verbose --delete] {
             let delete_string = if not $delete { " use --delete to handle it automatically." } else { ""  }
             print $"󰆴 Source deleted for ($mapping.target).($delete_string)"
             if $delete {
-              try {
-                print $"󰆴 Deleting target ($mapping.target)."
-                rm $mapping.target
-                $state = $state | reject $mapping.target
-              }
+              print $"󰆴 Deleting target ($mapping.target)."
+              rm $mapping.target
+              $state = $state | reject $mapping.target
             }
           }
         },
@@ -81,11 +79,9 @@ export def sync [--dry-run --verbose --delete] {
             let delete_string = if not $delete { " use --delete to handle it automatically." } else { ""  }
             print $"󰆴 Target deleted ($mapping.target).($delete_string)"
             if $delete {
-              try {
-                print $"󰆴 Deleting source ($mapping.source)."
-                rm $mapping.source
-                $state = $state | reject $mapping.target
-              }
+              print $"󰆴 Deleting source ($mapping.source)."
+              rm $mapping.source
+              $state = $state | reject $mapping.target
             }
           }
         },
