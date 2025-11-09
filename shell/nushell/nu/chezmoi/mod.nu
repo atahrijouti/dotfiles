@@ -22,7 +22,7 @@ export def status [--table --verbose] {
   }
 }
 
-export def sync [--dry-run --verbose --delete] {
+export def sync [--dry-run --verbose --prefer-source --prefer-target --merge --interactive --delete] {
   with-env {
     DRY_RUN: $dry_run,
     VERBOSE: $verbose
@@ -55,9 +55,13 @@ export def sync [--dry-run --verbose --delete] {
         },
         'untracked-different' => {
           print $" Untracked files are in conflict and require manual intervention. ($mapping.target)"
-          # --prefer-target: should this flag just pull target on source?
-          # --prefer-source: should this flag just apply the source onto the target?
-          # --merge should this flag open some kind of mechanism that offers interactive merge?
+          if $prefer_source {
+            print $"cp ($mapping.source) ($mapping.target)"
+          } else if $prefer_target {
+            print $"cp ($mapping.target) ($mapping.source)"
+          } else if $merge {
+            print $"nvim -d ($mapping.source) ($mapping.target)"
+          }
         },
         'both-deleted' => {
           print $" Files deleted. ($mapping.target)"
@@ -87,15 +91,19 @@ export def sync [--dry-run --verbose --delete] {
         },
         'source-deleted-target-changed' => {
           print $" Source deleted & target changed. ($mapping.target)"
-          # --prefer-target: should this flag pull target on source?
-          # --prefer-source: should this flag delete changed target?
-          # --merge should this flag open some kind of mechanism that offers interactive merge?
+          if $prefer_source {
+            print $"rm ($mapping.target)"
+          } else if $prefer_target {
+            print $"cp ($mapping.target) ($mapping.source)"
+          }
         },
         'target-deleted-source-changed' => {
           print $" Target deleted & source changed. ($mapping.target)"
-          # --prefer-target: should this flag apply source on target?
-          # --prefer-source: should this flag delete changed source?
-          # --merge should this flag open some kind of mechanism that offers interactive merge?
+          if $prefer_source {
+            print $"cp ($mapping.source) ($mapping.target)"
+          } else if $prefer_target {
+            print $"rm ($mapping.source)"
+          }
         },
         'source-changed' => {
           try {
@@ -119,9 +127,13 @@ export def sync [--dry-run --verbose --delete] {
         },
         'both-changed-different' => {
           print $" Files are in conflict and require manual intervention. ($mapping.target)"
-          # --prefer-target: should this flag apply source on target?
-          # --prefer-source: should this flag delete changed source?
-          # --merge should this flag open some kind of mechanism that offers interactive merge?
+          if $prefer_source {
+            print $"cp ($mapping.source) ($mapping.target)"
+          } else if $prefer_target {
+            print $"cp ($mapping.target) ($mapping.source)"
+          } else if $merge {
+            print $"nvim -d ($mapping.source) ($mapping.target)"
+          }
         },
         'up-to-date' => {
           if $env.VERBOSE? {
