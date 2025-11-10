@@ -22,6 +22,10 @@ export def status [--table --verbose] {
   }
 }
 
+export def magic [...files_filter: string] {
+  workable-file-mappings $files_filter 
+}
+
 export def sync [--dry-run --verbose --prefer-source --prefer-target --merge --interactive --delete] {
   with-env {
     DRY_RUN: $dry_run,

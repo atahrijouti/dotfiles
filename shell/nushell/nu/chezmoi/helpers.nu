@@ -77,13 +77,26 @@ def valid-mapping [mapping: record] {
   return true
 }
 
-export def workable-file-mappings [] {
+export def workable-file-mappings [filter: list<path> = []] {
   let last_state = (load-state)
   get-mappings
   | where {|m| valid-mapping $m }
   | where {|m| workable-os $m }
+  | where {|m| file-filter $m $filter}
   | each {|m| enumerate-mapping-files $m $last_state}
   | flatten
+}
+
+def file-filter [mapping: record, filter: list<path>] {
+  if ($filter | is-empty) {
+    return true
+  }
+
+  let target = resolve-target $mapping
+
+  $filter | any {|path|
+    ($path | path expand -n | str starts-with ($target | path expand -n))
+  }
 }
 
 def file-hash [path: string] {
