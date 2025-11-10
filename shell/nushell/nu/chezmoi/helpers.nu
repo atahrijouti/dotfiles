@@ -82,21 +82,36 @@ export def workable-file-mappings [filter: list<path> = []] {
   get-mappings
   | where {|m| valid-mapping $m }
   | where {|m| workable-os $m }
-  | where {|m| file-filter $m $filter}
+  | where {|m| path-filter $m $filter}
   | each {|m| enumerate-mapping-files $m $last_state}
   | flatten
 }
 
-def file-filter [mapping: record, filter: list<path>] {
-  if ($filter | is-empty) {
+def path-filter [mapping: record, filters: list<path>] {
+  if ($filters | is-empty) {
     return true
   }
 
-  let target = resolve-target $mapping
+  let target = resolve-target $mapping 
 
-  $filter | any {|path|
-    ($path | path expand -n | str starts-with ($target | path expand -n))
+  $filters | any {|filter|
+    paths-overlap $target $filter
   }
+}
+
+def paths-overlap [path: path, other:path] {
+  if $path == $other {
+    return true
+  }
+  try {
+    $path | path relative-to $other
+    return true
+  }
+  try {
+    $other | path relative-to $path
+    return true
+  }
+  return false
 }
 
 def file-hash [path: string] {
