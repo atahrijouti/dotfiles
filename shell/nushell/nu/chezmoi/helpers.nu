@@ -77,13 +77,13 @@ def valid-mapping [mapping: record] {
   return true
 }
 
-export def workable-file-mappings [filter: list<path> = []] {
+export def workable-file-mappings [filters: list<path> = []] {
   let last_state = (load-state)
   get-mappings
   | where {|m| valid-mapping $m }
   | where {|m| workable-os $m }
-  | where {|m| path-filter $m $filter}
-  | each {|m| enumerate-mapping-files $m $last_state}
+  | where {|m| path-filter $m $filters}
+  | each {|m| enumerate-mapping-files $m $last_state $filters}
   | flatten
 }
 
@@ -172,7 +172,7 @@ export def list-folder-files [root: string, includes: list, excludes: list] {
   $files | path relative-to $root
 }
 
-def enumerate-mapping-files [mapping: record, last_state: record] {
+def enumerate-mapping-files [mapping: record, last_state: record, filters: list<path>] {
   let mapping_source = $mapping.source
   let mapping_target = resolve-target $mapping
   

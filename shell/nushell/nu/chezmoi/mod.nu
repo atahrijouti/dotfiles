@@ -8,8 +8,8 @@ const POSSIBLE_DIRECTIONS = ['apply', 'pull']
 export def main [] {
 }
 
-export def status [...files_filter: string --table --verbose] {
-  mut status_data = workable-file-mappings $files_filter
+export def status [...file_filters: string --table --verbose] {
+  mut status_data = workable-file-mappings $file_filters
 
   if not $verbose {
     $status_data = $status_data | where {|f| $f.status != 'up-to-date' } | select target status
@@ -22,17 +22,17 @@ export def status [...files_filter: string --table --verbose] {
   }
 }
 
-export def magic [...files_filter: string] {
-  workable-file-mappings $files_filter 
+export def magic [...file_filters: string] {
+  workable-file-mappings $file_filters 
 }
 
-export def sync [...files_filter: string --dry-run --verbose --prefer-source --prefer-target --merge --interactive --delete] {
+export def sync [...file_filters: string --dry-run --verbose --prefer-source --prefer-target --merge --interactive --delete] {
   with-env {
     DRY_RUN: $dry_run,
     VERBOSE: $verbose
   } {
     mut state = load-state
-    for $mapping in (workable-file-mappings $files_filter) {
+    for $mapping in (workable-file-mappings $file_filters) {
       match $mapping.status {
         'untracked-both-missing' => {
           print $" Missing source and target for mapping ($mapping.target)"
