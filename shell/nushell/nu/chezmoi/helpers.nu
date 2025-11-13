@@ -82,12 +82,12 @@ export def workable-file-mappings [filters: list<path> = []] {
   get-mappings
   | where {|m| valid-mapping $m }
   | where {|m| workable-os $m }
-  | where {|m| path-filter $m $filters}
+  | where {|m| mapping-target-path-filter $m $filters}
   | each {|m| enumerate-mapping-files $m $last_state $filters}
   | flatten
 }
 
-def path-filter [mapping: record, filters: list<path>] {
+def mapping-target-path-filter [mapping: record, filters: list<path>] {
   if ($filters | is-empty) {
     return true
   }
@@ -96,6 +96,16 @@ def path-filter [mapping: record, filters: list<path>] {
 
   $filters | any {|filter|
     paths-overlap $target $filter
+  }
+}
+
+def target-dir-files-filter [file: path, target: path, filters: list<path>] {|file|
+  if ($filters | is-empty) {
+    return true
+  }
+  let target_path = $target | path join $file | path expand -n
+  $filters | any {|filter|
+    paths-overlap $target_path  $filter
   }
 }
 
@@ -210,7 +220,9 @@ def enumerate-mapping-files [mapping: record, last_state: record, filters: list<
       let source_files = list-folder-files $source $includes $excludes
       let target_files = list-folder-files $mapping_target $includes $excludes
 
-      let all_relative_paths =  $source_files | append $target_files | uniq
+      let all_relative_paths =  $source_files | append $target_files | uniq | where {|file|
+        target-dir-files-filter $file $target $filters
+      }
 
       (
         $all_relative_paths | each {|$relative|
