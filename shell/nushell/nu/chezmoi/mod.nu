@@ -28,7 +28,7 @@ export def diff [...file_filters: string] {
         display-diff $mapping.source $mapping.target $mapping.status $mapping.target
       }
       'source-changed' => {
-        display-diff $mapping.target $mapping.srouce $mapping.status $mapping.target
+        display-diff $mapping.target $mapping.source $mapping.status $mapping.target
       }
       _ => {}
     }
