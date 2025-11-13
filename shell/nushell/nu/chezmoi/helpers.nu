@@ -99,7 +99,7 @@ def mapping-target-path-filter [mapping: record, filters: list<path>] {
   }
 }
 
-def target-dir-files-filter [file: path, target: path, filters: list<path>] {|file|
+def target-dir-files-filter [file: path, target: path, filters: list<path>] {
   if ($filters | is-empty) {
     return true
   }
