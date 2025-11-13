@@ -1,7 +1,5 @@
 use ./helpers.nu *
 
-const POSSIBLE_DIRECTIONS = ['apply', 'pull']
-
 # Manage dotfiles à la chezmoi, with extra features to handle multiple OS setups
 # 
 # chezmoi est chez toi
@@ -21,6 +19,7 @@ export def status [...file_filters: string --table --verbose] {
     $status_data
   }
 }
+
 export def diff [...file_filters: string] {
   for $mapping in (workable-file-mappings $file_filters) {
     match $mapping.status {
