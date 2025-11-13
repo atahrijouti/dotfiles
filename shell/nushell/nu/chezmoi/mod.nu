@@ -21,9 +21,18 @@ export def status [...file_filters: string --table --verbose] {
     $status_data
   }
 }
-
-export def magic [...file_filters: string] {
-  workable-file-mappings $file_filters 
+export def diff [...file_filters: string] {
+  for $mapping in (workable-file-mappings $file_filters) {
+    match $mapping.status {
+      'untracked-different' | 'target-changed' | 'both-changed-different' => {
+        display-diff $mapping.source $mapping.target $mapping.status $mapping.target
+      }
+      'source-changed' => {
+        display-diff $mapping.target $mapping.srouce $mapping.status $mapping.target
+      }
+      _ => {}
+    }
+  }
 }
 
 export def sync [...file_filters: string --dry-run --verbose --prefer-source --prefer-target --merge --interactive --delete] {

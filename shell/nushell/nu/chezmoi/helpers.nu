@@ -3,24 +3,6 @@ const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
 const MAPPINGS_FILE = path self ./mappings.nuon
 const OS = $nu.os-info.name
 
-# last_applied == null
-# - untracked-both-missing      : source == null and target == null  
-# - untracked-source-missing    : target != null and source == null  
-# - untracked-target-missing    : source != null and target == null  
-# - untracked-different         : source != target and target != null and source != null  
-# - untracked-identical         : source == target and source != null
-# last_applied != null
-# - both-deleted                  : source == null and target == null
-# - source-deleted                : source == null and target == last_applied  
-# - source-deleted-target-changed : source == null and target != last_applied  
-# - target-deleted                : source == last_applied and target == null  
-# - target-deleted-source-changed : target == null and source != last_applied 
-# - source-changed                : source != last_applied and target == last_applied 
-# - target-changed                : target != last_applied and source == last_applied 
-# - both-changed-different        : target != last_applied and source != last_applied and target != source
-# - both-changed-identical        : source != last_applied  and target != last_applied and source == target 
-# - up-to-date                    : source == last_applied and target == last_applied 
-
 export def mapping-status [source: oneof<string, nothing>, target: oneof<string, nothing>, last: oneof<string, nothing>] {
   if $last == null {
     match [$source, $target] {
@@ -261,4 +243,13 @@ export def copy-file [from: string, to: string] {
     cp $from $to
   }
   print $" cp ($from) ($to)"
+}
+
+export def display-diff [old: path, new: path, status: string, target: path] {
+  decorated-print $"\((ansi blue)($status)(ansi reset)) (ansi cyan)($target)(ansi reset)"
+  difft $old $new
+}
+
+export def decorated-print [text: string] {
+  print (([$text] | table -i false -t default) | into string)
 }
