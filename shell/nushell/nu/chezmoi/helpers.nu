@@ -9,6 +9,7 @@ export def workable-file-mappings [filters: list<path> = []] {
   | where {|m| valid-mapping $m }
   | where {|m| workable-os $m }
   | where {|m| mapping-target-path-filter $m $filters}
+  | where {|m| mapping-matches-file-system $m}
   | each {|m| enumerate-mapping-files $m $last_state $filters}
   | flatten
 }
@@ -65,6 +66,44 @@ def mapping-target-path-filter [mapping: record, filters: list<path>] {
   }
 }
 
+def mapping-matches-file-system [mapping: record] {
+  let mapping_type = resolve-mapping-type $mapping
+  let mapping_source = resolve-source $mapping
+  let mapping_target = resolve-target $mapping
+
+  let target = $mapping_target | path expand -n
+  let source = $"($DOTFILES_ROOT)/($mapping_source)" | path expand -n
+
+  let source_type = $source | path type
+  let target_type = $target | path type
+
+  if $target_type == 'symlink' {
+    print $" SKIP: Unexpected symlink at target ($target)"
+    return false
+  }
+  if $source_type == 'symlink' {
+    print $" SKIP: Unexpected symlink at source ($source)"
+    return false
+  }
+  if ($mapping_type == 'file' and $target_type == 'dir') {
+    print $" SKIP: Mapping expects file but target is directory ($target)"
+    return false
+  }
+  if ($mapping_type == 'dir' and $target_type == 'file') {
+    print $" SKIP: Mapping expects directory but target is file ($target)"
+    return false
+  }
+  if ($mapping_type == 'file' and $source_type == 'dir') {
+    print $" SKIP: Mapping expects file but source is directory ($source | path expand -n)"
+    return false
+  }
+  if ($mapping_type == 'dir' and $source_type == 'file') {
+    print $" SKIP: Mapping expects directory but source is file ($source | path expand -n)"
+    return false
+  }
+  return true
+}
+
 def enumerate-mapping-files [mapping: record, last_state: record, filters: list<path>] {
   let mapping_type = resolve-mapping-type $mapping
   let mapping_source = resolve-source $mapping
@@ -75,31 +114,6 @@ def enumerate-mapping-files [mapping: record, last_state: record, filters: list<
 
   let source_type = $source | path type
   let target_type = $target | path type
-
-  if $target_type == 'symlink' {
-    print $" SKIP: Unexpected symlink at target ($target)"
-    return []
-  }
-  if $source_type == 'symlink' {
-    print $" SKIP: Unexpected symlink at source ($source)"
-    return []
-  }
-  if ($mapping_type == 'file' and $target_type == 'dir') {
-    print $" SKIP: Mapping expects file but target is directory ($target)"
-    return []
-  }
-  if ($mapping_type == 'dir' and $target_type == 'file') {
-    print $" SKIP: Mapping expects directory but target is file ($target)"
-    return []
-  }
-  if ($mapping_type == 'file' and $source_type == 'dir') {
-    print $" SKIP: Mapping expects file but source is directory ($source | path expand -n)"
-    return []
-  }
-  if ($mapping_type == 'dir' and $source_type == 'file') {
-    print $" SKIP: Mapping expects directory but source is file ($source | path expand -n)"
-    return []
-  }
 
   match $mapping_type {
     'file' => {
