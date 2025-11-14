@@ -3,34 +3,14 @@ const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
 const MAPPINGS_FILE = path self ./mappings.nuon
 const OS = $nu.os-info.name
 
-export def mapping-status [source: oneof<string, nothing>, target: oneof<string, nothing>, last: oneof<string, nothing>] {
-  if $last == null {
-    match [$source, $target] {
-      [null, null] => 'untracked-both-missing'
-      [null, _]    => 'untracked-source-missing'
-      [_, null]    => 'untracked-target-missing'
-      [$s, $t] if $s == $t => 'untracked-identical'
-      [$s, $t] if $s != $t => 'untracked-different'
-    }
-  } else {
-    match [$source, $target] {
-      [null, null] => 'both-deleted'
-      [null, $t] if $t == $last => 'source-deleted'
-      [null, $t] if $t != $last => 'source-deleted-target-changed'
-      [$s, null] if $s == $last => 'target-deleted'
-      [$s, null] if $s != $last => 'target-deleted-source-changed'
-      [$s, $t] if $s != $last and $t == $last => 'source-changed'
-      [$s, $t] if $s == $last and $t != $last => 'target-changed'
-      [$s, $t] if $s != $last and $t != $last and $s == $t => 'both-changed-identical'
-      [$s, $t] if $s != $last and $t != $last and $s != $t => 'both-changed-different'
-      [$s, $t] if $s == $last and $t == $last => 'up-to-date'
-    }
-  }
-}
-
-def workable-os [mapping: record] {
-  let only_list = $mapping | get -o only | default []
-  ($only_list | is-empty) or $OS in $only_list 
+export def workable-file-mappings [filters: list<path> = []] {
+  let last_state = (load-state)
+  get-mappings
+  | where {|m| valid-mapping $m }
+  | where {|m| workable-os $m }
+  | where {|m| mapping-target-path-filter $m $filters}
+  | each {|m| enumerate-mapping-files $m $last_state $filters}
+  | flatten
 }
 
 def valid-mapping [mapping: record] {
@@ -59,14 +39,9 @@ def valid-mapping [mapping: record] {
   return true
 }
 
-export def workable-file-mappings [filters: list<path> = []] {
-  let last_state = (load-state)
-  get-mappings
-  | where {|m| valid-mapping $m }
-  | where {|m| workable-os $m }
-  | where {|m| mapping-target-path-filter $m $filters}
-  | each {|m| enumerate-mapping-files $m $last_state $filters}
-  | flatten
+def workable-os [mapping: record] {
+  let only_list = $mapping | get -o only | default []
+  ($only_list | is-empty) or $OS in $only_list 
 }
 
 def mapping-target-path-filter [mapping: record, filters: list<path>] {
@@ -78,6 +53,97 @@ def mapping-target-path-filter [mapping: record, filters: list<path>] {
 
   $filters | any {|filter|
     paths-overlap $target $filter
+  }
+}
+
+def enumerate-mapping-files [mapping: record, last_state: record, filters: list<path>] {
+  let mapping_source = $mapping.source
+  let mapping_target = resolve-target $mapping
+  
+  let target = $mapping_target | path expand -n
+  let source = $"($DOTFILES_ROOT)/($mapping_source)"
+
+  let source_type = $source | path type
+  let target_type = $target | path type
+
+  if $target_type == 'symlink' {
+    print $" Unexpected symlink at target ($target)"
+    return []
+  }
+
+  match $source_type {
+    'file' => {
+      let expanded_source = $source | path expand -n
+      let source_hash = file-hash $expanded_source
+      let target_hash = file-hash $target
+      let last_hash = $last_state | get -o $target
+      let status = mapping-status $source_hash $target_hash $last_hash
+      [{
+        source: $expanded_source,
+        source_hash: $source_hash,
+        target: $target,
+        target_hash: $target_hash,
+        last_hash: $last_hash,
+        status: $status
+      }]
+    },
+    'dir' => {
+      let excludes = $mapping | get -o excludes | default []
+      let includes = $mapping | get -o includes | default []
+
+      let source_files = list-folder-files $source $includes $excludes
+      let target_files = list-folder-files $mapping_target $includes $excludes
+
+      let all_relative_paths =  $source_files | append $target_files | uniq | where {|file|
+        target-dir-files-filter $file $target $filters
+      }
+
+      (
+        $all_relative_paths | each {|$relative|
+          let source_path = $source | path join $relative | path expand -n
+          let target_path = $target | path join $relative | path expand -n
+
+          let source_hash = file-hash $source_path
+          let target_hash = file-hash $target_path
+          let last_hash = $last_state | get -o $target_path 
+          let status = mapping-status $source_hash $target_hash $last_hash
+
+          {
+            source: $source_path,
+            source_hash: $source_hash,
+            target: $target_path,
+            target_hash: $target_hash,
+            last_hash: $last_hash,
+            status: $status
+          }
+        }
+      )
+    }
+  }
+}
+
+export def mapping-status [source: oneof<string, nothing>, target: oneof<string, nothing>, last: oneof<string, nothing>] {
+  if $last == null {
+    match [$source, $target] {
+      [null, null] => 'untracked-both-missing'
+      [null, _]    => 'untracked-source-missing'
+      [_, null]    => 'untracked-target-missing'
+      [$s, $t] if $s == $t => 'untracked-identical'
+      [$s, $t] if $s != $t => 'untracked-different'
+    }
+  } else {
+    match [$source, $target] {
+      [null, null] => 'both-deleted'
+      [null, $t] if $t == $last => 'source-deleted'
+      [null, $t] if $t != $last => 'source-deleted-target-changed'
+      [$s, null] if $s == $last => 'target-deleted'
+      [$s, null] if $s != $last => 'target-deleted-source-changed'
+      [$s, $t] if $s != $last and $t == $last => 'source-changed'
+      [$s, $t] if $s == $last and $t != $last => 'target-changed'
+      [$s, $t] if $s != $last and $t != $last and $s == $t => 'both-changed-identical'
+      [$s, $t] if $s != $last and $t != $last and $s != $t => 'both-changed-different'
+      [$s, $t] if $s == $last and $t == $last => 'up-to-date'
+    }
   }
 }
 
@@ -162,72 +228,6 @@ export def list-folder-files [root: string, includes: list, excludes: list] {
   }
 
   $files | path relative-to $root
-}
-
-def enumerate-mapping-files [mapping: record, last_state: record, filters: list<path>] {
-  let mapping_source = $mapping.source
-  let mapping_target = resolve-target $mapping
-  
-  let target = $mapping_target | path expand -n
-  let source = $"($DOTFILES_ROOT)/($mapping_source)"
-
-  let source_type = $source | path type
-  let target_type = $target | path type
-
-  if $target_type == 'symlink' {
-    print $" Unexpected symlink at target ($target)"
-    return []
-  }
-
-  match $source_type {
-    'file' => {
-      let expanded_source = $source | path expand -n
-      let source_hash = file-hash $expanded_source
-      let target_hash = file-hash $target
-      let last_hash = $last_state | get -o $target
-      let status = mapping-status $source_hash $target_hash $last_hash
-      [{
-        source: $expanded_source,
-        source_hash: $source_hash,
-        target: $target,
-        target_hash: $target_hash,
-        last_hash: $last_hash,
-        status: $status
-      }]
-    },
-    'dir' => {
-      let excludes = $mapping | get -o excludes | default []
-      let includes = $mapping | get -o includes | default []
-
-      let source_files = list-folder-files $source $includes $excludes
-      let target_files = list-folder-files $mapping_target $includes $excludes
-
-      let all_relative_paths =  $source_files | append $target_files | uniq | where {|file|
-        target-dir-files-filter $file $target $filters
-      }
-
-      (
-        $all_relative_paths | each {|$relative|
-          let source_path = $source | path join $relative | path expand -n
-          let target_path = $target | path join $relative | path expand -n
-
-          let source_hash = file-hash $source_path
-          let target_hash = file-hash $target_path
-          let last_hash = $last_state | get -o $target_path 
-          let status = mapping-status $source_hash $target_hash $last_hash
-
-          {
-            source: $source_path,
-            source_hash: $source_hash,
-            target: $target_path,
-            target_hash: $target_hash,
-            last_hash: $last_hash,
-            status: $status
-          }
-        }
-      )
-    }
-  }
 }
 
 export def copy-file [from: string, to: string] {
