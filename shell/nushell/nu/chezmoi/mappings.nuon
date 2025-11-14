@@ -1,42 +1,42 @@
 [
   {
-    source: 'ides/emacs', target: '~/.emacs.d',
+    dir: 'ides/emacs', target: '~/.emacs.d',
     includes: [early-init.el init.el custom-vars.el lisp/**]
   },
   {
-    source: 'ides/nvim',
+    dir: 'ides/nvim',
     target: { linux: '~/.config/nvim', windows: '~/AppData/Local/nvim', macos: '~/.config/nvim' },
   },
   {
-    source: 'ides/lf',
+    dir: 'ides/lf',
     target: { linux: '~/.config/lf', windows: '~/AppData/Local/lf', macos: '~/.config/lf' },
     excludes: [history files marks]
   },
   {
-    source: 'ides/helix',
+    dir: 'ides/helix',
     target: { linux: '~/.config/helix', windows: '~/AppData/Roaming/helix', macos: '~/.config/helix' },
     excludes: [runtime/** themes/site-theme.toml]
   },
-  { source: 'ides/jetbrains/.ideavimrc', target: '~/.ideavimrc' },
+  { file: 'ides/jetbrains/.ideavimrc', target: '~/.ideavimrc' },
   {
-    source: 'ides/zed',
+    dir: 'ides/zed',
     target: { linux: '~/.config/zed', windows: '~/AppData/Roaming/zed', macos: '~/.config/zed' },
     includes: [keymap.json settings.json tasks.json themes/**]
   },
   {
-    source: 'linux/koi/koirc',
+    file: 'linux/koi/koirc',
     target: '~/.config/koirc', only: [linux]
   },
   {
-    source: 'shell/nushell',
+    dir: 'shell/nushell',
     target: { windows: '~/AppData/Roaming/nushell', linux: '~/.config/nushell', macos: '~/Library/Application Support/nushell' }
     excludes: [vendor/autoload/** history.*]
   },
-  { source: 'shell/wezterm', target: '~/.config/wezterm' },
-  { source :'shell/starship/starship.toml', target: '~/.config/starship.toml' },
-  { source :'shell/zsh/.zshrc', target: '~/.zshrc', only: [linux, macos] },
-  { source :'shell/zsh/.zshenv', target: '~/.zshenv', only: [linux, macos] },
-  { source :'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases', only: [linux, macos] },
-  { source: 'windows/clink', target: '~/AppData/Local/clink', only: [windows], excludes: [clink_history* clink.log clink_error*] },
-  { source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode/scripts.yaml', only: [windows] }
+  { dir: 'shell/wezterm', target: '~/.config/wezterm' },
+  { file: 'shell/starship/starship.toml', target: '~/.config/starship.toml' },
+  { file: 'shell/zsh/.zshrc', target: '~/.zshrc', only: [linux, macos] },
+  { file: 'shell/zsh/.zshenv', target: '~/.zshenv', only: [linux, macos] },
+  { file: 'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases', only: [linux, macos] },
+  { dir: 'windows/clink', target: '~/AppData/Local/clink', only: [windows], excludes: [clink_history* clink.log clink_error*] },
+  { file: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode/scripts.yaml', only: [windows] }
 ]

@@ -16,10 +16,19 @@ export def workable-file-mappings [filters: list<path> = []] {
 def valid-mapping [mapping: record] {
   mut errors = []
 
-  if ($mapping | get -o source) == null {
-    $errors = $errors | append "source missing"
-  } else if (($mapping | describe -d).type == 'string') == null {
-    $errors = $errors | append "source is not a string"
+  let source_is_dir = ($mapping | get -o dir) != null
+  let source_is_file = ($mapping | get -o file) != null
+
+  if not ($source_is_dir or $source_is_file) {
+    $errors = $errors | append "file/dir attribute missing"
+  } else if ($source_is_dir and $source_is_file) {
+    $errors = $errors | append "both file & dir attributes used"
+  } else {
+    if ($source_is_file and ($mapping.file | describe -d).type != string) {
+      $errors = $errors | append "file is not a string"
+    } else if ($source_is_dir and ($mapping.dir | describe -d).type != string) {
+      $errors = $errors | append "dir is not a string"
+    }
   }
 
   if ($mapping | get -o target) == null {
@@ -57,7 +66,8 @@ def mapping-target-path-filter [mapping: record, filters: list<path>] {
 }
 
 def enumerate-mapping-files [mapping: record, last_state: record, filters: list<path>] {
-  let mapping_source = $mapping.source
+  let mapping_type = resolve-mapping-type $mapping
+  let mapping_source = resolve-source $mapping
   let mapping_target = resolve-target $mapping
   
   let target = $mapping_target | path expand -n
@@ -67,11 +77,31 @@ def enumerate-mapping-files [mapping: record, last_state: record, filters: list<
   let target_type = $target | path type
 
   if $target_type == 'symlink' {
-    print $" Unexpected symlink at target ($target)"
+    print $" SKIP: Unexpected symlink at target ($target)"
+    return []
+  }
+  if $source_type == 'symlink' {
+    print $" SKIP: Unexpected symlink at source ($source)"
+    return []
+  }
+  if ($mapping_type == 'file' and $target_type == 'dir') {
+    print $" SKIP: Mapping expects file but target is directory ($target)"
+    return []
+  }
+  if ($mapping_type == 'dir' and $target_type == 'file') {
+    print $" SKIP: Mapping expects directory but target is file ($target)"
+    return []
+  }
+  if ($mapping_type == 'file' and $source_type == 'dir') {
+    print $" SKIP: Mapping expects file but source is directory ($source | path expand -n)"
+    return []
+  }
+  if ($mapping_type == 'dir' and $source_type == 'file') {
+    print $" SKIP: Mapping expects directory but source is file ($source | path expand -n)"
     return []
   }
 
-  match $source_type {
+  match $mapping_type {
     'file' => {
       let expanded_source = $source | path expand -n
       let source_hash = file-hash $expanded_source
@@ -186,6 +216,21 @@ def resolve-target [mapping: record] {
     $mapping.target | get -o $nu.os-info.name
   } else {
     $mapping.target
+  } 
+}
+
+def resolve-source [mapping: record] {
+  match (resolve-mapping-type $mapping) {
+    'file' => $mapping.file,
+    'dir' => $mapping.dir
+  }
+}
+
+def resolve-mapping-type [mapping: record] {
+  if ($mapping | get -o file) != null {
+    'file'
+  } else {
+    'dir'
   } 
 }
 
