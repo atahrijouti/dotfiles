@@ -8,10 +8,11 @@ export def get-workables [filters: list<path> = []] {
   get-mappings
   | where {|m| valid-mapping $m }
   | where {|m| workable-os $m }
-  | where {|m| mapping-target-path-filter $m $filters}
-  | where {|m| mapping-matches-file-system $m}
-  | each {|m| enumerate-mapping-files $m $last_state $filters}
+  | where {|m| mapping-target-path-filter $m $filters }
+  | where {|m| mapping-matches-file-system $m }
+  | each {|m| get-mapping-files $m $filters }
   | flatten
+  | each {|m| make-workable $m $last_state }
 }
 
 def valid-mapping [mapping: record] {
@@ -110,7 +111,23 @@ def mapping-matches-file-system [mapping: record] {
   return true
 }
 
-def enumerate-mapping-files [mapping: record, last_state: record, filters: list<path>] {
+def make-workable [mapping: record, last_state: record] {
+  let source_hash = file-hash $mapping.source
+  let target_hash = file-hash $mapping.target
+  let last_hash = $last_state | get -o $mapping.target
+  let status = mapping-status $source_hash $target_hash $last_hash
+
+  return {
+    source: $mapping.source,
+    source_hash: $source_hash,
+    target: $mapping.target,
+    target_hash: $target_hash,
+    last_hash: $last_hash,
+    status: $status
+  }
+}
+
+def get-mapping-files [mapping: record, filters: list<path>] {
   let mapping_type = resolve-mapping-type $mapping
   let mapping_source = resolve-source $mapping
   let mapping_target = resolve-target $mapping
@@ -123,19 +140,10 @@ def enumerate-mapping-files [mapping: record, last_state: record, filters: list<
 
   match $mapping_type {
     'file' => {
-      let expanded_source = $source | path expand -n
-      let source_hash = file-hash $expanded_source
-      let target_hash = file-hash $target
-      let last_hash = $last_state | get -o $target
-      let status = mapping-status $source_hash $target_hash $last_hash
-      [{
-        source: $expanded_source,
-        source_hash: $source_hash,
+      return {
+        source: ($source | path expand -n),
         target: $target,
-        target_hash: $target_hash,
-        last_hash: $last_hash,
-        status: $status
-      }]
+      }
     },
     'dir' => {
       let excludes = $mapping | get -o excludes | default []
@@ -148,23 +156,11 @@ def enumerate-mapping-files [mapping: record, last_state: record, filters: list<
         target-dir-files-filter $file $target $filters
       }
 
-      (
+      return (
         $all_relative_paths | each {|$relative|
-          let source_path = $source | path join $relative | path expand -n
-          let target_path = $target | path join $relative | path expand -n
-
-          let source_hash = file-hash $source_path
-          let target_hash = file-hash $target_path
-          let last_hash = $last_state | get -o $target_path 
-          let status = mapping-status $source_hash $target_hash $last_hash
-
           {
-            source: $source_path,
-            source_hash: $source_hash,
-            target: $target_path,
-            target_hash: $target_hash,
-            last_hash: $last_hash,
-            status: $status
+            source: ($source | path join $relative | path expand -n),
+            target: ($target | path join $relative | path expand -n),
           }
         }
       )
