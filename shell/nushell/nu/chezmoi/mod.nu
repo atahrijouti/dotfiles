@@ -7,27 +7,27 @@ export def main [] {
 }
 
 export def status [...file_filters: string --table --verbose] {
-  mut status_data = workable-file-mappings $file_filters
+  mut workables = get-workables $file_filters
 
   if not $verbose {
-    $status_data = $status_data | where {|f| $f.status != 'up-to-date' } | select target status
+    $workables = $workables | where {|f| $f.status != 'up-to-date' } | select target status
   }
 
-  if (not $table and ($status_data | is-empty)) {
+  if (not $table and ($workables | is-empty)) {
     'Up to date'
   } else {
-    $status_data
+    $workables
   }
 }
 
 export def diff [...file_filters: string] {
-  for $mapping in (workable-file-mappings $file_filters) {
-    match $mapping.status {
+  for workable in (get-workables $file_filters) {
+    match $workable.status {
       'untracked-different' | 'target-changed' | 'both-changed-different' => {
-        display-diff $mapping.source $mapping.target $mapping.status $mapping.target
+        display-diff $workable.source $workable.target $workable.status $workable.target
       }
       'source-changed' => {
-        display-diff $mapping.target $mapping.source $mapping.status $mapping.target
+        display-diff $workable.target $workable.source $workable.status $workable.target
       }
       _ => {}
     }
@@ -48,116 +48,116 @@ export def sync [
     VERBOSE: $verbose
   } {
     mut state = load-state
-    for $mapping in (workable-file-mappings $file_filters) {
-      match $mapping.status {
+    for workable in (get-workables $file_filters) {
+      match $workable.status {
         'untracked-both-missing' => {
-          print $" Missing source and target for mapping ($mapping.target)"
+          print $" Missing source and target for mapping ($workable.target)"
         },
         'untracked-source-missing' => {
           try {
-            print $" Pulling target ($mapping.target) for the first time"
-            copy-file $mapping.target $mapping.source
-            $state = update-state-for-target $state $mapping.target $mapping.target_hash
+            print $" Pulling target ($workable.target) for the first time"
+            copy-file $workable.target $workable.source
+            $state = update-state-for-target $state $workable.target $workable.target_hash
           }
         },
         'untracked-target-missing' => {
           try {
-            print $" Applying target ($mapping.target) for the first time"
-            copy-file $mapping.source $mapping.target
-            $state = update-state-for-target $state $mapping.target $mapping.source_hash
+            print $" Applying target ($workable.target) for the first time"
+            copy-file $workable.source $workable.target
+            $state = update-state-for-target $state $workable.target $workable.source_hash
           }
         },
         'untracked-identical' => {
           try {
-            print $" Files in place, missing cache entry. ($mapping.target)"
-            $state = update-state-for-target $state $mapping.target $mapping.source_hash
+            print $" Files in place, missing cache entry. ($workable.target)"
+            $state = update-state-for-target $state $workable.target $workable.source_hash
           }
         },
         'untracked-different' => {
-          print $" Untracked files are in conflict and require manual intervention. ($mapping.target)"
+          print $" Untracked files are in conflict and require manual intervention. ($workable.target)"
           if $prefer_source {
-            print $"cp ($mapping.source) ($mapping.target)"
+            print $"cp ($workable.source) ($workable.target)"
           } else if $prefer_target {
-            print $"cp ($mapping.target) ($mapping.source)"
+            print $"cp ($workable.target) ($workable.source)"
           } else if $merge {
-            print $"nvim -d ($mapping.source) ($mapping.target)"
+            print $"nvim -d ($workable.source) ($workable.target)"
           }
         },
         'both-deleted' => {
-          print $" Files deleted. ($mapping.target)"
-          $state = $state | reject $mapping.target
+          print $" Files deleted. ($workable.target)"
+          $state = $state | reject $workable.target
         },
         'source-deleted' => {
           try {
             let delete_string = if not $delete { " use --delete to handle it automatically." } else { ""  }
-            print $"󰆴 Source deleted for ($mapping.target).($delete_string)"
+            print $"󰆴 Source deleted for ($workable.target).($delete_string)"
             if $delete {
-              print $"󰆴 Deleting target ($mapping.target)."
-              rm $mapping.target
-              $state = $state | reject $mapping.target
+              print $"󰆴 Deleting target ($workable.target)."
+              rm $workable.target
+              $state = $state | reject $workable.target
             }
           }
         },
         'target-deleted' => {
           try {
             let delete_string = if not $delete { " use --delete to handle it automatically." } else { ""  }
-            print $"󰆴 Target deleted ($mapping.target).($delete_string)"
+            print $"󰆴 Target deleted ($workable.target).($delete_string)"
             if $delete {
-              print $"󰆴 Deleting source ($mapping.source)."
-              rm $mapping.source
-              $state = $state | reject $mapping.target
+              print $"󰆴 Deleting source ($workable.source)."
+              rm $workable.source
+              $state = $state | reject $workable.target
             }
           }
         },
         'source-deleted-target-changed' => {
-          print $" Source deleted & target changed. ($mapping.target)"
+          print $" Source deleted & target changed. ($workable.target)"
           if $prefer_source {
-            print $"rm ($mapping.target)"
+            print $"rm ($workable.target)"
           } else if $prefer_target {
-            print $"cp ($mapping.target) ($mapping.source)"
+            print $"cp ($workable.target) ($workable.source)"
           }
         },
         'target-deleted-source-changed' => {
-          print $" Target deleted & source changed. ($mapping.target)"
+          print $" Target deleted & source changed. ($workable.target)"
           if $prefer_source {
-            print $"cp ($mapping.source) ($mapping.target)"
+            print $"cp ($workable.source) ($workable.target)"
           } else if $prefer_target {
-            print $"rm ($mapping.source)"
+            print $"rm ($workable.source)"
           }
         },
         'source-changed' => {
           try {
-            print $" Applying ($mapping.target)"
-            copy-file $mapping.source $mapping.target
-            $state = update-state-for-target $state $mapping.target $mapping.source_hash
+            print $" Applying ($workable.target)"
+            copy-file $workable.source $workable.target
+            $state = update-state-for-target $state $workable.target $workable.source_hash
           }
         },
         'target-changed' => {
           try {
-            print $" Pulling ($mapping.target)"
-            copy-file $mapping.target $mapping.source
-            $state = update-state-for-target $state $mapping.target $mapping.target_hash
+            print $" Pulling ($workable.target)"
+            copy-file $workable.target $workable.source
+            $state = update-state-for-target $state $workable.target $workable.target_hash
           }
         },
         'both-changed-identical' => {
           try {
-            print $" Files changed & identical, update cache. ($mapping.target)"
-            $state = update-state-for-target $state $mapping.target $mapping.source_hash
+            print $" Files changed & identical, update cache. ($workable.target)"
+            $state = update-state-for-target $state $workable.target $workable.source_hash
           }
         },
         'both-changed-different' => {
-          print $" Files are in conflict and require manual intervention. ($mapping.target)"
+          print $" Files are in conflict and require manual intervention. ($workable.target)"
           if $prefer_source {
-            print $"cp ($mapping.source) ($mapping.target)"
+            print $"cp ($workable.source) ($workable.target)"
           } else if $prefer_target {
-            print $"cp ($mapping.target) ($mapping.source)"
+            print $"cp ($workable.target) ($workable.source)"
           } else if $merge {
-            print $"nvim -d ($mapping.source) ($mapping.target)"
+            print $"nvim -d ($workable.source) ($workable.target)"
           }
         },
         'up-to-date' => {
           if $env.VERBOSE? {
-            print $" Up to date. ($mapping.target)"
+            print $" Up to date. ($workable.target)"
           }
         }
       }

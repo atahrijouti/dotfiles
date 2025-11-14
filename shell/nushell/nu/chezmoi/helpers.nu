@@ -3,7 +3,7 @@ const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
 const MAPPINGS_FILE = path self ./mappings.nuon
 const OS = $nu.os-info.name
 
-export def workable-file-mappings [filters: list<path> = []] {
+export def get-workables [filters: list<path> = []] {
   let last_state = (load-state)
   get-mappings
   | where {|m| valid-mapping $m }
