@@ -34,7 +34,15 @@ export def diff [...file_filters: string] {
   }
 }
 
-export def sync [...file_filters: string --dry-run --verbose --prefer-source --prefer-target --merge --interactive --delete] {
+export def sync [
+    ...file_filters: string
+    --dry-run --verbose
+    --prefer-source
+    --prefer-target
+    --merge
+    --interactive
+    --delete
+  ] {
   with-env {
     DRY_RUN: $dry_run,
     VERBOSE: $verbose
