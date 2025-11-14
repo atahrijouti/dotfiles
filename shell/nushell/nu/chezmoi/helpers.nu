@@ -81,26 +81,32 @@ def mapping-matches-file-system [mapping: record] {
     print $" SKIP: Unexpected symlink at target ($target)"
     return false
   }
+
   if $source_type == 'symlink' {
     print $" SKIP: Unexpected symlink at source ($source)"
     return false
   }
+
   if ($mapping_type == 'file' and $target_type == 'dir') {
     print $" SKIP: Mapping expects file but target is directory ($target)"
     return false
   }
+
   if ($mapping_type == 'dir' and $target_type == 'file') {
     print $" SKIP: Mapping expects directory but target is file ($target)"
     return false
   }
+
   if ($mapping_type == 'file' and $source_type == 'dir') {
     print $" SKIP: Mapping expects file but source is directory ($source | path expand -n)"
     return false
   }
+
   if ($mapping_type == 'dir' and $source_type == 'file') {
     print $" SKIP: Mapping expects directory but source is file ($source | path expand -n)"
     return false
   }
+
   return true
 }
 
