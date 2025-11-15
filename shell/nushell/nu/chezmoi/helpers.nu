@@ -10,7 +10,7 @@ export def get-workables [filters: list<path> = []] {
   | where {|m| workable-os $m }
   | where {|m| mapping-target-path-filter $m $filters }
   | where {|m| mapping-matches-file-system $m }
-  | each {|m| get-mapping-files $m $filters } | flatten
+  | each {|m| get-mapping-files $m $last_state $filters } | flatten
   | each {|m| make-workable $m $last_state }
 }
 
@@ -126,7 +126,7 @@ def make-workable [mapping: record, last_state: record] {
   }
 }
 
-def get-mapping-files [mapping: record, filters: list<path>] {
+def get-mapping-files [mapping: record, last_state:record, filters: list<path>] {
   let mapping_type = resolve-mapping-type $mapping
   let mapping_source = resolve-source $mapping
   let mapping_target = resolve-target $mapping
@@ -150,9 +150,9 @@ def get-mapping-files [mapping: record, filters: list<path>] {
 
       let source_files = list-folder-files $source $includes $excludes
       let target_files = list-folder-files $mapping_target $includes $excludes
-      # TODO list files previously comitted to state 
+      let tracked_target_files = tracked-dir-mapping-files $mapping $last_state
 
-      let all_relative_paths =  $source_files | append $target_files | uniq | where {|file|
+      let all_relative_paths =  $source_files | append $target_files | append $tracked_target_files | uniq | where {|file|
         target-dir-files-filter $file $target $filters
       }
 
@@ -168,10 +168,12 @@ def get-mapping-files [mapping: record, filters: list<path>] {
   }
 }
 
-export def tracked-dir-mapping-files [mapping: path, state: record] {
+export def tracked-dir-mapping-files [mapping: record, state: record] {
+  let mapping_target = resolve-target $mapping
   $state
-  | items {|target, hash| $target}
-  | where {|target| path-in-other $target $mapping}
+  | items {|tracked_target, hash| $tracked_target}
+  | where {|tracked_target| path-in-other $tracked_target $mapping_target}
+  | path relative-to $mapping_target
 }
 
 
@@ -329,15 +331,4 @@ export def display-diff [old: path, new: path, status: string, target: path] {
 
 export def decorated-print [text: string] {
   print (([$text] | table -i false -t default) | into string)
-}
-
-export def magic-helper [filters: list<path> = []] {
-  let last_state = (load-state)
-  get-mappings
-  | where {|m| valid-mapping $m }
-  | where {|m| workable-os $m }
-  | where {|m| mapping-target-path-filter $m $filters }
-  | where {|m| mapping-matches-file-system $m }
-  | where {|m| ($m | get -o dir) != null }
-  | each {|m| tracked-dir-mapping-files (resolve-target $m) $last_state | table -i false -t default }
 }
