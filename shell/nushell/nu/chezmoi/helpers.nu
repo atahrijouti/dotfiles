@@ -168,6 +168,13 @@ def get-mapping-files [mapping: record, filters: list<path>] {
   }
 }
 
+export def tracked-dir-mapping-files [mapping: path, state: record] {
+  $state
+  | items {|target, hash| $target}
+  | where {|target| path-in-other $target $mapping}
+}
+
+
 export def mapping-status [source: oneof<string, nothing>, target: oneof<string, nothing>, last: oneof<string, nothing>] {
   if $last == null {
     match [$source, $target] {
@@ -207,12 +214,21 @@ def paths-overlap [path: path, other:path] {
   if $path == $other {
     return true
   }
+
+  if (path-in-other $path $other) {
+    true
+  }
+
+  if (path-in-other $other $path) {
+    true
+  }
+
+  return false
+}
+
+def path-in-other [path: path, other: path] {
   try {
     $path | path relative-to $other
-    return true
-  }
-  try {
-    $other | path relative-to $path
     return true
   }
   return false
@@ -313,4 +329,15 @@ export def display-diff [old: path, new: path, status: string, target: path] {
 
 export def decorated-print [text: string] {
   print (([$text] | table -i false -t default) | into string)
+}
+
+export def magic-helper [filters: list<path> = []] {
+  let last_state = (load-state)
+  get-mappings
+  | where {|m| valid-mapping $m }
+  | where {|m| workable-os $m }
+  | where {|m| mapping-target-path-filter $m $filters }
+  | where {|m| mapping-matches-file-system $m }
+  | where {|m| ($m | get -o dir) != null }
+  | each {|m| tracked-dir-mapping-files (resolve-target $m) $last_state | table -i false -t default }
 }

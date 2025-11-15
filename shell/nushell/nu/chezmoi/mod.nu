@@ -6,6 +6,10 @@ use ./helpers.nu *
 export def main [] {
 }
 
+export def magic [...file_filters: string] {
+  magic-helper $file_filters
+}
+
 export def status [...file_filters: string --table --verbose] {
   mut workables = get-workables $file_filters
 
