@@ -33,6 +33,7 @@ x = ":sh mise build --quiet"
 r = ":reload-all"
 c = ":config-reload"
 t = ":tree-sitter-highlight-name"
+s = ":toggle-option lsp.auto-signature-help"
 
 [keys.normal]
 i = ["collapse_selection", "insert_mode"]
