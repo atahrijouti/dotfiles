@@ -10,8 +10,7 @@ export def get-workables [filters: list<path> = []] {
   | where {|m| workable-os $m }
   | where {|m| mapping-target-path-filter $m $filters }
   | where {|m| mapping-matches-file-system $m }
-  | each {|m| get-mapping-files $m $filters }
-  | flatten
+  | each {|m| get-mapping-files $m $filters } | flatten
   | each {|m| make-workable $m $last_state }
 }
 
@@ -151,6 +150,7 @@ def get-mapping-files [mapping: record, filters: list<path>] {
 
       let source_files = list-folder-files $source $includes $excludes
       let target_files = list-folder-files $mapping_target $includes $excludes
+      # TODO list files previously comitted to state 
 
       let all_relative_paths =  $source_files | append $target_files | uniq | where {|file|
         target-dir-files-filter $file $target $filters
