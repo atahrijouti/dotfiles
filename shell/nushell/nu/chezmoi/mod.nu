@@ -34,13 +34,14 @@ export def diff [...file_filters: string] {
   }
 }
 
+export def resolve-conflicts [] {
+  
+}
+ 
 export def sync [
     ...file_filters: string
     --dry-run --verbose
-    --prefer-source
-    --prefer-target
-    --merge
-    --interactive
+    --auto
     --delete
   ] {
   with-env {
@@ -48,7 +49,51 @@ export def sync [
     VERBOSE: $verbose
   } {
     mut state = load-state
-    for workable in (get-workables $file_filters) {
+
+    let workables = get-workables $file_filters
+    if ($workables | is-empty) {
+      print 'Already up-to-date'
+      return 
+    }
+
+    let auto_syncable = $workables
+      | where ($it.status in $AUTO_RESOLVED_STATUSES)
+      | select status target
+
+    let is_deletable = $workables
+      | where ($it.status in $AUTO_DELETE_STATUSES)
+      | select status target
+
+    let is_in_conflict = $workables
+      | where ($it.status in $CONFLICT_STATUSES)
+      | select status target
+
+    if not $auto {
+      if ($auto_syncable | is-not-empty) {
+        print "The following files will be synced automatically:"
+        print ($auto_syncable | table -t default -i false)
+      }
+
+      if ($is_deletable | is-not-empty) {
+        print "Deletion can be handled automatically for the following files:"
+        if (not $delete) {
+          print $"(ansi yellow)--delete not supplied, deletion will be skipped(ansi reset)"
+        print ($is_deletable | table -t default -i false)
+        }
+      }
+    
+      if ($is_in_conflict | is-not-empty) {
+        print "The following files are in conflict. Use resolve-conflicts to handle them:"
+        print ($is_in_conflict| table -t default -i false)
+      }
+
+      let answer = [no yes] | input list "Would you like to proceed?"
+      if ($answer != yes) {
+        return
+      }
+    }
+    
+    for workable in $workables {
       match $workable.status {
         'untracked-both-missing' => {
           print $" Missing source and target for mapping ($workable.target)"
@@ -71,16 +116,6 @@ export def sync [
           try {
             print $" Files in place, missing cache entry. ($workable.target)"
             $state = update-state-for-target $state $workable.target $workable.source_hash
-          }
-        },
-        'untracked-different' => {
-          print $" Untracked files are in conflict and require manual intervention. ($workable.target)"
-          if $prefer_source {
-            print $"cp ($workable.source) ($workable.target)"
-          } else if $prefer_target {
-            print $"cp ($workable.target) ($workable.source)"
-          } else if $merge {
-            print $"nvim -d ($workable.source) ($workable.target)"
           }
         },
         'both-deleted' => {
@@ -109,22 +144,6 @@ export def sync [
             }
           }
         },
-        'source-deleted-target-changed' => {
-          print $" Source deleted & target changed. ($workable.target)"
-          if $prefer_source {
-            print $"rm ($workable.target)"
-          } else if $prefer_target {
-            print $"cp ($workable.target) ($workable.source)"
-          }
-        },
-        'target-deleted-source-changed' => {
-          print $" Target deleted & source changed. ($workable.target)"
-          if $prefer_source {
-            print $"cp ($workable.source) ($workable.target)"
-          } else if $prefer_target {
-            print $"rm ($workable.source)"
-          }
-        },
         'source-changed' => {
           try {
             print $" Applying ($workable.target)"
@@ -145,27 +164,17 @@ export def sync [
             $state = update-state-for-target $state $workable.target $workable.source_hash
           }
         },
-        'both-changed-different' => {
-          print $" Files are in conflict and require manual intervention. ($workable.target)"
-          if $prefer_source {
-            print $"cp ($workable.source) ($workable.target)"
-          } else if $prefer_target {
-            print $"cp ($workable.target) ($workable.source)"
-          } else if $merge {
-            print $"nvim -d ($workable.source) ($workable.target)"
-          }
-        },
         'up-to-date' => {
-          if $env.VERBOSE? {
-            print $" Up to date. ($workable.target)"
-          }
+          print $" Up to date. ($workable.target)"
         }
       }
     }    
 
     save-state $state
 
-    print $"\n✓ Made myself chezmoi"
+    let dry_run_message = if ($dry_run) { "(DRY_RUN)" } else { "" }
+
+    print $"(ansi green)✓ Made myself chezmoi (ansi yellow)($dry_run_message)(ansi reset)"
 
   }
 }

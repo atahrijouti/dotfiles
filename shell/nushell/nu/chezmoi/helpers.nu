@@ -3,15 +3,57 @@ const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
 const MAPPINGS_FILE = path self ./mappings.nuon
 const OS = $nu.os-info.name
 
+const STATUSES = [
+  'untracked-both-missing',
+  'untracked-source-missing',
+  'untracked-target-missing',
+  'untracked-identical',
+  'untracked-different',
+  'both-deleted',
+  'source-deleted',
+  'source-deleted-target-changed',
+  'target-deleted',
+  'target-deleted-source-changed',
+  'source-changed',
+  'target-changed',
+  'both-changed-identical',
+  'both-changed-different',
+  'up-to-date' 
+]
+
+export const AUTO_RESOLVED_STATUSES = [
+  'untracked-source-missing',
+  'untracked-target-missing',
+  'untracked-identical',
+  'both-deleted',
+  'source-changed',
+  'target-changed',
+  'both-changed-identical',
+  'up-to-date' 
+]
+
+export const AUTO_DELETE_STATUSES = [
+  'source-deleted',
+  'target-deleted',
+]
+
+export const CONFLICT_STATUSES = [
+  'untracked-different',
+  'source-deleted-target-changed',
+  'target-deleted-source-changed',
+  'both-changed-different',
+]
+
 export def get-workables [filters: list<path> = []] {
   let last_state = (load-state)
   get-mappings
-  | where {|m| valid-mapping $m }
-  | where {|m| workable-os $m }
-  | where {|m| mapping-target-path-filter $m $filters }
-  | where {|m| mapping-matches-file-system $m }
+  | where (valid-mapping $it)
+  | where (workable-os $it)
+  | where (mapping-target-path-filter $it $filters)
+  | where (mapping-matches-file-system $it)
   | each {|m| get-mapping-files $m $last_state $filters } | flatten
   | each {|m| make-workable $m $last_state }
+  | where $env.verbose or $it.status != 'up-to-date'
 }
 
 def valid-mapping [mapping: record] {
@@ -114,7 +156,7 @@ def make-workable [mapping: record, last_state: record] {
   let source_hash = file-hash $mapping.source
   let target_hash = file-hash $mapping.target
   let last_hash = $last_state | get -o $mapping.target
-  let status = mapping-status $source_hash $target_hash $last_hash
+  let status = workable-status $source_hash $target_hash $last_hash
 
   return {
     source: $mapping.source,
@@ -176,8 +218,7 @@ export def tracked-dir-mapping-files [mapping: record, state: record] {
   | path relative-to $mapping_target
 }
 
-
-export def mapping-status [source: oneof<string, nothing>, target: oneof<string, nothing>, last: oneof<string, nothing>] {
+export def workable-status [source: oneof<string, nothing>, target: oneof<string, nothing>, last: oneof<string, nothing>] {
   if $last == null {
     match [$source, $target] {
       [null, null] => 'untracked-both-missing'
