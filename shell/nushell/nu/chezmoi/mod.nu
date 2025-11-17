@@ -78,8 +78,8 @@ export def sync [
         print "Deletion can be handled automatically for the following files:"
         if (not $delete) {
           print $"(ansi yellow)--delete not supplied, deletion will be skipped(ansi reset)"
-        print ($is_deletable | table -t default -i false)
         }
+        print ($is_deletable | table -t default -i false)
       }
     
       if ($is_in_conflict | is-not-empty) {
