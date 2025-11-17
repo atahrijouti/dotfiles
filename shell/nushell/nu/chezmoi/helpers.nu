@@ -44,7 +44,7 @@ export const CONFLICT_STATUSES = [
   'both-changed-different',
 ]
 
-export def get-workables [filters: list<path> = []] {
+export def get-workables [filters: list<path> = [], verbose: bool = false] {
   let last_state = (load-state)
   get-mappings
   | where (valid-mapping $it)
@@ -53,7 +53,7 @@ export def get-workables [filters: list<path> = []] {
   | where (mapping-matches-file-system $it)
   | each {|m| get-mapping-files $m $last_state $filters } | flatten
   | each {|m| make-workable $m $last_state }
-  | where $env.verbose or $it.status != 'up-to-date'
+  | where $verbose or $it.status != 'up-to-date'
 }
 
 def valid-mapping [mapping: record] {
