@@ -22,6 +22,7 @@ const STATUSES = [
 ]
 
 export const AUTO_RESOLVED_STATUSES = [
+  'untracked-both-missing',
   'untracked-source-missing',
   'untracked-target-missing',
   'untracked-identical',

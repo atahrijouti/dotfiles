@@ -50,7 +50,7 @@ export def sync [
   } {
     mut state = load-state
 
-    let workables = get-workables $file_filters
+    let workables = get-workables $file_filters $verbose
     if ($workables | is-empty) {
       print 'Already up-to-date'
       return 
