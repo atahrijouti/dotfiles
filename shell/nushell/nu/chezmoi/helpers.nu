@@ -21,6 +21,19 @@ const STATUSES = [
   'up-to-date' 
 ]
 
+export const DIFFABLE_STATUSES = [
+  'untracked-source-missing',
+  'untracked-target-missing',
+  'untracked-different',
+  'source-deleted',
+  'source-deleted-target-changed',
+  'target-deleted',
+  'target-deleted-source-changed',
+  'source-changed',
+  'target-changed',
+  'both-changed-different',
+]
+
 export const AUTO_RESOLVED_STATUSES = [
   'untracked-both-missing',
   'untracked-source-missing',

@@ -21,7 +21,9 @@ export def status [...file_filters: string --table --verbose] {
 }
 
 export def diff [...file_filters: string] {
-  for workable in (get-workables $file_filters) {
+  let diffable_workables = (get-workables $file_filters) | where ($DIFFABLE_STATUSES has $it.status)
+
+  for workable in $diffable_workables {
     match $workable.status {
       'untracked-different' | 'target-changed' | 'both-changed-different' => {
         display-diff $workable.source $workable.target $workable.status $workable.target
