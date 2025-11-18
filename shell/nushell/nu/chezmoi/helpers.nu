@@ -380,8 +380,12 @@ export def copy-file [from: string, to: string] {
 }
 
 export def display-diff [old: path, new: path, status: string, target: path] {
-  decorated-print $"\((ansi blue)($status)(ansi reset)) (ansi cyan)($target)(ansi reset)"
+  print-diff-header $status $target
   difft $old $new
+}
+
+export def print-diff-header [status: string, target: path] {
+  decorated-print $"\((ansi blue)($status)(ansi reset)) (ansi cyan)($target)(ansi reset)"
 }
 
 export def decorated-print [text: string] {

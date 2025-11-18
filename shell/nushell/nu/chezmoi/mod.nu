@@ -31,7 +31,30 @@ export def diff [...file_filters: string] {
       'source-changed' => {
         display-diff $workable.target $workable.source $workable.status $workable.target
       }
-      _ => {}
+      'untracked-source-missing' => {
+        print-diff-header $workable.status $workable.target
+        print $" New target"
+      }
+      'untracked-target-missing' => {
+        print-diff-header $workable.status $workable.target
+        print $" New source"
+      }
+      'source-deleted' => {
+        print-diff-header $workable.status $workable.target
+        print $"󰆴 Source deleted"
+      }
+      'source-deleted-target-changed' => {
+        print-diff-header $workable.status $workable.target
+        print $" Source deleted, but the target has changed"
+      }
+      'target-deleted' => {
+        print-diff-header $workable.status $workable.target
+        print $"󰆴 Target deleted"
+      }
+      'target-deleted-source-changed' => {
+        print-diff-header $workable.status $workable.target
+        print $" Target deleted, but the source has changed"
+      }   
     }
   }
 }
