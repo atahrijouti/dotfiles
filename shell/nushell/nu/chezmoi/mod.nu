@@ -179,27 +179,27 @@ export def diff [...file_filters: string] {
       }
       'untracked-source-missing' => {
         print-diff-header $workable.status $workable.target
-        print $" New target"
+        print $"(ansi blue)(ansi reset) New target\n"
       }
       'untracked-target-missing' => {
         print-diff-header $workable.status $workable.target
-        print $" New source"
+        print $"(ansi blue)(ansi reset) New source\n"
       }
       'source-deleted' => {
         print-diff-header $workable.status $workable.target
-        print $"󰆴 Source deleted"
+        print $"(ansi red)󰆴(ansi reset) Source deleted\n"
       }
       'source-deleted-target-changed' => {
         print-diff-header $workable.status $workable.target
-        print $" Source deleted, but the target has changed"
+        print $"(ansi yellow)(ansi reset) Source deleted, but the target has changed\n"
       }
       'target-deleted' => {
         print-diff-header $workable.status $workable.target
-        print $"󰆴 Target deleted"
+        print $"(ansi red)󰆴(ansi reset) Target deleted\n"
       }
       'target-deleted-source-changed' => {
         print-diff-header $workable.status $workable.target
-        print $" Target deleted, but the source has changed"
+        print $"(ansi yellow)(ansi reset) Target deleted, but the source has changed\n"
       }   
     }
   }
