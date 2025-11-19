@@ -1,3 +1,4 @@
+use ./constants.nu *
 use ./helpers.nu *
 
 # Manage dotfiles à la chezmoi, with extra features to handle multiple OS setups
@@ -18,49 +19,6 @@ export def status [...file_filters: string --table --verbose] {
   } else {
     $workables
   }
-}
-
-export def diff [...file_filters: string] {
-  let diffable_workables = (get-workables $file_filters) | where ($DIFFABLE_STATUSES has $it.status)
-
-  for workable in $diffable_workables {
-    match $workable.status {
-      'untracked-different' | 'target-changed' | 'both-changed-different' => {
-        display-diff $workable.source $workable.target $workable.status $workable.target
-      }
-      'source-changed' => {
-        display-diff $workable.target $workable.source $workable.status $workable.target
-      }
-      'untracked-source-missing' => {
-        print-diff-header $workable.status $workable.target
-        print $" New target"
-      }
-      'untracked-target-missing' => {
-        print-diff-header $workable.status $workable.target
-        print $" New source"
-      }
-      'source-deleted' => {
-        print-diff-header $workable.status $workable.target
-        print $"󰆴 Source deleted"
-      }
-      'source-deleted-target-changed' => {
-        print-diff-header $workable.status $workable.target
-        print $" Source deleted, but the target has changed"
-      }
-      'target-deleted' => {
-        print-diff-header $workable.status $workable.target
-        print $"󰆴 Target deleted"
-      }
-      'target-deleted-source-changed' => {
-        print-diff-header $workable.status $workable.target
-        print $" Target deleted, but the source has changed"
-      }   
-    }
-  }
-}
-
-export def resolve-conflicts [] {
-  
 }
  
 export def sync [
@@ -201,5 +159,48 @@ export def sync [
 
     print $"(ansi green)✓ Made myself chezmoi (ansi yellow)($dry_run_message)(ansi reset)"
 
+  }
+}
+
+export def resolve-conflicts [] {
+  
+}
+
+export def diff [...file_filters: string] {
+  let diffable_workables = (get-workables $file_filters) | where ($DIFFABLE_STATUSES has $it.status)
+
+  for workable in $diffable_workables {
+    match $workable.status {
+      'untracked-different' | 'target-changed' | 'both-changed-different' => {
+        display-diff $workable.source $workable.target $workable.status $workable.target
+      }
+      'source-changed' => {
+        display-diff $workable.target $workable.source $workable.status $workable.target
+      }
+      'untracked-source-missing' => {
+        print-diff-header $workable.status $workable.target
+        print $" New target"
+      }
+      'untracked-target-missing' => {
+        print-diff-header $workable.status $workable.target
+        print $" New source"
+      }
+      'source-deleted' => {
+        print-diff-header $workable.status $workable.target
+        print $"󰆴 Source deleted"
+      }
+      'source-deleted-target-changed' => {
+        print-diff-header $workable.status $workable.target
+        print $" Source deleted, but the target has changed"
+      }
+      'target-deleted' => {
+        print-diff-header $workable.status $workable.target
+        print $"󰆴 Target deleted"
+      }
+      'target-deleted-source-changed' => {
+        print-diff-header $workable.status $workable.target
+        print $" Target deleted, but the source has changed"
+      }   
+    }
   }
 }
