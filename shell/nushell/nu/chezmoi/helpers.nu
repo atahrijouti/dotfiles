@@ -174,6 +174,27 @@ export def tracked-dir-mapping-files [mapping: record, state: record] {
   | path relative-to $mapping_target
 }
 
+export def list-folder-files [root: string, includes: list, excludes: list] {
+  if not ($root | path exists)  or ($root | path type) == symlink {
+    return []
+  }
+  
+  if ($root | path type) == file {
+    return [$root]
+  }
+  
+  let files = if ($includes | is-not-empty) {
+    $includes | each {|pattern|
+      glob $"($root)/($pattern)" --no-dir
+    } | flatten
+  } else {
+    let exclude_patterns = $excludes | append '__never_match__/**'
+    glob $"($root)/**/*" --no-dir --exclude $exclude_patterns
+  }
+
+  $files | path relative-to $root
+}
+
 export def workable-status [source: oneof<string, nothing>, target: oneof<string, nothing>, last: oneof<string, nothing>] {
   if $last == null {
     match [$source, $target] {
@@ -269,6 +290,7 @@ export def load-state [] {
   if not ($STATE_FILE | path exists) { return {} }
   open $STATE_FILE
 }
+
 export def update-state-for-target [state: record, target: path, hash: string] {
   $state | upsert $target $hash
 }
@@ -283,27 +305,6 @@ export def save-state [state: record] {
     if not ($state_dir | path exists) { mkdir $state_dir }
     $state | save -f $STATE_FILE
   }
-}
-
-export def list-folder-files [root: string, includes: list, excludes: list] {
-  if not ($root | path exists)  or ($root | path type) == symlink {
-    return []
-  }
-  
-  if ($root | path type) == file {
-    return [$root]
-  }
-  
-  let files = if ($includes | is-not-empty) {
-    $includes | each {|pattern|
-      glob $"($root)/($pattern)" --no-dir
-    } | flatten
-  } else {
-    let exclude_patterns = $excludes | append '__never_match__/**'
-    glob $"($root)/**/*" --no-dir --exclude $exclude_patterns
-  }
-
-  $files | path relative-to $root
 }
 
 export def copy-file [from: string, to: string] {
