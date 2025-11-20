@@ -128,12 +128,8 @@ def get-mapping-files [mapping: record, last_state:record, filters: list<path>] 
   let mapping_type = resolve-mapping-type $mapping
   let mapping_source = resolve-source $mapping
   let mapping_target = resolve-target $mapping
-  
   let target = $mapping_target | path expand -n
   let source = $"($DOTFILES_ROOT)/($mapping_source)"
-
-  let source_type = $source | path type
-  let target_type = $target | path type
 
   match $mapping_type {
     'file' => {
@@ -166,11 +162,84 @@ def get-mapping-files [mapping: record, last_state:record, filters: list<path>] 
   }
 }
 
+export def do-magic [filters: list<path> = []] {
+  # don't look here this is just for testing purposes
+  let state = (load-state)
+  let state = {
+   'C:\Users\atj\.emacs.d\early-init.el': 'C:\Users\atj\.emacs.d\early-init.el'
+   'C:\Users\atj\.emacs.d\init.el': 'C:\Users\atj\.emacs.d\init.el'
+   'C:\Users\atj\.emacs.d\custom-vars.el': 'C:\Users\atj\.emacs.d\custom-vars.el'
+   'C:\Users\atj\.emacs.d\lisp\atj-keymap.el': 'C:\Users\atj\.emacs.d\lisp\atj-keymap.el'
+   'C:\Users\atj\.emacs.d\lisp\atj-options.el': 'C:\Users\atj\.emacs.d\lisp\atj-options.el'
+   'C:\Users\atj\.emacs.d\lisp\atj-overrides.el': 'C:\Users\atj\.emacs.d\lisp\atj-overrides.el'
+   'C:\Users\atj\.emacs.d\lisp\atj-packages.el': 'C:\Users\atj\.emacs.d\lisp\atj-packages.el'
+   'C:\Users\atj\.emacs.d\lisp\atj-vendor.el': 'C:\Users\atj\.emacs.d\lisp\atj-vendor.el'
+   'C:\Users\atj\.emacs.d\lol\atj-vendor.el': 'C:\Users\atj\.emacs.d\lisp\atj-vendor.el'
+  }
+
+  let mappings = get-mappings
+  let mapping = $mappings.0
+  let mapping_type = resolve-mapping-type $mapping
+  let mapping_source = resolve-source $mapping
+  let mapping_target = resolve-target $mapping
+  
+  let target = $mapping_target | path expand -n
+  let source = $"($DOTFILES_ROOT)/($mapping_source)"
+
+  let excludes = $mapping | get -o excludes | default []
+  let includes = $mapping | get -o includes | default []
+
+  let mapping_files_in_state = $state
+  | items {|key| $key}
+  | where {|tracked_target| path-in-other $tracked_target $mapping_target}
+
+  decorated-print $includes 
+  decorated-print ($mapping_files_in_state | where (mapping-filters-validate-path $it $mapping))
+}
+
+def path-matches-glob-in-dir [path: path, pattern: string, base: path] {
+  if ($pattern | str ends-with '/**') {
+    let dir = $pattern | str replace -r '/\*\*$' ''
+    let dir_path  = $base | path join $dir
+    path-in-other $path $dir_path
+  } else if ($pattern | str ends-with '*') {
+    let prefix = ($pattern | str replace -r '\*$' '')
+    let prefix_path = $base | path join $prefix | path expand -n
+    $path | str starts-with $prefix_path
+  } else {
+    let full_pattern_path = ($base | path join $pattern | path expand)
+    $path == $full_pattern_path or (path-in-other $path $full_pattern_path)
+  }
+}
+
+def mapping-filters-validate-path [path: path, mapping: record] {
+  let includes = $mapping | get -o includes | default []
+  let excludes = $mapping | get -o excludes | default []
+  let mapping_target = resolve-target $mapping
+
+  let patterns = if ($includes | is-not-empty) {
+    $includes
+  } else {
+    $excludes
+  }
+
+  let pattern_matches_path = $patterns | any {|pattern|
+    path-matches-glob-in-dir $path $pattern $mapping_target
+  }
+
+  if ($includes | is-not-empty) {
+    $pattern_matches_path
+  } else {
+    not $pattern_matches_path
+  }
+}
+
 export def tracked-dir-mapping-files [mapping: record, state: record] {
   let mapping_target = resolve-target $mapping
   $state
   | items {|tracked_target, hash| $tracked_target}
   | where {|tracked_target| path-in-other $tracked_target $mapping_target}
+  | where (mapping-filters-validate-path $it $mapping)
   | path relative-to $mapping_target
 }
 
@@ -182,7 +251,7 @@ export def list-folder-files [root: string, includes: list, excludes: list] {
   if ($root | path type) == file {
     return [$root]
   }
-  
+ 
   let files = if ($includes | is-not-empty) {
     $includes | each {|pattern|
       glob $"($root)/($pattern)" --no-dir
@@ -331,6 +400,6 @@ export def print-diff-header [status: string, target: path] {
   decorated-print $"\((ansi blue)($status)(ansi reset)) (ansi cyan)($target)(ansi reset)"
 }
 
-export def decorated-print [text: string] {
-  print (([$text] | table -i false -t default) | into string)
+export def decorated-print [text: any] {
+  print (([$text] | flatten | table -i false -t default) | into string)
 }
