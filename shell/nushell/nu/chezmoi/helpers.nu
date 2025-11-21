@@ -113,6 +113,7 @@ def make-workable [mapping: record, last_state: record] {
   let target_hash = file-hash $mapping.target
   let last_hash = $last_state | get -o $mapping.target
   let status = workable-status $source_hash $target_hash $last_hash
+  let action = workable-action $status
 
   return {
     source: $mapping.source,
@@ -120,7 +121,8 @@ def make-workable [mapping: record, last_state: record] {
     target: $mapping.target,
     target_hash: $target_hash,
     last_hash: $last_hash,
-    status: $status
+    status: $status,
+    action: $action
   }
 }
 
@@ -163,38 +165,7 @@ def get-mapping-files [mapping: record, last_state:record, filters: list<path>] 
 }
 
 export def do-magic [filters: list<path> = []] {
-  # don't look here this is just for testing purposes
-  let state = (load-state)
-  let state = {
-   'C:\Users\atj\.emacs.d\early-init.el': 'C:\Users\atj\.emacs.d\early-init.el'
-   'C:\Users\atj\.emacs.d\init.el': 'C:\Users\atj\.emacs.d\init.el'
-   'C:\Users\atj\.emacs.d\custom-vars.el': 'C:\Users\atj\.emacs.d\custom-vars.el'
-   'C:\Users\atj\.emacs.d\lisp\atj-keymap.el': 'C:\Users\atj\.emacs.d\lisp\atj-keymap.el'
-   'C:\Users\atj\.emacs.d\lisp\atj-options.el': 'C:\Users\atj\.emacs.d\lisp\atj-options.el'
-   'C:\Users\atj\.emacs.d\lisp\atj-overrides.el': 'C:\Users\atj\.emacs.d\lisp\atj-overrides.el'
-   'C:\Users\atj\.emacs.d\lisp\atj-packages.el': 'C:\Users\atj\.emacs.d\lisp\atj-packages.el'
-   'C:\Users\atj\.emacs.d\lisp\atj-vendor.el': 'C:\Users\atj\.emacs.d\lisp\atj-vendor.el'
-   'C:\Users\atj\.emacs.d\lol\atj-vendor.el': 'C:\Users\atj\.emacs.d\lisp\atj-vendor.el'
-  }
-
-  let mappings = get-mappings
-  let mapping = $mappings.0
-  let mapping_type = resolve-mapping-type $mapping
-  let mapping_source = resolve-source $mapping
-  let mapping_target = resolve-target $mapping
-  
-  let target = $mapping_target | path expand -n
-  let source = $"($DOTFILES_ROOT)/($mapping_source)"
-
-  let excludes = $mapping | get -o excludes | default []
-  let includes = $mapping | get -o includes | default []
-
-  let mapping_files_in_state = $state
-  | items {|key| $key}
-  | where {|tracked_target| path-in-other $tracked_target $mapping_target}
-
-  decorated-print $includes 
-  decorated-print ($mapping_files_in_state | where (mapping-filters-validate-path $it $mapping))
+  print "🎉"
 }
 
 def path-matches-glob-in-dir [path: path, pattern: string, base: path] {
@@ -289,6 +260,26 @@ export def workable-status [source: oneof<string, nothing>, target: oneof<string
   }
 }
 
+def workable-action [status: string] {
+  match $status {
+    'untracked-both-missing' => 'Inform',
+    'untracked-source-missing' => 'Pull (New)',
+    'untracked-target-missing' => 'Apply (New)',
+    'untracked-identical' => 'Update State',
+    'untracked-different' => 'Resolve Conflict (Untracked)',
+    'both-deleted' => 'Update State',
+    'source-deleted' => 'Delete Target',
+    'source-deleted-target-changed' => 'Resolve Conflict (Deletion)',
+    'target-deleted' => 'Delete Source',
+    'target-deleted-source-changed' => 'Resolve Conflict (Deletion)',
+    'source-changed' => 'Pull',
+    'target-changed' => 'Apply',
+    'both-changed-identical' => 'Update State',
+    'both-changed-different' => 'Resolve Conflict',
+    'up-to-date' => 'Inform',
+  }
+}
+
 def target-dir-files-filter [file: path, target: path, filters: list<path>] {
   if ($filters | is-empty) {
     return true
@@ -305,11 +296,11 @@ def paths-overlap [path: path, other:path] {
   }
 
   if (path-in-other $path $other) {
-    true
+    return true
   }
 
   if (path-in-other $other $path) {
-    true
+    return true
   }
 
   return false

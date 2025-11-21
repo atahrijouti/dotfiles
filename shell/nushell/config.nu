@@ -31,5 +31,5 @@ $env.config.color_config.shape_external = "red"
 $env.config.color_config.shape_external_resolved = "cyan"
 
 
-use ./nu/chezmoi
+use nu/chezmoi
 use nu/aliases.nu *
