@@ -58,4 +58,39 @@ export const CONFLICT_STATUSES = [
   'both-changed-different',
 ]
 
+export const AUTO_APPLY_STATUSES = [
+  'untracked-target-missing',
+  'source-changed',
+]
+
+export const AUTO_PULL_STATUSES = [
+  'untracked-source-missing',
+  'target-changed',
+]
+
+export const FORCE_APPLICABLE_STATUSES = [
+  'untracked-target-missing',
+  'untracked-identical',
+  'untracked-different',
+  'target-deleted',
+  'target-deleted-source-changed',
+  'source-changed',
+  'target-changed',
+  'both-changed-identical',
+  'both-changed-different',
+  'up-to-date' 
+]
+
+export const FORCE_PULLABLE_STATUSES = [
+  'untracked-source-missing',
+  'untracked-identical',
+  'untracked-different',
+  'source-deleted',
+  'source-deleted-target-changed',
+  'source-changed',
+  'target-changed',
+  'both-changed-identical',
+  'both-changed-different',
+  'up-to-date' 
+]
 
