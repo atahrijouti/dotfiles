@@ -382,13 +382,13 @@ export def copy-file [from: string, to: string] {
     if not $env.DRY_RUN? {
       mkdir $to_dir
     }
-    print $" mkdir ($to_dir)"
+    print $"(ansi purple)(ansi reset) mkdir ($to_dir)"
   }
 
   if not $env.DRY_RUN? {
     cp $from $to
   }
-  print $" cp ($from) ($to)"
+  print $"(ansi cyan)(ansi reset) cp ($from) ($to)"
 }
 
 export def display-diff [old: path, new: path, status: string, target: path] {
