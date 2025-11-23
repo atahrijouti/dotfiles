@@ -1,7 +1,7 @@
 use constants.nu *
 use helpers.nu *
 
-export def diff [...file_filters: string] {
+export def diff [--verbose ...file_filters: string] {
   let diffable_workables = (get-workables $file_filters) | where ($DIFFABLE_STATUSES has $it.status)
 
   for workable in $diffable_workables {
@@ -15,10 +15,16 @@ export def diff [...file_filters: string] {
       'untracked-source-missing' => {
         print-diff-header $workable.status $workable.target
         print $"(ansi blue)(ansi reset) New target\n"
+        if $verbose {
+          print ($workable.target | open)
+        }
       }
       'untracked-target-missing' => {
         print-diff-header $workable.status $workable.target
         print $"(ansi blue)(ansi reset) New source\n"
+        if $verbose {
+          print ($workable.source | open)
+        }
       }
       'source-deleted' => {
         print-diff-header $workable.status $workable.target
@@ -27,6 +33,9 @@ export def diff [...file_filters: string] {
       'source-deleted-target-changed' => {
         print-diff-header $workable.status $workable.target
         print $"(ansi yellow)(ansi reset) Source deleted, but the target has changed\n"
+        if $verbose {
+          print ($workable.target | open)
+        }
       }
       'target-deleted' => {
         print-diff-header $workable.status $workable.target
@@ -35,6 +44,9 @@ export def diff [...file_filters: string] {
       'target-deleted-source-changed' => {
         print-diff-header $workable.status $workable.target
         print $"(ansi yellow)(ansi reset) Target deleted, but the source has changed\n"
+        if $verbose {
+          print ($workable.source | open)
+        }
       }   
     }
   }
