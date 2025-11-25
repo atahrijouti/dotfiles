@@ -1,8 +1,24 @@
+use std 'path add'
+
 let os = $nu.os-info.name
 let is_windows = $os == windows
+let is_macos = $os == macos
 
 if $is_windows {
   $env.HOME = $env.USERPROFILE
+}
+if $is_macos {
+    path add /opt/homebrew/bin /opt/homebrew/sbin
+
+    $env.HOMEBREW_PREFIX = "/opt/homebrew"
+    $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
+    $env.HOMEBREW_REPOSITORY = "/opt/homebrew"
+
+    if not ($env.MANPATH? | is-empty) {
+        $env.MANPATH = $":($env.MANPATH | str trim --left --char ':')"
+    }
+
+    $env.INFOPATH = $"/opt/homebrew/share/info:($env.INFOPATH? | default '')"
 }
 
 $env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
