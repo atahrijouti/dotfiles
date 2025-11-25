@@ -1,4 +1,3 @@
-
 # Options
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
