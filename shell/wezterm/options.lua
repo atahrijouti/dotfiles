@@ -29,14 +29,14 @@ M.run = function(config)
   config.disable_default_key_bindings = true
   -- config.debug_key_events = true
 
-  local launch_menu = {}
+  -- local launch_menu = {}
 
-  table.insert(launch_menu, {
-    label = "Nushell",
-    args = { "nu" },
-  })
+  -- table.insert(launch_menu, {
+  --   label = "Nushell",
+  --   args = { "nu" },
+  -- })
 
-  config.launch_menu = launch_menu
+  -- config.launch_menu = launch_menu
 end
 
 return M
