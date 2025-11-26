@@ -9,33 +9,37 @@ if $is_windows {
 }
 
 if $is_macos {
-    $env.HOMEBREW_PREFIX = "/opt/homebrew"
-    $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
-    $env.HOMEBREW_REPOSITORY = "/opt/homebrew"
+  $env.HOMEBREW_PREFIX = "/opt/homebrew"
+  $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
+  $env.HOMEBREW_REPOSITORY = "/opt/homebrew"
 
-    if not ($env.MANPATH? | is-empty) {
-        $env.MANPATH = $":($env.MANPATH | str trim --left --char ':')"
-    }
+  if not ($env.MANPATH? | is-empty) {
+      $env.MANPATH = $":($env.MANPATH | str trim --left --char ':')"
+  }
 
-    $env.INFOPATH = $"/opt/homebrew/share/info:($env.INFOPATH? | default '')"
+  $env.INFOPATH = $"/opt/homebrew/share/info:($env.INFOPATH? | default '')"
 
-    $env.BUN_INSTALL = $env.HOME | path join .bun  
-    $env.M2_HOME = $env.HOME | path join Library/programs/maven  
+  $env.BUN_INSTALL = $env.HOME | path join .bun  
+  $env.M2_HOME = $env.HOME | path join Library/programs/maven  
 
-    path add --append /usr/local/bin  
-    path add --append /opt/homebrew/bin
-    path add --append /opt/homebrew/sbin
-    path add --append /Applications/WezTerm.app/Contents/MacOS
-    path add --append ($env.HOME | path join "Library/Application Support/JetBrains/Toolbox/scripts")
-    path add --append ($env.HOME | path join "Library/programs/bin")
-    path add --append ($env.HOME | path join ".bin")
-    path add --append ($env.HOME | path join ".local/bin")
-    path add --append ($env.HOME | path join "Library/pnpm")
-    path add --append ($env.HOME | path join ".cargo/bin")
-    path add --append ($env.HOME | path join "go/bin")
-    path add --append ($env.HOME | path join ".rd/bin")
-    path add --append ($env.M2_HOME | path join bin)
-    path add --append ($env.BUN_INSTALL| path join bin)
+  $env.NODE_EXTRA_CA_CERTS = $env.HOME | path join .certs/cert.pem
+  $env.SSL_CERT_FILE = $env.HOME | path join .certs/cert.pem
+  $env.CURL_SSL_BACKEND = "secure-transport"
+
+  path add --append /usr/local/bin  
+  path add --append /opt/homebrew/bin
+  path add --append /opt/homebrew/sbin
+  path add --append /Applications/WezTerm.app/Contents/MacOS
+  path add --append ($env.HOME | path join "Library/Application Support/JetBrains/Toolbox/scripts")
+  path add --append ($env.HOME | path join "Library/programs/bin")
+  path add --append ($env.HOME | path join ".bin")
+  path add --append ($env.HOME | path join ".local/bin")
+  path add --append ($env.HOME | path join "Library/pnpm")
+  path add --append ($env.HOME | path join ".cargo/bin")
+  path add --append ($env.HOME | path join ".rd/bin")
+  path add --append ($env.BUN_INSTALL| path join bin)
+  path add --append ($env.HOME | path join "go/bin")
+  path add --append ($env.M2_HOME | path join bin)
 }
 
 $env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
