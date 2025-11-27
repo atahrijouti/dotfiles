@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 SOURCE="/Users/atahrijouti/playground/logseq"
 TARGET="/Users/atahrijouti/OneDrive - PayPal/logseq"
 LOG_FILE="/Users/atahrijouti/.logs/mirror_onedrive/log.txt"
