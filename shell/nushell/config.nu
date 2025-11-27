@@ -4,8 +4,12 @@ let os = $nu.os-info.name
 let is_windows = $os == windows
 let is_macos = $os == macos
 
+$env.EDITOR = 'hx'
+$env.HELIX_CONFIG = ($env.HOME | path join ".config/helix")
+
 if $is_windows {
   $env.HOME = $env.USERPROFILE
+  $env.HELIX_CONFIG = ($env.HOME | path join "AppData/Roaming/helix")
 }
 
 if $is_macos {
@@ -69,4 +73,5 @@ $env.config.color_config.shape_external_resolved = "cyan"
 
 
 use nu/chezmoi
+use nu/scripts
 use nu/aliases.nu *

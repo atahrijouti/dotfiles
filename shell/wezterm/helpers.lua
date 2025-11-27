@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 
+
 _G.nocase = function(s)
   s = string.gsub(s, "%a", function(c)
     return string.format("[%s%s]", string.lower(c), string.upper(c))
@@ -8,6 +9,16 @@ _G.nocase = function(s)
 end
 
 local M = {}
+
+-- this runs too many times, so only keeping in the code for now
+local switchHelixTheme = function (theme)
+    wezterm.run_child_process {
+        '/opt/homebrew/bin/nu',
+        '-l',
+        '-c',
+        'scripts switch-helix-theme ' .. theme
+    }
+end
 
 M.decideColorScheme = function(config)
   local appearance = "Dark"
