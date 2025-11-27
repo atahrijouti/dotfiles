@@ -30,7 +30,7 @@
   {
     dir: 'shell/nushell',
     target: { windows: '~/AppData/Roaming/nushell', linux: '~/.config/nushell', macos: '~/Library/Application Support/nushell' }
-    excludes: [vendor/autoload/** history.*]
+    excludes: [autoload/** vendor/autoload/** history.*]
   },
   { dir: 'shell/wezterm', target: '~/.config/wezterm' },
   { file: 'shell/starship/starship.toml', target: '~/.config/starship.toml' },
