@@ -31,18 +31,11 @@
   "file_types": {
     "JSONC": ["~/AppData/Roaming/Zed/**/*.json"]
   },
-  /** add windows terminal terminal fix here
-    "terminal": {
-      "shell": {
-        "with_arguments": {
-          "program": "cmd.exe",
-          "args": ["/k"]
-        }
-      }
+  "terminal": {
+    "shell": {
+      "program": "nu"
     }
-  */
-  // gitignore:start
-  // gitignore:end
+  },
   "format_on_save": "on",
   "lsp": {
     "solargraph": {
