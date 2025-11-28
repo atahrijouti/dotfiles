@@ -39,6 +39,17 @@
   { file: 'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases', only: [linux, macos] },
   { dir: 'windows/clink', target: '~/AppData/Local/clink', only: [windows], excludes: [clink_history* clink.log clink_error*] },
   { file: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode/scripts.yaml', only: [windows] },
+  {
+    dir: 'macos/keyboard-layouts',
+    target: '~/Library/Keyboard Layouts',
+    only: [macos],
+    includes: ['US - ATJ.bundle/**' 'US International - ATJ.bundle/**']
+  },
+
+
+  ################
+  # test section #
+  ################
   # { file: 'test-data/untracked-source-missing', target: '~/test-data/untracked-target-missing' },
   # { dir: 'test-data', target: '~', includes: [test-data/**] },
 ]
