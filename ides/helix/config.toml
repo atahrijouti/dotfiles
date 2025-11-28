@@ -34,6 +34,7 @@ r = ":reload-all"
 c = ":config-reload"
 t = ":tree-sitter-highlight-name"
 s = ":toggle-option lsp.auto-signature-help"
+i = ":toggle-option auto-info"
 
 [keys.normal]
 i = ["collapse_selection", "insert_mode"]
