@@ -1,10 +1,9 @@
-require("helpers")
-
 local wezterm = require("wezterm")
 local keymaps = require("keymaps")
 local options = require("options")
 
 local config = wezterm.config_builder()
+
 
 options.run(config)
 keymaps.run(config)
