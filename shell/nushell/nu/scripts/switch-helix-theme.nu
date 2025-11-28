@@ -1,4 +1,4 @@
-#!/usr/bin/env nu
+const STATE_FILE = $"($nu.cache-dir)/system-theme.nuon" | path expand
 
 def themes [] { ["light", "dark"] }
 
@@ -11,7 +11,13 @@ export def main [theme: string@themes] {
 
   if ($hx_theme | is-empty) {
     print "Accepted values are : light / dark"
-    return 
+    return
+  }
+
+  mut state = (load-state)
+  if $state.theme? == $theme {
+    print $"Theme is already ($theme), skipping"
+    return
   }
 
   mut c = try {
@@ -24,6 +30,18 @@ export def main [theme: string@themes] {
     $c | save -f $"($env.HELIX_CONFIG)/themes/site-theme.toml"
   }
 
+  $state.theme = $theme
+
+  save-state $state
 }
 
+def load-state [] {
+  if not ($STATE_FILE | path exists) { return {} }
+  open $STATE_FILE
+}
 
+export def save-state [state: record] {
+  let state_dir = $STATE_FILE | path dirname
+  if not ($state_dir | path exists) { mkdir $state_dir }
+  $state | save -f $STATE_FILE
+}
