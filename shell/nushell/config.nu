@@ -22,10 +22,9 @@ if $is_macos {
   }
 
   $env.INFOPATH = $"/opt/homebrew/share/info:($env.INFOPATH? | default '')"
-
+  $env.PNPM_HOME = $env.HOME | path join Library/pnpm
   $env.BUN_INSTALL = $env.HOME | path join .bun  
   $env.M2_HOME = $env.HOME | path join Library/programs/maven  
-
   $env.NODE_EXTRA_CA_CERTS = $env.HOME | path join .certs/cert.pem
   $env.SSL_CERT_FILE = $env.HOME | path join .certs/cert.pem
   $env.CURL_SSL_BACKEND = "secure-transport"
