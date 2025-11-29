@@ -91,7 +91,9 @@ export def sync [
             print $"(ansi red)󰆴(ansi reset) Source deleted for ($workable.target).($delete_string)"
             if $delete {
               print $"(ansi red)󰆴(ansi reset) Deleting target ($workable.target)."
-              rm $workable.target
+              if (not $dry_run) {
+                rm $workable.target
+              }
               $state = $state | reject $workable.target
             }
           }
@@ -102,7 +104,9 @@ export def sync [
             print $"(ansi red)󰆴(ansi reset) Target deleted ($workable.target).($delete_string)"
             if $delete {
               print $"(ansi red)󰆴(ansi reset) Deleting source ($workable.source)."
-              rm $workable.source
+              if (not $dry_run) {
+                rm $workable.source
+              }
               $state = $state | reject $workable.target
             }
           }
