@@ -24,10 +24,6 @@
     includes: [keymap.json settings.json tasks.json themes/**]
   },
   {
-    file: 'linux/koi/koirc',
-    target: '~/.config/koirc', only: [linux]
-  },
-  {
     dir: 'shell/nushell',
     target: { windows: '~/AppData/Roaming/nushell', linux: '~/.config/nushell', macos: '~/Library/Application Support/nushell' }
     excludes: [autoload/** vendor/autoload/** history.*]
