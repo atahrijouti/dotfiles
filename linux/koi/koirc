@@ -34,7 +34,7 @@ light=breeze-dark
 
 [Script]
 dark=~/source/dotfiles/scripts/switch_dark.sh
-enabled=true
+enabled=false
 light=~/source/dotfiles/scripts/switch_light.sh
 
 [Wallpaper]
