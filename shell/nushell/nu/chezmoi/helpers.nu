@@ -2,9 +2,7 @@ use ./constants.nu *
 
 export def get-workables [filters: list<path> = [], verbose: bool = false] {
   let last_state = (load-state)
-  get-mappings
-  | where (valid-mapping $it)
-  | where (workable-os $it)
+  this-os-mappings
   | where (mapping-target-path-filter $it $filters)
   | where (mapping-matches-file-system $it)
   | each {|m| get-mapping-files $m $last_state $filters } | flatten
@@ -12,22 +10,28 @@ export def get-workables [filters: list<path> = [], verbose: bool = false] {
   | where $verbose or $it.status != 'up-to-date'
 }
 
+export def this-os-mappings [] {
+  get-mappings
+  | where (valid-mapping $it)
+  | where (workable-os $it)
+  | each {|m| make-this-os-mapping $m}
+}
+
 def valid-mapping [mapping: record] {
   mut errors = []
 
-  let source_is_dir = ($mapping | get -o dir) != null
-  let source_is_file = ($mapping | get -o file) != null
+  if ($mapping | get -o source) == null {
+    $errors = $errors | append "source missing"
+  } else if (($mapping.source | describe -d).type != string) {
+    $errors = $errors | append "source is not a string"
+  }
 
-  if not ($source_is_dir or $source_is_file) {
-    $errors = $errors | append "file/dir attribute missing"
-  } else if ($source_is_dir and $source_is_file) {
-    $errors = $errors | append "both file & dir attributes used"
-  } else {
-    if ($source_is_file and ($mapping.file | describe -d).type != string) {
-      $errors = $errors | append "file is not a string"
-    } else if ($source_is_dir and ($mapping.dir | describe -d).type != string) {
-      $errors = $errors | append "dir is not a string"
-    }
+  if ($mapping | get -o type) == null {
+    $errors = $errors | append "type missing"
+  } else if (($mapping.type | describe -d).type != string) {
+    $errors = $errors | append "type is not a string"
+  } else if ($mapping.type not-in ['file', 'dir']) {
+    $errors = $errors | append "type is neither file nor dir"
   }
 
   if ($mapping | get -o target) == null {
@@ -52,6 +56,10 @@ def workable-os [mapping: record] {
   ($only_list | is-empty) or $OS in $only_list 
 }
 
+def make-this-os-mapping [mapping: record] {
+  $mapping | upsert target (resolve-target $mapping) | reject -o only
+}
+
 def mapping-target-path-filter [mapping: record, filters: list<path>] {
   if ($filters | is-empty) {
     return true
@@ -65,12 +73,10 @@ def mapping-target-path-filter [mapping: record, filters: list<path>] {
 }
 
 def mapping-matches-file-system [mapping: record] {
-  let mapping_type = resolve-mapping-type $mapping
-  let mapping_source = resolve-source $mapping
   let mapping_target = resolve-target $mapping
 
   let target = $mapping_target | path expand -n
-  let source = $"($DOTFILES_ROOT)/($mapping_source)" | path expand -n
+  let source = $"($DOTFILES_ROOT)/($mapping.source)" | path expand -n
 
   let source_type = $source | path type
   let target_type = $target | path type
@@ -85,22 +91,22 @@ def mapping-matches-file-system [mapping: record] {
     return false
   }
 
-  if ($mapping_type == 'file' and $target_type == 'dir') {
+  if ($mapping.type == 'file' and $target_type == 'dir') {
     print $" SKIP: Mapping expects file but target is directory ($target)"
     return false
   }
 
-  if ($mapping_type == 'dir' and $target_type == 'file') {
+  if ($mapping.type == 'dir' and $target_type == 'file') {
     print $" SKIP: Mapping expects directory but target is file ($target)"
     return false
   }
 
-  if ($mapping_type == 'file' and $source_type == 'dir') {
+  if ($mapping.type == 'file' and $source_type == 'dir') {
     print $" SKIP: Mapping expects file but source is directory ($source | path expand -n)"
     return false
   }
 
-  if ($mapping_type == 'dir' and $source_type == 'file') {
+  if ($mapping.type == 'dir' and $source_type == 'file') {
     print $" SKIP: Mapping expects directory but source is file ($source | path expand -n)"
     return false
   }
@@ -127,13 +133,11 @@ def make-workable [mapping: record, last_state: record] {
 }
 
 def get-mapping-files [mapping: record, last_state:record, filters: list<path>] {
-  let mapping_type = resolve-mapping-type $mapping
-  let mapping_source = resolve-source $mapping
   let mapping_target = resolve-target $mapping
   let target = $mapping_target | path expand -n
-  let source = $"($DOTFILES_ROOT)/($mapping_source)"
+  let source = $"($DOTFILES_ROOT)/($mapping.source)"
 
-  match $mapping_type {
+  match $mapping.type {
     'file' => {
       return {
         source: ($source | path expand -n),
@@ -328,21 +332,6 @@ def resolve-target [mapping: record] {
     $mapping.target | get -o $nu.os-info.name
   } else {
     $mapping.target
-  } 
-}
-
-def resolve-source [mapping: record] {
-  match (resolve-mapping-type $mapping) {
-    'file' => $mapping.file,
-    'dir' => $mapping.dir
-  }
-}
-
-def resolve-mapping-type [mapping: record] {
-  if ($mapping | get -o file) != null {
-    'file'
-  } else {
-    'dir'
   } 
 }
 

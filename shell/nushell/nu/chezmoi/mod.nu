@@ -10,4 +10,7 @@ export use command-resolve-conflicts.nu *
 export use command-status.nu *
 export use command-sync.nu *
 
-
+## mappings
+export module mappings {
+  export use command-mappings.nu *
+}
