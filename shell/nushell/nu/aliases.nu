@@ -8,3 +8,7 @@ export alias 'g h' = cd ~
 export alias 'g d' = cd ~/source/dotfiles/
 export alias 'g p' = cd ~/playground/
 export alias 'g c' = cd $nu.default-config-dir
+
+# apps
+export alias ffmpeg = ^ffmpeg -hide_banner
+export alias ffprobe = ^ffprobe -hide_banner
