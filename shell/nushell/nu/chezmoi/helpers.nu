@@ -345,7 +345,7 @@ export def update-state-for-target [state: record, target: path, hash: string] {
 }
 
 export def save-state [state: record] {
-  if not $env.DRY_RUN? {
+  if $env.DRY_RUN? != true {
     let state_dir = $STATE_FILE | path dirname
     if not ($state_dir | path exists) { mkdir $state_dir }
     $state | save -f $STATE_FILE
@@ -355,7 +355,7 @@ export def save-state [state: record] {
 export def copy-file [from: string, to: string] {
   let to_dir = $to | path dirname
   if not ($to_dir | path exists) {
-    if not $env.DRY_RUN? {
+    if $env.DRY_RUN? != true {
       mkdir $to_dir
     }
     print $"(ansi purple)(ansi reset) mkdir ($to_dir)"
