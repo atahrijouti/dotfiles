@@ -1,4 +1,4 @@
-# Scripts of various functin
+# Scripts of various function
 export def main [] {
 }
 

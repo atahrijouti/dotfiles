@@ -87,7 +87,7 @@ export def sync [
         },
         'source-deleted' => {
           try {
-            let delete_string = if not $delete { " use --delete to handle it automatically." } else { ""  }
+            let delete_string = if not $delete { " Use --delete to handle it automatically." } else { ""  }
             print $"(ansi red)󰆴(ansi reset) Source deleted for ($workable.target).($delete_string)"
             if $delete {
               print $"(ansi red)󰆴(ansi reset) Deleting target ($workable.target)."
@@ -100,7 +100,7 @@ export def sync [
         },
         'target-deleted' => {
           try {
-            let delete_string = if not $delete { " use --delete to handle it automatically." } else { ""  }
+            let delete_string = if not $delete { " Use --delete to handle it automatically." } else { ""  }
             print $"(ansi red)󰆴(ansi reset) Target deleted ($workable.target).($delete_string)"
             if $delete {
               print $"(ansi red)󰆴(ansi reset) Deleting source ($workable.source)."

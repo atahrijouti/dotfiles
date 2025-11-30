@@ -36,7 +36,7 @@
     excludes: [autoload/** vendor/autoload/** history.*]
   },
   { type: 'dir', source: 'shell/wezterm', target: '~/.config/wezterm' },
-  { type: 'file' source: 'shell/starship/starship.toml', target: '~/.config/starship.toml' },
+  { type: 'file', source: 'shell/starship/starship.toml', target: '~/.config/starship.toml' },
   { type: 'file', source: 'shell/zsh/.zshrc', target: '~/.zshrc',  only: [linux, macos] },
   { type: 'file', source: 'shell/zsh/.zshenv', target: '~/.zshenv',  only: [linux, macos] },
   { type: 'file', source: 'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases',  only: [linux, macos] },

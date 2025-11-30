@@ -344,10 +344,6 @@ export def update-state-for-target [state: record, target: path, hash: string] {
   $state | upsert $target $hash
 }
 
-export def remove-state-for-target [state: record, target: path] {
-  $state | reject $target
-}
-
 export def save-state [state: record] {
   if not $env.DRY_RUN? {
     let state_dir = $STATE_FILE | path dirname
