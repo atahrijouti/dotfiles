@@ -75,4 +75,3 @@ $env.config.color_config.shape_external_resolved = "cyan"
 
 use chezmoi
 use scripts
-use aliases.nu *
