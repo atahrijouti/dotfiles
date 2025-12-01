@@ -3,14 +3,14 @@ use std 'path add'
 const os = $nu.os-info.name
 const is_windows = $os == windows
 const is_macos = $os == macos
-const NU_FOLDER = ($nu.default-config-dir | path join nu)
+const USER_NU_LIB_FOLDER = ($nu.default-config-dir | path join autoload libs)
 
 $env.EDITOR = 'hx'
 $env.HELIX_CONFIG = ($env.HOME | path join ".config/helix")
 
 $env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
-const NU_LIB_DIRS = [ $NU_FOLDER ]
-$env.NU_LIB_DIRS ++= $NU_LIB_DIRS
+const NU_LIB_DIRS = [ $USER_NU_LIB_FOLDER ]
+$env.NU_LIB_DIRS ++= $NU_LIB_DIRS 
 
 if $is_windows {
   $env.HOME = $env.USERPROFILE
@@ -71,7 +71,3 @@ $env.config.table.mode = 'none'
 $env.config.highlight_resolved_externals = true
 $env.config.color_config.shape_external = "red"
 $env.config.color_config.shape_external_resolved = "cyan"
-
-
-use chezmoi
-use scripts

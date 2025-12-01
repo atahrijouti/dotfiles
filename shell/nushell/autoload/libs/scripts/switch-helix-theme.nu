@@ -40,7 +40,7 @@ def load-state [] {
   open $STATE_FILE
 }
 
-export def save-state [state: record] {
+def save-state [state: record] {
   let state_dir = $STATE_FILE | path dirname
   if not ($state_dir | path exists) { mkdir $state_dir }
   $state | save -f $STATE_FILE
