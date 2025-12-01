@@ -3,6 +3,10 @@ export const STATE_FILE = $"($nu.cache-dir)/chezmoi-state.nuon" | path expand
 export const MAPPINGS_FILE = path self ./mappings.nuon
 export const OS = $nu.os-info.name
 
+export const GLOBAL_EXCLUDES = [
+  '**/*.DS_Store'
+]
+
 export const STATUSES = [
   'untracked-both-missing',
   'untracked-source-missing',
