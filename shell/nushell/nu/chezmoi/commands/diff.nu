@@ -1,7 +1,7 @@
-use constants.nu *
-use helpers.nu *
+use chezmoi/constants.nu *
+use chezmoi/helpers.nu *
 
-export def diff [--verbose ...file_filters: string] {
+export def main [--verbose ...file_filters: string] {
   let diffable_workables = (get-workables $file_filters) | where ($DIFFABLE_STATUSES has $it.status)
 
   for workable in $diffable_workables {

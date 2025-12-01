@@ -1,7 +1,7 @@
-use constants.nu *
-use helpers.nu *
+use chezmoi/constants.nu *
+use chezmoi/helpers.nu *
 
-export def sync [
+export def main [
     ...file_filters: string
     --dry-run --verbose
     --auto

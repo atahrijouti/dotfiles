@@ -1,6 +1,6 @@
-use helpers.nu *
+use chezmoi/helpers.nu *
 
-export def status [...file_filters: string --table --verbose] {
+export def main [...file_filters: string --table --verbose] {
   mut workables = get-workables $file_filters $verbose
 
   if not $verbose {

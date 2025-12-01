@@ -4,13 +4,11 @@
 export def main [] {
 }
 
-export use command-diff.nu *
-export use command-magic.nu *
-export use command-resolve-conflicts.nu *
-export use command-status.nu *
-export use command-sync.nu *
+export use commands/diff.nu
+export use commands/magic.nu
+export use commands/resolve-conflicts.nu
+export use commands/status.nu
+export use commands/sync.nu
 
 ## mappings
-export module mappings {
-  export use command-mappings.nu *
-}
+export use commands/mappings.nu

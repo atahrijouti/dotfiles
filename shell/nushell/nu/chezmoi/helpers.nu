@@ -1,4 +1,4 @@
-use ./constants.nu *
+use chezmoi/constants.nu *
 
 export def get-workables [filters: list<path> = [], verbose: bool = false] {
   let last_state = (load-state)
