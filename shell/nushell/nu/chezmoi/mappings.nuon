@@ -33,7 +33,7 @@
     type: 'dir',
     source: 'shell/nushell',
     target: { windows: '~/AppData/Roaming/nushell', linux: '~/.config/nushell', macos: '~/Library/Application Support/nushell' }
-    excludes: [autoload/** vendor/autoload/** history.*]
+    excludes: [autoload/site-config.nu vendor/autoload/** history.*]
   },
   { type: 'dir', source: 'shell/wezterm', target: '~/.config/wezterm' },
   { type: 'file', source: 'shell/starship/starship.toml', target: '~/.config/starship.toml' },
