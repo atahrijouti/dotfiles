@@ -1,11 +1,16 @@
 use std 'path add'
 
-let os = $nu.os-info.name
-let is_windows = $os == windows
-let is_macos = $os == macos
+const os = $nu.os-info.name
+const is_windows = $os == windows
+const is_macos = $os == macos
+const NU_FOLDER = ($nu.default-config-dir | path join nu)
 
 $env.EDITOR = 'hx'
 $env.HELIX_CONFIG = ($env.HOME | path join ".config/helix")
+
+$env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
+const NU_LIB_DIRS = [ $NU_FOLDER ]
+$env.NU_LIB_DIRS ++= $NU_LIB_DIRS
 
 if $is_windows {
   $env.HOME = $env.USERPROFILE
@@ -45,9 +50,6 @@ if $is_macos {
   path add --append ($env.M2_HOME | path join bin)
 }
 
-$env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
-$env.NU_LIB_DIRS ++= [ ($nu.default-config-dir | path join nu) ]
-
 # generate autoload files
 if false {
   const autoload_dir = $nu.data-dir | path join vendor autoload
@@ -71,6 +73,6 @@ $env.config.color_config.shape_external = "red"
 $env.config.color_config.shape_external_resolved = "cyan"
 
 
-use nu/chezmoi
-use nu/scripts
-use nu/aliases.nu *
+use chezmoi
+use scripts
+use aliases.nu *
