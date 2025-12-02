@@ -1,2 +1,0 @@
-use chezmoi
-use scripts
