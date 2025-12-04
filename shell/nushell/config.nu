@@ -5,18 +5,21 @@ const is_windows = $os == windows
 const is_macos = $os == macos
 const USER_NU_LIB_FOLDER = ($nu.default-config-dir | path join nu)
 
-$env.HOME = '~' | path expand -n
+if $is_windows {
+  $env.HOME = '~' | path expand -n
+}
+
 $env.EDITOR = 'hx'
-$env.HELIX_CONFIG = ($env.HOME | path join ".config/helix")
+if $is_windows {
+  $env.HELIX_CONFIG = ($env.HOME | path join "AppData/Roaming/helix")
+} else {
+  $env.HELIX_CONFIG = ($env.HOME | path join ".config/helix")
+}
 
 $env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
 const NU_LIB_DIRS = [ $USER_NU_LIB_FOLDER ]
 $env.NU_LIB_DIRS ++= $NU_LIB_DIRS 
 
-if $is_windows {
-  $env.HOME = $env.USERPROFILE
-  $env.HELIX_CONFIG = ($env.HOME | path join "AppData/Roaming/helix")
-}
 
 if $is_macos {
   $env.HOMEBREW_PREFIX = "/opt/homebrew"
