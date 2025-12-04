@@ -30,16 +30,16 @@ M.run = function(config)
     { key = "Tab", mods = "CTRL", action = act.ActivateTabRelative(1) },
 
     -- activate pane
-    { key = "h", mods = "SUPER|ALT", action = act.ActivatePaneDirection("Left") },
-    { key = "l", mods = "SUPER|ALT", action = act.ActivatePaneDirection("Right") },
-    { key = "k", mods = "SUPER|ALT", action = act.ActivatePaneDirection("Up") },
-    { key = "j", mods = "SUPER|ALT", action = act.ActivatePaneDirection("Down") },
+    { key = "h", mods = "CTRL|ALT", action = act.ActivatePaneDirection("Left") },
+    { key = "l", mods = "CTRL|ALT", action = act.ActivatePaneDirection("Right") },
+    { key = "k", mods = "CTRL|ALT", action = act.ActivatePaneDirection("Up") },
+    { key = "j", mods = "CTRL|ALT", action = act.ActivatePaneDirection("Down") },
 
     -- resize pane
-    { key = "H", mods = "SUPER|ALT", action = act.AdjustPaneSize({ "Left", 1 }) },
-    { key = "L", mods = "SUPER|ALT", action = act.AdjustPaneSize({ "Right", 1 }) },
-    { key = "K", mods = "SUPER|ALT", action = act.AdjustPaneSize({ "Up", 1 }) },
-    { key = "J", mods = "SUPER|ALT", action = act.AdjustPaneSize({ "Down", 1 }) },
+    { key = "H", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Left", 1 }) },
+    { key = "L", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Right", 1 }) },
+    { key = "K", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Up", 1 }) },
+    { key = "J", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Down", 1 }) },
     {
       key = "p",
       mods = "LEADER",
