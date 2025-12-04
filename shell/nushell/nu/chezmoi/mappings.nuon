@@ -42,6 +42,7 @@
   { type: 'file', source: 'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases',  only: [linux, macos] },
   { type: 'dir', source: 'windows/clink', target: '~/AppData/Local/clink',  only: [windows], excludes: [clink_history* clink.log clink_error*] },
   { type: 'file', source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode/scripts.yaml',  only: [windows] },
+  { type: 'dir', source: 'windows/windows-theme', target: '~/AppData/Local/Microsoft/Windows/Themes', only: [windows], includes: [Light.theme Dark.theme]}
   {
     type: 'dir',
     source: 'macos/keyboard-layouts',
