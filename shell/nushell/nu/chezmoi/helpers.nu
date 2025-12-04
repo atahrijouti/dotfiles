@@ -229,10 +229,10 @@ export def list-folder-files [root: string, includes: list, excludes: list] {
  
   let files = if ($includes | is-not-empty) {
     $includes | each {|pattern|
-      glob $"($root)/($pattern)" --no-dir --exclude $GLOBAL_EXCLUDES
+      glob $"($root)/($pattern)" --no-dir --exclude ($GLOBAL_EXCLUDES | append ['__never_match__/**'])
     } | flatten
   } else {
-    let exclude_patterns = $excludes | append ['__never_match__/**'] | append $GLOBAL_EXCLUDES
+    let exclude_patterns = $excludes | (append $GLOBAL_EXCLUDES | append ['__never_match__/**'])
     glob $"($root)/**/*" --no-dir --exclude $exclude_patterns
   }
 
