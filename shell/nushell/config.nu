@@ -5,6 +5,7 @@ const is_windows = $os == windows
 const is_macos = $os == macos
 const USER_NU_LIB_FOLDER = ($nu.default-config-dir | path join nu)
 
+$env.HOME = '~' | path expand -n
 $env.EDITOR = 'hx'
 $env.HELIX_CONFIG = ($env.HOME | path join ".config/helix")
 
