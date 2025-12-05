@@ -32,7 +32,7 @@
   {
     type: 'dir',
     source: 'shell/nushell',
-    target: { windows: '~/AppData/Roaming/nushell', linux: '~/.config/nushell', macos: '~/Library/Application Support/nushell' }
+    target: { windows: '~/AppData/Roaming/nushell', linux: '~/.config/nushell', macos: '~/Library/Application Support/nushell' },
     excludes: [autoload/site-config.nu vendor/autoload/** history.*]
   },
   { type: 'dir', source: 'shell/wezterm', target: '~/.config/wezterm' },
@@ -40,9 +40,19 @@
   { type: 'file', source: 'shell/zsh/.zshrc', target: '~/.zshrc',  only: [linux, macos] },
   { type: 'file', source: 'shell/zsh/.zshenv', target: '~/.zshenv',  only: [linux, macos] },
   { type: 'file', source: 'shell/zsh/.zsh_aliases', target: '~/.zsh_aliases',  only: [linux, macos] },
+
+  ### windows ###
   { type: 'dir', source: 'windows/clink', target: '~/AppData/Local/clink',  only: [windows], excludes: [clink_history* clink.log clink_error*] },
   { type: 'file', source: 'windows/autodarkmode/scripts.yaml', target: '~/AppData/Roaming/AutoDarkMode/scripts.yaml',  only: [windows] },
-  { type: 'dir', source: 'windows/windows-theme', target: '~/AppData/Local/Microsoft/Windows/Themes', only: [windows], includes: [Light.theme Dark.theme]}
+  { type: 'dir', source: 'windows/windows-theme', target: '~/AppData/Local/Microsoft/Windows/Themes', only: [windows], includes: [Light.theme Dark.theme]},
+  {
+    type: 'dir', source: 'windows/autohotkey',
+    target: '~/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup',
+    only: [windows],
+    includes: [startup.ahk]
+  },
+
+  ### macos ###
   {
     type: 'dir',
     source: 'macos/keyboard-layouts',
