@@ -13,7 +13,7 @@ export def get-workables [filters: list<path> = [], verbose: bool = false] {
 export def this-os-mappings [] {
   get-mappings
   | where (valid-mapping $it)
-  | where (workable-os $it)
+  | where (workable-machine $it)
   | each {|m| make-this-os-mapping $m}
 }
 
@@ -51,9 +51,16 @@ def valid-mapping [mapping: record] {
   return true
 }
 
-def workable-os [mapping: record] {
+def workable-machine [mapping: record] {
   let only_list = $mapping | get -o only | default []
-  ($only_list | is-empty) or $OS in $only_list 
+  if ($only_list | is-empty) {
+    return true
+  }
+
+  let machine_name = (sys host | get hostname)
+  let machine_id = [$OS $"machine:($machine_name)"] 
+
+  return ($machine_id | any {|o| $o in $only_list})
 }
 
 def make-this-os-mapping [mapping: record] {
