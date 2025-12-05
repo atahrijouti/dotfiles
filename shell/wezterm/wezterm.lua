@@ -18,8 +18,8 @@ elseif wezterm.target_triple == "x86_64-unknown-linux-gnu" then
 end
 print(wezterm.target_triple)
 -- specific machine override
-if wezterm.hostname() == "x240" then
-  require("overrides.machine.x240").run(config)
+if wezterm.hostname() == "silver-lake" then
+  require("overrides.machine.silver-lake").run(config)
 end
 
 if wezterm.hostname() == "purple-lake" then
