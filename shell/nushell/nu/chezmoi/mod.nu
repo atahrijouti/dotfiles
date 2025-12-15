@@ -9,6 +9,7 @@ export use commands/magic.nu
 export use commands/resolve-conflicts.nu
 export use commands/status.nu
 export use commands/sync.nu
+export use commands/cancel-target-changes.nu 
 
 ## mappings
 export use commands/mappings.nu

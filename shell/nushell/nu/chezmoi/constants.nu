@@ -50,6 +50,16 @@ export const AUTO_RESOLVED_STATUSES = [
   'up-to-date' 
 ]
 
+export const CANCELLABLE_TARGET_CHANGES = [
+  'target-deleted',
+  'target-changed',
+  'both-changed-identical',
+]
+
+export const CANCELLABLE_TARGET_ADDITIONS = [
+  'untracked-source-missing',
+]
+
 export const AUTO_DELETE_STATUSES = [
   'source-deleted',
   'target-deleted',
