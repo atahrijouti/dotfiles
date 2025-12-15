@@ -93,8 +93,8 @@ export def main [
               print $"(ansi red)󰆴(ansi reset) Deleting target ($workable.target)."
               if (not $dry_run) {
                 rm $workable.target
+                $state = $state | reject $workable.target
               }
-              $state = $state | reject $workable.target
             }
           }
         },
@@ -106,8 +106,8 @@ export def main [
               print $"(ansi red)󰆴(ansi reset) Deleting source ($workable.source)."
               if (not $dry_run) {
                 rm $workable.source
+                $state = $state | reject $workable.target
               }
-              $state = $state | reject $workable.target
             }
           }
         },

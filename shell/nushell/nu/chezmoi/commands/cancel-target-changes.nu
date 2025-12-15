@@ -76,8 +76,8 @@ export def main [
             print $"(ansi red)󰆴(ansi reset) Deleting target ($workable.target)."
             if (not $dry_run) {
               rm $workable.target
+              $state = $state | reject $workable.target
             }
-            $state = $state | reject $workable.target
           }
         }
       }
