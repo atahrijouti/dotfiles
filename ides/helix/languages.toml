@@ -43,3 +43,8 @@ auto-format = true
 name = "tsx"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 auto-format = true
+
+[[language]]
+name = "astro"
+formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
+auto-format = true
