@@ -55,11 +55,11 @@ if $is_macos {
 }
 
 # generate autoload files
+const autoload_dir = $nu.data-dir | path join vendor autoload
+^mise activate nu | save -f ($autoload_dir | path join mise.nu)
 if false {
-  const autoload_dir = $nu.data-dir | path join vendor autoload
   ^starship init nu | save -f ($autoload_dir | path join "starship.nu")
   ^carapace _carapace nushell | save -f ($autoload_dir | path join "carapace.nu")
-  ^mise activate nu | save -f ($autoload_dir | path join mise.nu)
 }
 
 ###### nu config
