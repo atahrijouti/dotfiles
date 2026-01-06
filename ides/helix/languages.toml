@@ -48,3 +48,8 @@ auto-format = true
 name = "astro"
 formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
 auto-format = true
+
+
+[[language]]
+name = "c"
+auto-format = true
