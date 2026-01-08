@@ -36,7 +36,17 @@
     excludes: [autoload/site-config.nu vendor/autoload/** history.*]
   },
   { type: 'dir', source: 'shell/wezterm', target: '~/.config/wezterm' },
-  { type: 'dir', source: 'shell/ghostty', target: '~/.config/ghostty' },
+
+  { type: 'dir', source: 'shell/ghostty', target: '~/.config/ghostty', excludes: [site-config]},
+
+  # the following ends up creating both site-config in dotfiles and silver-lake.ini in ghostty
+  # {
+  #   type: 'file',
+  #   source: 'shell/ghostty/silver-lake/site-config',
+  #   target: '~/.config/ghostty/site-config',
+  #   only: [machine:silver-lake machine:purple-lake]
+  # },
+
   { type: 'file', source: 'shell/starship/starship.toml', target: '~/.config/starship.toml' },
   { type: 'file', source: 'shell/zsh/.zshrc', target: '~/.zshrc',  only: [linux, macos] },
   { type: 'file', source: 'shell/zsh/.zshenv', target: '~/.zshenv',  only: [linux, macos] },
