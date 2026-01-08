@@ -1,0 +1,59 @@
+# Options
+# Run `ghostty +show-config --default --docs` to view a list of
+font-family = "JetBrainsMono Nerd Font"
+font-size = 11
+copy-on-select = true
+command = nu
+
+# keybindings
+## ide
+# keybind = alt+1=split_left_open_lf
+# keybind = alt+9=split_down_open_lazygit
+  
+## edit surfaces
+keybind = ctrl+,>z=toggle_split_zoom
+keybind = ctrl+,>c=close_surface
+
+## new splits
+keybind = ctrl+,>-=new_split:down
+keybind = ctrl+,>shift+-=new_split:up
+keybind = ctrl+,>\=new_split:right
+keybind = ctrl+,>shift+\=new_split:left
+
+## goto split
+keybind = super+alt+h=goto_split:left
+keybind = super+alt+l=goto_split:right
+keybind = super+alt+k=goto_split:up
+keybind = super+alt+j=goto_split:down
+
+## resize split
+keybind = super+alt+shift+h=resize_split:left,10
+keybind = super+alt+shift+l=resize_split:right,10
+keybind = super+alt+shift+k=resize_split:up,10
+keybind = super+alt+shift+j=resize_split:down,10
+
+## clipboard
+keybind = ctrl+shift+v=paste_from_clipboard
+# keybind = ctrl+,>x=activate_copy_mode
+ 
+## search
+# keybind = ctrl+,>f=search
+
+## spawn
+keybind = ctrl+,>t=new_tab
+keybind = ctrl+,>n=new_window
+
+## tabs
+keybind = ctrl+shift+tab=previous_tab
+keybind = ctrl+tab=next_tab
+
+## application
+keybind = ctrl+,>q=quit
+keybind = ctrl+,>h=toggle_visibility
+keybind = ctrl+,>r=reload_config
+keybind = ctrl+,>,=toggle_command_palette
+
+## font size
+keybind = ctrl+==increase_font_size:1
+keybind = ctrl+-=decrease_font_size:1
+keybind = ctrl+0=reset_font_size
