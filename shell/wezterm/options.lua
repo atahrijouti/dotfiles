@@ -13,13 +13,6 @@ M.run = function(config)
 
   config.audible_bell = "Disabled"
 
-  config.window_padding = {
-    left = 10,
-    right = 10,
-    top = 10,
-    bottom = 0,
-  }
-
   config.initial_cols = 100
   config.initial_rows = 24
 
