@@ -38,23 +38,23 @@
   { type: 'dir', source: 'shell/wezterm', target: '~/.config/wezterm' },
 
   ## Ghostty
-  { type: 'dir', source: 'shell/ghostty', target: '~/.config/ghostty', excludes: [site-config/**]},
+  { type: 'dir', source: 'shell/ghostty', target: '~/.config/ghostty', excludes: [overrides/**]},
   {
     type: 'file',
-    source: 'shell/ghostty/site-config/silver-lake',
-    target: '~/.config/ghostty/site-config',
+    source: 'shell/ghostty/overrides/silver-lake',
+    target: '~/.config/ghostty/overrides/site-config',
     only: [machine:silver-lake machine:purple-lake]
   },
   {
     type: 'file',
-    source: 'shell/ghostty/site-config/saphire-tower',
-    target: '~/.config/ghostty/site-config',
+    source: 'shell/ghostty/overrides/saphire-tower',
+    target: '~/.config/ghostty/overrides/site-config',
     only: [machine:Saphire-Tower]
   },
   {
     type: 'file',
-    source: 'shell/ghostty/site-config/macos-config',
-    target: '~/.config/ghostty/os-config',
+    source: 'shell/ghostty/overrides/macos-config',
+    target: '~/.config/ghostty/overrides/os-config',
     only: [macos]
   },
 

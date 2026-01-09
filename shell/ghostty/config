@@ -1,14 +1,13 @@
 # Options
 # Run `ghostty +show-config --default --docs` to view a list of
-font-family = "JetBrainsMono Nerd Font"
 font-size = 11
-copy-on-select = true
+copy-on-select = clipboard
 command = nu
 theme=light:JetBrains Cyan Light,dark:Tomorrow Night Eighties
 
 # overrides
-config-file=?site-config
-config-file=?os-config
+config-file=?overrides/site-config
+config-file=?overrides/os-config
 
 # keybindings
 ## ide
