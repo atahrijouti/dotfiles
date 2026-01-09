@@ -57,6 +57,12 @@
     target: '~/.config/ghostty/overrides/os-config',
     only: [macos]
   },
+  {
+    type: 'file',
+    source: 'shell/ghostty/overrides/linux-config',
+    target: '~/.config/ghostty/overrides/os-config',
+    only: [linux]
+  },
 
   { type: 'file', source: 'shell/starship/starship.toml', target: '~/.config/starship.toml' },
   { type: 'file', source: 'shell/zsh/.zshrc', target: '~/.zshrc',  only: [linux, macos] },
