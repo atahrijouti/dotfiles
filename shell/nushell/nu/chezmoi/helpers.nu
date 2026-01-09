@@ -51,16 +51,20 @@ def valid-mapping [mapping: record] {
   return true
 }
 
+export def this-machine-id [] {
+  $"machine:((sys host | get hostname))"
+}
+
 def workable-machine [mapping: record] {
   let only_list = $mapping | get -o only | default []
   if ($only_list | is-empty) {
     return true
   }
 
-  let machine_name = (sys host | get hostname)
-  let machine_id = [$OS $"machine:($machine_name)"] 
+  let machine_id = (this-machine-id) 
+  let machine_matchers = [$OS $machine_id] 
 
-  return ($machine_id | any {|o| $o in $only_list})
+  return ($machine_matchers | any {|o| $o in $only_list})
 }
 
 def make-this-os-mapping [mapping: record] {
