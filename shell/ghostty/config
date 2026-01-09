@@ -5,7 +5,10 @@ font-size = 11
 copy-on-select = true
 command = nu
 theme=light:JetBrains Cyan Light,dark:Tomorrow Night Eighties
+
+# overrides
 config-file=?site-config
+config-file=?os-config
 
 # keybindings
 ## ide
