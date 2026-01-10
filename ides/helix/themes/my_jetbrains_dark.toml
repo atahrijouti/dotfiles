@@ -11,3 +11,4 @@ inherits = "jetbrains_dark"
 "ui.statusline.insert" = { fg = "blue48", bg = "green156", modifiers = ["bold"] }
 "ui.statusline.select" = { fg = "blue48", bg = "red194", modifiers = ["bold"] }
 
+"ui.virtual.jump-label" = {fg = "blue48", bg = "red194", modifiers = ["bold", "reversed"] }
