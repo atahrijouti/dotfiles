@@ -17,7 +17,10 @@ config-file=?overrides/os-config
 ## ide
 # keybind = alt+1=split_left_open_lf
 # keybind = alt+9=split_down_open_lazygit
-  
+
+# General QoL
+keybind = shift+enter=text:\x1b\r
+   
 ## edit surfaces
 keybind = ctrl+,>z=toggle_split_zoom
 keybind = ctrl+,>c=close_surface
