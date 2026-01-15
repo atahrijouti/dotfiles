@@ -37,6 +37,7 @@ if $is_macos {
   $env.NODE_EXTRA_CA_CERTS = $env.HOME | path join .certs/cert.pem
   $env.SSL_CERT_FILE = $env.HOME | path join .certs/cert.pem
   $env.CURL_SSL_BACKEND = "secure-transport"
+  $env.SDKROOT = "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
 
   path add /opt/homebrew/opt/llvm/bin
   path add --append /usr/local/bin  
