@@ -38,6 +38,7 @@ if $is_macos {
   $env.SSL_CERT_FILE = $env.HOME | path join .certs/cert.pem
   $env.CURL_SSL_BACKEND = "secure-transport"
 
+  path add /opt/homebrew/opt/llvm/bin
   path add --append /usr/local/bin  
   path add --append /opt/homebrew/bin
   path add --append /opt/homebrew/sbin
