@@ -5,6 +5,8 @@ const is_windows = $os == windows
 const is_macos = $os == macos
 const USER_NU_LIB_FOLDER = ($nu.default-config-dir | path join nu)
 
+$env.VENDOR_AUTOLOAD_DIR = $nu.data-dir | path join vendor autoload
+
 if $is_windows {
   $env.HOME = '~' | path expand -n
 }
@@ -57,11 +59,10 @@ if $is_macos {
 }
 
 # generate autoload files
-const autoload_dir = $nu.data-dir | path join vendor autoload
-^mise activate nu | save -f ($autoload_dir | path join mise.nu)
+^mise activate nu | save -f ($env.VENDOR_AUTOLOAD_DIR | path join mise.nu)
 if false {
-  ^starship init nu | save -f ($autoload_dir | path join "starship.nu")
-  ^carapace _carapace nushell | save -f ($autoload_dir | path join "carapace.nu")
+  ^starship init nu | save -f ($env.VENDOR_AUTOLOAD_DIR | path join "starship.nu")
+  ^carapace _carapace nushell | save -f ($env.VENDOR_AUTOLOAD_DIR | path join "carapace.nu")
 }
 
 ###### nu config
