@@ -7,7 +7,7 @@ export alias lg = lazygit
 export alias 'g h' = cd ~
 export alias 'g d' = cd ~/source/dotfiles
 export alias 'g p' = cd ~/playground/
-export alias 'g t' = cd ~/playground/c/c-tris
+export alias 'g t' = cd ~/playground/clone-tris
 export alias 'g c' = cd $nu.default-config-dir
 
 # apps
