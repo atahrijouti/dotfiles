@@ -15,10 +15,12 @@ set clipboard+=unnamed
 set clipboard+=ideaput
 set ignorecase
 set smartcase
+set NERDTree
 
 
 
 Plug 'machakann/vim-highlightedyank'
+Plug 'preservim/nerdtree'
 Plug 'tpope/vim-commentary'
 
 inoremap jk <Esc>
