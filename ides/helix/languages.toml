@@ -60,3 +60,9 @@ auto-format = true
 
 [language-server]
 clangd = { command = "clangd", args = [ "--clang-tidy" ] }
+
+[[language]]
+name = "clojure"
+indent = { tab-width = 2, unit = "  " }
+formatter = { command = "cljfmt", args = [ "fix", "-" ] }
+auto-format = true
