@@ -27,6 +27,7 @@ j = "normal_mode"
 
 [keys.normal.space]
 q = ":q"
+";" = ":sh ncat localhost 5555 <<EOF\n%{selection}\nEOF"
 
 [keys.normal.space.x]
 x = ":sh mise build"
