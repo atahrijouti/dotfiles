@@ -1,10 +1,10 @@
 [
-  {
-    type: 'dir',
-    source: 'ides/emacs',
-    target: '~/.emacs.d',
-    includes: [early-init.el init.el custom-vars.el lisp/**]
-  },
+  # {
+  #   type: 'dir',
+  #   source: 'ides/emacs',
+  #   target: '~/.emacs.d',
+  #   includes: [early-init.el init.el custom-vars.el lisp/**]
+  # },
   {
     type: 'dir',
     source: 'ides/nvim',
