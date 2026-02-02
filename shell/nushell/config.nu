@@ -11,6 +11,10 @@ if $is_windows {
   $env.HOME = '~' | path expand -n
 }
 
+$env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
+const NU_LIB_DIRS = [ $USER_NU_LIB_FOLDER ]
+$env.NU_LIB_DIRS ++= $NU_LIB_DIRS 
+
 $env.EDITOR = 'hx'
 if $is_windows {
   $env.HELIX_CONFIG = ($env.HOME | path join "AppData/Roaming/helix")
@@ -18,10 +22,8 @@ if $is_windows {
   $env.HELIX_CONFIG = ($env.HOME | path join ".config/helix")
 }
 
-$env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
-const NU_LIB_DIRS = [ $USER_NU_LIB_FOLDER ]
-$env.NU_LIB_DIRS ++= $NU_LIB_DIRS 
-
+# doom emacs
+path add --append ~/.config/emacs/bin  
 
 if $is_macos {
   $env.HOMEBREW_PREFIX = "/opt/homebrew"
