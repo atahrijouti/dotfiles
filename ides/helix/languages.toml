@@ -66,3 +66,12 @@ name = "clojure"
 indent = { tab-width = 2, unit = "  " }
 formatter = { command = "cljfmt", args = [ "fix", "-" ] }
 auto-format = true
+
+
+[language-server.godot]
+command = "ncat"
+args = ["127.0.0.1", "6005"]
+
+[[language]]
+name = "gdscript"
+language-servers = ["godot"]
