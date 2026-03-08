@@ -1,1 +1,4 @@
 inherits = "cyan_light"
+
+"ui.statusline.inactive" = { fg = "shade03_darker", bg = "shade01_lighter" }
+"ui.window" = { fg = "shade03_darker", bg = "shade01_lighter" }
