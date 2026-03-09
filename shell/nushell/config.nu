@@ -4,11 +4,15 @@ const os = $nu.os-info.name
 const is_windows = $os == windows
 const is_macos = $os == macos
 const USER_NU_LIB_FOLDER = ($nu.default-config-dir | path join nu)
+let is_wezterm = $"WEZTERM_PANE" in $env
 
 $env.VENDOR_AUTOLOAD_DIR = $nu.data-dir | path join vendor autoload
 
 if $is_windows {
   $env.HOME = '~' | path expand -n
+  if $is_wezterm {
+    $env.config.shell_integration.osc133 = false
+  }
 }
 
 $env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
