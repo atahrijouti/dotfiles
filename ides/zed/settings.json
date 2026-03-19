@@ -1,9 +1,10 @@
 {
+  "icon_theme": "Material Icon Theme",
   "helix_mode": true,
   "theme": {
     "mode": "system",
     "light": "My Cyan Light",
-    "dark": "JetBrains New Dark"
+    "dark": "JetBrains New Dark",
   },
   "vim_mode": true,
   "buffer_font_family": "JetBrains Mono",
@@ -11,48 +12,48 @@
   "buffer_font_weight": 500,
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "tab_bar": {
-    "show": false
+    "show": false,
   },
   "show_wrap_guides": true,
   "toolbar": {},
   "autosave": "on_window_change",
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "inlay_hints": {
-    "enabled": false
+    "enabled": false,
   },
   "auto_update": false,
   "file_types": {
-    "JSONC": ["~/AppData/Roaming/Zed/**/*.json"]
+    "JSONC": ["~/AppData/Roaming/Zed/**/*.json"],
   },
   "terminal": {
     "shell": {
-      "program": "nu"
-    }
+      "program": "nu",
+    },
   },
   "format_on_save": "on",
   "lsp": {
     "solargraph": {
       "initialization_options": {
         "diagnostics": true,
-        "formatting": true
-      }
-    }
+        "formatting": true,
+      },
+    },
   },
   "languages": {
     "Lua": {
       "formatter": {
         "external": {
           "command": "stylua",
-          "arguments": ["-"]
-        }
-      }
-    }
-  }
+          "arguments": ["-"],
+        },
+      },
+    },
+  },
 }
