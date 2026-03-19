@@ -9,6 +9,7 @@ winget install -e --id OlegDanilov.RapidEnvironmentEditor
 winget install -e --id Microsoft.VCRedist.2015+.x64
 winget install -e --id jdx.mise
 winget install -e --id Helix.Helix
+winget install -e --id Wilfred.difftastic
 winget install -e --id ZedIndustries.Zed
 winget install -e --id rsteube.Carapace
 winget install -e --id Starship.Starship
@@ -50,4 +51,3 @@ winget install -e --id Spotify.Spotify
 winget install -e --id ArminOsaj.AutoDarkMode
 winget install -e --id GnuPG.Gpg4win
 winget install -e --id astral-sh.uv
-
