@@ -13,6 +13,7 @@
       "alt-super-shift-h": "vim::ResizePaneLeft",
       "alt-super-j": "workspace::ActivatePaneDown",
       "alt-super-shift-j": "vim::ResizePaneDown",
+      "ctrl-alt-k": "workspace::ActivatePaneUp",
       "alt-super-k": "workspace::ActivatePaneUp",
       "alt-super-shift-k": "vim::ResizePaneUp",
       "alt-super-l": "workspace::ActivatePaneRight",
