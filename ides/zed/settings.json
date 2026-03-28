@@ -45,6 +45,13 @@
         "formatting": true,
       },
     },
+    "eslint": {
+      "settings": {
+        "codeActionOnSave": {
+          "rules": ["import/order"],
+        },
+      },
+    },
   },
   "languages": {
     "Lua": {
@@ -53,6 +60,11 @@
           "command": "stylua",
           "arguments": ["-"],
         },
+      },
+    },
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
       },
     },
   },
