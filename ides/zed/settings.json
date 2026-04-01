@@ -1,4 +1,11 @@
 {
+  "gutter": {
+    "line_numbers": false,
+  },
+  "git_panel": {
+    "tree_view": false,
+  },
+  "diff_view_style": "unified",
   "icon_theme": "Material Icon Theme",
   "helix_mode": true,
   "theme": {
