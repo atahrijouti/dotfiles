@@ -1,6 +1,6 @@
 {
   "gutter": {
-    "line_numbers": false,
+    // "line_numbers": false,
   },
   "git_panel": {
     "tree_view": false,
@@ -46,12 +46,6 @@
   },
   "format_on_save": "on",
   "lsp": {
-    "solargraph": {
-      "initialization_options": {
-        "diagnostics": true,
-        "formatting": true,
-      },
-    },
     "eslint": {
       "settings": {
         "codeActionOnSave": {
@@ -61,14 +55,6 @@
     },
   },
   "languages": {
-    "Lua": {
-      "formatter": {
-        "external": {
-          "command": "stylua",
-          "arguments": ["-"],
-        },
-      },
-    },
     "JavaScript": {
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
