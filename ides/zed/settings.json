@@ -1,18 +1,19 @@
 {
   "outline_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "right",
   },
   "agent": {
+    "sidebar_side": "right",
     "dock": "right",
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "project_panel": {
     "dock": "left",
-    "hide_hidden": false
+    "hide_hidden": false,
   },
   "gutter": {
     // "line_numbers": false,
@@ -23,13 +24,12 @@
   },
   "diff_view_style": "unified",
   "icon_theme": "Material Icon Theme",
-  "helix_mode": true,
   "theme": {
     "mode": "system",
     "light": "My Cyan Light",
     "dark": "JetBrains New Dark",
   },
-  "vim_mode": true,
+  "helix_mode": true,
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 14,
   "buffer_font_weight": 500,
