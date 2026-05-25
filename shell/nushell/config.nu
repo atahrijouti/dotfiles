@@ -40,7 +40,7 @@ if $is_macos {
 
   $env.INFOPATH = $"/opt/homebrew/share/info:($env.INFOPATH? | default '')"
   $env.PNPM_HOME = $env.HOME | path join Library/pnpm
-  $env.BUN_INSTALL = $env.HOME | path join .bun  
+  # $env.BUN_INSTALL = $env.HOME | path join .bun  
   $env.M2_HOME = $env.HOME | path join Library/programs/maven  
   $env.NODE_EXTRA_CA_CERTS = $env.HOME | path join .certs/cert.pem
   $env.SSL_CERT_FILE = $env.HOME | path join .certs/cert.pem
@@ -59,7 +59,7 @@ if $is_macos {
   path add --append ($env.HOME | path join "Library/pnpm")
   path add --append ($env.HOME | path join ".cargo/bin")
   path add --append ($env.HOME | path join ".rd/bin")
-  path add --append ($env.BUN_INSTALL| path join bin)
+  # path add --append ($env.BUN_INSTALL| path join bin)
   path add --append ($env.HOME | path join "go/bin")
   path add --append ($env.M2_HOME | path join bin)
 }
