@@ -33,6 +33,7 @@ if $is_macos {
   $env.HOMEBREW_PREFIX = "/opt/homebrew"
   $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
   $env.HOMEBREW_REPOSITORY = "/opt/homebrew"
+  $env.HOMEBREW_NO_AUTO_UPDATE = 1
 
   if not ($env.MANPATH? | is-empty) {
       $env.MANPATH = $":($env.MANPATH | str trim --left --char ':')"
@@ -42,8 +43,8 @@ if $is_macos {
   $env.PNPM_HOME = $env.HOME | path join Library/pnpm
   # $env.BUN_INSTALL = $env.HOME | path join .bun  
   $env.M2_HOME = $env.HOME | path join Library/programs/maven  
-  $env.NODE_EXTRA_CA_CERTS = $env.HOME | path join .certs/cert.pem
-  $env.SSL_CERT_FILE = $env.HOME | path join .certs/cert.pem
+  # $env.NODE_EXTRA_CA_CERTS = $env.HOME | path join .certs/cert.pem
+  # $env.SSL_CERT_FILE = $env.HOME | path join .certs/cert.pem
   $env.CURL_SSL_BACKEND = "secure-transport"
   $env.SDKROOT = "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
 
@@ -56,7 +57,7 @@ if $is_macos {
   path add --append ($env.HOME | path join "Library/programs/bin")
   path add --append ($env.HOME | path join ".bin")
   path add --append ($env.HOME | path join ".local/bin")
-  path add --append ($env.HOME | path join "Library/pnpm")
+  path add --append ($env.HOME | path join "Library/pnpm/bin")
   path add --append ($env.HOME | path join ".cargo/bin")
   path add --append ($env.HOME | path join ".rd/bin")
   # path add --append ($env.BUN_INSTALL| path join bin)
