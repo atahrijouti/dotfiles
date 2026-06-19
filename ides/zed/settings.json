@@ -1,4 +1,6 @@
 {
+  "icon_theme": "Material Icon Theme",
+  "cli_default_open_behavior": "existing_window",
   "disable_ai": true,
   "proxy": "",
   "autosave": "on_window_change",
@@ -23,7 +25,6 @@
     "tree_view": false,
   },
   "diff_view_style": "unified",
-  "icon_theme": "Material Icon Theme",
   "theme": {
     "mode": "system",
     "light": "My Cyan Light",
