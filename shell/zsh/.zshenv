@@ -1,6 +1,7 @@
 export EDITOR="hx"
 export DOTFILES="$HOME/source/dotfiles"
 export BUN_INSTALL="$HOME/.bun"
+export ZPLUG_HOME=$HOME/.zplug
 
 [ -s "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
 export HOMEBREW_NO_ANALYTICS=1
