@@ -47,7 +47,7 @@ export def main [--verbose ...file_filters: string] {
         if $verbose {
           print ($workable.source | open)
         }
-      }   
+      }
     }
   }
 }

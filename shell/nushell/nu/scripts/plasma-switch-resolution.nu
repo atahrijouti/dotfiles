@@ -28,4 +28,3 @@ export def main [mode: string@modes = "default"] {
   sleep 1sec;
   kscreen-doctor ...$recipe
 }
-

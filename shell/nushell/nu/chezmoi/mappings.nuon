@@ -12,7 +12,7 @@
   # },
   {
     type: 'dir',
-    source: 'ides/lf', 
+    source: 'ides/lf',
     target: { linux: '~/.config/lf', windows: '~/AppData/Local/lf', macos: '~/.config/lf' },
     excludes: [history files marks]
   },
@@ -25,7 +25,7 @@
   { type: 'file', source: 'ides/jetbrains/.ideavimrc', target: '~/.ideavimrc' },
   {
     type: 'dir',
-    source: 'ides/zed', 
+    source: 'ides/zed',
     target: { linux: '~/.config/zed', windows: '~/AppData/Roaming/zed', macos: '~/.config/zed' },
     includes: [keymap.json settings.json tasks.json themes/**]
   },

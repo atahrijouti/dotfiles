@@ -17,7 +17,7 @@ if $is_windows {
 
 $env.DOTFILES = ($env.DOTFILES? | default "~/source/dotfiles" | path expand -n)
 const NU_LIB_DIRS = [ $USER_NU_LIB_FOLDER ]
-$env.NU_LIB_DIRS ++= $NU_LIB_DIRS 
+$env.NU_LIB_DIRS ++= $NU_LIB_DIRS
 
 $env.EDITOR = 'hx'
 if $is_windows {
@@ -27,7 +27,7 @@ if $is_windows {
 }
 
 # doom emacs
-path add --append ~/.config/emacs/bin  
+path add --append ~/.config/emacs/bin
 
 if $is_macos {
   $env.HOMEBREW_PREFIX = "/opt/homebrew"
@@ -41,15 +41,15 @@ if $is_macos {
 
   $env.INFOPATH = $"/opt/homebrew/share/info:($env.INFOPATH? | default '')"
   $env.PNPM_HOME = $env.HOME | path join Library/pnpm
-  # $env.BUN_INSTALL = $env.HOME | path join .bun  
-  $env.M2_HOME = $env.HOME | path join Library/programs/maven  
+  # $env.BUN_INSTALL = $env.HOME | path join .bun
+  $env.M2_HOME = $env.HOME | path join Library/programs/maven
   # $env.NODE_EXTRA_CA_CERTS = $env.HOME | path join .certs/cert.pem
   # $env.SSL_CERT_FILE = $env.HOME | path join .certs/cert.pem
   $env.CURL_SSL_BACKEND = "secure-transport"
   $env.SDKROOT = "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
 
   path add /opt/homebrew/opt/llvm/bin
-  path add --append /usr/local/bin  
+  path add --append /usr/local/bin
   path add --append /opt/homebrew/bin
   path add --append /opt/homebrew/sbin
   path add --append /Applications/WezTerm.app/Contents/MacOS

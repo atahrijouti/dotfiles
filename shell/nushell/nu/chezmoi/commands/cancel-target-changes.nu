@@ -16,16 +16,16 @@ export def main [
     let workables = get-workables $file_filters $verbose
     if ($workables | is-empty) {
       print 'Already up-to-date'
-      return 
+      return
     }
 
     let cancellables_changes = $workables
       | where ($it.status in $CANCELLABLE_TARGET_CHANGES)
-      | select status target 
+      | select status target
 
     let is_addition = $workables
       | where ($it.status in $CANCELLABLE_TARGET_ADDITIONS)
-      | select status target 
+      | select status target
 
     if not $auto {
       if ($cancellables_changes | is-not-empty) {
@@ -46,7 +46,7 @@ export def main [
         return
       }
     }
-    
+
     for workable in $workables {
       match $workable.status {
         'target-deleted' => {
@@ -81,7 +81,7 @@ export def main [
           }
         }
       }
-    }    
+    }
 
     save-state $state
 

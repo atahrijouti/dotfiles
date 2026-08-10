@@ -16,12 +16,12 @@ export def main [
     let workables = get-workables $file_filters $verbose
     if ($workables | is-empty) {
       print 'Already up-to-date'
-      return 
+      return
     }
 
     let auto_syncable = $workables
       | where ($it.status in $AUTO_RESOLVED_STATUSES)
-      | select action status target 
+      | select action status target
 
     let is_deletable = $workables
       | where ($it.status in $AUTO_DELETE_STATUSES)
@@ -44,7 +44,7 @@ export def main [
         }
         print ($is_deletable | table -t default -i false)
       }
-    
+
       if ($is_in_conflict | is-not-empty) {
         print "The following files are in conflict. Use resolve-conflicts to handle them:"
         print ($is_in_conflict| table -t default -i false)
@@ -55,7 +55,7 @@ export def main [
         return
       }
     }
-    
+
     for workable in $workables {
       match $workable.status {
         'untracked-both-missing' => {
@@ -135,7 +135,7 @@ export def main [
           print $"(ansi green)(ansi reset) Up to date. ($workable.target)"
         }
       }
-    }    
+    }
 
     save-state $state
 

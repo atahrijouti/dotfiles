@@ -22,7 +22,7 @@ export const STATUSES = [
   'target-changed',
   'both-changed-identical',
   'both-changed-different',
-  'up-to-date' 
+  'up-to-date'
 ]
 
 export const DIFFABLE_STATUSES = [
@@ -47,7 +47,7 @@ export const AUTO_RESOLVED_STATUSES = [
   'source-changed',
   'target-changed',
   'both-changed-identical',
-  'up-to-date' 
+  'up-to-date'
 ]
 
 export const CANCELLABLE_TARGET_CHANGES = [
@@ -92,7 +92,7 @@ export const FORCE_APPLICABLE_STATUSES = [
   'target-changed',
   'both-changed-identical',
   'both-changed-different',
-  'up-to-date' 
+  'up-to-date'
 ]
 
 export const FORCE_PULLABLE_STATUSES = [
@@ -105,6 +105,5 @@ export const FORCE_PULLABLE_STATUSES = [
   'target-changed',
   'both-changed-identical',
   'both-changed-different',
-  'up-to-date' 
+  'up-to-date'
 ]
-
