@@ -61,8 +61,8 @@ def workable-machine [mapping: record] {
     return true
   }
 
-  let machine_id = (this-machine-id) 
-  let machine_matchers = [$OS $machine_id] 
+  let machine_id = (this-machine-id)
+  let machine_matchers = [$OS $machine_id]
 
   return ($machine_matchers | any {|o| $o in $only_list})
 }
@@ -76,7 +76,7 @@ def mapping-target-path-filter [mapping: record, filters: list<path>] {
     return true
   }
 
-  let target = resolve-target $mapping 
+  let target = resolve-target $mapping
 
   $filters | any {|filter|
     paths-overlap $target $filter
@@ -233,11 +233,11 @@ export def list-folder-files [root: string, includes: list, excludes: list] {
   if not ($root | path exists)  or ($root | path type) == symlink {
     return []
   }
-  
+
   if ($root | path type) == file {
     return [$root]
   }
- 
+
   let files = if ($includes | is-not-empty) {
     $includes | each {|pattern|
       glob $"($root)/($pattern)" --no-dir --exclude ($GLOBAL_EXCLUDES | append ['__never_match__/**'])
@@ -337,13 +337,13 @@ def file-hash [path: string] {
 def get-mappings [] {
   $MAPPINGS_FILE | open
 }
- 
+
 def resolve-target [mapping: record] {
   if ($mapping.target | describe -d | get type) == 'record' {
     $mapping.target | get -o $nu.os-info.name
   } else {
     $mapping.target
-  } 
+  }
 }
 
 export def load-state [] {

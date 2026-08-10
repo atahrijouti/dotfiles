@@ -89,6 +89,13 @@
     includes: ['US - ATJ.bundle/**' 'US International - ATJ.bundle/**']
   },
 
+  {
+    type: 'file',
+    source: 'macos/hammerspoon/init.lua',
+    target: '~/.hammerspoon/init.lua',
+    only: [macos],
+  },
+
 
   ################
   # test section #
