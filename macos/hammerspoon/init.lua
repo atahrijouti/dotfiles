@@ -1,47 +1,21 @@
-hs.loadSpoon("ShiftIt")
 hs.loadSpoon("AutoClick")
 
-spoon.ShiftIt:bindHotkeys({})
-
-spoon.AutoClick.clicksPerSecond = 60
-spoon.AutoClick:bindHotkeys({ triggerAutoClick = { { "ctrl", "alt" }, "F9" } })
-
-local log = hs.logger.new("ATJSpoon", "debug")
-
-local function pointInRect(point, rect)
-	return point.x >= rect.x and point.x <= (rect.x + rect.w) and point.y >= rect.y and point.y <= (rect.y + rect.h)
-end
-
-local autoClickAuthorizedApps = {
-	["Google Chrome"] = true,
-	["Vampire Survivors"] = true,
+-- Restrict auto-clicking to these apps. Clicks only fire while the window
+-- directly under the mouse belongs to one of them. Leave empty to click
+-- unconditionally.
+spoon.AutoClick.authorizedApps = {
+    "Google Chrome",
+    "Vampire Survivors",
+    "Safari",
 }
 
-local appUnderMouse = function()
-	-- Get the current mouse position
-	local mousePos = hs.mouse.getAbsolutePosition()
+-- Optional overrides:
+-- spoon.AutoClick.clicksPerSecond = 60            -- default is 60
+-- spoon.AutoClick.logger.setLogLevel("debug")     -- trace which app is being checked
 
-	-- Get all visible windows
-	local windows = hs.window.orderedWindows()
-
-	if #windows == 0 then
-		return false
-	end
-
-	local win = windows[1]
-	local appName = win:application():name()
-
-	if not autoClickAuthorizedApps[appName] then
-		log.i("not chrome", win:application():name())
-		return false
-	end
-
-	local frame = win:frame()
-	if pointInRect(mousePos, frame) then
-		return true
-	end
-
-	return false
-end
-
-spoon.AutoClick.condition = appUnderMouse
+spoon.AutoClick:bindHotkeys({
+    -- Gate on the app under the mouse (strict).
+    triggerAutoClick = { { "ctrl", "alt" }, "F9" },
+    -- Gate on the frontmost app (for fullscreen apps with no window under the cursor).
+    triggerAutoClickFrontmost = { { "ctrl", "alt" }, "F10" },
+})
