@@ -90,9 +90,9 @@
   },
 
   {
-    type: 'file',
-    source: 'macos/hammerspoon/init.lua',
-    target: '~/.hammerspoon/init.lua',
+    type: 'dir',
+    source: 'macos/hammerspoon',
+    target: '~/.hammerspoon',
     only: [macos],
   },
 
