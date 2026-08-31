@@ -28,6 +28,7 @@ if $is_windows {
 
 # doom emacs
 path add --append ~/.config/emacs/bin
+path add --append ~/programs/bin
 
 if $is_macos {
   $env.HOMEBREW_PREFIX = "/opt/homebrew"
