@@ -3,6 +3,10 @@
 [
   {
     "label": "Open lazygit",
-    "command": "lazygit"
-  }
+    "command": "lazygit",
+  },
+  {
+    "label": "mise run build",
+    "command": "mise run build",
+  },
 ]

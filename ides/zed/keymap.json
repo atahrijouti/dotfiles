@@ -3,7 +3,7 @@
     "bindings": {
       "ctrl-f12": "terminal_panel::ToggleFocus",
       "ctrl-f11": ["task::Spawn", { "task_name": "Windows Terminal" }],
-      "ctrl-shift-r": ["task::Spawn", { "task_name": "Run project" }],
+      "ctrl-shift-r": ["task::Spawn", { "task_name": "mise run build" }],
       "ctrl-s": "workspace::Save",
       "alt-1": "project_panel::ToggleFocus",
       "super-1": "project_panel::ToggleFocus",
