@@ -95,6 +95,7 @@
     target: '~/.hammerspoon',
     only: [macos],
   },
+  { type: 'file', source: 'macos/aerospace/aerospace.toml', target: '~/.aerospace.toml', only: [macos] },
 
 
   ################
