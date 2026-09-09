@@ -1,5 +1,5 @@
 hs.loadSpoon("AutoClick")
-hs.loadSpoon("ShiftIt")
+-- hs.loadSpoon("ShiftIt")
 
 spoon.AutoClick.authorizedApps = {
     "Google Chrome",
@@ -12,6 +12,6 @@ spoon.AutoClick:bindHotkeys({
     triggerAutoClickFrontmost = { { "ctrl", "alt" }, "F10" },
 })
 
-spoon.ShiftIt:bindHotkeys({})
+-- spoon.ShiftIt:bindHotkeys({})
 
-spoon.ShiftIt:setWindowCyclingSizes({ 50, 40, 33.3, 30 }, { 50 })
+-- spoon.ShiftIt:setWindowCyclingSizes({ 50, 40, 33.3, 30 }, { 50 })
