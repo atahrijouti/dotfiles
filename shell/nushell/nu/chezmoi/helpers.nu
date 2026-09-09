@@ -83,14 +83,18 @@ def mapping-target-path-filter [mapping: record, filters: list<path>] {
   }
 }
 
+def safe-path-type [p: path] {
+  if ($p | path exists --no-symlink) { $p | path type } else { null }
+}
+
 def mapping-matches-file-system [mapping: record] {
   let mapping_target = resolve-target $mapping
 
   let target = $mapping_target | path expand -n
   let source = $"($DOTFILES_ROOT)/($mapping.source)" | path expand -n
 
-  let source_type = $source | path type
-  let target_type = $target | path type
+  let source_type = safe-path-type $source
+  let target_type = safe-path-type $target
 
   if $target_type == 'symlink' {
     print $" SKIP: Unexpected symlink at target ($target)"
