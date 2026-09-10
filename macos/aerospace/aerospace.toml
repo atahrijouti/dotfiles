@@ -57,22 +57,26 @@ gaps.outer.right =      0
     ctrl-alt-minus = 'resize smart -50'
     ctrl-alt-equal = 'resize smart +50'
 
+
+    # layout change
     ctrl-alt-f = 'fullscreen'
-    ctrl-alt-s = 'layout v_accordion'
-    ctrl-alt-w = 'layout h_accordion'
-    ctrl-alt-e = 'layout tiles horizontal vertical'
     ctrl-alt-space = 'layout floating tiling'
 
+    ctrl-alt-t= 'layout tiles horizontal vertical'
+    ctrl-alt-a = 'layout accordion horizontal vertical'
+
+
+    # modes
     ctrl-alt-semicolon = 'mode service'
     ctrl-alt-comma = 'mode pane'
 
-    ctrl-alt-leftSquareBracket = 'layout tiles horizontal vertical'
-    ctrl-alt-rightSquareBracket = 'layout accordion horizontal vertical'
 
 
 [mode.pane.binding]
-    backslash = ['split horizontal', 'mode main']
-    minus = ['split vertical', 'mode main']
+    h = ['join-with left', 'mode main']
+    j = ['join-with down', 'mode main']
+    k = ['join-with up', 'mode main']
+    l = ['join-with right', 'mode main']
 
 [mode.service.binding]
     esc = ['reload-config', 'mode main']
