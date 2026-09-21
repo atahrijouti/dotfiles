@@ -15,7 +15,7 @@ default-root-container-layout = 'accordion'
 
 default-root-container-orientation = 'auto'
 
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focused-monitor-changed = []
 
 automatically-unhide-macos-hidden-apps = false
 persistent-workspaces = []
