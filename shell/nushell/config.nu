@@ -30,6 +30,10 @@ if $is_windows {
 path add --append ~/.config/emacs/bin
 path add --append ~/programs/bin
 
+
+path add --append ($env.HOME | path join ".local/share/pnpm/bin")
+
+
 if $is_macos {
   $env.HOMEBREW_PREFIX = "/opt/homebrew"
   $env.HOMEBREW_CELLAR = "/opt/homebrew/Cellar"
