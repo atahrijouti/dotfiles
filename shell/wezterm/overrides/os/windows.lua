@@ -6,6 +6,7 @@ local act = wezterm.action
 M.run = function(config)
   config.font_size = 11
   config.default_prog = { "nu" }
+  config.wsl_domains = {}
 
   local launch_menu = {}
 
