@@ -22,8 +22,9 @@
     "hide_hidden": false,
   },
   "git_panel": {
+    "group_by": "staging",
     "dock": "left",
-    "tree_view": false,
+    "tree_view": true,
   },
   "diff_view_style": "unified",
   "theme": {
