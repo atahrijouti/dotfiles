@@ -1,0 +1,25 @@
+# Lua LS formatter (EmmyLuaCodeStyle)
+# see https://github.com/CppCXY/EmmyLuaCodeStyle/blob/master/lua.template.editorconfig
+root = true
+
+[*.lua]
+indent_style = space
+indent_size = 2
+continuation_indent = 2
+max_line_length = 100
+end_of_line = lf
+insert_final_newline = true
+quote_style = double
+call_arg_parentheses = keep
+auto_collapse_lines = false
+trailing_table_separator = smart
+
+# don't vertically align things
+align_function_params = false
+align_continuous_assign_statement = false
+align_continuous_rect_table_field = false
+align_array_table = false
+align_continuous_inline_comment = false
+
+# don't force a blank line after every function
+line_space_after_function_statement = keep
