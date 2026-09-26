@@ -16,7 +16,11 @@ M.run = function(config)
 
   table.insert(launch_menu, {
     label = "ZSH - MSYS UCRT64",
-    args = { "cmd.exe ", "/k", "C:\\msys64\\msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh" },
+    args = {
+      "cmd.exe ",
+      "/k",
+      "C:\\msys64\\msys2_shell.cmd -defterm -here -no-start -ucrt64 -shell zsh",
+    },
   })
 
   table.insert(launch_menu, {
@@ -26,7 +30,7 @@ M.run = function(config)
 
   config.launch_menu = launch_menu
 
-
+  -- stylua: ignore start
   table.insert(config.keys, { key = "h", mods = "CTRL|ALT", action = act.ActivatePaneDirection("Left") })
   table.insert(config.keys, { key = "l", mods = "CTRL|ALT", action = act.ActivatePaneDirection("Right") })
   table.insert(config.keys, { key = "k", mods = "CTRL|ALT", action = act.ActivatePaneDirection("Up") })
@@ -35,7 +39,7 @@ M.run = function(config)
   table.insert(config.keys, { key = "L", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Right", 1 }) })
   table.insert(config.keys, { key = "K", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Up", 1 }) })
   table.insert(config.keys, { key = "J", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Down", 1 }) })
-  
+  -- stylua: ignore end
   return config
 end
 
