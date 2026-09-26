@@ -34,7 +34,7 @@ M.run = function(config)
     { key = "l", mods = "SUPER|ALT", action = act.ActivatePaneDirection("Right") },
     { key = "k", mods = "SUPER|ALT", action = act.ActivatePaneDirection("Up") },
     { key = "j", mods = "SUPER|ALT", action = act.ActivatePaneDirection("Down") },
-    
+
     -- resize pane
 
     { key = "H", mods = "SUPER|ALT", action = act.AdjustPaneSize({ "Left", 1 }) },

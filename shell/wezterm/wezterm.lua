@@ -4,7 +4,6 @@ local options = require("options")
 
 local config = wezterm.config_builder()
 
-
 options.run(config)
 keymaps.run(config)
 
