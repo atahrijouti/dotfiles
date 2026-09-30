@@ -106,5 +106,5 @@ return {
         disable = { filetypes = { "TelescopePrompt" } },
       })
     end,
-  }
+  },
 }
