@@ -13,6 +13,8 @@ error_symbol = '[λ](bold red)'
 [package]
 disabled = true
 
+[gcloud]
+disabled = true
+
 [git_status]
 windows_starship = "C:\\Program Files\\starship\\bin\\starship.exe"
-
