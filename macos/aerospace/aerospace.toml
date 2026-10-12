@@ -33,6 +33,17 @@ gaps.outer.bottom =     0
 gaps.outer.top =        0
 gaps.outer.right =      0
 
+on-window-detected = [
+    {
+        if = 'test %{app-bundle-id} = com.apple.ActivityMonitor',
+        run = 'layout floating',
+    },
+    {
+        if = 'test %{app-bundle-id} = ru.keepcoder.Telegram',
+        run = 'layout floating',
+    },
+]
+
 [mode.main.binding]
     ctrl-cmd-t = 'exec-and-forget open -na Ghostty'
 
@@ -87,7 +98,3 @@ gaps.outer.right =      0
 
     # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
     #s = ['layout sticky tiling', 'mode main']
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.ActivityMonitor'
-    run = 'layout floating'
