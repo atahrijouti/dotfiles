@@ -15,11 +15,13 @@ default-root-container-layout = 'accordion'
 
 default-root-container-orientation = 'auto'
 
-on-focused-monitor-changed = []
 
 automatically-unhide-macos-hidden-apps = false
-persistent-workspaces = []
+persistent-workspaces = ['1', '2']
 
+workspace-to-monitor-force-assignment = { 1 = 'main', 2 = 'secondary' }
+
+on-focused-monitor-changed = []
 on-mode-changed = []
 
 focus-follows-mouse.enabled = false
