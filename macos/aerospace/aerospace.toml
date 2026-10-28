@@ -38,6 +38,7 @@ gaps.outer.right =      0
 on-window-detected = [
     {
         if = """test %{app-bundle-id} ~= '^(\
+            com.apple.AppStore|\
             com.apple.ActivityMonitor|\
             ru.keepcoder.Telegram|\
             rocks.shy.VacuumTube\
