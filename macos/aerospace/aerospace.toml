@@ -39,6 +39,7 @@ on-window-detected = [
     {
         if = """test %{app-bundle-id} ~= '^(\
             com.apple.AppStore|\
+            com.adguard.safari.AdGuard|\
             com.apple.ActivityMonitor|\
             ru.keepcoder.Telegram|\
             rocks.shy.VacuumTube\
